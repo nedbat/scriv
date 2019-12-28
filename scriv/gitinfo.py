@@ -19,3 +19,14 @@ def user_nick() -> str:
         return nick
 
     return os.getenv("USER", "somebody")
+
+
+def current_branch_name() -> str:
+    """
+    Get the current branch name.
+    """
+    ok, out = run_command("git rev-parse --symbolic-full-name HEAD")
+    if not ok:
+        return ""
+
+    return out.strip()
