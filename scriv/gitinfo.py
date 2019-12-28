@@ -29,4 +29,7 @@ def current_branch_name() -> str:
     if not ok:
         return ""
 
-    return out.strip()
+    branch = out.strip()
+    if branch.startswith("refs/heads/"):
+        branch = branch[len("refs/heads/") :]
+    return branch

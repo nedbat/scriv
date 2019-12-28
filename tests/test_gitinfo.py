@@ -4,7 +4,7 @@ from typing import Tuple
 
 import pytest
 
-from scriv.gitinfo import user_nick
+from scriv.gitinfo import current_branch_name, user_nick
 
 
 class RunCommandFaker:
@@ -49,3 +49,8 @@ def test_user_nick_from_env(fake_run_command, monkeypatch):  # pylint: disable=u
 
 def test_user_nick_from_nowhere(fake_run_command):  # pylint: disable=unused-argument
     assert user_nick() == "somebody"
+
+
+def test_current_branch_name(fake_run_command):
+    fake_run_command.add_fake("git rev-parse --symbolic-full-name HEAD", (True, "refs/heads/master"))
+    assert current_branch_name() == "master"

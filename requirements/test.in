@@ -5,3 +5,4 @@
 
 pytest-cov                # pytest extension for code coverage statistics
 pytest-mock               # pytest wrapper around mock
+freezegun                 # for mocking datetime

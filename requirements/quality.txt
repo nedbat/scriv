@@ -18,6 +18,7 @@ click==7.0
 coverage==5.0.1
 distlib==0.3.0            # via caniusepython3
 edx-lint==1.4.1
+freezegun==0.3.12
 idna==2.8                 # via requests
 importlib-metadata==1.3.0
 isort==4.3.21
@@ -40,6 +41,7 @@ pyparsing==2.4.6
 pytest-cov==2.8.1
 pytest-mock==1.13.0
 pytest==5.3.2
+python-dateutil==2.8.1
 regex==2019.12.20         # via black
 requests==2.22.0          # via caniusepython3
 six==1.13.0
