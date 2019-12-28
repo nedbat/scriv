@@ -23,7 +23,6 @@ lazy-object-proxy==1.4.3  # via astroid
 mccabe==0.6.1             # via pylint
 more-itertools==5.0.0
 packaging==19.2
-pathlib2==2.3.5
 pluggy==0.13.1
 py==1.8.1
 pycodestyle==2.5.0

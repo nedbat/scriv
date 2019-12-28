@@ -17,7 +17,7 @@ pluggy==0.13.1            # via tox
 py==1.8.1                 # via tox
 pyparsing==2.4.6          # via packaging
 requests==2.22.0          # via codecov
-six==1.13.0               # via packaging, tox
+six==1.13.0               # via more-itertools, packaging, tox
 toml==0.10.0              # via tox
 tox-battery==0.5.1
 tox==3.14.2

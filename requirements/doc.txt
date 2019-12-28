@@ -22,7 +22,6 @@ jinja2==2.10.3            # via sphinx
 markupsafe==1.1.1         # via jinja2
 more-itertools==5.0.0
 packaging==19.2
-pathlib2==2.3.5
 pbr==5.4.4                # via stevedore
 pluggy==0.13.1
 py==1.8.1
