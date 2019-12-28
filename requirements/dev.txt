@@ -28,7 +28,7 @@ jinja2==2.10.3            # via diff-cover, jinja2-pluralize
 lazy-object-proxy==1.4.3
 markupsafe==1.1.1         # via jinja2
 mccabe==0.6.1
-more-itertools==5.0.0
+more-itertools==8.0.2
 packaging==19.2
 pip-tools==4.3.0
 pluggy==0.13.1
@@ -48,7 +48,7 @@ six==1.13.0
 snowballstemmer==2.0.0
 toml==0.10.0
 tox-battery==0.5.1
-tox==3.14.2
+tox==3.14.3
 typed-ast==1.4.0
 urllib3==1.25.7
 virtualenv==16.7.9
