@@ -24,6 +24,8 @@ isort==4.3.21
 lazy-object-proxy==1.4.3  # via astroid
 mccabe==0.6.1             # via pylint
 more-itertools==8.0.2
+mypy-extensions==0.4.3    # via mypy
+mypy==0.761
 packaging==19.2
 pathspec==0.7.0           # via black
 pluggy==0.13.1
@@ -42,7 +44,8 @@ requests==2.22.0          # via caniusepython3
 six==1.13.0
 snowballstemmer==2.0.0    # via pydocstyle
 toml==0.10.0              # via black
-typed-ast==1.4.0          # via astroid, black
+typed-ast==1.4.0          # via astroid, black, mypy
+typing-extensions==3.7.4.1  # via mypy
 urllib3==1.25.7           # via requests
 wcwidth==0.1.7
 wrapt==1.11.2             # via astroid

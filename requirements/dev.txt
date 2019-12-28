@@ -31,6 +31,8 @@ lazy-object-proxy==1.4.3
 markupsafe==1.1.1         # via jinja2
 mccabe==0.6.1
 more-itertools==8.0.2
+mypy-extensions==0.4.3
+mypy==0.761
 packaging==19.2
 pathspec==0.7.0
 pip-tools==4.3.0
@@ -54,6 +56,7 @@ toml==0.10.0
 tox-battery==0.5.1
 tox==3.14.3
 typed-ast==1.4.0
+typing-extensions==3.7.4.1
 urllib3==1.25.7
 virtualenv==16.7.9
 wcwidth==0.1.7
