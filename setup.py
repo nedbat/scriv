@@ -1,5 +1,4 @@
 #!/usr/bin/env python
-# pylint: disable=open-builtin,native-string
 """
 Package metadata for scriv.
 """
@@ -69,7 +68,8 @@ setup(
     author="edX",
     author_email="oscm@edx.org",
     url="https://github.com/edx/scriv",
-    packages=["scriv",],
+    packages=["scriv"],
+    entry_points={"console_scripts": ["scriv = scriv.cli:cli"]},
     include_package_data=True,
     install_requires=load_requirements("requirements/base.in"),
     license="Apache Software License 2.0",

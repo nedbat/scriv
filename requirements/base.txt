@@ -4,3 +4,4 @@
 #
 #    make upgrade
 #
+click==7.0

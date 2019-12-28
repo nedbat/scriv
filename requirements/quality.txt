@@ -12,7 +12,7 @@ caniusepython3==7.2.0
 certifi==2019.11.28       # via requests
 chardet==3.0.4            # via requests
 click-log==0.3.2          # via edx-lint
-click==7.0                # via click-log, edx-lint
+click==7.0
 coverage==5.0.1
 distlib==0.3.0            # via caniusepython3
 edx-lint==1.4.1
