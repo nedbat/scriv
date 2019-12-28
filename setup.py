@@ -17,11 +17,10 @@ def get_version(*file_paths):
     """
     filename = os.path.join(os.path.dirname(__file__), *file_paths)
     version_file = open(filename).read()
-    version_match = re.search(r"^__version__ = ['\"]([^'\"]*)['\"]",
-                              version_file, re.M)
+    version_match = re.search(r"^__version__ = ['\"]([^'\"]*)['\"]", version_file, re.M)
     if version_match:
         return version_match.group(1)
-    raise RuntimeError('Unable to find version string.')
+    raise RuntimeError("Unable to find version string.")
 
 
 def load_requirements(*requirements_paths):
@@ -34,7 +33,8 @@ def load_requirements(*requirements_paths):
     requirements = set()
     for path in requirements_paths:
         requirements.update(
-            line.split('#')[0].strip() for line in open(path).readlines()
+            line.split("#")[0].strip()
+            for line in open(path).readlines()
             if is_requirement(line.strip())
         )
     return list(requirements)
@@ -47,41 +47,39 @@ def is_requirement(line):
     Returns:
         bool: True if the line is not blank, a comment, a URL, or an included file
     """
-    return line and not line.startswith(('-r', '#', '-e', 'git+', '-c'))
+    return line and not line.startswith(("-r", "#", "-e", "git+", "-c"))
 
 
-VERSION = get_version('scriv', '__init__.py')
+VERSION = get_version("scriv", "__init__.py")
 
-if sys.argv[-1] == 'tag':
+if sys.argv[-1] == "tag":
     print("Tagging the version on GitHub:")
     os.system(u"git tag -a %s -m 'version %s'" % (VERSION, VERSION))
     os.system("git push --tags")
     sys.exit()
 
-README = open(os.path.join(os.path.dirname(__file__), 'README.rst')).read()
-CHANGELOG = open(os.path.join(os.path.dirname(__file__), 'CHANGELOG.rst')).read()
+README = open(os.path.join(os.path.dirname(__file__), "README.rst")).read()
+CHANGELOG = open(os.path.join(os.path.dirname(__file__), "CHANGELOG.rst")).read()
 
 setup(
-    name='scriv',
+    name="scriv",
     version=VERSION,
     description="""Scriv changelog management tool""",
-    long_description=README + '\n\n' + CHANGELOG,
-    author='edX',
-    author_email='oscm@edx.org',
-    url='https://github.com/edx/scriv',
-    packages=[
-        'scriv',
-    ],
+    long_description=README + "\n\n" + CHANGELOG,
+    author="edX",
+    author_email="oscm@edx.org",
+    url="https://github.com/edx/scriv",
+    packages=["scriv",],
     include_package_data=True,
-    install_requires=load_requirements('requirements/base.in'),
+    install_requires=load_requirements("requirements/base.in"),
     license="Apache Software License 2.0",
     zip_safe=False,
-    keywords='edx',
+    keywords="edx",
     classifiers=[
-        'Development Status :: 3 - Alpha',
-        'Intended Audience :: Developers',
-        'License :: OSI Approved :: Apache Software License',
-        'Natural Language :: English',
-        'Programming Language :: Python :: 3',
+        "Development Status :: 3 - Alpha",
+        "Intended Audience :: Developers",
+        "License :: OSI Approved :: Apache Software License",
+        "Natural Language :: English",
+        "Programming Language :: Python :: 3",
     ],
 )
