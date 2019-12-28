@@ -4,10 +4,12 @@
 #
 #    make upgrade
 #
+appdirs==1.4.3
 argparse==1.4.0
 astroid==2.3.3
 attrs==19.3.0
 backports.functools-lru-cache==1.6.1
+black==19.10b0
 caniusepython3==7.2.0
 certifi==2019.11.28
 chardet==3.0.4
@@ -30,6 +32,7 @@ markupsafe==1.1.1         # via jinja2
 mccabe==0.6.1
 more-itertools==8.0.2
 packaging==19.2
+pathspec==0.7.0
 pip-tools==4.3.0
 pluggy==0.13.1
 py==1.8.1
@@ -43,6 +46,7 @@ pylint==2.4.2
 pyparsing==2.4.6
 pytest-cov==2.8.1
 pytest==5.3.2
+regex==2019.12.20
 requests==2.22.0
 six==1.13.0
 snowballstemmer==2.0.0
