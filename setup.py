@@ -1,10 +1,8 @@
 #!/usr/bin/env python
-# -*- coding: utf-8 -*-
 # pylint: disable=open-builtin,native-string
 """
-Package metadata for journo.
+Package metadata for scriv.
 """
-from __future__ import absolute_import, print_function
 
 import os
 import re
@@ -52,7 +50,7 @@ def is_requirement(line):
     return line and not line.startswith(('-r', '#', '-e', 'git+', '-c'))
 
 
-VERSION = get_version('journo', '__init__.py')
+VERSION = get_version('scriv', '__init__.py')
 
 if sys.argv[-1] == 'tag':
     print("Tagging the version on GitHub:")
@@ -64,15 +62,15 @@ README = open(os.path.join(os.path.dirname(__file__), 'README.rst')).read()
 CHANGELOG = open(os.path.join(os.path.dirname(__file__), 'CHANGELOG.rst')).read()
 
 setup(
-    name='journo',
+    name='scriv',
     version=VERSION,
-    description="""Journo changelog management tool""",
+    description="""Scriv changelog management tool""",
     long_description=README + '\n\n' + CHANGELOG,
     author='edX',
     author_email='oscm@edx.org',
-    url='https://github.com/edx/journo',
+    url='https://github.com/edx/scriv',
     packages=[
-        'journo',
+        'scriv',
     ],
     include_package_data=True,
     install_requires=load_requirements('requirements/base.in'),

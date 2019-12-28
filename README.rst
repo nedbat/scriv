@@ -1,5 +1,6 @@
-journo
-=============================
+=====
+Scriv
+=====
 
 |pypi-badge| |travis-badge| |codecov-badge| |doc-badge| |pyversions-badge|
 |license-badge|
@@ -9,7 +10,7 @@ which sets it in the context of other repositories under the ``edx``
 organization. It should make clear where this fits in to the overall edX
 codebase.
 
-Journo changelog management tool
+Scriv changelog management tool
 
 Overview (please modify)
 ------------------------
@@ -21,7 +22,7 @@ to understand the code in more detail.
 Documentation
 -------------
 
-The full documentation is at https://journo.readthedocs.org.
+The full documentation is at https://scriv.readthedocs.org.
 
 License
 -------
@@ -42,10 +43,10 @@ Even though they were written with ``edx-platform`` in mind, the guidelines
 should be followed for Open edX code in general.
 
 The pull request description template should be automatically applied if you are creating a pull request from GitHub. Otherwise you
-can find it at `PULL_REQUEST_TEMPLATE.md <https://github.com/edx/journo/blob/master/.github/PULL_REQUEST_TEMPLATE.md>`_.
+can find it at `PULL_REQUEST_TEMPLATE.md <https://github.com/edx/scriv/blob/master/.github/PULL_REQUEST_TEMPLATE.md>`_.
 
 The issue report template should be automatically applied if you are creating an issue on GitHub as well. Otherwise you
-can find it at `ISSUE_TEMPLATE.md <https://github.com/edx/journo/blob/master/.github/ISSUE_TEMPLATE.md>`_.
+can find it at `ISSUE_TEMPLATE.md <https://github.com/edx/scriv/blob/master/.github/ISSUE_TEMPLATE.md>`_.
 
 Reporting Security Issues
 -------------------------
@@ -61,26 +62,26 @@ refer to this `list of resources`_ if you need any assistance.
 .. _list of resources: https://open.edx.org/getting-help
 
 
-.. |pypi-badge| image:: https://img.shields.io/pypi/v/journo.svg
-    :target: https://pypi.python.org/pypi/journo/
+.. |pypi-badge| image:: https://img.shields.io/pypi/v/scriv.svg
+    :target: https://pypi.python.org/pypi/scriv/
     :alt: PyPI
 
-.. |travis-badge| image:: https://travis-ci.org/edx/journo.svg?branch=master
-    :target: https://travis-ci.org/edx/journo
+.. |travis-badge| image:: https://travis-ci.org/edx/scriv.svg?branch=master
+    :target: https://travis-ci.org/edx/scriv
     :alt: Travis
 
-.. |codecov-badge| image:: http://codecov.io/github/edx/journo/coverage.svg?branch=master
-    :target: http://codecov.io/github/edx/journo?branch=master
+.. |codecov-badge| image:: http://codecov.io/github/edx/scriv/coverage.svg?branch=master
+    :target: http://codecov.io/github/edx/scriv?branch=master
     :alt: Codecov
 
-.. |doc-badge| image:: https://readthedocs.org/projects/journo/badge/?version=latest
-    :target: http://journo.readthedocs.io/en/latest/
+.. |doc-badge| image:: https://readthedocs.org/projects/scriv/badge/?version=latest
+    :target: http://scriv.readthedocs.io/en/latest/
     :alt: Documentation
 
-.. |pyversions-badge| image:: https://img.shields.io/pypi/pyversions/journo.svg
-    :target: https://pypi.python.org/pypi/journo/
+.. |pyversions-badge| image:: https://img.shields.io/pypi/pyversions/scriv.svg
+    :target: https://pypi.python.org/pypi/scriv/
     :alt: Supported Python versions
 
-.. |license-badge| image:: https://img.shields.io/github/license/edx/journo.svg
-    :target: https://github.com/edx/journo/blob/master/LICENSE.txt
+.. |license-badge| image:: https://img.shields.io/github/license/edx/scriv.svg
+    :target: https://github.com/edx/scriv/blob/master/LICENSE.txt
     :alt: License

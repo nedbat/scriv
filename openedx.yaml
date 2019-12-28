@@ -1,8 +1,8 @@
 # openedx.yaml
 
 ---
-owner: edx/devops
-nick: journo
+owner: edx/openedx
+nick: scriv
 tags:
     - tools
 oeps:
