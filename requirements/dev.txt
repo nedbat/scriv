@@ -47,6 +47,7 @@ pylint-plugin-utils==0.6
 pylint==2.4.2
 pyparsing==2.4.6
 pytest-cov==2.8.1
+pytest-mock==1.13.0
 pytest==5.3.2
 regex==2019.12.20
 requests==2.22.0

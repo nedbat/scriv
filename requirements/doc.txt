@@ -28,6 +28,7 @@ py==1.8.1
 pygments==2.5.2           # via readme-renderer, sphinx
 pyparsing==2.4.6
 pytest-cov==2.8.1
+pytest-mock==1.13.0
 pytest==5.3.2
 pytz==2019.3              # via babel
 readme-renderer==24.0

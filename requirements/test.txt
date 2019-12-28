@@ -14,7 +14,8 @@ pluggy==0.13.1            # via pytest
 py==1.8.1                 # via pytest
 pyparsing==2.4.6          # via packaging
 pytest-cov==2.8.1
-pytest==5.3.2             # via pytest-cov
+pytest-mock==1.13.0
+pytest==5.3.2             # via pytest-cov, pytest-mock
 six==1.13.0               # via packaging
 wcwidth==0.1.7            # via pytest
 zipp==0.6.0               # via importlib-metadata
