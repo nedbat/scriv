@@ -5,6 +5,10 @@ import attr
 
 @attr.s(auto_attribs=True)
 class Config:
+    """
+    All the settable options for Scriv.
+    """
+
     entry_directory: str = "changelog.d"
     format: str = "rst"
 
