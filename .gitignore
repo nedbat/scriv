@@ -1,0 +1,70 @@
+*.py[cod]
+__pycache__
+.pytest_cache
+
+# C extensions
+*.so
+
+# Packages
+*.egg
+*.egg-info
+dist
+build
+eggs
+parts
+bin
+var
+sdist
+develop-eggs
+.installed.cfg
+lib
+lib64
+
+# Installer logs
+pip-log.txt
+
+# Unit test / coverage reports
+.cache/
+.pytest_cache/
+.coverage
+.coverage.*
+.tox
+coverage.xml
+htmlcov/
+
+# IDEs and text editors
+*~
+*.swp
+.idea/
+.project
+.pycharm_helpers/
+.pydevproject
+
+# The Silver Searcher
+.agignore
+
+# OS X artifacts
+*.DS_Store
+
+# Logging
+log/
+logs/
+chromedriver.log
+ghostdriver.log
+
+# Complexity
+output/*.html
+output/*/index.html
+
+# Sphinx
+docs/_build
+docs/modules.rst
+docs/journo.rst
+docs/journo.*.rst
+
+# Private requirements
+requirements/private.in
+requirements/private.txt
+
+# tox environment temporary artifacts
+tests/__init__.py

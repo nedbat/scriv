@@ -1,0 +1,49 @@
+# Config file for automatic testing at travis-ci.org
+
+language: python
+
+python:
+  - 2.7
+  - 3.6
+
+env:
+  - TOXENV=django18
+  - TOXENV=django111
+  - TOXENV=django20
+
+matrix:
+  exclude:
+    - python: 2.7
+      env: TOXENV=django20
+  include:
+    - python: 3.6
+      env: TOXENV=quality
+    - python: 3.6
+      env: TOXENV=docs
+    - python: 3.6
+      env: TOXENV=pii_check
+
+cache:
+  - pip
+  
+before_install:
+  - pip install --upgrade pip
+
+install:
+  - pip install -r requirements/travis.txt
+
+script:
+  - tox
+
+after_success:
+  - codecov
+
+# Set password via "travis encrypt --add deploy.password"; for details, see
+# https://docs.travis-ci.com/user/deployment/pypi
+deploy:
+  provider: pypi
+  user: edx
+  distributions: sdist bdist_wheel
+  on:
+    tags: true
+    condition: '$TOXENV = quality'

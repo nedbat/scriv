@@ -1,0 +1,10 @@
+[run]
+branch = True
+data_file = .coverage
+source=journo
+omit =
+    test_settings
+    *migrations*
+    *admin.py
+    *static*
+    *templates*

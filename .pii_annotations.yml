@@ -1,0 +1,35 @@
+source_path: ./
+report_path: pii_report
+safelist_path: .annotation_safe_list.yml
+coverage_target: 100.0
+annotations:
+    ".. no_pii:":
+    "pii_group":
+        - ".. pii:":
+        - ".. pii_types:":
+            choices:
+              - id # Unique identifier for the user which is shared across systems
+              - name # Used for any part of the user’s name
+              - username
+              - password
+              - location # Used for any part of any type address or country stored
+              - phone_number # Used for phone or fax numbers
+              - email_address
+              - birth_date # Used for any part of a stored birth date
+              - ip # IP address
+              - external_service # Used for external service ids or links such as social media links or usernames, website links, etc.
+              - biography # Any type of free-form biography field
+              - gender
+              - sex
+              - image
+              - video
+              - other
+        - ".. pii_retirement:":
+            choices:
+              - retained     # Intentionally kept for legal reasons
+              - local_api    # An API exists in this repository for retiring this information
+              - consumer_api # The data's consumer must implement an API for retiring this information
+              - third_party  # A third party API exists to retire this data
+extensions:
+    python:
+        - py

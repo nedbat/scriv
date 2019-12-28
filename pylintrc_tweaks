@@ -1,0 +1,4 @@
+# pylintrc tweaks for use with edx_lint.
+[MASTER]
+ignore = migrations
+load-plugins = caniusepython3.pylint_checker,edx_lint.pylint

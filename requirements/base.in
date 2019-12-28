@@ -1,0 +1,4 @@
+# Core requirements for using this application
+
+-c constraints.txt
+
