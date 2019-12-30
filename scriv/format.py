@@ -1,0 +1,19 @@
+"""Dispatcher for format-based knowledge."""
+
+from scriv.config import Config
+
+
+class FormatTools:
+    """Methods and data about specific formats."""
+
+    NEW_TEMPLATE: str = ""
+
+
+def get_format_tools(config: Config) -> FormatTools:
+    """Return the FormatTools to use."""
+    if config.format == "rst":
+        from scriv import format_rst  # pylint: disable=cyclic-import
+
+        return format_rst.RstTools()
+    else:
+        raise Exception("Unknown format: {}".format(config.format))

@@ -7,6 +7,7 @@ import re
 import jinja2
 
 from scriv.config import Config
+from scriv.format import get_format_tools
 from scriv.gitinfo import current_branch_name, user_nick
 
 
@@ -25,21 +26,7 @@ def new_entry_path(config: Config) -> str:
     return file_path
 
 
-NEW_TEMPLATE = """\
-.. A new scriv entry.
-..
-.. Uncomment the header that is right (remove the leading dots).
-
-{% for cat in config.categories -%}
-.. {{ cat }}
-.. {{ '=' * (cat|length) }}
-..
-.. - A bullet item for the {{ cat }} category.
-..
-{% endfor -%}
-"""
-
-
 def new_entry_contents(config: Config) -> str:
     """Produce the initial contents of a scriv entry."""
-    return jinja2.Template(NEW_TEMPLATE).render(config=config)
+    tools = get_format_tools(config)
+    return jinja2.Template(tools.NEW_TEMPLATE).render(config=config)
