@@ -30,7 +30,7 @@ after_success:
 
 deploy:
   provider: pypi
-  user: edx
+  user: "__token__"
   distributions: sdist bdist_wheel
   on:
     tags: true
