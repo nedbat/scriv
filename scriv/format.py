@@ -6,7 +6,7 @@ from scriv.config import Config
 class FormatTools:
     """Methods and data about specific formats."""
 
-    NEW_TEMPLATE: str = ""
+    NEW_TEMPLATE = ""
 
 
 def get_format_tools(config: Config) -> FormatTools:

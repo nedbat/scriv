@@ -1,26 +1,17 @@
 """Scriv configuration."""
 
-from typing import List
-
 import attr
 
 
-@attr.s(auto_attribs=True)
+@attr.s
 class Config:
     """
     All the settable options for Scriv.
     """
 
-    entry_directory: str = "changelog.d"
-    format: str = "rst"
-    categories: List[str] = [
-        "Removed",
-        "Added",
-        "Changed",
-        "Deprecated",
-        "Fixed",
-        "Security",
-    ]
+    entry_directory = attr.ib(type=str, default="changelog.d")
+    format = attr.ib(type=str, default="rst")
+    categories = attr.ib(type=list, default=["Removed", "Added", "Changed", "Deprecated", "Fixed", "Security"])
 
 
 def read_config() -> Config:
