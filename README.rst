@@ -5,19 +5,14 @@ Scriv
 |pypi-badge| |travis-badge| |codecov-badge| |doc-badge| |pyversions-badge|
 |license-badge|
 
-The ``README.rst`` file should start with a brief description of the repository,
-which sets it in the context of other repositories under the ``edx``
-organization. It should make clear where this fits in to the overall edX
-codebase.
-
 Scriv changelog management tool
 
-Overview (please modify)
-------------------------
+Overview
+--------
 
-The ``README.rst`` file should then provide an overview of the code in this
-repository, including the main components and useful entry points for starting
-to understand the code in more detail.
+Scriv is a command-line tool for helping developers maintain useful changelogs.
+It manages a directory of changelog entries. It aggregates them into a
+CHANGELOG file.
 
 Documentation
 -------------
@@ -41,12 +36,6 @@ Please read `How To Contribute <https://github.com/edx/edx-platform/blob/master/
 
 Even though they were written with ``edx-platform`` in mind, the guidelines
 should be followed for Open edX code in general.
-
-The pull request description template should be automatically applied if you are creating a pull request from GitHub. Otherwise you
-can find it at `PULL_REQUEST_TEMPLATE.md <https://github.com/edx/scriv/blob/master/.github/PULL_REQUEST_TEMPLATE.md>`_.
-
-The issue report template should be automatically applied if you are creating an issue on GitHub as well. Otherwise you
-can find it at `ISSUE_TEMPLATE.md <https://github.com/edx/scriv/blob/master/.github/ISSUE_TEMPLATE.md>`_.
 
 Reporting Security Issues
 -------------------------
