@@ -1,15 +1,12 @@
 """Markdown text knowledge for scriv."""
 
-import textwrap
-
 from scriv.format import FormatTools
 
 
 class MdTools(FormatTools):
     """Specifics about how to work with Markdown."""
 
-    NEW_TEMPLATE = textwrap.dedent(
-        """\
+    NEW_TEMPLATE = """\
         <!--
         A new scriv entry.
 
@@ -25,4 +22,3 @@ class MdTools(FormatTools):
         -->
         {% endfor -%}
         """
-    )

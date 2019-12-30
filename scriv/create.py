@@ -3,6 +3,7 @@
 import datetime
 import os.path
 import re
+import textwrap
 
 import jinja2
 
@@ -29,4 +30,4 @@ def new_entry_path(config: Config) -> str:
 def new_entry_contents(config: Config) -> str:
     """Produce the initial contents of a scriv entry."""
     tools = get_format_tools(config)
-    return jinja2.Template(tools.NEW_TEMPLATE).render(config=config)
+    return jinja2.Template(textwrap.dedent(tools.NEW_TEMPLATE)).render(config=config)

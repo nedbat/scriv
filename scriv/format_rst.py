@@ -1,15 +1,12 @@
 """ReStructured text knowledge for scriv."""
 
-import textwrap
-
 from scriv.format import FormatTools
 
 
 class RstTools(FormatTools):
     """Specifics about how to work with ReStructured Text."""
 
-    NEW_TEMPLATE = textwrap.dedent(
-        """\
+    NEW_TEMPLATE = """\
         .. A new scriv entry.
         ..
         .. Uncomment the header that is right (remove the leading dots).
@@ -22,4 +19,3 @@ class RstTools(FormatTools):
         ..
         {% endfor -%}
         """
-    )
