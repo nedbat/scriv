@@ -5,6 +5,7 @@
 #    make upgrade
 #
 attrs==19.3.0
+click-log==0.3.2
 click==7.0
 jinja2==2.10.3
 markupsafe==1.1.1         # via jinja2

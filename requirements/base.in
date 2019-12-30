@@ -4,4 +4,5 @@
 
 attrs
 click
+click-log
 jinja2

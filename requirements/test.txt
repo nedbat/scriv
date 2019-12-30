@@ -5,6 +5,7 @@
 #    make upgrade
 #
 attrs==19.3.0
+click-log==0.3.2
 click==7.0
 coverage==5.0.1
 freezegun==0.3.12
