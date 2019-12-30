@@ -1,5 +1,7 @@
 """Scriv configuration."""
 
+from typing import List
+
 import attr
 
 
@@ -11,6 +13,14 @@ class Config:
 
     entry_directory: str = "changelog.d"
     format: str = "rst"
+    categories: List[str] = [
+        "Removed",
+        "Added",
+        "Changed",
+        "Deprecated",
+        "Fixed",
+        "Security",
+    ]
 
 
 def read_config() -> Config:

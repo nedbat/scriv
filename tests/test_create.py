@@ -3,7 +3,7 @@
 from freezegun import freeze_time
 
 from scriv.config import Config
-from scriv.create import new_entry_path
+from scriv.create import new_entry_contents, new_entry_path
 
 
 @freeze_time("2012-10-01")
@@ -20,3 +20,11 @@ def test_new_entry_path_with_branch(mocker):
     mocker.patch("scriv.create.current_branch_name", side_effect=["joedeveloper/feature-123.4"])
     config = Config(entry_directory="notes")
     assert new_entry_path(config) == "notes/20130225_joedev_feature_123_4.rst"
+
+
+def test_new_entry_contents():
+    config = Config()
+    contents = new_entry_contents(config)
+    assert "A new scriv entry" in contents
+    assert ".. Added\n.. =====\n" in contents
+    assert all(cat in contents for cat in config.categories)

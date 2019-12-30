@@ -3,7 +3,7 @@
 import click
 
 from scriv.config import read_config
-from scriv.create import new_entry_path
+from scriv.create import new_entry_contents, new_entry_path
 
 
 @click.group()
@@ -20,4 +20,4 @@ def create() -> None:
     file_path = new_entry_path(config)
     click.echo("Creating {}".format(file_path))
     with open(file_path, "w") as f:
-        f.write("ENTRY!\n")
+        f.write(new_entry_contents(config))
