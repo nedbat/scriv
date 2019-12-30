@@ -15,5 +15,9 @@ def get_format_tools(config: Config) -> FormatTools:
         from scriv import format_rst  # pylint: disable=cyclic-import
 
         return format_rst.RstTools()
+    elif config.format == "md":
+        from scriv import format_md  # pylint: disable=cyclic-import
+
+        return format_md.MdTools()
     else:
         raise Exception("Unknown format: {}".format(config.format))
