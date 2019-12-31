@@ -1,5 +1,7 @@
 """Markdown text knowledge for scriv."""
 
+from typing import Dict, List
+
 from scriv.format import FormatTools
 
 
@@ -22,3 +24,7 @@ class MdTools(FormatTools):
         -->
         {% endfor -%}
         """
+
+    @staticmethod
+    def parse_text(text) -> Dict[str, List[str]]:  # noqa: D102
+        return {}

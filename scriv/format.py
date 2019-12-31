@@ -1,12 +1,30 @@
 """Dispatcher for format-based knowledge."""
 
+import abc
+from typing import Dict, List
+
 from scriv.config import Config
 
 
-class FormatTools:
+class FormatTools(abc.ABC):
     """Methods and data about specific formats."""
 
+    # The Jinja2 template for new entries in this format.
     NEW_TEMPLATE = ""
+
+    @staticmethod
+    @abc.abstractmethod
+    def parse_text(text: str) -> Dict[str, List[str]]:
+        """
+        Parse text to find sections.
+
+        Args:
+            text: the marked-up text.
+
+        Returns:
+            A dict mapping section headers to a list of the paragraphs in each
+            section.
+        """
 
 
 def get_format_tools(config: Config) -> FormatTools:
