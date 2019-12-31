@@ -1,8 +1,6 @@
 """Markdown text knowledge for scriv."""
 
-from typing import Dict, List
-
-from scriv.format import FormatTools
+from scriv.format import FormatTools, SectionDict
 
 
 class MdTools(FormatTools):
@@ -26,9 +24,9 @@ class MdTools(FormatTools):
         """
 
     @staticmethod
-    def parse_text(text) -> Dict[str, List[str]]:  # noqa: D102
+    def parse_text(text) -> SectionDict:  # noqa: D102
         return {}
 
     @staticmethod
-    def format_sections(sections: Dict[str, List[str]]) -> str:  # noqa: D102
+    def format_sections(sections: SectionDict) -> str:  # noqa: D102
         pass

@@ -5,6 +5,10 @@ from typing import Dict, List
 
 from scriv.config import Config
 
+# Parsed changelogs entries are called Sections. An ordered dict mapping
+# section names to lists of paragraphs.
+SectionDict = Dict[str, List[str]]
+
 
 class FormatTools(abc.ABC):
     """Methods and data about specific formats."""
@@ -14,7 +18,7 @@ class FormatTools(abc.ABC):
 
     @staticmethod
     @abc.abstractmethod
-    def parse_text(text: str) -> Dict[str, List[str]]:
+    def parse_text(text: str) -> SectionDict:
         """
         Parse text to find sections.
 
@@ -28,7 +32,7 @@ class FormatTools(abc.ABC):
 
     @staticmethod
     @abc.abstractmethod
-    def format_sections(sections: Dict[str, List[str]]) -> str:
+    def format_sections(sections: SectionDict) -> str:
         """
         Format a series of sections into marked-up text.
         """

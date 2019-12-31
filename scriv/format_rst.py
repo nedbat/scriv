@@ -1,8 +1,6 @@
 """ReStructured text knowledge for scriv."""
 
-from typing import Dict, List
-
-from scriv.format import FormatTools
+from scriv.format import FormatTools, SectionDict
 
 
 class RstTools(FormatTools):
@@ -23,9 +21,9 @@ class RstTools(FormatTools):
         """
 
     @staticmethod
-    def parse_text(text: str) -> Dict[str, List[str]]:  # noqa: D102
+    def parse_text(text: str) -> SectionDict:  # noqa: D102
         # Parse a very restricted subset of rst.
-        sections = {}  # type: Dict[str, List[str]]
+        sections = {}  # type: SectionDict
 
         lines = text.splitlines()
         lines.append("")
@@ -68,7 +66,7 @@ class RstTools(FormatTools):
         return sections
 
     @staticmethod
-    def format_sections(sections: Dict[str, List[str]]) -> str:  # noqa: D102
+    def format_sections(sections: SectionDict) -> str:  # noqa: D102
         lines = []
         for section, paragraphs in sections.items():
             lines.append("")
