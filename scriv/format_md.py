@@ -28,3 +28,7 @@ class MdTools(FormatTools):
     @staticmethod
     def parse_text(text) -> Dict[str, List[str]]:  # noqa: D102
         return {}
+
+    @staticmethod
+    def format_sections(sections: Dict[str, List[str]]) -> str:  # noqa: D102
+        pass

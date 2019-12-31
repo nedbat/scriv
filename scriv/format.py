@@ -26,6 +26,13 @@ class FormatTools(abc.ABC):
             section.
         """
 
+    @staticmethod
+    @abc.abstractmethod
+    def format_sections(sections: Dict[str, List[str]]) -> str:
+        """
+        Format a series of sections into marked-up text.
+        """
+
 
 def get_format_tools(config: Config) -> FormatTools:
     """Return the FormatTools to use."""

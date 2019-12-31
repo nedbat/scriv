@@ -1,5 +1,6 @@
 """Tests for scriv.format_rst.py."""
 
+import collections
 import textwrap
 
 import pytest
@@ -21,7 +22,7 @@ from scriv.format_rst import RstTools
             - This thing was added.
               And we liked it.
             """,
-            {"Added": ["- This thing was added.\n  And we liked it.\n"]},
+            {"Added": ["- This thing was added.\n  And we liked it."]},
         ),
         (
             """\
@@ -49,10 +50,10 @@ from scriv.format_rst import RstTools
             """,
             {
                 "Added": [
-                    "- This thing was added.\n  And we liked it.\n",
-                    "- Also added\n  this thing\n  that is very important.\n",
+                    "- This thing was added.\n  And we liked it.",
+                    "- Also added\n  this thing\n  that is very important.",
                 ],
-                "Fixed": ["- This thing was fixed.\n", "- Another thing was fixed.\n"],
+                "Fixed": ["- This thing was fixed.", "- Another thing was fixed."],
             },
         ),
     ],
@@ -60,3 +61,40 @@ from scriv.format_rst import RstTools
 def test_parse_text(text, parsed):
     actual = RstTools().parse_text(textwrap.dedent(text))
     assert parsed == actual
+
+
+def test_format_sections():
+    sections = collections.OrderedDict(
+        [
+            (
+                "Added",
+                [
+                    "- This thing was added.\n  And we liked it.",
+                    "- Also added\n  this thing\n  that is very important.",
+                ],
+            ),
+            ("Fixed", ["- This thing was fixed.", "- Another thing was fixed."]),
+        ]
+    )
+    expected = """\
+
+        Added
+        -----
+
+        - This thing was added.
+          And we liked it.
+
+        - Also added
+          this thing
+          that is very important.
+
+        Fixed
+        -----
+
+        - This thing was fixed.
+
+        - Another thing was fixed.
+        """
+    actual = RstTools().format_sections(sections)
+    print(actual)
+    assert textwrap.dedent(expected) == actual

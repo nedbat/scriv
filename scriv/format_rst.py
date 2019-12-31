@@ -15,7 +15,7 @@ class RstTools(FormatTools):
         ..
         {% for cat in config.categories -%}
         .. {{ cat }}
-        .. {{ '=' * (cat|length) }}
+        .. {{ '-' * (cat|length) }}
         ..
         .. - A bullet item for the {{ cat }} category.
         ..
@@ -63,6 +63,19 @@ class RstTools(FormatTools):
 
         # Trim out all empty paragraphs.
         for section, paragraphs in sections.items():
-            sections[section] = list(filter(None, paragraphs))
+            sections[section] = [par.rstrip() for par in paragraphs if par]
 
         return sections
+
+    @staticmethod
+    def format_sections(sections: Dict[str, List[str]]) -> str:  # noqa: D102
+        lines = []
+        for section, paragraphs in sections.items():
+            lines.append("")
+            lines.append(section)
+            lines.append("-" * len(section))
+            for paragraph in paragraphs:
+                lines.append("")
+                lines.append(paragraph)
+
+        return "\n".join(lines) + "\n"

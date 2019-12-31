@@ -28,7 +28,7 @@ def test_new_entry_contents_rst():
     contents = new_entry_contents(config)
     assert contents.startswith(".. ")
     assert "A new scriv entry" in contents
-    assert ".. Added\n.. =====\n" in contents
+    assert ".. Added\n.. -----\n" in contents
     assert all(cat in contents for cat in config.categories)
 
 
