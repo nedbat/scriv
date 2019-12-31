@@ -1,3 +1,6 @@
 # pylintrc tweaks for use with edx_lint.
 [MASTER]
 load-plugins = caniusepython3.pylint_checker,edx_lint.pylint
+
+[REPORTS]
+score=no

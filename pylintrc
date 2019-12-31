@@ -360,6 +360,7 @@ output-format = text
 files-output = no
 reports = no
 evaluation = 10.0 - ((float(5 * error + warning + refactor + convention) / statement) * 10)
+score = no
 
 [BASIC]
 bad-functions = map,filter,apply,input
@@ -453,4 +454,4 @@ int-import-graph =
 [EXCEPTIONS]
 overgeneral-exceptions = Exception
 
-# 441d7fe42ced9f62afb3a8d14707445c5346fd0e
+# dd79d7ebf8d1ce1bc7144e7fcc3cbcfbd38610dd
