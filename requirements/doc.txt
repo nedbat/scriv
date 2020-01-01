@@ -6,7 +6,7 @@
 #
 alabaster==0.7.12         # via sphinx
 attrs==19.3.0
-babel==2.7.0              # via sphinx
+babel==2.8.0              # via sphinx
 bleach==3.1.0             # via readme-renderer
 certifi==2019.11.28       # via requests
 chardet==3.0.4            # via doc8, requests
@@ -26,8 +26,9 @@ more-itertools==8.0.2
 packaging==19.2
 pbr==5.4.4                # via stevedore
 pluggy==0.13.1
+pudb==2019.2
 py==1.8.1
-pygments==2.5.2           # via readme-renderer, sphinx
+pygments==2.5.2
 pyparsing==2.4.6
 pytest-cov==2.8.1
 pytest-mock==1.13.0
@@ -48,6 +49,7 @@ sphinxcontrib-qthelp==1.0.2  # via sphinx
 sphinxcontrib-serializinghtml==1.1.3  # via sphinx
 stevedore==1.31.0         # via doc8
 urllib3==1.25.7           # via requests
+urwid==2.1.0
 wcwidth==0.1.7
 webencodings==0.5.1       # via bleach
 zipp==0.6.0

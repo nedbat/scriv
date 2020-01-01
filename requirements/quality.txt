@@ -32,9 +32,11 @@ mypy==0.761
 packaging==19.2
 pathspec==0.7.0           # via black
 pluggy==0.13.1
+pudb==2019.2
 py==1.8.1
 pycodestyle==2.5.0
 pydocstyle==5.0.1
+pygments==2.5.2
 pylint-celery==0.3        # via edx-lint
 pylint-django==2.0.11     # via edx-lint
 pylint-plugin-utils==0.6  # via pylint-celery, pylint-django
@@ -52,6 +54,7 @@ toml==0.10.0              # via black
 typed-ast==1.4.0          # via astroid, black, mypy
 typing-extensions==3.7.4.1  # via mypy
 urllib3==1.25.7           # via requests
+urwid==2.1.0
 wcwidth==0.1.7
 wrapt==1.11.2             # via astroid
 zipp==0.6.0

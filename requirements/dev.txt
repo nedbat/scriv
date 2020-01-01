@@ -38,10 +38,11 @@ packaging==19.2
 pathspec==0.7.0
 pip-tools==4.3.0
 pluggy==0.13.1
+pudb==2019.2
 py==1.8.1
 pycodestyle==2.5.0
 pydocstyle==5.0.1
-pygments==2.5.2           # via diff-cover
+pygments==2.5.2
 pylint-celery==0.3
 pylint-django==2.0.11
 pylint-plugin-utils==0.6
@@ -61,6 +62,7 @@ tox==3.14.3
 typed-ast==1.4.0
 typing-extensions==3.7.4.1
 urllib3==1.25.7
+urwid==2.1.0
 virtualenv==16.7.9
 wcwidth==0.1.7
 wrapt==1.11.2
