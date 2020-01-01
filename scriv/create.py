@@ -1,15 +1,20 @@
 """Creating entries."""
 
 import datetime
+import logging
 import os.path
 import re
 import textwrap
 
+import click
+import click_log
 import jinja2
 
-from scriv.config import Config
+from scriv.config import Config, read_config
 from scriv.format import get_format_tools
 from scriv.gitinfo import current_branch_name, user_nick
+
+logger = logging.getLogger()
 
 
 def new_entry_path(config: Config) -> str:
@@ -31,3 +36,16 @@ def new_entry_contents(config: Config) -> str:
     """Produce the initial contents of a scriv entry."""
     tools = get_format_tools(config.format)
     return jinja2.Template(textwrap.dedent(tools.NEW_TEMPLATE)).render(config=config)
+
+
+@click.command()
+@click_log.simple_verbosity_option(logger)
+def create() -> None:
+    """
+    Create a new scriv changelog entry.
+    """
+    config = read_config()
+    file_path = new_entry_path(config)
+    logger.info("Creating {}".format(file_path))
+    with open(file_path, "w") as f:
+        f.write(new_entry_contents(config))
