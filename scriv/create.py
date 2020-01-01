@@ -16,7 +16,7 @@ def new_entry_path(config: Config) -> str:
     """
     Return the file path for a new entry.
     """
-    file_name = "{:%Y%m%d}_{}".format(datetime.datetime.now(), user_nick())
+    file_name = "{:%Y%m%d_%H%M}_{}".format(datetime.datetime.now(), user_nick())
     branch_name = current_branch_name()
     if branch_name and branch_name != "master":
         branch_name = branch_name.rpartition("/")[-1]
