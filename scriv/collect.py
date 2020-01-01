@@ -3,7 +3,7 @@
 import collections
 import logging
 from pathlib import Path
-from typing import Iterable, List
+from typing import Dict, Iterable, List, TypeVar
 
 import click
 import click_log
@@ -38,20 +38,23 @@ def combine_sections(files: Iterable[Path]) -> SectionDict:
     return sections
 
 
-def order_sections(sections: SectionDict, categories: List[str]) -> SectionDict:
+T = TypeVar("T")
+
+
+def order_dict(d: Dict[str, T], keys: List[str]) -> Dict[str, T]:
     """
-    Re-order the sections to match the categories list.
+    Produce an OrderedDict of `d`, but with the keys in `keys` order.
     """
     with_order = collections.OrderedDict()
-    to_insert = set(sections)
-    for category in categories:
-        if category not in to_insert:
+    to_insert = set(d)
+    for k in keys:
+        if k not in to_insert:
             continue
-        with_order[category] = sections[category]
-        to_insert.remove(category)
+        with_order[k] = d[k]
+        to_insert.remove(k)
 
-    for category in to_insert:
-        with_order[category] = sections[category]
+    for k in to_insert:
+        with_order[k] = d[k]
 
     return with_order
 
@@ -65,6 +68,7 @@ def collect() -> None:
     config = read_config()
     logger.info("Collecting from {}".format(config.entry_directory))
     sections = combine_sections(files_to_combine(config.entry_directory))
+    sections = order_dict(sections, config.categories)
     format_tools = get_format_tools(config.format)
     with open(config.output_file, "w") as f:
         f.write(format_tools.format_sections(sections))
