@@ -5,8 +5,8 @@ import logging
 import click
 import click_log
 
-from scriv.collect import collect
-from scriv.create import create
+from .collect import collect
+from .create import create
 
 logger = logging.getLogger()
 click_log.basic_config(logger)

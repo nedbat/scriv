@@ -8,8 +8,8 @@ from typing import Dict, Iterable, List, TypeVar
 import click
 import click_log
 
-from scriv.config import read_config
-from scriv.format import SectionDict, get_format_tools
+from .config import read_config
+from .format import SectionDict, get_format_tools
 
 logger = logging.getLogger()
 

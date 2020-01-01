@@ -10,9 +10,9 @@ import click
 import click_log
 import jinja2
 
-from scriv.config import Config, read_config
-from scriv.format import get_format_tools
-from scriv.gitinfo import current_branch_name, user_nick
+from .config import Config, read_config
+from .format import get_format_tools
+from .gitinfo import current_branch_name, user_nick
 
 logger = logging.getLogger()
 

@@ -48,11 +48,11 @@ def get_format_tools(fmt: str) -> FormatTools:
     if fmt.startswith("."):
         fmt = fmt[1:]
     if fmt == "rst":
-        from scriv import format_rst  # pylint: disable=cyclic-import
+        from . import format_rst  # pylint: disable=cyclic-import
 
         return format_rst.RstTools()
     elif fmt == "md":
-        from scriv import format_md  # pylint: disable=cyclic-import
+        from . import format_md  # pylint: disable=cyclic-import
 
         return format_md.MdTools()
     else:

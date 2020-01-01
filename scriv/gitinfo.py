@@ -2,7 +2,7 @@
 
 import os
 
-from scriv.shell import run_command
+from .shell import run_command
 
 
 def user_nick() -> str:

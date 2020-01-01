@@ -1,6 +1,6 @@
 """Markdown text knowledge for scriv."""
 
-from scriv.format import FormatTools, SectionDict
+from .format import FormatTools, SectionDict
 
 
 class MdTools(FormatTools):
