@@ -52,5 +52,5 @@ def test_user_nick_from_nowhere(fake_run_command):  # pylint: disable=unused-arg
 
 
 def test_current_branch_name(fake_run_command):
-    fake_run_command.add_fake("git rev-parse --symbolic-full-name HEAD", (True, "refs/heads/master"))
-    assert current_branch_name() == "master"
+    fake_run_command.add_fake("git rev-parse --abbrev-ref HEAD", (True, "joedev/feature-123"))
+    assert current_branch_name() == "joedev/feature-123"

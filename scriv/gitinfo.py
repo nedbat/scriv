@@ -25,11 +25,8 @@ def current_branch_name() -> str:
     """
     Get the current branch name.
     """
-    ok, out = run_command("git rev-parse --symbolic-full-name HEAD")
+    ok, out = run_command("git rev-parse --abbrev-ref HEAD")
     if not ok:
         return ""
 
-    branch = out.strip()
-    if branch.startswith("refs/heads/"):
-        branch = branch[len("refs/heads/") :]
-    return branch
+    return out.strip()
