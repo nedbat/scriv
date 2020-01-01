@@ -3,7 +3,7 @@
 import collections
 import logging
 from pathlib import Path
-from typing import Dict, Iterable, List, TypeVar
+from typing import Dict, Iterable, List, Tuple, TypeVar
 
 import click
 import click_log
@@ -59,6 +59,19 @@ def order_dict(d: Dict[str, T], keys: List[str]) -> Dict[str, T]:
     return with_order
 
 
+def cut_at_line(text: str, marker: str) -> Tuple[str, str]:
+    """
+    Split text into two parts: up to the line with marker, and lines after.
+
+    If `marker` isn't in the text, return ("", text)
+    """
+    lines = text.splitlines(keepends=True)
+    for i, line in enumerate(lines):
+        if marker in line:
+            return "".join(lines[: i + 1]), "".join(lines[i + 1 :])
+    return ("", text)
+
+
 @click.command()
 @click_log.simple_verbosity_option(logger)
 def collect() -> None:
@@ -69,6 +82,15 @@ def collect() -> None:
     logger.info("Collecting from {}".format(config.entry_directory))
     sections = combine_sections(files_to_combine(config.entry_directory))
     sections = order_dict(sections, config.categories)
+
+    changelog = Path(config.output_file)
+    if changelog.exists():
+        changelog_text = changelog.read_text()
+        text_before, text_after = cut_at_line(changelog_text, config.insert_marker)
+    else:
+        text_before = ""
+        text_after = ""
+
     format_tools = get_format_tools(config.format)
-    with open(config.output_file, "w") as f:
-        f.write(format_tools.format_sections(sections))
+    new_text = format_tools.format_sections(sections)
+    changelog.write_text(text_before + new_text + text_after)

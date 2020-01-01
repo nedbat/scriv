@@ -13,6 +13,7 @@ class Config:
     format = attr.ib(type=str, default="rst")
     categories = attr.ib(type=list, default=["Removed", "Added", "Changed", "Deprecated", "Fixed", "Security"])
     output_file = attr.ib(type=str, default="CHANGELOG.rst")
+    insert_marker = attr.ib(type=str, default="scriv:insert-here")
 
 
 def read_config() -> Config:
