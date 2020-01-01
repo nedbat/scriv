@@ -7,3 +7,4 @@ def test_defaults():
     config = Config()
     assert config.entry_directory == "changelog.d"
     assert config.format == "rst"
+    assert config.output_file == "CHANGELOG.rst"

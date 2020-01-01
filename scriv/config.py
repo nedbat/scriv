@@ -12,6 +12,7 @@ class Config:
     entry_directory = attr.ib(type=str, default="changelog.d")
     format = attr.ib(type=str, default="rst")
     categories = attr.ib(type=list, default=["Removed", "Added", "Changed", "Deprecated", "Fixed", "Security"])
+    output_file = attr.ib(type=str, default="CHANGELOG.rst")
 
 
 def read_config() -> Config:

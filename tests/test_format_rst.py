@@ -15,12 +15,18 @@ from scriv.format_rst import RstTools
             """\
             .. Comments can be here
             .. and here.
-
+            ..
+            .. and here.
             Added
             -----
 
             - This thing was added.
               And we liked it.
+
+            .. More comments can be here
+            ..
+            .. And here.
+
             """,
             {"Added": ["- This thing was added.\n  And we liked it."]},
         ),

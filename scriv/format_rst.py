@@ -34,7 +34,7 @@ class RstTools(FormatTools):
         for line in lines:
             line = line.rstrip()
 
-            if line[:3] == ".. ":
+            if line[:2] == "..":
                 # Comment, do nothing.
                 continue
 
