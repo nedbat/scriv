@@ -1,35 +1,6 @@
 """Tests of gitinfo.py"""
 
-from typing import Tuple
-
-import pytest
-
 from scriv.gitinfo import current_branch_name, user_nick
-
-
-class RunCommandFaker:
-    """
-    A fake implementation of run_command.
-
-    Add results for commands with `add_fake`.
-    """
-
-    def __init__(self):
-        self.in_out = {}
-
-    def add_fake(self, cmd: str, result: Tuple[bool, str]) -> None:
-        self.in_out[cmd] = result
-
-    def __call__(self, cmd: str) -> Tuple[bool, str]:
-        return self.in_out.get(cmd, (False, ""))
-
-
-@pytest.fixture(name="fake_run_command")
-def fake_run_command_fixture(mocker):
-    """Replace gitinfo.run_command with a fake."""
-    frc = RunCommandFaker()
-    mocker.patch("scriv.gitinfo.run_command", frc)
-    return frc
 
 
 def test_user_nick_from_github(fake_run_command):
