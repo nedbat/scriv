@@ -1,6 +1,6 @@
 """Test collection logic."""
 
-from scriv.collect import collect
+from scriv.cli import cli
 
 ENTRY1 = """\
 Fixed
@@ -90,7 +90,7 @@ def test_collect_simple(cli_runner, changelog_d, temp_dir):
     # Entries in sections are in time order.
     (changelog_d / "20170616_nedbat.rst").write_text(ENTRY1)
     (changelog_d / "20170617_nedbat.rst").write_text(ENTRY2)
-    result = cli_runner.invoke(collect)
+    result = cli_runner.invoke(cli, ["collect"])
     assert result.exit_code == 0
     changelog_text = (temp_dir / "CHANGELOG.rst").read_text()
     assert CHANGELOG_1_2 == changelog_text
@@ -102,7 +102,7 @@ def test_collect_ordering(cli_runner, changelog_d, temp_dir):
     (changelog_d / "20170616_nedbat.rst").write_text(ENTRY2)
     (changelog_d / "20170617_nedbat.rst").write_text(ENTRY1)
     (changelog_d / "20170618_joedev.rst").write_text(ENTRY3)
-    result = cli_runner.invoke(collect)
+    result = cli_runner.invoke(cli, ["collect"])
     assert result.exit_code == 0
     changelog_text = (temp_dir / "CHANGELOG.rst").read_text()
     assert CHANGELOG_2_1_3 == changelog_text
@@ -113,7 +113,7 @@ def test_collect_inserts_at_marker(cli_runner, changelog_d, temp_dir):
     changelog = temp_dir / "CHANGELOG.rst"
     changelog.write_text(MARKED_CHANGELOG_A + UNMARKED_CHANGELOG_B)
     (changelog_d / "20170617_nedbat.rst").write_text(ENTRY1)
-    result = cli_runner.invoke(collect)
+    result = cli_runner.invoke(cli, ["collect"])
     assert result.exit_code == 0
     changelog_text = changelog.read_text()
     expected = MARKED_CHANGELOG_A + "\n" + ENTRY1 + UNMARKED_CHANGELOG_B
@@ -125,7 +125,7 @@ def test_collect_prepends_if_no_marker(cli_runner, changelog_d, temp_dir):
     changelog = temp_dir / "CHANGELOG.rst"
     changelog.write_text(UNMARKED_CHANGELOG_B)
     (changelog_d / "20170617_nedbat.rst").write_text(ENTRY1)
-    result = cli_runner.invoke(collect)
+    result = cli_runner.invoke(cli, ["collect"])
     assert result.exit_code == 0
     changelog_text = changelog.read_text()
     expected = "\n" + ENTRY1 + UNMARKED_CHANGELOG_B

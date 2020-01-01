@@ -3,8 +3,9 @@
 import freezegun
 import pytest
 
+from scriv.cli import cli
 from scriv.config import Config
-from scriv.create import create, new_entry_contents, new_entry_path
+from scriv.create import new_entry_contents, new_entry_path
 
 
 @freezegun.freeze_time("2012-10-01T07:08:09")
@@ -49,7 +50,7 @@ def test_new_entry_contents_unknown():
 
 def test_create_no_output_directory(cli_runner):
     # With no changelog.d directory, create fails with a FileNotFoundError.
-    result = cli_runner.invoke(create)
+    result = cli_runner.invoke(cli, ["create"])
     assert result.exit_code == 1
     assert isinstance(result.exception, FileNotFoundError)
     assert "changelog.d" in str(result.exception)
@@ -58,7 +59,7 @@ def test_create_no_output_directory(cli_runner):
 def test_create_entry(cli_runner, changelog_d):
     # Create will make one file with the current time in the name.
     with freezegun.freeze_time("2013-02-25T15:16:17"):
-        result = cli_runner.invoke(create)
+        result = cli_runner.invoke(cli, ["create"])
 
     assert result.exit_code == 0
     entries = sorted(changelog_d.iterdir())
@@ -71,7 +72,7 @@ def test_create_entry(cli_runner, changelog_d):
 
     # Using create later will make a second file with a new timestamp.
     with freezegun.freeze_time("2013-02-25T15:18:19"):
-        result = cli_runner.invoke(create)
+        result = cli_runner.invoke(cli, ["create"])
 
     assert result.exit_code == 0
     entries = sorted(changelog_d.iterdir())
