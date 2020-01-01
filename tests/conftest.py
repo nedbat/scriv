@@ -1,8 +1,10 @@
 """Fixture definitions."""
 
+import pathlib
 from typing import Tuple
 
 import pytest
+from click.testing import CliRunner
 
 
 class RunCommandFaker:
@@ -31,3 +33,24 @@ def fake_run_command(mocker):
     frc = RunCommandFaker()
     mocker.patch("scriv.gitinfo.run_command", frc)
     return frc
+
+
+@pytest.fixture()
+def temp_dir(tmpdir) -> pathlib.Path:
+    """Make and change into the tmpdir directory, as a Path."""
+    tmpdir.chdir()
+    return pathlib.Path(str(tmpdir))
+
+
+@pytest.fixture()
+def cli_runner(temp_dir):  # pylint: disable=unused-argument, redefined-outer-name
+    """Return a CliRunner, and run in a temp directory."""
+    return CliRunner()
+
+
+@pytest.fixture()
+def changelog_d(temp_dir) -> pathlib.Path:  # pylint: disable=redefined-outer-name
+    """Make a changelog.d directory, and return a Path() to it."""
+    the_changelog_d = temp_dir / "changelog.d"
+    the_changelog_d.mkdir()
+    return the_changelog_d
