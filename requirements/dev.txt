@@ -5,12 +5,9 @@
 #    make upgrade
 #
 appdirs==1.4.3
-argparse==1.4.0
 astroid==2.3.3
 attrs==19.3.0
-backports.functools-lru-cache==1.6.1
 black==19.10b0
-caniusepython3==7.2.0
 certifi==2019.11.28
 chardet==3.0.4
 click-log==0.3.2
@@ -18,7 +15,6 @@ click==7.0
 codecov==2.0.15
 coverage==5.0.1
 diff-cover==2.5.0
-distlib==0.3.0
 edx-lint==1.4.1
 filelock==3.0.12
 freezegun==0.3.12
@@ -64,9 +60,6 @@ typing-extensions==3.7.4.1
 urllib3==1.25.7
 urwid==2.1.0
 virtualenv==16.7.9
-wcwidth==0.1.7
+wcwidth==0.1.8
 wrapt==1.11.2
 zipp==0.6.0
-
-# The following packages are considered to be unsafe in a requirements file:
-# setuptools

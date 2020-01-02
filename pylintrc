@@ -66,7 +66,7 @@
 [MASTER]
 ignore = 
 persistent = yes
-load-plugins = caniusepython3.pylint_checker,edx_lint.pylint
+load-plugins = edx_lint.pylint
 
 [MESSAGES CONTROL]
 enable = 
@@ -454,4 +454,4 @@ int-import-graph =
 [EXCEPTIONS]
 overgeneral-exceptions = Exception
 
-# dd79d7ebf8d1ce1bc7144e7fcc3cbcfbd38610dd
+# fdb5b15006f1e45673a78cef2f07bae236ff14de

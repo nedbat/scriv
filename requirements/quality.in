@@ -4,7 +4,6 @@
 -r test.txt               # Core and testing dependencies for this package
 
 black                     # Uncompromising code formatting
-caniusepython3            # Additional Python 3 compatibility pylint checks
 edx-lint                  # edX pylint rules and plugins
 isort                     # to standardize order of imports
 mypy                      # Static type checking
