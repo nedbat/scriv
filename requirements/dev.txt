@@ -62,4 +62,4 @@ urwid==2.1.0
 virtualenv==16.7.9
 wcwidth==0.1.8
 wrapt==1.11.2
-zipp==2.1.0
+zipp==1.1.0

@@ -48,4 +48,4 @@ typing-extensions==3.7.4.1  # via mypy
 urwid==2.1.0
 wcwidth==0.1.8
 wrapt==1.11.2             # via astroid
-zipp==2.1.0
+zipp==1.1.0

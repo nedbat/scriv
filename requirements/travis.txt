@@ -21,4 +21,4 @@ toml==0.10.0              # via tox
 tox==3.14.3
 urllib3==1.25.8           # via requests
 virtualenv==16.7.9        # via tox
-zipp==2.1.0               # via importlib-metadata
+zipp==1.1.0               # via importlib-metadata
