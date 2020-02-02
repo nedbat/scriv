@@ -34,7 +34,7 @@ def test_defaults(temp_dir):  # pylint: disable=unused-argument
 
 
 def test_reading_config(temp_dir):
-    (temp_dir / ".scrivrc").write_text(CONFIG1)
+    (temp_dir / "setup.cfg").write_text(CONFIG1)
     config = read_config()
     assert config.entry_directory == "changelog.d"
     assert config.output_file == "README.md"
@@ -44,4 +44,21 @@ def test_reading_config(temp_dir):
 def test_reading_config_list(temp_dir):
     (temp_dir / "tox.ini").write_text(CONFIG2)
     config = read_config()
+    assert config.categories == ["New", "Different", "Gone", "Bad"]
+
+
+def test_reading_config_from_directory(changelog_d):
+    # The settings file can be changelog.d/scriv.ini .
+    (changelog_d / "scriv.ini").write_text(CONFIG1)
+    config = read_config()
+    assert config.categories == ["New", "Different", "Gone", "Bad"]
+
+
+def test_reading_config_from_other_directory(temp_dir):
+    # setup.cfg can set the entry directory, and then scriv.ini will be found there.
+    (temp_dir / "scriv.d").mkdir()
+    (temp_dir / "scriv.d" / "scriv.ini").write_text(CONFIG1)
+    (temp_dir / "setup.cfg").write_text("[tool.scriv]\nentry_directory = scriv.d\n")
+    config = read_config()
+    assert config.entry_directory == "scriv.d"
     assert config.categories == ["New", "Different", "Gone", "Bad"]

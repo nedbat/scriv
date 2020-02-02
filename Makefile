@@ -1,5 +1,5 @@
 .PHONY: clean coverage diff_cover docs help \
-        quality requirements selfcheck test test-all upgrade validate
+	quality requirements selfcheck test test-all upgrade validate
 
 .DEFAULT_GOAL := help
 
