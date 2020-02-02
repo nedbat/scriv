@@ -8,20 +8,21 @@ from typing import Dict, Iterable, List, Tuple, TypeVar
 import click
 import click_log
 
-from .config import read_config
+from .config import Config, read_config
 from .format import SectionDict, get_format_tools
 
 logger = logging.getLogger()
 
 
-def files_to_combine(directory: str) -> Iterable[Path]:
+def files_to_combine(config: Config) -> Iterable[Path]:
     """
-    In the directory, find the names of files to combine.
+    Find all the files to be combined.
 
     The files are returned in the order they should be processed.
 
     """
-    return sorted(Path(directory).glob("**/*.*"))
+    pattern = "**/*.{}".format(config.format)
+    return sorted(Path(config.entry_directory).glob(pattern))
 
 
 def combine_sections(files: Iterable[Path]) -> SectionDict:
@@ -80,7 +81,7 @@ def collect() -> None:
     """
     config = read_config()
     logger.info("Collecting from {}".format(config.entry_directory))
-    sections = combine_sections(files_to_combine(config.entry_directory))
+    sections = combine_sections(files_to_combine(config))
     sections = order_dict(sections, config.categories)
 
     changelog = Path(config.output_file)

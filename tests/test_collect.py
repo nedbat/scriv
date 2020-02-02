@@ -88,6 +88,7 @@ Blah blah.
 def test_collect_simple(cli_runner, changelog_d, temp_dir):
     # Sections are ordered by the config file.
     # Entries in sections are in time order.
+    (changelog_d / "scriv.ini").write_text("# this shouldn't be collected\n")
     (changelog_d / "20170616_nedbat.rst").write_text(ENTRY1)
     (changelog_d / "20170617_nedbat.rst").write_text(ENTRY2)
     result = cli_runner.invoke(cli, ["collect"])
