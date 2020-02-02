@@ -7,20 +7,18 @@
 certifi==2019.11.28       # via requests
 chardet==3.0.4            # via requests
 codecov==2.0.15
-coverage==5.0.1           # via codecov
+coverage==5.0.3           # via codecov
 filelock==3.0.12          # via tox
 idna==2.8                 # via requests
-importlib-metadata==1.3.0  # via pluggy, tox
-more-itertools==8.0.2     # via zipp
-packaging==19.2           # via tox
+importlib-metadata==1.5.0  # via pluggy, tox
+packaging==20.1           # via tox
 pluggy==0.13.1            # via tox
 py==1.8.1                 # via tox
 pyparsing==2.4.6          # via packaging
 requests==2.22.0          # via codecov
-six==1.13.0               # via packaging, tox
+six==1.14.0               # via packaging, tox
 toml==0.10.0              # via tox
-tox-battery==0.5.1
 tox==3.14.3
-urllib3==1.25.7           # via requests
+urllib3==1.25.8           # via requests
 virtualenv==16.7.9        # via tox
-zipp==0.6.0               # via importlib-metadata
+zipp==2.1.0               # via importlib-metadata
