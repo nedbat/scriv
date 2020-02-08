@@ -1,10 +1,13 @@
 """Fixture definitions."""
 
 import pathlib
+import traceback
 from typing import Tuple
 
 import pytest
 from click.testing import CliRunner
+
+from scriv.cli import cli as scriv_cli
 
 
 class RunCommandFaker:
@@ -43,9 +46,25 @@ def temp_dir(tmpdir) -> pathlib.Path:
 
 
 @pytest.fixture()
-def cli_runner(temp_dir):  # pylint: disable=unused-argument, redefined-outer-name
-    """Return a CliRunner, and run in a temp directory."""
-    return CliRunner()
+def cli_invoke(temp_dir):  # pylint: disable=unused-argument, redefined-outer-name
+    """
+    Produce a function to invoke the Scriv cli with click.CliRunner.
+
+    The test will run in a temp directory.
+    """
+
+    def invoke(command, expect_ok=True):
+        runner = CliRunner()
+        result = runner.invoke(scriv_cli, command)
+        print(result.output)
+        if result.exception:
+            traceback.print_exception(None, result.exception, result.exception.__traceback__)
+        if expect_ok:
+            assert result.exception is None
+            assert result.exit_code == 0
+        return result
+
+    return invoke
 
 
 @pytest.fixture()
