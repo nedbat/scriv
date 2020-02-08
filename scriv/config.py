@@ -39,7 +39,7 @@ def read_config() -> Config:
 
     Configuration will be read from setup.cfg, tox.ini, or
     changelog.d/scriv.ini.  If setup.cfg or tox.ini defines
-    a new entry_directort, then scriv.ini is read from there.
+    a new entry_directory, then scriv.ini is read from there.
 
     The section can be named ``[scriv]`` or ``[tool.scriv]``.
 
