@@ -92,6 +92,10 @@ def test_collect_simple(cli_invoke, changelog_d, temp_dir):
     cli_invoke(["collect"])
     changelog_text = (temp_dir / "CHANGELOG.rst").read_text()
     assert CHANGELOG_1_2 == changelog_text
+    # We didn't use --delete, so the files should still exist.
+    assert (changelog_d / "scriv.ini").exists()
+    assert (changelog_d / "20170616_nedbat.rst").exists()
+    assert (changelog_d / "20170617_nedbat.rst").exists()
 
 
 def test_collect_ordering(cli_invoke, changelog_d, temp_dir):
@@ -125,3 +129,16 @@ def test_collect_prepends_if_no_marker(cli_invoke, changelog_d, temp_dir):
     changelog_text = changelog.read_text()
     expected = "\n" + ENTRY1 + UNMARKED_CHANGELOG_B
     assert expected == changelog_text
+
+
+def test_collect_and_delete(cli_invoke, changelog_d, temp_dir):
+    (changelog_d / "scriv.ini").write_text("# this shouldn't be collected\n")
+    (changelog_d / "20170616_nedbat.rst").write_text(ENTRY1)
+    (changelog_d / "20170617_nedbat.rst").write_text(ENTRY2)
+    cli_invoke(["collect", "--delete"])
+    changelog_text = (temp_dir / "CHANGELOG.rst").read_text()
+    assert CHANGELOG_1_2 == changelog_text
+    # We used --delete, so the collected files should be gone.
+    assert (changelog_d / "scriv.ini").exists()
+    assert not (changelog_d / "20170616_nedbat.rst").exists()
+    assert not (changelog_d / "20170617_nedbat.rst").exists()

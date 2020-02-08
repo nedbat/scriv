@@ -14,7 +14,7 @@ from .format import SectionDict, get_format_tools
 logger = logging.getLogger()
 
 
-def files_to_combine(config: Config) -> Iterable[Path]:
+def files_to_combine(config: Config) -> List[Path]:
     """
     Find all the files to be combined.
 
@@ -74,14 +74,16 @@ def cut_at_line(text: str, marker: str) -> Tuple[str, str]:
 
 
 @click.command()
+@click.option("--delete", is_flag=True, help="Delete changelog entry files that are collected.")
 @click_log.simple_verbosity_option(logger)
-def collect() -> None:
+def collect(delete: bool) -> None:
     """
     Collect entries and produce a combined file.
     """
     config = read_config()
     logger.info("Collecting from {}".format(config.entry_directory))
-    sections = combine_sections(files_to_combine(config))
+    files = files_to_combine(config)
+    sections = combine_sections(files)
     sections = order_dict(sections, config.categories)
 
     changelog = Path(config.output_file)
@@ -95,3 +97,8 @@ def collect() -> None:
     format_tools = get_format_tools(config.format)
     new_text = format_tools.format_sections(sections)
     changelog.write_text(text_before + new_text + text_after)
+
+    if delete:
+        for file in files:
+            logger.debug("Deleting entry file {}".format(file))
+            file.unlink()
