@@ -55,15 +55,16 @@ def test_create_no_output_directory(cli_invoke):
     assert "changelog.d" in str(result.exception)
 
 
-def test_create_entry(cli_invoke, changelog_d):
+def test_create_entry(mocker, cli_invoke, changelog_d):
     # Create will make one file with the current time in the name.
+    mocker.patch("scriv.create.user_nick", side_effect=["joedev", "joedev"])
     with freezegun.freeze_time("2013-02-25T15:16:17"):
         cli_invoke(["create"])
 
     entries = sorted(changelog_d.iterdir())
     assert len(entries) == 1
     entry = entries[0]
-    assert "20130225_1516_somebody.rst" == entry.name
+    assert "20130225_1516_joedev.rst" == entry.name
     contents = entry.read_text()
     assert "A new scriv entry" in contents
     assert ".. Added\n.. -----\n" in contents
@@ -75,4 +76,4 @@ def test_create_entry(cli_invoke, changelog_d):
     entries = sorted(changelog_d.iterdir())
     assert len(entries) == 2
     entry = entries[-1]
-    assert "20130225_1518_somebody.rst" == entry.name
+    assert "20130225_1518_joedev.rst" == entry.name
