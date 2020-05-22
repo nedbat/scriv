@@ -4,8 +4,8 @@
 #
 #    make upgrade
 #
-attrs==19.3.0
-click-log==0.3.2
-click==7.0
-jinja2==2.11.1
+attrs==19.3.0             # via -r requirements/base.in
+click-log==0.3.2          # via -r requirements/base.in
+click==7.1.2              # via -r requirements/base.in, click-log
+jinja2==2.11.2            # via -r requirements/base.in
 markupsafe==1.1.1         # via jinja2
