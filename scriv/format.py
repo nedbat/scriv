@@ -3,6 +3,8 @@
 import abc
 from typing import Dict, List
 
+from .config import Config
+
 # Parsed changelogs entries are called Sections. An ordered dict mapping
 # section names to lists of paragraphs.
 SectionDict = Dict[str, List[str]]
@@ -11,12 +13,14 @@ SectionDict = Dict[str, List[str]]
 class FormatTools(abc.ABC):
     """Methods and data about specific formats."""
 
-    # The Jinja2 template for new entries in this format.
-    NEW_TEMPLATE = ""
-
-    @staticmethod
     @abc.abstractmethod
-    def parse_text(text: str) -> SectionDict:
+    def new_template(self) -> str:
+        """
+        Produce a Jinja2 template string for new entries.
+        """
+
+    @abc.abstractmethod
+    def parse_text(self, text: str) -> SectionDict:
         """
         Parse text to find sections.
 
@@ -28,32 +32,29 @@ class FormatTools(abc.ABC):
             section.
         """
 
-    @staticmethod
     @abc.abstractmethod
-    def format_sections(sections: SectionDict) -> str:
+    def format_sections(self, sections: SectionDict) -> str:
         """
         Format a series of sections into marked-up text.
         """
 
 
-def get_format_tools(fmt: str) -> FormatTools:
+def get_format_tools(fmt: str, config: Config) -> FormatTools:
     """
     Return the FormatTools to use.
 
     Args:
-        fmt: One of the supported formats ("rst" or "md"), or a file extension
-            implying one of them (".rst", ".md").
+        fmt: One of the supported formats ("rst" or "md").
+        config: The configuration settings to use.
 
     """
-    if fmt.startswith("."):
-        fmt = fmt[1:]
     if fmt == "rst":
         from . import format_rst  # pylint: disable=cyclic-import
 
-        return format_rst.RstTools()
+        return format_rst.RstTools(config)
     elif fmt == "md":
         from . import format_md  # pylint: disable=cyclic-import
 
-        return format_md.MdTools()
+        return format_md.MdTools(config)
     else:
         raise Exception("Unknown format: {}".format(fmt))

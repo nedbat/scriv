@@ -25,14 +25,14 @@ def files_to_combine(config: Config) -> List[Path]:
     return sorted(Path(config.entry_directory).glob(pattern))
 
 
-def combine_sections(files: Iterable[Path]) -> SectionDict:
+def combine_sections(config: Config, files: Iterable[Path]) -> SectionDict:
     """
     Read files, and produce a combined SectionDict of their contents.
     """
     sections = collections.defaultdict(list)  # type: SectionDict
     for file in files:
         with file.open() as f:
-            format_tools = get_format_tools(file.suffix)
+            format_tools = get_format_tools(file.suffix.lstrip("."), config)
             file_sections = format_tools.parse_text(f.read())
             for section, paragraphs in file_sections.items():
                 sections[section].extend(paragraphs)
@@ -83,7 +83,7 @@ def collect(delete: bool) -> None:
     config = read_config()
     logger.info("Collecting from {}".format(config.entry_directory))
     files = files_to_combine(config)
-    sections = combine_sections(files)
+    sections = combine_sections(config, files)
     sections = order_dict(sections, config.categories)
 
     changelog = Path(config.output_file)
@@ -94,7 +94,7 @@ def collect(delete: bool) -> None:
         text_before = ""
         text_after = ""
 
-    format_tools = get_format_tools(config.format)
+    format_tools = get_format_tools(config.format, config)
     new_text = format_tools.format_sections(sections)
     changelog.write_text(text_before + new_text + text_after)
 

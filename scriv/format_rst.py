@@ -1,12 +1,18 @@
 """ReStructured text knowledge for scriv."""
 
+from .config import Config
 from .format import FormatTools, SectionDict
 
 
 class RstTools(FormatTools):
     """Specifics about how to work with ReStructured Text."""
 
-    NEW_TEMPLATE = """\
+    def __init__(self, config: Config = None):
+        """Create an RstTools with the specified configuration."""
+        self.config = config or Config()
+
+    def new_template(self) -> str:  # noqa: D102 (inherited docstring)
+        return """\
         .. A new scriv entry.
         ..
         .. Uncomment the header that is right (remove the leading dots).
@@ -20,8 +26,7 @@ class RstTools(FormatTools):
         {% endfor -%}
         """
 
-    @staticmethod
-    def parse_text(text: str) -> SectionDict:  # noqa: D102
+    def parse_text(self, text: str) -> SectionDict:  # noqa: D102 (inherited docstring)
         # Parse a very restricted subset of rst.
         sections = {}  # type: SectionDict
 
@@ -65,8 +70,7 @@ class RstTools(FormatTools):
 
         return sections
 
-    @staticmethod
-    def format_sections(sections: SectionDict) -> str:  # noqa: D102
+    def format_sections(self, sections: SectionDict) -> str:  # noqa: D102 (inherited docstring)
         lines = []
         for section, paragraphs in sections.items():
             lines.append("")
