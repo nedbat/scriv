@@ -5,6 +5,7 @@ import textwrap
 
 import pytest
 
+from scriv.config import Config
 from scriv.format_rst import RstTools
 
 
@@ -85,7 +86,7 @@ def test_format_sections():
     expected = """\
 
         Added
-        -----
+        ~~~~~
 
         - This thing was added.
           And we liked it.
@@ -95,12 +96,11 @@ def test_format_sections():
           that is very important.
 
         Fixed
-        -----
+        ~~~~~
 
         - This thing was fixed.
 
         - Another thing was fixed.
         """
-    actual = RstTools().format_sections(sections)
-    print(actual)
+    actual = RstTools(Config(rst_header_char="~")).format_sections(sections)
     assert textwrap.dedent(expected) == actual

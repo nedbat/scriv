@@ -32,6 +32,15 @@ def test_new_entry_contents_rst():
     assert all(cat in contents for cat in config.categories)
 
 
+def test_new_entry_contents_rst_with_customized_header():
+    config = Config(format="rst", rst_header_char="~")
+    contents = new_entry_contents(config)
+    assert contents.startswith(".. ")
+    assert "A new scriv entry" in contents
+    assert ".. Added\n.. ~~~~~\n" in contents
+    assert all(cat in contents for cat in config.categories)
+
+
 def test_new_entry_contents_md():
     config = Config(format="md")
     contents = new_entry_contents(config)
