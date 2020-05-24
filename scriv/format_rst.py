@@ -1,15 +1,10 @@
 """ReStructured text knowledge for scriv."""
 
-from .config import Config
 from .format import FormatTools, SectionDict
 
 
 class RstTools(FormatTools):
     """Specifics about how to work with ReStructured Text."""
-
-    def __init__(self, config: Config = None):
-        """Create an RstTools with the specified configuration."""
-        self.config = config or Config()
 
     def new_template(self) -> str:  # noqa: D102 (inherited docstring)
         return """\

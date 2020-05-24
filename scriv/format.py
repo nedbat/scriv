@@ -13,6 +13,10 @@ SectionDict = Dict[str, List[str]]
 class FormatTools(abc.ABC):
     """Methods and data about specific formats."""
 
+    def __init__(self, config: Config = None):
+        """Create a FormatTools with the specified configuration."""
+        self.config = config or Config()
+
     @abc.abstractmethod
     def new_template(self) -> str:
         """
