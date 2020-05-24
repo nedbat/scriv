@@ -6,21 +6,6 @@ from .format import FormatTools, SectionDict
 class RstTools(FormatTools):
     """Specifics about how to work with ReStructured Text."""
 
-    def new_template(self) -> str:  # noqa: D102 (inherited docstring)
-        return """\
-        .. A new scriv entry.
-        ..
-        .. Uncomment the header that is right (remove the leading dots).
-        ..
-        {% for cat in config.categories -%}
-        .. {{ cat }}
-        .. {{ config.rst_header_char * (cat|length) }}
-        ..
-        .. - A bullet item for the {{ cat }} category.
-        ..
-        {% endfor -%}
-        """
-
     def parse_text(self, text: str) -> SectionDict:  # noqa: D102 (inherited docstring)
         # Parse a very restricted subset of rst.
         sections = {}  # type: SectionDict

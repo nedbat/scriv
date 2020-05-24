@@ -1,0 +1,11 @@
+.. A new scriv entry.
+..
+.. Uncomment the header that is right (remove the leading dots).
+..
+{% for cat in config.categories -%}
+.. {{ cat }}
+.. {{ config.rst_header_char * (cat|length) }}
+..
+.. - A bullet item for the {{ cat }} category.
+..
+{% endfor -%}

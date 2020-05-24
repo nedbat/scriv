@@ -1,4 +1,4 @@
-"""Tests for scriv.format_rst.py."""
+"""Tests for scriv/format_rst.py."""
 
 import collections
 import textwrap

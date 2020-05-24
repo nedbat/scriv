@@ -21,6 +21,8 @@ class Config:
     insert_marker = attr.ib(type=str, default="scriv:insert-here")
     # The character to use for header underlines in rst files
     rst_header_char = attr.ib(type=str, default="-")
+    # The name of the template for new entries
+    new_entry_template = attr.ib(type=str, default=None)
 
 
 def convert_list(val: str) -> List[str]:
