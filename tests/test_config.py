@@ -26,11 +26,14 @@ value = 17
 
 
 def test_defaults(temp_dir):  # pylint: disable=unused-argument
+    # No configuration files anywhere, just get all the defaults.
     config = read_config()
     assert config.entry_directory == "changelog.d"
     assert config.format == "rst"
+    assert config.categories == ["Removed", "Added", "Changed", "Deprecated", "Fixed", "Security"]
     assert config.output_file == "CHANGELOG.rst"
     assert config.insert_marker == "scriv:insert-here"
+    assert config.rst_header_char == "-"
 
 
 def test_reading_config(temp_dir):
