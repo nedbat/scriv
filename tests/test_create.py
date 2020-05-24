@@ -9,16 +9,16 @@ from scriv.create import new_entry_contents, new_entry_path
 
 @freezegun.freeze_time("2012-10-01T07:08:09")
 def test_new_entry_path(mocker):
-    mocker.patch("scriv.create.user_nick", side_effect=["joedev"])
-    mocker.patch("scriv.create.current_branch_name", side_effect=["master"])
+    mocker.patch("scriv.create.user_nick", return_value="joedev")
+    mocker.patch("scriv.create.current_branch_name", return_value="master")
     config = Config(entry_directory="notes")
     assert new_entry_path(config) == "notes/20121001_0708_joedev.rst"
 
 
 @freezegun.freeze_time("2013-02-25T15:16:17")
 def test_new_entry_path_with_branch(mocker):
-    mocker.patch("scriv.create.user_nick", side_effect=["joedev"])
-    mocker.patch("scriv.create.current_branch_name", side_effect=["joedeveloper/feature-123.4"])
+    mocker.patch("scriv.create.user_nick", return_value="joedev")
+    mocker.patch("scriv.create.current_branch_name", return_value="joedeveloper/feature-123.4")
     config = Config(entry_directory="notes")
     assert new_entry_path(config) == "notes/20130225_1516_joedev_feature_123_4.rst"
 
@@ -66,7 +66,7 @@ def test_create_no_output_directory(cli_invoke):
 
 def test_create_entry(mocker, cli_invoke, changelog_d):
     # Create will make one file with the current time in the name.
-    mocker.patch("scriv.create.user_nick", side_effect=["joedev", "joedev"])
+    mocker.patch("scriv.create.user_nick", return_value="joedev")
     with freezegun.freeze_time("2013-02-25T15:16:17"):
         cli_invoke(["create"])
 
