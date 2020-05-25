@@ -142,6 +142,7 @@ class Config:
 
         Prefixes:
             "file:" read the content from a file.
+            "literal:" read a literal string from a file.
 
         """
         value = value.replace("${config:format}", self.format)

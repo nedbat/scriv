@@ -1,27 +1,41 @@
-.. Scriv documentation master file, created by
-   sphinx-quickstart on Fri Dec 27 21:05:02 2019.
-   You can adapt this file completely to your liking, but it should at least
-   contain the root `toctree` directive.
-
+#####
 Scriv
-===============================
+#####
+
 Scriv changelog management tool
 
-Contents:
+Overview
+========
+
+Scriv is a command-line tool for helping developers maintain useful changelogs.
+It manages a directory of changelog fragments. It aggregates them into entries
+in a CHANGELOG file.
+
+Getting Started
+===============
+
+Scriv writes changelog fragments into a directory called "changelog.d".  Start
+by creating this directory.  (By the way, like many aspects of scriv's
+operation, you can choose a different name for this directory.)
+
+To make a new changelog fragment, use the ``scriv create`` command.  It will
+make a new file with a filename using the current date and time, your GitHub or
+Git user name, and your branch name.  Changelog fragments should be committed
+along with all the other changes on your branch.
+
+When it is time to release your project, the ``scriv collect`` command
+aggregates all the fragments into a new entry in your changelog file.
+
 
 .. toctree::
-   :maxdepth: 2
+    :maxdepth: 1
 
-   readme
-   getting_started
-   testing
-   modules
-   changelog
+    details
+    commands
+    configuration
+    changelog
 
-
-Indices and tables
-==================
-
-* :ref:`genindex`
-* :ref:`modindex`
-* :ref:`search`
+..    scenarios
+..        lib, every commit published
+..        app, no version numbers
+..        lib, occasional publish
