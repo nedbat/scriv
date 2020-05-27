@@ -1,5 +1,5 @@
 [run]
 branch = True
-source = .
-omit =
-    .tox/*
+source =
+    scriv
+    tests
