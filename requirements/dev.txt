@@ -8,18 +8,18 @@ appdirs==1.4.4            # via -r requirements/quality.txt, -r requirements/tra
 astroid==2.3.3            # via -r requirements/quality.txt, pylint, pylint-celery
 attrs==19.3.0             # via -r requirements/quality.txt, black, pytest
 black==19.10b0            # via -r requirements/quality.txt
-certifi==2020.4.5.1       # via -r requirements/travis.txt, requests
+certifi==2020.6.20        # via -r requirements/travis.txt, requests
 chardet==3.0.4            # via -r requirements/travis.txt, requests
 click-log==0.3.2          # via -r requirements/quality.txt, edx-lint
 click==7.1.2              # via -r requirements/pip-tools.txt, -r requirements/quality.txt, black, click-log, edx-lint, pip-tools
-codecov==2.1.3            # via -r requirements/travis.txt
-coverage==5.1             # via -r requirements/quality.txt, -r requirements/travis.txt, codecov, pytest-cov
-diff-cover==2.6.1         # via -r requirements/dev.in
-distlib==0.3.0            # via -r requirements/travis.txt, virtualenv
-edx-lint==1.4.1           # via -r requirements/quality.txt
+codecov==2.1.8            # via -r requirements/travis.txt
+coverage==5.2.1           # via -r requirements/quality.txt, -r requirements/travis.txt, codecov, pytest-cov
+diff-cover==3.0.1         # via -r requirements/dev.in
+distlib==0.3.1            # via -r requirements/travis.txt, virtualenv
+edx-lint==1.5.0           # via -r requirements/quality.txt
 filelock==3.0.12          # via -r requirements/travis.txt, tox, virtualenv
 freezegun==0.3.15         # via -r requirements/quality.txt
-idna==2.9                 # via -r requirements/travis.txt, requests
+idna==2.10                # via -r requirements/travis.txt, requests
 inflect==4.1.0            # via jinja2-pluralize
 isort==4.3.21             # via -r requirements/quality.txt, pylint
 jinja2-pluralize==0.3.0   # via diff-cover
@@ -27,40 +27,41 @@ jinja2==2.11.2            # via -r requirements/quality.txt, diff-cover, jinja2-
 lazy-object-proxy==1.4.3  # via -r requirements/quality.txt, astroid
 markupsafe==1.1.1         # via -r requirements/quality.txt, jinja2
 mccabe==0.6.1             # via -r requirements/quality.txt, pylint
-more-itertools==8.3.0     # via -r requirements/quality.txt, pytest
+more-itertools==8.4.0     # via -r requirements/quality.txt, pytest
 mypy-extensions==0.4.3    # via -r requirements/quality.txt, mypy
-mypy==0.770               # via -r requirements/quality.txt
+mypy==0.782               # via -r requirements/quality.txt
 packaging==20.4           # via -r requirements/quality.txt, -r requirements/travis.txt, pytest, tox
 pathspec==0.8.0           # via -r requirements/quality.txt, black
-pip-tools==5.1.2          # via -r requirements/pip-tools.txt
+pip-tools==5.3.0          # via -r requirements/pip-tools.txt
 pluggy==0.13.1            # via -r requirements/quality.txt, -r requirements/travis.txt, diff-cover, pytest, tox
 pudb==2019.2              # via -r requirements/quality.txt
-py==1.8.1                 # via -r requirements/quality.txt, -r requirements/travis.txt, pytest, tox
+py==1.9.0                 # via -r requirements/quality.txt, -r requirements/travis.txt, pytest, tox
 pycodestyle==2.6.0        # via -r requirements/quality.txt
 pydocstyle==5.0.2         # via -r requirements/quality.txt
 pygments==2.6.1           # via -r requirements/quality.txt, diff-cover, pudb
 pylint-celery==0.3        # via -r requirements/quality.txt, edx-lint
 pylint-django==2.0.11     # via -r requirements/quality.txt, edx-lint
 pylint-plugin-utils==0.6  # via -r requirements/quality.txt, pylint-celery, pylint-django
-pylint==2.4.2             # via -r requirements/quality.txt, edx-lint, pylint-celery, pylint-django, pylint-plugin-utils
+pylint-pytest==0.2.0      # via -r requirements/quality.txt
+pylint==2.4.4             # via -r requirements/quality.txt, edx-lint, pylint-celery, pylint-django, pylint-plugin-utils, pylint-pytest
 pyparsing==2.4.7          # via -r requirements/quality.txt, -r requirements/travis.txt, packaging
-pytest-cov==2.9.0         # via -r requirements/quality.txt
-pytest-mock==3.1.0        # via -r requirements/quality.txt
-pytest==5.4.2             # via -r requirements/quality.txt, pytest-cov, pytest-mock
+pytest-cov==2.10.0        # via -r requirements/quality.txt
+pytest-mock==3.2.0        # via -r requirements/quality.txt
+pytest==5.4.3             # via -r requirements/quality.txt, pylint-pytest, pytest-cov, pytest-mock
 python-dateutil==2.8.1    # via -r requirements/quality.txt, freezegun
-regex==2020.5.14          # via -r requirements/quality.txt, black
-requests==2.23.0          # via -r requirements/travis.txt, codecov
+regex==2020.7.14          # via -r requirements/quality.txt, black
+requests==2.24.0          # via -r requirements/travis.txt, codecov
 six==1.15.0               # via -r requirements/pip-tools.txt, -r requirements/quality.txt, -r requirements/travis.txt, astroid, diff-cover, edx-lint, freezegun, packaging, pip-tools, python-dateutil, tox, virtualenv
 snowballstemmer==2.0.0    # via -r requirements/quality.txt, pydocstyle
 toml==0.10.1              # via -r requirements/quality.txt, -r requirements/travis.txt, black, tox
-tox-battery==0.6.0        # via -r requirements/dev.in
-tox==3.15.1               # via -r requirements/travis.txt, tox-battery
+tox-battery==0.6.1        # via -r requirements/dev.in
+tox==3.18.0               # via -r requirements/travis.txt, tox-battery
 typed-ast==1.4.1          # via -r requirements/quality.txt, black, mypy
 typing-extensions==3.7.4.2  # via -r requirements/quality.txt, mypy
-urllib3==1.25.9           # via -r requirements/travis.txt, requests
+urllib3==1.25.10          # via -r requirements/travis.txt, requests
 urwid==2.1.0              # via -r requirements/quality.txt, pudb
-virtualenv==20.0.21       # via -r requirements/travis.txt, tox
-wcwidth==0.1.9            # via -r requirements/quality.txt, pytest
+virtualenv==20.0.28       # via -r requirements/travis.txt, tox
+wcwidth==0.2.5            # via -r requirements/quality.txt, pytest
 wrapt==1.11.2             # via -r requirements/quality.txt, astroid
 
 # The following packages are considered to be unsafe in a requirements file:

@@ -25,7 +25,7 @@ value = 17
 """
 
 
-def test_defaults(temp_dir):  # pylint: disable=unused-argument
+def test_defaults(temp_dir):
     # No configuration files anywhere, just get all the defaults.
     config = read_config()
     assert config.entry_directory == "changelog.d"

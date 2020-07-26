@@ -61,11 +61,11 @@ def get_format_tools(fmt: str, config: Config) -> FormatTools:
 
     """
     if fmt == "rst":
-        from . import format_rst  # pylint: disable=cyclic-import
+        from . import format_rst  # pylint: disable=cyclic-import,import-outside-toplevel
 
         return format_rst.RstTools(config)
     elif fmt == "md":
-        from . import format_md  # pylint: disable=cyclic-import
+        from . import format_md  # pylint: disable=cyclic-import,import-outside-toplevel
 
         return format_md.MdTools(config)
     else:

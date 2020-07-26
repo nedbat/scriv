@@ -46,7 +46,7 @@ def temp_dir(tmpdir) -> pathlib.Path:
 
 
 @pytest.fixture()
-def cli_invoke(temp_dir):  # pylint: disable=unused-argument, redefined-outer-name
+def cli_invoke(temp_dir):
     """
     Produce a function to invoke the Scriv cli with click.CliRunner.
 
@@ -68,7 +68,7 @@ def cli_invoke(temp_dir):  # pylint: disable=unused-argument, redefined-outer-na
 
 
 @pytest.fixture()
-def changelog_d(temp_dir) -> pathlib.Path:  # pylint: disable=redefined-outer-name
+def changelog_d(temp_dir) -> pathlib.Path:
     """Make a changelog.d directory, and return a Path() to it."""
     the_changelog_d = temp_dir / "changelog.d"
     the_changelog_d.mkdir()

@@ -13,12 +13,12 @@ def test_user_nick_from_git(fake_run_command):
     assert user_nick() == "joesomeone"
 
 
-def test_user_nick_from_env(fake_run_command, monkeypatch):  # pylint: disable=unused-argument
+def test_user_nick_from_env(fake_run_command, monkeypatch):
     monkeypatch.setenv("USER", "joseph")
     assert user_nick() == "joseph"
 
 
-def test_user_nick_from_nowhere(fake_run_command, monkeypatch):  # pylint: disable=unused-argument
+def test_user_nick_from_nowhere(fake_run_command, monkeypatch):
     # With no git information, and no USER env var, we just call the user "somebody"
     monkeypatch.delenv("USER", raising=False)
     assert user_nick() == "somebody"

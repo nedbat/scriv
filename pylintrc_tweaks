@@ -1,6 +1,6 @@
 # pylintrc tweaks for use with edx_lint.
 [MASTER]
-load-plugins = edx_lint.pylint
+load-plugins = edx_lint.pylint,pylint_pytest
 
 [REPORTS]
 score=no

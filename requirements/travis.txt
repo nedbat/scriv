@@ -5,20 +5,20 @@
 #    make upgrade
 #
 appdirs==1.4.4            # via virtualenv
-certifi==2020.4.5.1       # via requests
+certifi==2020.6.20        # via requests
 chardet==3.0.4            # via requests
-codecov==2.1.3            # via -r requirements/travis.in
-coverage==5.1             # via codecov
-distlib==0.3.0            # via virtualenv
+codecov==2.1.8            # via -r requirements/travis.in
+coverage==5.2.1           # via codecov
+distlib==0.3.1            # via virtualenv
 filelock==3.0.12          # via tox, virtualenv
-idna==2.9                 # via requests
+idna==2.10                # via requests
 packaging==20.4           # via tox
 pluggy==0.13.1            # via tox
-py==1.8.1                 # via tox
+py==1.9.0                 # via tox
 pyparsing==2.4.7          # via packaging
-requests==2.23.0          # via codecov
+requests==2.24.0          # via codecov
 six==1.15.0               # via packaging, tox, virtualenv
 toml==0.10.1              # via tox
-tox==3.15.1               # via -r requirements/travis.in
-urllib3==1.25.9           # via requests
-virtualenv==20.0.21       # via tox
+tox==3.18.0               # via -r requirements/travis.in
+urllib3==1.25.10          # via requests
+virtualenv==20.0.28       # via tox
