@@ -102,5 +102,5 @@ def test_format_sections():
 
         - Another thing was fixed.
         """
-    actual = RstTools(Config(rst_header_char="~")).format_sections(sections)
+    actual = RstTools(Config(rst_section_char="~")).format_sections(sections)
     assert textwrap.dedent(expected) == actual

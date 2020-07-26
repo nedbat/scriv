@@ -1,5 +1,5 @@
 Added
 -----
 
-- A new configuration setting, rst_header_char, determines the character used
-  in the underlines for the category headings in .rst files.
+- A new configuration setting, rst_section_char, determines the character used
+  in the underlines for the section headings in .rst files.

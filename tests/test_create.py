@@ -33,7 +33,7 @@ def test_new_entry_contents_rst():
 
 
 def test_new_entry_contents_rst_with_customized_header():
-    config = Config(format="rst", rst_header_char="~")
+    config = Config(format="rst", rst_section_char="~")
     contents = new_entry_contents(config)
     assert contents.startswith(".. ")
     assert "A new scriv entry" in contents

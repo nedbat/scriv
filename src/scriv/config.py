@@ -19,8 +19,8 @@ class Config:
     categories = attr.ib(type=list, default=["Removed", "Added", "Changed", "Deprecated", "Fixed", "Security"])
     output_file = attr.ib(type=str, default="CHANGELOG.rst")
     insert_marker = attr.ib(type=str, default="scriv:insert-here")
-    # The character to use for header underlines in rst files
-    rst_header_char = attr.ib(type=str, default="-")
+    # The character to use for section underlines in rst files
+    rst_section_char = attr.ib(type=str, default="-")
     # The name of the template for new entries
     new_entry_template = attr.ib(type=str, default=None)
 

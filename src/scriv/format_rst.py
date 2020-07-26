@@ -23,7 +23,7 @@ class RstTools(FormatTools):
                 # Comment, do nothing.
                 continue
 
-            if line[:3] == self.config.rst_header_char * 3:
+            if line[:3] == self.config.rst_section_char * 3:
                 # Section underline. Previous line was the heading.
                 if paragraphs is not None:
                     # Heading was made a paragraph, undo that.
@@ -55,7 +55,7 @@ class RstTools(FormatTools):
         for section, paragraphs in sections.items():
             lines.append("")
             lines.append(section)
-            lines.append(self.config.rst_header_char * len(section))
+            lines.append(self.config.rst_section_char * len(section))
             for paragraph in paragraphs:
                 lines.append("")
                 lines.append(paragraph)
