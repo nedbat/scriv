@@ -1,4 +1,5 @@
 .. A new scriv entry.
+{% if config.categories -%}
 ..
 .. Uncomment the header that is right (remove the leading dots).
 ..
@@ -9,3 +10,6 @@
 .. - A bullet item for the {{ cat }} category.
 ..
 {% endfor -%}
+{% else %}
+- A bullet item for this entry. EDIT ME!
+{% endif -%}

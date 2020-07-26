@@ -27,7 +27,7 @@ def test_new_entry_contents_rst():
     config = Config(format="rst")
     contents = new_entry_contents(config)
     assert contents.startswith(".. ")
-    assert "A new scriv entry" in contents
+    assert ".. A new scriv entry" in contents
     assert ".. Added\n.. -----\n" in contents
     assert all(cat in contents for cat in config.categories)
 
@@ -36,9 +36,19 @@ def test_new_entry_contents_rst_with_customized_header():
     config = Config(format="rst", rst_section_char="~")
     contents = new_entry_contents(config)
     assert contents.startswith(".. ")
-    assert "A new scriv entry" in contents
+    assert ".. A new scriv entry" in contents
     assert ".. Added\n.. ~~~~~\n" in contents
     assert all(cat in contents for cat in config.categories)
+
+
+def test_no_categories_rst(changelog_d):
+    # If the project isn't using categories, then the new entry is simpler.
+    config = Config(categories="")
+    contents = new_entry_contents(config)
+    assert ".. A new scriv entry." in contents
+    assert "- A bullet item for this entry. EDIT ME!" in contents
+    assert "Uncomment the header that is right" not in contents
+    assert ".. Added" not in contents
 
 
 def test_new_entry_contents_md():

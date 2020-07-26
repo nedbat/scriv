@@ -16,14 +16,20 @@ class Config:
 
     entry_directory = attr.ib(type=str, default="changelog.d")
     format = attr.ib(type=str, default="rst")
+
+    # The categories for changelog entries. Can be empty for no categorization.
     categories = attr.ib(type=list, default=["Removed", "Added", "Changed", "Deprecated", "Fixed", "Security"])
+
     output_file = attr.ib(type=str, default="CHANGELOG.rst")
     insert_marker = attr.ib(type=str, default="scriv:insert-here")
+
     # The characters to use for header and section underlines in rst files.
     rst_header_char = attr.ib(type=str, default="=")
     rst_section_char = attr.ib(type=str, default="-")
+
     # The name of the template for new entries.
     new_entry_template = attr.ib(type=str, default=None)
+
     # The text of the changelog entry header.
     header = attr.ib(type=str, default="{date:%Y-%m-%d}")
 

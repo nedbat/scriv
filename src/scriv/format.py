@@ -3,13 +3,14 @@
 import abc
 import pkgutil
 from pathlib import Path
-from typing import Dict, List
+from typing import Dict, List, Optional
 
 from .config import Config
 
-# Parsed changelogs entries are called Sections. An ordered dict mapping
-# section names to lists of paragraphs.
-SectionDict = Dict[str, List[str]]
+# When collecting changelog entries, we group them by their category into
+# Sections.  A SectionDict maps category names to a list of the entries in that
+# section.  For projects not using categories, the key will be None.
+SectionDict = Dict[Optional[str], List[str]]
 
 
 class FormatTools(abc.ABC):

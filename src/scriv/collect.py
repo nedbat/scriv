@@ -32,18 +32,23 @@ def combine_sections(config: Config, files: Iterable[Path]) -> SectionDict:
     """
     sections = collections.defaultdict(list)  # type: SectionDict
     for file in files:
+        format_tools = get_format_tools(file.suffix.lstrip("."), config)
         with file.open() as f:
-            format_tools = get_format_tools(file.suffix.lstrip("."), config)
-            file_sections = format_tools.parse_text(f.read())
+            text = f.read().rstrip()
+        if config.categories:
+            file_sections = format_tools.parse_text(text)
             for section, paragraphs in file_sections.items():
                 sections[section].extend(paragraphs)
+        else:
+            sections[None].append(text)
     return sections
 
 
 T = TypeVar("T")
+K = TypeVar("K")
 
 
-def order_dict(d: Dict[str, T], keys: List[str]) -> Dict[str, T]:
+def order_dict(d: Dict[K, T], keys: List[K]) -> Dict[K, T]:
     """
     Produce an OrderedDict of `d`, but with the keys in `keys` order.
     """

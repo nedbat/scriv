@@ -62,9 +62,10 @@ class RstTools(FormatTools):
     def format_sections(self, sections: SectionDict) -> str:  # noqa: D102 (inherited docstring)
         lines = []
         for section, paragraphs in sections.items():
-            lines.append("")
-            lines.append(section)
-            lines.append(self.config.rst_section_char * len(section))
+            if section:
+                lines.append("")
+                lines.append(section)
+                lines.append(self.config.rst_section_char * len(section))
             for paragraph in paragraphs:
                 lines.append("")
                 lines.append(paragraph)
