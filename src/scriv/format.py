@@ -39,6 +39,12 @@ class FormatTools(abc.ABC):
         """
 
     @abc.abstractmethod
+    def format_header(self, data: Dict) -> str:
+        """
+        Format the header for a new changelog entry, using provided data.
+        """
+
+    @abc.abstractmethod
     def format_sections(self, sections: SectionDict) -> str:
         """
         Format a series of sections into marked-up text.

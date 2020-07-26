@@ -1,6 +1,7 @@
 """Tests for scriv/format_rst.py."""
 
 import collections
+import datetime
 import textwrap
 
 import pytest
@@ -104,3 +105,18 @@ def test_format_sections():
         """
     actual = RstTools(Config(rst_section_char="~")).format_sections(sections)
     assert textwrap.dedent(expected) == actual
+
+
+@pytest.mark.parametrize(
+    "config_kwargs, result",
+    [
+        ({}, "\n2020-07-26\n==========\n"),
+        ({"header": "Look: {date:%Y-%m-%d}"}, "\nLook: 2020-07-26\n================\n"),
+        ({"rst_header_char": "*"}, "\n2020-07-26\n**********\n"),
+        ({"header": "Xyzzy", "rst_header_char": "^"}, "\nXyzzy\n^^^^^\n"),
+        ({"header": ""}, ""),
+    ],
+)
+def test_format_header(config_kwargs, result):
+    actual = RstTools(Config(**config_kwargs)).format_header({"date": datetime.datetime(2020, 7, 26)})
+    assert result == actual

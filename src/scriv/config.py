@@ -19,10 +19,13 @@ class Config:
     categories = attr.ib(type=list, default=["Removed", "Added", "Changed", "Deprecated", "Fixed", "Security"])
     output_file = attr.ib(type=str, default="CHANGELOG.rst")
     insert_marker = attr.ib(type=str, default="scriv:insert-here")
-    # The character to use for section underlines in rst files
+    # The characters to use for header and section underlines in rst files.
+    rst_header_char = attr.ib(type=str, default="=")
     rst_section_char = attr.ib(type=str, default="-")
-    # The name of the template for new entries
+    # The name of the template for new entries.
     new_entry_template = attr.ib(type=str, default=None)
+    # The text of the changelog entry header.
+    header = attr.ib(type=str, default="{date:%Y-%m-%d}")
 
 
 def convert_list(val: str) -> List[str]:

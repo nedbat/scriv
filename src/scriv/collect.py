@@ -1,6 +1,7 @@
 """Collecting entries."""
 
 import collections
+import datetime
 import logging
 from pathlib import Path
 from typing import Dict, Iterable, List, Tuple, TypeVar
@@ -95,8 +96,14 @@ def collect(delete: bool) -> None:
         text_after = ""
 
     format_tools = get_format_tools(config.format, config)
+    header_data = {
+        "date": datetime.datetime.now(),
+    }
+    new_header = format_tools.format_header(header_data)
     new_text = format_tools.format_sections(sections)
-    changelog.write_text(text_before + new_text + text_after)
+    print(repr(new_header))
+    print(repr(new_text))
+    changelog.write_text(text_before + new_header + new_text + text_after)
 
     if delete:
         for file in files:

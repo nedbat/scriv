@@ -33,7 +33,9 @@ def test_defaults(temp_dir):  # pylint: disable=unused-argument
     assert config.categories == ["Removed", "Added", "Changed", "Deprecated", "Fixed", "Security"]
     assert config.output_file == "CHANGELOG.rst"
     assert config.insert_marker == "scriv:insert-here"
+    assert config.rst_header_char == "="
     assert config.rst_section_char == "-"
+    assert config.header == "{date:%Y-%m-%d}"
 
 
 def test_reading_config(temp_dir):

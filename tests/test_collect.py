@@ -1,5 +1,7 @@
 """Test collection logic."""
 
+import freezegun
+
 ENTRY1 = """\
 Fixed
 -----
@@ -28,6 +30,9 @@ Obsolete
 
 CHANGELOG_1_2 = """\
 
+2020-02-25
+==========
+
 Added
 -----
 
@@ -42,6 +47,9 @@ Fixed
 """
 
 CHANGELOG_2_1_3 = """\
+
+2020-02-25
+==========
 
 Added
 -----
@@ -82,6 +90,12 @@ Other stuff
 Blah blah.
 """
 
+CHANGELOG_HEADER = """\
+
+2020-02-25
+==========
+"""
+
 
 def test_collect_simple(cli_invoke, changelog_d, temp_dir):
     # Sections are ordered by the config file.
@@ -89,7 +103,8 @@ def test_collect_simple(cli_invoke, changelog_d, temp_dir):
     (changelog_d / "scriv.ini").write_text("# this shouldn't be collected\n")
     (changelog_d / "20170616_nedbat.rst").write_text(ENTRY1)
     (changelog_d / "20170617_nedbat.rst").write_text(ENTRY2)
-    cli_invoke(["collect"])
+    with freezegun.freeze_time("2020-02-25T15:18:19"):
+        cli_invoke(["collect"])
     changelog_text = (temp_dir / "CHANGELOG.rst").read_text()
     assert CHANGELOG_1_2 == changelog_text
     # We didn't use --delete, so the files should still exist.
@@ -104,7 +119,8 @@ def test_collect_ordering(cli_invoke, changelog_d, temp_dir):
     (changelog_d / "20170616_nedbat.rst").write_text(ENTRY2)
     (changelog_d / "20170617_nedbat.rst").write_text(ENTRY1)
     (changelog_d / "20170618_joedev.rst").write_text(ENTRY3)
-    cli_invoke(["collect"])
+    with freezegun.freeze_time("2020-02-25T15:18:19"):
+        cli_invoke(["collect"])
     changelog_text = (temp_dir / "CHANGELOG.rst").read_text()
     assert CHANGELOG_2_1_3 == changelog_text
 
@@ -114,7 +130,22 @@ def test_collect_inserts_at_marker(cli_invoke, changelog_d, temp_dir):
     changelog = temp_dir / "CHANGELOG.rst"
     changelog.write_text(MARKED_CHANGELOG_A + UNMARKED_CHANGELOG_B)
     (changelog_d / "20170617_nedbat.rst").write_text(ENTRY1)
-    cli_invoke(["collect"])
+    with freezegun.freeze_time("2020-02-25T15:18:19"):
+        cli_invoke(["collect"])
+    changelog_text = changelog.read_text()
+    expected = MARKED_CHANGELOG_A + CHANGELOG_HEADER + "\n" + ENTRY1 + UNMARKED_CHANGELOG_B
+    assert expected == changelog_text
+
+
+def test_collect_inserts_at_marker_no_header(cli_invoke, changelog_d, temp_dir):
+    # No header this time.
+    (changelog_d / "scriv.ini").write_text("[scriv]\nheader =\n")
+    # Collected text is inserted into CHANGELOG where marked.
+    changelog = temp_dir / "CHANGELOG.rst"
+    changelog.write_text(MARKED_CHANGELOG_A + UNMARKED_CHANGELOG_B)
+    (changelog_d / "20170617_nedbat.rst").write_text(ENTRY1)
+    with freezegun.freeze_time("2020-02-25T15:18:19"):
+        cli_invoke(["collect"])
     changelog_text = changelog.read_text()
     expected = MARKED_CHANGELOG_A + "\n" + ENTRY1 + UNMARKED_CHANGELOG_B
     assert expected == changelog_text
@@ -125,9 +156,10 @@ def test_collect_prepends_if_no_marker(cli_invoke, changelog_d, temp_dir):
     changelog = temp_dir / "CHANGELOG.rst"
     changelog.write_text(UNMARKED_CHANGELOG_B)
     (changelog_d / "20170617_nedbat.rst").write_text(ENTRY1)
-    cli_invoke(["collect"])
+    with freezegun.freeze_time("2020-02-25T15:18:19"):
+        cli_invoke(["collect"])
     changelog_text = changelog.read_text()
-    expected = "\n" + ENTRY1 + UNMARKED_CHANGELOG_B
+    expected = CHANGELOG_HEADER + "\n" + ENTRY1 + UNMARKED_CHANGELOG_B
     assert expected == changelog_text
 
 
@@ -135,7 +167,8 @@ def test_collect_and_delete(cli_invoke, changelog_d, temp_dir):
     (changelog_d / "scriv.ini").write_text("# this shouldn't be collected\n")
     (changelog_d / "20170616_nedbat.rst").write_text(ENTRY1)
     (changelog_d / "20170617_nedbat.rst").write_text(ENTRY2)
-    cli_invoke(["collect", "--delete"])
+    with freezegun.freeze_time("2020-02-25T15:18:19"):
+        cli_invoke(["collect", "--delete"])
     changelog_text = (temp_dir / "CHANGELOG.rst").read_text()
     assert CHANGELOG_1_2 == changelog_text
     # We used --delete, so the collected files should be gone.
