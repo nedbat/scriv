@@ -1,5 +1,7 @@
 """Test collection logic."""
 
+from unittest.mock import call
+
 import freezegun
 
 ENTRY1 = """\
@@ -107,10 +109,10 @@ def test_collect_simple(cli_invoke, changelog_d, temp_dir):
         cli_invoke(["collect"])
     changelog_text = (temp_dir / "CHANGELOG.rst").read_text()
     assert CHANGELOG_1_2 == changelog_text
-    # We didn't use --delete, so the files should still exist.
+    # We didn't use --keep, so the files should be gone.
     assert (changelog_d / "scriv.ini").exists()
-    assert (changelog_d / "20170616_nedbat.rst").exists()
-    assert (changelog_d / "20170617_nedbat.rst").exists()
+    assert not (changelog_d / "20170616_nedbat.rst").exists()
+    assert not (changelog_d / "20170617_nedbat.rst").exists()
 
 
 def test_collect_ordering(cli_invoke, changelog_d, temp_dir):
@@ -163,21 +165,23 @@ def test_collect_prepends_if_no_marker(cli_invoke, changelog_d, temp_dir):
     assert expected == changelog_text
 
 
-def test_collect_and_delete(cli_invoke, changelog_d, temp_dir):
+def test_collect_keep(cli_invoke, changelog_d, temp_dir):
+    # --keep tells collect to not delete the entry files.
     (changelog_d / "scriv.ini").write_text("# this shouldn't be collected\n")
     (changelog_d / "20170616_nedbat.rst").write_text(ENTRY1)
     (changelog_d / "20170617_nedbat.rst").write_text(ENTRY2)
     with freezegun.freeze_time("2020-02-25T15:18:19"):
-        cli_invoke(["collect", "--delete"])
+        cli_invoke(["collect", "--keep"])
     changelog_text = (temp_dir / "CHANGELOG.rst").read_text()
     assert CHANGELOG_1_2 == changelog_text
-    # We used --delete, so the collected files should be gone.
+    # We used --keep, so the collected files should still exist.
     assert (changelog_d / "scriv.ini").exists()
-    assert not (changelog_d / "20170616_nedbat.rst").exists()
-    assert not (changelog_d / "20170617_nedbat.rst").exists()
+    assert (changelog_d / "20170616_nedbat.rst").exists()
+    assert (changelog_d / "20170617_nedbat.rst").exists()
 
 
 def test_collect_no_categories(cli_invoke, changelog_d, temp_dir):
+    # Categories can be empty, making a simpler changelog.
     changelog = temp_dir / "CHANGELOG.rst"
     (changelog_d / "scriv.ini").write_text("[scriv]\ncategories=\n")
     (changelog_d / "20170616_nedbat.rst").write_text("- The first change.\n")
@@ -187,3 +191,55 @@ def test_collect_no_categories(cli_invoke, changelog_d, temp_dir):
     changelog_text = changelog.read_text()
     expected = "\n2020-02-25\n==========\n\n- The first change.\n\n- The second change.\n"
     assert expected == changelog_text
+
+
+def test_collect_add(mocker, cli_invoke, changelog_d, temp_dir):
+    # --add tells collect to tell git what's going on.
+    (changelog_d / "scriv.ini").write_text("# this shouldn't be collected\n")
+    (changelog_d / "20170616_nedbat.rst").write_text(ENTRY1)
+    (changelog_d / "20170617_nedbat.rst").write_text(ENTRY2)
+    mock_call = mocker.patch("subprocess.call")
+    mock_call.return_value = 0
+    with freezegun.freeze_time("2020-02-25T15:18:19"):
+        cli_invoke(["collect", "--add"])
+    changelog_text = (temp_dir / "CHANGELOG.rst").read_text()
+    assert CHANGELOG_1_2 == changelog_text
+    # We used --add, so the collected files were git rm'd
+    assert mock_call.mock_calls == [
+        call(["git", "add", "CHANGELOG.rst"]),
+        call(["git", "rm", str((changelog_d / "20170616_nedbat.rst").relative_to(temp_dir))]),
+        call(["git", "rm", str((changelog_d / "20170617_nedbat.rst").relative_to(temp_dir))]),
+    ]
+
+
+def test_collect_add_rm_fail(mocker, cli_invoke, changelog_d, temp_dir):
+    # --add, but fail to remove a file.
+    (changelog_d / "scriv.ini").write_text("# this shouldn't be collected\n")
+    (changelog_d / "20170616_nedbat.rst").write_text(ENTRY1)
+    (changelog_d / "20170617_nedbat.rst").write_text(ENTRY2)
+    mock_call = mocker.patch("subprocess.call")
+    mock_call.side_effect = [0, 99]
+    with freezegun.freeze_time("2020-02-25T15:18:19"):
+        result = cli_invoke(["collect", "--add"], expect_ok=False)
+    assert result.exit_code == 99
+    changelog_text = (temp_dir / "CHANGELOG.rst").read_text()
+    assert CHANGELOG_1_2 == changelog_text
+    # We used --add, so the collected files were git rm'd
+    assert mock_call.mock_calls == [
+        call(["git", "add", "CHANGELOG.rst"]),
+        call(["git", "rm", str((changelog_d / "20170616_nedbat.rst").relative_to(temp_dir))]),
+    ]
+
+
+def test_collect_edit(fake_git, mocker, cli_invoke, changelog_d, temp_dir):
+    # --edit tells collect to open the changelog in an editor.
+    fake_git.set_editor("my_fav_editor")
+    (changelog_d / "scriv.ini").write_text("# this shouldn't be collected\n")
+    (changelog_d / "20170616_nedbat.rst").write_text(ENTRY1)
+    (changelog_d / "20170617_nedbat.rst").write_text(ENTRY2)
+    mock_edit = mocker.patch("click.edit")
+    with freezegun.freeze_time("2020-02-25T15:18:19"):
+        cli_invoke(["collect", "--edit"])
+    changelog_text = (temp_dir / "CHANGELOG.rst").read_text()
+    assert CHANGELOG_1_2 == changelog_text
+    mock_edit.assert_called_once_with(filename="CHANGELOG.rst", editor="my_fav_editor")

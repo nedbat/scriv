@@ -1,0 +1,38 @@
+.. A new scriv entry.
+..
+.. Uncomment the header that is right (remove the leading dots).
+..
+.. Removed
+.. -------
+..
+.. - A bullet item for the Removed category.
+
+Added
+-----
+
+- The collect command now accepts --edit (to open the changelog file in an
+  editor after the new entries have been collected) and --add (to git-add the
+  changelog file and git rm the entries).
+
+
+Changed
+-------
+
+- The --delete option to collect is now called --keep, and defaults to False.
+  By default, the collected entry files are removed.
+
+.. Deprecated
+.. ----------
+..
+.. - A bullet item for the Deprecated category.
+..
+.. Fixed
+.. -----
+..
+.. - A bullet item for the Fixed category.
+..
+.. Security
+.. --------
+..
+.. - A bullet item for the Security category.
+..

@@ -4,13 +4,14 @@ import collections
 import datetime
 import logging
 from pathlib import Path
-from typing import Dict, Iterable, List, Tuple, TypeVar
+from typing import Dict, Iterable, List, Optional, Tuple, TypeVar
 
 import click
 import click_log
 
 from .config import Config, read_config
 from .format import SectionDict, get_format_tools
+from .gitinfo import git_add, git_config_bool, git_edit, git_rm
 
 logger = logging.getLogger()
 
@@ -80,12 +81,19 @@ def cut_at_line(text: str, marker: str) -> Tuple[str, str]:
 
 
 @click.command()
-@click.option("--delete", is_flag=True, help="Delete changelog entry files that are collected.")
+@click.option("--add/--no-add", default=None, help="'git add' the updated changelog file.")
+@click.option("--edit/--no-edit", default=None, help="Open the changelog file in your text editor.")
+@click.option("--keep", is_flag=True, help="Keep the entry files that are collected.")
 @click_log.simple_verbosity_option(logger)
-def collect(delete: bool) -> None:
+def collect(add: Optional[bool], edit: Optional[bool], keep: bool) -> None:
     """
     Collect entries and produce a combined file.
     """
+    if add is None:
+        add = git_config_bool("scriv.collect.add")
+    if edit is None:
+        edit = git_config_bool("scriv.collect.edit")
+
     config = read_config()
     logger.info("Collecting from {}".format(config.entry_directory))
     files = files_to_combine(config)
@@ -108,7 +116,16 @@ def collect(delete: bool) -> None:
     new_text = format_tools.format_sections(sections)
     changelog.write_text(text_before + new_header + new_text + text_after)
 
-    if delete:
+    if edit:
+        git_edit(str(changelog))
+
+    if add:
+        git_add(str(changelog))
+
+    if not keep:
         for file in files:
-            logger.debug("Deleting entry file {}".format(file))
-            file.unlink()
+            logger.info("Deleting entry file {}".format(file))
+            if add:
+                git_rm(str(file))
+            else:
+                file.unlink()

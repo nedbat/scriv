@@ -4,7 +4,6 @@ import datetime
 import logging
 import os.path
 import re
-import sys
 import textwrap
 from typing import Optional
 
@@ -64,6 +63,4 @@ def create(add: Optional[bool], edit: Optional[bool]) -> None:
         git_edit(file_path)
 
     if add:
-        ret = git_add(file_path)
-        if ret != 0:
-            sys.exit(ret)
+        git_add(file_path)

@@ -3,6 +3,7 @@
 import logging
 import os
 import subprocess
+import sys
 
 import click
 
@@ -60,21 +61,21 @@ def git_edit(filename: str) -> None:
     click.edit(filename=filename, editor=git_editor())
 
 
-def git_add(filename: str) -> int:
-    """Git add a file, and return the exit code."""
+def git_add(filename: str) -> None:
+    """Git add a file. If it fails, sys.exit."""
     ret = subprocess.call(["git", "add", filename])
     if ret == 0:
         logger.info("Added {}".format(filename))
     else:
         logger.error("Couldn't add {}".format(filename))
-    return ret
+        sys.exit(ret)
 
 
-def git_rm(filename: str) -> int:
-    """Git rm a file, and return the exit code."""
+def git_rm(filename: str) -> None:
+    """Git rm a file. If it fails, sys.exit."""
     ret = subprocess.call(["git", "rm", filename])
     if ret == 0:
         logger.info("Removed {}".format(filename))
     else:
         logger.error("Couldn't remove {}".format(filename))
-    return ret
+        sys.exit(ret)
