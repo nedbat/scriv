@@ -8,25 +8,25 @@ from scriv.create import new_entry_contents, new_entry_path
 
 
 @freezegun.freeze_time("2012-10-01T07:08:09")
-def test_new_entry_path(mocker):
-    mocker.patch("scriv.create.user_nick", return_value="joedev")
-    mocker.patch("scriv.create.current_branch_name", return_value="master")
+def test_new_entry_path(fake_git):
+    fake_git.set_config("github.user", "joedev")
+    fake_git.set_branch("master")
     config = Config(entry_directory="notes")
     assert new_entry_path(config) == "notes/20121001_0708_joedev.rst"
 
 
 @freezegun.freeze_time("2012-10-01T07:08:09")
-def test_new_entry_path_with_custom_main(mocker):
-    mocker.patch("scriv.create.user_nick", return_value="joedev")
-    mocker.patch("scriv.create.current_branch_name", return_value="mainline")
+def test_new_entry_path_with_custom_main(fake_git):
+    fake_git.set_config("github.user", "joedev")
+    fake_git.set_branch("mainline")
     config = Config(entry_directory="notes", main_branches=["main", "mainline"])
     assert new_entry_path(config) == "notes/20121001_0708_joedev.rst"
 
 
 @freezegun.freeze_time("2013-02-25T15:16:17")
-def test_new_entry_path_with_branch(mocker):
-    mocker.patch("scriv.create.user_nick", return_value="joedev")
-    mocker.patch("scriv.create.current_branch_name", return_value="joedeveloper/feature-123.4")
+def test_new_entry_path_with_branch(fake_git):
+    fake_git.set_config("github.user", "joedev")
+    fake_git.set_branch("joedeveloper/feature-123.4")
     config = Config(entry_directory="notes")
     assert new_entry_path(config) == "notes/20130225_1516_joedev_feature_123_4.rst"
 
