@@ -1,0 +1,35 @@
+.. A new scriv entry.
+..
+.. Uncomment the header that is right (remove the leading dots).
+..
+.. Removed
+.. -------
+..
+.. - A bullet item for the Removed category.
+
+Added
+-----
+
+- The names of the main git branches are configurable as "main_branches" in the
+  configuration file.  The default is "master", "main", and "develop".
+
+.. Changed
+.. -------
+..
+.. - A bullet item for the Changed category.
+..
+.. Deprecated
+.. ----------
+..
+.. - A bullet item for the Deprecated category.
+..
+.. Fixed
+.. -----
+..
+.. - A bullet item for the Fixed category.
+..
+.. Security
+.. --------
+..
+.. - A bullet item for the Security category.
+..

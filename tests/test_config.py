@@ -36,6 +36,7 @@ def test_defaults(temp_dir):
     assert config.rst_header_char == "="
     assert config.rst_section_char == "-"
     assert config.header == "{date:%Y-%m-%d}"
+    assert config.main_branches == ["master", "main", "develop"]
 
 
 def test_reading_config(temp_dir):

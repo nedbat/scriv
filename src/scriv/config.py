@@ -33,6 +33,9 @@ class Config:
     # The text of the changelog entry header.
     header = attr.ib(type=str, default="{date:%Y-%m-%d}")
 
+    # Branches that aren't interesting enough to use in entry file names.
+    main_branches = attr.ib(type=list, default=["master", "main", "develop"])
+
 
 def convert_list(val: str) -> List[str]:
     """

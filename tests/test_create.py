@@ -15,6 +15,14 @@ def test_new_entry_path(mocker):
     assert new_entry_path(config) == "notes/20121001_0708_joedev.rst"
 
 
+@freezegun.freeze_time("2012-10-01T07:08:09")
+def test_new_entry_path_with_custom_main(mocker):
+    mocker.patch("scriv.create.user_nick", return_value="joedev")
+    mocker.patch("scriv.create.current_branch_name", return_value="mainline")
+    config = Config(entry_directory="notes", main_branches=["main", "mainline"])
+    assert new_entry_path(config) == "notes/20121001_0708_joedev.rst"
+
+
 @freezegun.freeze_time("2013-02-25T15:16:17")
 def test_new_entry_path_with_branch(mocker):
     mocker.patch("scriv.create.user_nick", return_value="joedev")

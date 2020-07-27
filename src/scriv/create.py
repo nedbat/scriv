@@ -24,7 +24,7 @@ def new_entry_path(config: Config) -> str:
     """
     file_name = "{:%Y%m%d_%H%M}_{}".format(datetime.datetime.now(), user_nick())
     branch_name = current_branch_name()
-    if branch_name and branch_name != "master":
+    if branch_name and branch_name not in config.main_branches:
         branch_name = branch_name.rpartition("/")[-1]
         branch_name = re.sub(r"[^a-zA-Z0-9_]", "_", branch_name)
         file_name += "_{}".format(branch_name)
