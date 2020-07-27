@@ -106,8 +106,6 @@ def collect(delete: bool) -> None:
     }
     new_header = format_tools.format_header(header_data)
     new_text = format_tools.format_sections(sections)
-    print(repr(new_header))
-    print(repr(new_text))
     changelog.write_text(text_before + new_header + new_text + text_after)
 
     if delete:
