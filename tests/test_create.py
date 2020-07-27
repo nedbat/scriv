@@ -74,9 +74,9 @@ def test_create_no_output_directory(cli_invoke):
     assert "changelog.d" in str(result.exception)
 
 
-def test_create_entry(mocker, cli_invoke, changelog_d):
+def test_create_entry(fake_git, cli_invoke, changelog_d):
     # Create will make one file with the current time in the name.
-    mocker.patch("scriv.create.user_nick", return_value="joedev")
+    fake_git.set_config("github.user", "joedev")
     with freezegun.freeze_time("2013-02-25T15:16:17"):
         cli_invoke(["create"])
 
@@ -94,5 +94,84 @@ def test_create_entry(mocker, cli_invoke, changelog_d):
 
     entries = sorted(changelog_d.iterdir())
     assert len(entries) == 2
-    entry = entries[-1]
-    assert "20130225_1518_joedev.rst" == entry.name
+    latest_entry = entries[-1]
+    assert "20130225_1518_joedev.rst" == latest_entry.name
+
+
+def test_create_edit(mocker, fake_git, cli_invoke, changelog_d):
+    # "scriv create --edit" will invoke a text editor.
+    fake_git.set_config("github.user", "joedev")
+    fake_git.set_editor("my_fav_editor")
+    mock_edit = mocker.patch("click.edit")
+    with freezegun.freeze_time("2013-02-25T15:16:17"):
+        cli_invoke(["create", "--edit"])
+    mock_edit.assert_called_once_with(filename="changelog.d/20130225_1516_joedev.rst", editor="my_fav_editor")
+
+
+def test_create_edit_preference(mocker, fake_git, cli_invoke, changelog_d):
+    # The user can set a git configuration to default to --edit.
+    fake_git.set_config("scriv.create.edit", "true")
+    fake_git.set_config("github.user", "joedev")
+    fake_git.set_editor("my_fav_editor")
+    mock_edit = mocker.patch("click.edit")
+    with freezegun.freeze_time("2013-02-25T15:16:17"):
+        cli_invoke(["create"])
+    mock_edit.assert_called_once_with(filename="changelog.d/20130225_1516_joedev.rst", editor="my_fav_editor")
+
+
+def test_create_edit_preference_no_edit(mocker, fake_git, cli_invoke, changelog_d):
+    # The user can set a git configuration to default to --edit, but --no-edit
+    # will turn it off.
+    fake_git.set_config("scriv.create.edit", "true")
+    fake_git.set_config("github.user", "joedev")
+    mock_edit = mocker.patch("click.edit")
+    with freezegun.freeze_time("2013-02-25T15:16:17"):
+        cli_invoke(["create", "--no-edit"])
+    mock_edit.assert_not_called()
+
+
+def test_create_add(caplog, mocker, fake_git, cli_invoke, changelog_d):
+    # "scriv create --add" will invoke "git add" on the file.
+    fake_git.set_config("github.user", "joedev")
+    mock_call = mocker.patch("subprocess.call")
+    mock_call.return_value = 0
+    with freezegun.freeze_time("2013-02-25T15:16:17"):
+        cli_invoke(["create", "--add"])
+    mock_call.assert_called_once_with(["git", "add", "changelog.d/20130225_1516_joedev.rst"])
+    assert "Added changelog.d/20130225_1516_joedev.rst" in caplog.text
+
+
+def test_create_add_preference(mocker, fake_git, cli_invoke, changelog_d):
+    # The user can set a git configuration to default to --add.
+    fake_git.set_config("github.user", "joedev")
+    fake_git.set_config("scriv.create.add", "true")
+    mock_call = mocker.patch("subprocess.call")
+    mock_call.return_value = 0
+    with freezegun.freeze_time("2013-02-25T15:16:17"):
+        cli_invoke(["create"])
+    mock_call.assert_called_once_with(["git", "add", "changelog.d/20130225_1516_joedev.rst"])
+
+
+def test_create_add_preference_no_add(caplog, mocker, fake_git, cli_invoke, changelog_d):
+    # The user can set a git configuration to default to --add, but --no-add
+    # will turn it off.
+    fake_git.set_config("github.user", "joedev")
+    fake_git.set_config("scriv.create.add", "true")
+    mock_call = mocker.patch("subprocess.call")
+    with freezegun.freeze_time("2013-02-25T15:16:17"):
+        cli_invoke(["create", "--no-add"])
+    mock_call.assert_not_called()
+    assert "Added" not in caplog.text
+
+
+def test_create_add_fail(caplog, mocker, fake_git, cli_invoke, changelog_d):
+    # We properly handle failure to add.
+    fake_git.set_config("github.user", "joedev")
+    mock_call = mocker.patch("subprocess.call")
+    mock_call.return_value = 99
+    with freezegun.freeze_time("2013-02-25T15:16:17"):
+        result = cli_invoke(["create", "--add"], expect_ok=False)
+    mock_call.assert_called_once_with(["git", "add", "changelog.d/20130225_1516_joedev.rst"])
+    assert result.exit_code == 99
+    assert "Added" not in caplog.text
+    assert "Couldn't add changelog.d/20130225_1516_joedev.rst" in caplog.text

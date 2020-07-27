@@ -2,7 +2,7 @@
 
 import os
 
-from .shell import run_command
+from .shell import run_command, run_simple_command
 
 
 def user_nick() -> str:
@@ -25,8 +25,25 @@ def current_branch_name() -> str:
     """
     Get the current branch name.
     """
-    ok, out = run_command("git rev-parse --abbrev-ref HEAD")
-    if not ok:
-        return ""
+    return run_simple_command("git rev-parse --abbrev-ref HEAD")
 
-    return out.strip()
+
+def git_config(option: str) -> str:
+    """
+    Return a git config value.
+    """
+    return run_simple_command("git config --get {}".format(option))
+
+
+def git_config_bool(option: str) -> bool:
+    """
+    Return a boolean git config value.
+    """
+    return git_config(option) == "true"
+
+
+def git_editor() -> str:
+    """
+    Get the command name of the editor Git will launch.
+    """
+    return run_simple_command("git var GIT_EDITOR")

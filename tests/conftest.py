@@ -35,7 +35,34 @@ def fake_run_command(mocker):
     """Replace gitinfo.run_command with a fake."""
     frc = RunCommandFaker()
     mocker.patch("scriv.gitinfo.run_command", frc)
+    mocker.patch("scriv.shell.run_command", frc)
     return frc
+
+
+class FakeGit:
+    """Simulate aspects of our local git."""
+
+    def __init__(self, frc: RunCommandFaker) -> None:
+        """Make a FakeGit from a RunCommandFaker."""
+        self.frc = frc
+
+    def set_config(self, name: str, value: str) -> None:
+        """Set a config value."""
+        self.frc.add_fake("git config --get " + name, (True, value + "\n"))
+
+    def set_branch(self, branch_name: str) -> None:
+        """Set the current branch."""
+        self.frc.add_fake("git rev-parse --abbrev-ref HEAD", (True, branch_name + "\n"))
+
+    def set_editor(self, editor_name: str) -> None:
+        """Set the name of the editor Git will launch."""
+        self.frc.add_fake("git var GIT_EDITOR", (True, editor_name + "\n"))
+
+
+@pytest.fixture()
+def fake_git(fake_run_command) -> FakeGit:
+    """Get a FakeGit to use in tests."""
+    return FakeGit(fake_run_command)
 
 
 @pytest.fixture()

@@ -21,3 +21,13 @@ def run_command(cmd: str) -> Tuple[bool, str]:
     logging.debug("Command exited with {} status. Output: {!r}".format(proc.returncode, output))
 
     return proc.returncode == 0, output
+
+
+def run_simple_command(cmd: str) -> str:
+    """
+    Run a command and return its output, or "" if it fails.
+    """
+    ok, out = run_command(cmd)
+    if not ok:
+        return ""
+    return out.strip()

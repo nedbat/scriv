@@ -4,7 +4,10 @@ import datetime
 import logging
 import os.path
 import re
+import subprocess
+import sys
 import textwrap
+from typing import Optional
 
 import click
 import click_log
@@ -12,7 +15,7 @@ import jinja2
 
 from .config import Config, read_config
 from .format import get_format_tools
-from .gitinfo import current_branch_name, user_nick
+from .gitinfo import current_branch_name, git_config_bool, git_editor, user_nick
 
 logger = logging.getLogger()
 
@@ -39,13 +42,32 @@ def new_entry_contents(config: Config) -> str:
 
 
 @click.command()
+@click.option("--add/--no-add", default=None, help="'git add' the created file.")
+@click.option("--edit/--no-edit", default=None, help="Open the created file in your text editor.")
 @click_log.simple_verbosity_option(logger)
-def create() -> None:
+def create(add: Optional[bool], edit: Optional[bool]) -> None:
     """
     Create a new scriv changelog entry.
     """
+    if add is None:
+        add = git_config_bool("scriv.create.add")
+    if edit is None:
+        edit = git_config_bool("scriv.create.edit")
+
     config = read_config()
     file_path = new_entry_path(config)
+    # TODO: what if the file already exists?
     logger.info("Creating {}".format(file_path))
     with open(file_path, "w") as f:
         f.write(new_entry_contents(config))
+
+    if edit:
+        click.edit(filename=file_path, editor=git_editor())
+
+    if add:
+        ret = subprocess.call(["git", "add", file_path])
+        if ret == 0:
+            logger.info("Added {}".format(file_path))
+        else:
+            logger.error("Couldn't add {}".format(file_path))
+            sys.exit(ret)
