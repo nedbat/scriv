@@ -1,8 +1,14 @@
 """Get information from git."""
 
+import logging
 import os
+import subprocess
+
+import click
 
 from .shell import run_command, run_simple_command
+
+logger = logging.getLogger()
 
 
 def user_nick() -> str:
@@ -47,3 +53,28 @@ def git_editor() -> str:
     Get the command name of the editor Git will launch.
     """
     return run_simple_command("git var GIT_EDITOR")
+
+
+def git_edit(filename: str) -> None:
+    """Edit a file using the same editor Git chooses."""
+    click.edit(filename=filename, editor=git_editor())
+
+
+def git_add(filename: str) -> int:
+    """Git add a file, and return the exit code."""
+    ret = subprocess.call(["git", "add", filename])
+    if ret == 0:
+        logger.info("Added {}".format(filename))
+    else:
+        logger.error("Couldn't add {}".format(filename))
+    return ret
+
+
+def git_rm(filename: str) -> int:
+    """Git rm a file, and return the exit code."""
+    ret = subprocess.call(["git", "rm", filename])
+    if ret == 0:
+        logger.info("Removed {}".format(filename))
+    else:
+        logger.error("Couldn't remove {}".format(filename))
+    return ret

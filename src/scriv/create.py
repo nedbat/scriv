@@ -4,7 +4,6 @@ import datetime
 import logging
 import os.path
 import re
-import subprocess
 import sys
 import textwrap
 from typing import Optional
@@ -15,7 +14,7 @@ import jinja2
 
 from .config import Config, read_config
 from .format import get_format_tools
-from .gitinfo import current_branch_name, git_config_bool, git_editor, user_nick
+from .gitinfo import current_branch_name, git_add, git_config_bool, git_edit, user_nick
 
 logger = logging.getLogger()
 
@@ -62,12 +61,9 @@ def create(add: Optional[bool], edit: Optional[bool]) -> None:
         f.write(new_entry_contents(config))
 
     if edit:
-        click.edit(filename=file_path, editor=git_editor())
+        git_edit(file_path)
 
     if add:
-        ret = subprocess.call(["git", "add", file_path])
-        if ret == 0:
-            logger.info("Added {}".format(file_path))
-        else:
-            logger.error("Couldn't add {}".format(file_path))
+        ret = git_add(file_path)
+        if ret != 0:
             sys.exit(ret)
