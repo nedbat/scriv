@@ -12,7 +12,7 @@ def test_new_entry_path(fake_git):
     fake_git.set_config("github.user", "joedev")
     fake_git.set_branch("master")
     config = Config(entry_directory="notes")
-    assert new_entry_path(config) == "notes/20121001_0708_joedev.rst"
+    assert new_entry_path(config) == "notes/20121001_070809_joedev.rst"
 
 
 @freezegun.freeze_time("2012-10-01T07:08:09")
@@ -20,7 +20,7 @@ def test_new_entry_path_with_custom_main(fake_git):
     fake_git.set_config("github.user", "joedev")
     fake_git.set_branch("mainline")
     config = Config(entry_directory="notes", main_branches=["main", "mainline"])
-    assert new_entry_path(config) == "notes/20121001_0708_joedev.rst"
+    assert new_entry_path(config) == "notes/20121001_070809_joedev.rst"
 
 
 @freezegun.freeze_time("2013-02-25T15:16:17")
@@ -28,7 +28,7 @@ def test_new_entry_path_with_branch(fake_git):
     fake_git.set_config("github.user", "joedev")
     fake_git.set_branch("joedeveloper/feature-123.4")
     config = Config(entry_directory="notes")
-    assert new_entry_path(config) == "notes/20130225_1516_joedev_feature_123_4.rst"
+    assert new_entry_path(config) == "notes/20130225_151617_joedev_feature_123_4.rst"
 
 
 def test_new_entry_contents_rst():
@@ -91,7 +91,7 @@ def test_create_entry(fake_git, cli_invoke, changelog_d):
     entries = sorted(changelog_d.iterdir())
     assert len(entries) == 1
     entry = entries[0]
-    assert "20130225_1516_joedev.rst" == entry.name
+    assert "20130225_151617_joedev.rst" == entry.name
     contents = entry.read_text()
     assert "A new scriv entry" in contents
     assert ".. Added\n.. -----\n" in contents
@@ -103,7 +103,7 @@ def test_create_entry(fake_git, cli_invoke, changelog_d):
     entries = sorted(changelog_d.iterdir())
     assert len(entries) == 2
     latest_entry = entries[-1]
-    assert "20130225_1518_joedev.rst" == latest_entry.name
+    assert "20130225_151819_joedev.rst" == latest_entry.name
 
 
 def test_create_edit(mocker, fake_git, cli_invoke, changelog_d):
@@ -113,7 +113,7 @@ def test_create_edit(mocker, fake_git, cli_invoke, changelog_d):
     mock_edit = mocker.patch("click.edit")
     with freezegun.freeze_time("2013-02-25T15:16:17"):
         cli_invoke(["create", "--edit"])
-    mock_edit.assert_called_once_with(filename="changelog.d/20130225_1516_joedev.rst", editor="my_fav_editor")
+    mock_edit.assert_called_once_with(filename="changelog.d/20130225_151617_joedev.rst", editor="my_fav_editor")
 
 
 def test_create_edit_preference(mocker, fake_git, cli_invoke, changelog_d):
@@ -124,7 +124,7 @@ def test_create_edit_preference(mocker, fake_git, cli_invoke, changelog_d):
     mock_edit = mocker.patch("click.edit")
     with freezegun.freeze_time("2013-02-25T15:16:17"):
         cli_invoke(["create"])
-    mock_edit.assert_called_once_with(filename="changelog.d/20130225_1516_joedev.rst", editor="my_fav_editor")
+    mock_edit.assert_called_once_with(filename="changelog.d/20130225_151617_joedev.rst", editor="my_fav_editor")
 
 
 def test_create_edit_preference_no_edit(mocker, fake_git, cli_invoke, changelog_d):
@@ -145,8 +145,8 @@ def test_create_add(caplog, mocker, fake_git, cli_invoke, changelog_d):
     mock_call.return_value = 0
     with freezegun.freeze_time("2013-02-25T15:16:17"):
         cli_invoke(["create", "--add"])
-    mock_call.assert_called_once_with(["git", "add", "changelog.d/20130225_1516_joedev.rst"])
-    assert "Added changelog.d/20130225_1516_joedev.rst" in caplog.text
+    mock_call.assert_called_once_with(["git", "add", "changelog.d/20130225_151617_joedev.rst"])
+    assert "Added changelog.d/20130225_151617_joedev.rst" in caplog.text
 
 
 def test_create_add_preference(mocker, fake_git, cli_invoke, changelog_d):
@@ -157,7 +157,7 @@ def test_create_add_preference(mocker, fake_git, cli_invoke, changelog_d):
     mock_call.return_value = 0
     with freezegun.freeze_time("2013-02-25T15:16:17"):
         cli_invoke(["create"])
-    mock_call.assert_called_once_with(["git", "add", "changelog.d/20130225_1516_joedev.rst"])
+    mock_call.assert_called_once_with(["git", "add", "changelog.d/20130225_151617_joedev.rst"])
 
 
 def test_create_add_preference_no_add(caplog, mocker, fake_git, cli_invoke, changelog_d):
@@ -179,7 +179,26 @@ def test_create_add_fail(caplog, mocker, fake_git, cli_invoke, changelog_d):
     mock_call.return_value = 99
     with freezegun.freeze_time("2013-02-25T15:16:17"):
         result = cli_invoke(["create", "--add"], expect_ok=False)
-    mock_call.assert_called_once_with(["git", "add", "changelog.d/20130225_1516_joedev.rst"])
+    mock_call.assert_called_once_with(["git", "add", "changelog.d/20130225_151617_joedev.rst"])
     assert result.exit_code == 99
     assert "Added" not in caplog.text
-    assert "Couldn't add changelog.d/20130225_1516_joedev.rst" in caplog.text
+    assert "Couldn't add changelog.d/20130225_151617_joedev.rst" in caplog.text
+
+
+def test_create_file_exists(fake_git, cli_invoke, changelog_d):
+    # Create won't overwrite an existing entry file.
+    (changelog_d / "20130225_151617_joedev.rst").write_text("I'm precious!")
+    fake_git.set_config("github.user", "joedev")
+    with freezegun.freeze_time("2013-02-25T15:16:17"):
+        result = cli_invoke(["create"], expect_ok=False)
+
+    # "create" ended with an error and a message.
+    assert 1 == result.exit_code
+    assert "File changelog.d/20130225_151617_joedev.rst already exists, not overwriting\n" == result.stdout
+
+    # Our precious file is unharmed.
+    entries = sorted(changelog_d.iterdir())
+    assert len(entries) == 1
+    entry = entries[0]
+    assert "20130225_151617_joedev.rst" == entry.name
+    assert "I'm precious!" == entry.read_text()

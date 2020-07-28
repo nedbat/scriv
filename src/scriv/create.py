@@ -4,6 +4,7 @@ import datetime
 import logging
 import os.path
 import re
+import sys
 import textwrap
 from typing import Optional
 
@@ -22,7 +23,7 @@ def new_entry_path(config: Config) -> str:
     """
     Return the file path for a new entry.
     """
-    file_name = "{:%Y%m%d_%H%M}_{}".format(datetime.datetime.now(), user_nick())
+    file_name = "{:%Y%m%d_%H%M%S}_{}".format(datetime.datetime.now(), user_nick())
     branch_name = current_branch_name()
     if branch_name and branch_name not in config.main_branches:
         branch_name = branch_name.rpartition("/")[-1]
@@ -54,7 +55,9 @@ def create(add: Optional[bool], edit: Optional[bool]) -> None:
 
     config = read_config()
     file_path = new_entry_path(config)
-    # TODO: what if the file already exists?
+    if os.path.exists(file_path):
+        sys.exit("File {} already exists, not overwriting".format(file_path))
+
     logger.info("Creating {}".format(file_path))
     with open(file_path, "w") as f:
         f.write(new_entry_contents(config))
