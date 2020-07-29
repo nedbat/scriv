@@ -9,6 +9,7 @@ click-log==0.3.2          # via -r requirements/base.txt
 click==7.1.2              # via -r requirements/base.txt, click-log
 coverage==5.2.1           # via -r requirements/test.in, pytest-cov
 freezegun==0.3.15         # via -r requirements/test.in
+iniconfig==1.0.0          # via pytest
 jinja2==2.11.2            # via -r requirements/base.txt
 markupsafe==1.1.1         # via -r requirements/base.txt, jinja2
 more-itertools==8.4.0     # via pytest
@@ -20,8 +21,8 @@ pygments==2.6.1           # via pudb
 pyparsing==2.4.7          # via packaging
 pytest-cov==2.10.0        # via -r requirements/test.in
 pytest-mock==3.2.0        # via -r requirements/test.in
-pytest==5.4.3             # via pytest-cov, pytest-mock
+pytest==6.0.1             # via pytest-cov, pytest-mock
 python-dateutil==2.8.1    # via freezegun
 six==1.15.0               # via freezegun, packaging, python-dateutil
-urwid==2.1.0              # via pudb
-wcwidth==0.2.5            # via pytest
+toml==0.10.1              # via pytest
+urwid==2.1.1              # via pudb

@@ -25,9 +25,6 @@ install:
 script:
   - tox
 
-after_success:
-  - codecov
-
 deploy:
   provider: pypi
   user: "__token__"
