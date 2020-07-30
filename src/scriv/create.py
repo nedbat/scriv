@@ -12,7 +12,7 @@ import click
 import click_log
 import jinja2
 
-from .config import Config, read_config
+from .config import Config
 from .format import get_format_tools
 from .gitinfo import current_branch_name, git_add, git_config_bool, git_edit, user_nick
 
@@ -53,7 +53,7 @@ def create(add: Optional[bool], edit: Optional[bool]) -> None:
     if edit is None:
         edit = git_config_bool("scriv.create.edit")
 
-    config = read_config()
+    config = Config.read()
     file_path = new_entry_path(config)
     if os.path.exists(file_path):
         sys.exit("File {} already exists, not overwriting".format(file_path))

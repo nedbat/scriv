@@ -1,6 +1,6 @@
 """Tests of scriv/config.py"""
 
-from scriv.config import read_config
+from scriv.config import Config
 
 CONFIG1 = """\
 [scriv]
@@ -27,7 +27,7 @@ value = 17
 
 def test_defaults(temp_dir):
     # No configuration files anywhere, just get all the defaults.
-    config = read_config()
+    config = Config.read()
     assert config.entry_directory == "changelog.d"
     assert config.format == "rst"
     assert config.categories == ["Removed", "Added", "Changed", "Deprecated", "Fixed", "Security"]
@@ -41,7 +41,7 @@ def test_defaults(temp_dir):
 
 def test_reading_config(temp_dir):
     (temp_dir / "setup.cfg").write_text(CONFIG1)
-    config = read_config()
+    config = Config.read()
     assert config.entry_directory == "changelog.d"
     assert config.output_file == "README.md"
     assert config.categories == ["New", "Different", "Gone", "Bad"]
@@ -49,14 +49,14 @@ def test_reading_config(temp_dir):
 
 def test_reading_config_list(temp_dir):
     (temp_dir / "tox.ini").write_text(CONFIG2)
-    config = read_config()
+    config = Config.read()
     assert config.categories == ["New", "Different", "Gone", "Bad"]
 
 
 def test_reading_config_from_directory(changelog_d):
     # The settings file can be changelog.d/scriv.ini .
     (changelog_d / "scriv.ini").write_text(CONFIG1)
-    config = read_config()
+    config = Config.read()
     assert config.categories == ["New", "Different", "Gone", "Bad"]
 
 
@@ -65,6 +65,6 @@ def test_reading_config_from_other_directory(temp_dir):
     (temp_dir / "scriv.d").mkdir()
     (temp_dir / "scriv.d" / "scriv.ini").write_text(CONFIG1)
     (temp_dir / "setup.cfg").write_text("[tool.scriv]\nentry_directory = scriv.d\n")
-    config = read_config()
+    config = Config.read()
     assert config.entry_directory == "scriv.d"
     assert config.categories == ["New", "Different", "Gone", "Bad"]

@@ -9,7 +9,7 @@ from typing import Dict, Iterable, List, Optional, Tuple, TypeVar
 import click
 import click_log
 
-from .config import Config, read_config
+from .config import Config
 from .format import SectionDict, get_format_tools
 from .gitinfo import git_add, git_config_bool, git_edit, git_rm
 
@@ -94,7 +94,7 @@ def collect(add: Optional[bool], edit: Optional[bool], keep: bool) -> None:
     if edit is None:
         edit = git_config_bool("scriv.collect.edit")
 
-    config = read_config()
+    config = Config.read()
     logger.info("Collecting from {}".format(config.entry_directory))
     files = files_to_combine(config)
     sections = combine_sections(config, files)
