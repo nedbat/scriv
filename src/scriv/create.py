@@ -13,7 +13,6 @@ import click_log
 import jinja2
 
 from .config import Config
-from .format import get_format_tools
 from .gitinfo import current_branch_name, git_add, git_config_bool, git_edit, user_nick
 
 logger = logging.getLogger()
@@ -36,8 +35,7 @@ def new_entry_path(config: Config) -> str:
 
 def new_entry_contents(config: Config) -> str:
     """Produce the initial contents of a scriv entry."""
-    tools = get_format_tools(config.format, config)
-    return jinja2.Template(textwrap.dedent(tools.new_template())).render(config=config)
+    return jinja2.Template(textwrap.dedent(config.new_entry_template)).render(config=config)
 
 
 @click.command()

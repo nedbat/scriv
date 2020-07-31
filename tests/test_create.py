@@ -69,9 +69,8 @@ def test_new_entry_contents_md():
 
 
 def test_new_entry_contents_unknown():
-    config = Config(format="xyzzy")
-    with pytest.raises(Exception, match="Unknown format: xyzzy"):
-        new_entry_contents(config)
+    with pytest.raises(ValueError, match=r"'format' must be in \['rst', 'md'\] \(got 'xyzzy'\)"):
+        Config(format="xyzzy")
 
 
 def test_create_no_output_directory(cli_invoke):

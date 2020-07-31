@@ -1,0 +1,42 @@
+.. A new scriv entry.
+..
+.. Uncomment the header that is right (remove the leading dots).
+..
+.. Removed
+.. -------
+..
+.. - A bullet item for the Removed category.
+
+Added
+-----
+
+- Configuration values can now be read from files by prefixing them with
+  "file:".  File names will be interpreted relative to the changelog.d
+  directory, or will be found in a few files installed with scriv.
+
+- Configuration values can interpolate the currently configured format (rst or
+  md) with "${config:format}".
+
+- The default value for new templates is now
+  "file: new_entry.${config:format}.j2".
+
+.. Changed
+.. -------
+..
+.. - A bullet item for the Changed category.
+..
+.. Deprecated
+.. ----------
+..
+.. - A bullet item for the Deprecated category.
+..
+.. Fixed
+.. -----
+..
+.. - A bullet item for the Fixed category.
+..
+.. Security
+.. --------
+..
+.. - A bullet item for the Security category.
+..

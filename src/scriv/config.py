@@ -1,6 +1,7 @@
 """Scriv configuration."""
 
 import configparser
+import pkgutil
 import re
 from pathlib import Path
 from typing import Any, List
@@ -15,7 +16,9 @@ class Config:
     """
 
     entry_directory = attr.ib(type=str, default="changelog.d")
-    format = attr.ib(type=str, default="rst")
+
+    # What format for entries? ReStructuredText ("rst") or Markdown ("md").
+    format = attr.ib(type=str, default="rst", validator=attr.validators.in_(["rst", "md"]))
 
     # The categories for changelog entries. Can be empty for no categorization.
     categories = attr.ib(type=list, default=["Removed", "Added", "Changed", "Deprecated", "Fixed", "Security"])
@@ -28,13 +31,31 @@ class Config:
     rst_section_char = attr.ib(type=str, default="-")
 
     # The name of the template for new entries.
-    new_entry_template = attr.ib(type=str, default=None)
+    new_entry_template = attr.ib(type=str, default="file: new_entry.${config:format}.j2")
 
     # The text of the changelog entry header.
     header = attr.ib(type=str, default="{date:%Y-%m-%d}")
 
     # Branches that aren't interesting enough to use in entry file names.
     main_branches = attr.ib(type=list, default=["master", "main", "develop"])
+
+    def __attrs_post_init__(self):  # noqa: D105 (Missing docstring in magic method)
+        self.resolve_all()
+
+    def resolve_all(self):
+        """
+        Prepare all fields in the config.
+
+        Call resolve_value on them, and convert strings to lists as needed.
+        """
+        for attrdef in attr.fields(Config):
+            value = getattr(self, attrdef.name)
+            if attrdef.type is list:
+                if isinstance(value, str):
+                    value = convert_list(value)
+            else:
+                value = self.resolve_value(value)
+            setattr(self, attrdef.name, value)
 
     @classmethod
     def read(cls) -> "Config":
@@ -52,6 +73,7 @@ class Config:
         for configfile in ["setup.cfg", "tox.ini"]:
             config.read_one_config(configfile)
         config.read_one_config(str(Path(config.entry_directory) / "scriv.ini"))
+        config.resolve_all()
         return config
 
     def read_one_config(self, configfile: str) -> None:
@@ -69,9 +91,34 @@ class Config:
                 except KeyError:
                     pass
                 else:
-                    if attrdef.type is list:
-                        val = convert_list(val)
                     setattr(self, attrdef.name, val)
+
+    def resolve_value(self, value: str) -> str:
+        """
+        Interpret prefixes in config files to find the actual value.
+
+        Also, "${config:format}" is replaced with the configured
+        format ("rst" or "md").
+
+        Prefixes:
+            "file:" read the content from a file.
+
+        """
+        value = value.replace("${config:format}", self.format)
+        if value.startswith("file:"):
+            file_name = value.partition(":")[2].strip()
+            file_path = Path(self.entry_directory) / file_name
+            if file_path.exists():
+                with open(str(file_path)) as f:
+                    value = f.read()
+            else:
+                try:
+                    file_bytes = pkgutil.get_data("scriv", "templates/" + file_name)
+                except IOError:
+                    raise Exception("No such file: {}".format(file_path))
+                assert file_bytes
+                value = file_bytes.decode("utf-8")
+        return value
 
 
 def convert_list(val: str) -> List[str]:

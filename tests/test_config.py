@@ -1,5 +1,7 @@
 """Tests of scriv/config.py"""
 
+import pytest
+
 from scriv.config import Config
 
 CONFIG1 = """\
@@ -30,6 +32,7 @@ def test_defaults(temp_dir):
     config = Config.read()
     assert config.entry_directory == "changelog.d"
     assert config.format == "rst"
+    assert config.new_entry_template.startswith(".. A new scriv entry")
     assert config.categories == ["Removed", "Added", "Changed", "Deprecated", "Fixed", "Security"]
     assert config.output_file == "CHANGELOG.rst"
     assert config.insert_marker == "scriv:insert-here"
@@ -68,3 +71,29 @@ def test_reading_config_from_other_directory(temp_dir):
     config = Config.read()
     assert config.entry_directory == "scriv.d"
     assert config.categories == ["New", "Different", "Gone", "Bad"]
+
+
+def test_default_template():
+    fmt = Config().new_entry_template
+    assert "A new scriv entry" in fmt
+
+
+def test_custom_template(changelog_d):
+    # You can define your own template with your own name.
+    (changelog_d / "start_here.j2").write_text("Custom template.")
+    fmt = Config(new_entry_template="file: start_here.j2").new_entry_template
+    assert "Custom template." == fmt
+
+
+def test_no_such_template():
+    # If you specify a template name, and it doesn't exist, an error will be raised.
+    with pytest.raises(Exception, match="No such file: changelog.d/foo.j2"):
+        Config(new_entry_template="file: foo.j2")
+
+
+def test_override_default_name(changelog_d):
+    # You can define a file named new_entry.rst.j2, and it will be read
+    # as the template.
+    (changelog_d / "new_entry.rst.j2").write_text("Hello there!")
+    fmt = Config().new_entry_template
+    assert "Hello there!" == fmt
