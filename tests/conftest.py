@@ -1,8 +1,9 @@
 """Fixture definitions."""
 
+import os
 import pathlib
 import traceback
-from typing import Tuple
+from typing import Iterable, Tuple
 
 import pytest
 from click.testing import CliRunner
@@ -66,10 +67,14 @@ def fake_git(fake_run_command) -> FakeGit:
 
 
 @pytest.fixture()
-def temp_dir(tmpdir) -> pathlib.Path:
+def temp_dir(tmpdir) -> Iterable[pathlib.Path]:
     """Make and change into the tmpdir directory, as a Path."""
+    old_dir = os.getcwd()
     tmpdir.chdir()
-    return pathlib.Path(str(tmpdir))
+    try:
+        yield pathlib.Path(str(tmpdir))
+    finally:
+        os.chdir(old_dir)
 
 
 @pytest.fixture()
