@@ -30,9 +30,9 @@ value = 17
 def test_defaults(temp_dir):
     # No configuration files anywhere, just get all the defaults.
     config = Config.read()
-    assert config.entry_directory == "changelog.d"
+    assert config.fragment_directory == "changelog.d"
     assert config.format == "rst"
-    assert config.new_entry_template.startswith(".. A new scriv entry")
+    assert config.new_fragment_template.startswith(".. A new scriv changelog fragment")
     assert config.categories == ["Removed", "Added", "Changed", "Deprecated", "Fixed", "Security"]
     assert config.output_file == "CHANGELOG.rst"
     assert config.insert_marker == "scriv:insert-here"
@@ -45,7 +45,7 @@ def test_defaults(temp_dir):
 def test_reading_config(temp_dir):
     (temp_dir / "setup.cfg").write_text(CONFIG1)
     config = Config.read()
-    assert config.entry_directory == "changelog.d"
+    assert config.fragment_directory == "changelog.d"
     assert config.output_file == "README.md"
     assert config.categories == ["New", "Different", "Gone", "Bad"]
 
@@ -64,36 +64,36 @@ def test_reading_config_from_directory(changelog_d):
 
 
 def test_reading_config_from_other_directory(temp_dir):
-    # setup.cfg can set the entry directory, and then scriv.ini will be found there.
+    # setup.cfg can set the fragment directory, and then scriv.ini will be found there.
     (temp_dir / "scriv.d").mkdir()
     (temp_dir / "scriv.d" / "scriv.ini").write_text(CONFIG1)
-    (temp_dir / "setup.cfg").write_text("[tool.scriv]\nentry_directory = scriv.d\n")
+    (temp_dir / "setup.cfg").write_text("[tool.scriv]\nfragment_directory = scriv.d\n")
     config = Config.read()
-    assert config.entry_directory == "scriv.d"
+    assert config.fragment_directory == "scriv.d"
     assert config.categories == ["New", "Different", "Gone", "Bad"]
 
 
 def test_default_template():
-    fmt = Config().new_entry_template
-    assert "A new scriv entry" in fmt
+    fmt = Config().new_fragment_template
+    assert "A new scriv changelog fragment" in fmt
 
 
 def test_custom_template(changelog_d):
     # You can define your own template with your own name.
     (changelog_d / "start_here.j2").write_text("Custom template.")
-    fmt = Config(new_entry_template="file: start_here.j2").new_entry_template
+    fmt = Config(new_fragment_template="file: start_here.j2").new_fragment_template
     assert "Custom template." == fmt
 
 
 def test_no_such_template():
     # If you specify a template name, and it doesn't exist, an error will be raised.
     with pytest.raises(Exception, match="No such file: changelog.d/foo.j2"):
-        Config(new_entry_template="file: foo.j2")
+        Config(new_fragment_template="file: foo.j2")
 
 
 def test_override_default_name(changelog_d):
-    # You can define a file named new_entry.rst.j2, and it will be read
+    # You can define a file named new_fragment.rst.j2, and it will be read
     # as the template.
-    (changelog_d / "new_entry.rst.j2").write_text("Hello there!")
-    fmt = Config().new_entry_template
+    (changelog_d / "new_fragment.rst.j2").write_text("Hello there!")
+    fmt = Config().new_fragment_template
     assert "Hello there!" == fmt

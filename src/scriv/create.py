@@ -1,4 +1,4 @@
-"""Creating entries."""
+"""Creating fragments."""
 
 import datetime
 import logging
@@ -18,9 +18,9 @@ from .gitinfo import current_branch_name, git_add, git_config_bool, git_edit, us
 logger = logging.getLogger()
 
 
-def new_entry_path(config: Config) -> str:
+def new_fragment_path(config: Config) -> str:
     """
-    Return the file path for a new entry.
+    Return the file path for a new fragment.
     """
     file_name = "{:%Y%m%d_%H%M%S}_{}".format(datetime.datetime.now(), user_nick())
     branch_name = current_branch_name()
@@ -29,13 +29,13 @@ def new_entry_path(config: Config) -> str:
         branch_name = re.sub(r"[^a-zA-Z0-9_]", "_", branch_name)
         file_name += "_{}".format(branch_name)
     file_name += ".{}".format(config.format)
-    file_path = os.path.join(config.entry_directory, file_name)
+    file_path = os.path.join(config.fragment_directory, file_name)
     return file_path
 
 
-def new_entry_contents(config: Config) -> str:
-    """Produce the initial contents of a scriv entry."""
-    return jinja2.Template(textwrap.dedent(config.new_entry_template)).render(config=config)
+def new_fragment_contents(config: Config) -> str:
+    """Produce the initial contents of a scriv fragment."""
+    return jinja2.Template(textwrap.dedent(config.new_fragment_template)).render(config=config)
 
 
 @click.command()
@@ -44,7 +44,7 @@ def new_entry_contents(config: Config) -> str:
 @click_log.simple_verbosity_option(logger)
 def create(add: Optional[bool], edit: Optional[bool]) -> None:
     """
-    Create a new scriv changelog entry.
+    Create a new scriv changelog fragment.
     """
     if add is None:
         add = git_config_bool("scriv.create.add")
@@ -52,13 +52,13 @@ def create(add: Optional[bool], edit: Optional[bool]) -> None:
         edit = git_config_bool("scriv.create.edit")
 
     config = Config.read()
-    file_path = new_entry_path(config)
+    file_path = new_fragment_path(config)
     if os.path.exists(file_path):
         sys.exit("File {} already exists, not overwriting".format(file_path))
 
     logger.info("Creating {}".format(file_path))
     with open(file_path, "w") as f:
-        f.write(new_entry_contents(config))
+        f.write(new_fragment_contents(config))
 
     if edit:
         git_edit(file_path)

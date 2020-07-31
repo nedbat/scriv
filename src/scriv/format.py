@@ -5,9 +5,9 @@ from typing import Dict, List, Optional
 
 from .config import Config
 
-# When collecting changelog entries, we group them by their category into
-# Sections.  A SectionDict maps category names to a list of the entries in that
-# section.  For projects not using categories, the key will be None.
+# When collecting changelog fragments, we group them by their category into
+# Sections.  A SectionDict maps category names to a list of the fragments in
+# that section.  For projects not using categories, the key will be None.
 SectionDict = Dict[Optional[str], List[str]]
 
 

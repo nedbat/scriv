@@ -1,4 +1,4 @@
-"""Collecting entries."""
+"""Collecting fragments."""
 
 import collections
 import datetime
@@ -24,7 +24,7 @@ def files_to_combine(config: Config) -> List[Path]:
 
     """
     pattern = "**/*.{}".format(config.format)
-    return sorted(Path(config.entry_directory).glob(pattern))
+    return sorted(Path(config.fragment_directory).glob(pattern))
 
 
 def combine_sections(config: Config, files: Iterable[Path]) -> SectionDict:
@@ -83,11 +83,11 @@ def cut_at_line(text: str, marker: str) -> Tuple[str, str]:
 @click.command()
 @click.option("--add/--no-add", default=None, help="'git add' the updated changelog file.")
 @click.option("--edit/--no-edit", default=None, help="Open the changelog file in your text editor.")
-@click.option("--keep", is_flag=True, help="Keep the entry files that are collected.")
+@click.option("--keep", is_flag=True, help="Keep the fragment files that are collected.")
 @click_log.simple_verbosity_option(logger)
 def collect(add: Optional[bool], edit: Optional[bool], keep: bool) -> None:
     """
-    Collect entries and produce a combined file.
+    Collect fragments and produce a combined entry in the CHANGELOG file.
     """
     if add is None:
         add = git_config_bool("scriv.collect.add")
@@ -95,7 +95,7 @@ def collect(add: Optional[bool], edit: Optional[bool], keep: bool) -> None:
         edit = git_config_bool("scriv.collect.edit")
 
     config = Config.read()
-    logger.info("Collecting from {}".format(config.entry_directory))
+    logger.info("Collecting from {}".format(config.fragment_directory))
     files = files_to_combine(config)
     sections = combine_sections(config, files)
     sections = order_dict(sections, config.categories)
@@ -124,7 +124,7 @@ def collect(add: Optional[bool], edit: Optional[bool], keep: bool) -> None:
 
     if not keep:
         for file in files:
-            logger.info("Deleting entry file {}".format(file))
+            logger.info("Deleting fragment file {}".format(file))
             if add:
                 git_rm(str(file))
             else:

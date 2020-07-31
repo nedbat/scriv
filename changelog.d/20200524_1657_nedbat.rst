@@ -33,6 +33,6 @@ Added
 
 - The `new_entry_template` configuration setting is the name of the template
   file to use when creating new entries.  The file will be found in the
-  `entry_directory` directory.  The file name defaults to ``new_entry.FMT.j2``.
+  `fragment_directory` directory.  The file name defaults to ``new_entry.FMT.j2``.
   If the file doesn't exist, an internal default will be used.
 

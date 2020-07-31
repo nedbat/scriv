@@ -15,12 +15,14 @@ class Config:
     All the settable options for Scriv.
     """
 
-    entry_directory = attr.ib(type=str, default="changelog.d")
+    # The directory for fragments waiting to be collected. Also can have
+    # templates and settings for scriv.
+    fragment_directory = attr.ib(type=str, default="changelog.d")
 
-    # What format for entries? ReStructuredText ("rst") or Markdown ("md").
+    # What format for fragments? ReStructuredText ("rst") or Markdown ("md").
     format = attr.ib(type=str, default="rst", validator=attr.validators.in_(["rst", "md"]))
 
-    # The categories for changelog entries. Can be empty for no categorization.
+    # The categories for changelog fragments. Can be empty for no categorization.
     categories = attr.ib(type=list, default=["Removed", "Added", "Changed", "Deprecated", "Fixed", "Security"])
 
     output_file = attr.ib(type=str, default="CHANGELOG.rst")
@@ -30,13 +32,13 @@ class Config:
     rst_header_char = attr.ib(type=str, default="=")
     rst_section_char = attr.ib(type=str, default="-")
 
-    # The name of the template for new entries.
-    new_entry_template = attr.ib(type=str, default="file: new_entry.${config:format}.j2")
+    # The name of the template for new fragments.
+    new_fragment_template = attr.ib(type=str, default="file: new_fragment.${config:format}.j2")
 
     # The text of the changelog entry header.
     header = attr.ib(type=str, default="{date:%Y-%m-%d}")
 
-    # Branches that aren't interesting enough to use in entry file names.
+    # Branches that aren't interesting enough to use in fragment file names.
     main_branches = attr.ib(type=list, default=["master", "main", "develop"])
 
     def __attrs_post_init__(self):  # noqa: D105 (Missing docstring in magic method)
@@ -64,7 +66,7 @@ class Config:
 
         Configuration will be read from setup.cfg, tox.ini, or
         changelog.d/scriv.ini.  If setup.cfg or tox.ini defines
-        a new entry_directory, then scriv.ini is read from there.
+        a new fragment_directory, then scriv.ini is read from there.
 
         The section can be named ``[scriv]`` or ``[tool.scriv]``.
 
@@ -72,7 +74,7 @@ class Config:
         config = cls()
         for configfile in ["setup.cfg", "tox.ini"]:
             config.read_one_config(configfile)
-        config.read_one_config(str(Path(config.entry_directory) / "scriv.ini"))
+        config.read_one_config(str(Path(config.fragment_directory) / "scriv.ini"))
         config.resolve_all()
         return config
 
@@ -107,7 +109,7 @@ class Config:
         value = value.replace("${config:format}", self.format)
         if value.startswith("file:"):
             file_name = value.partition(":")[2].strip()
-            file_path = Path(self.entry_directory) / file_name
+            file_path = Path(self.fragment_directory) / file_name
             if file_path.exists():
                 with open(str(file_path)) as f:
                     value = f.read()
