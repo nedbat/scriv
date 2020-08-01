@@ -73,11 +73,6 @@ def test_reading_config_from_other_directory(temp_dir):
     assert config.categories == ["New", "Different", "Gone", "Bad"]
 
 
-def test_default_template():
-    fmt = Config().new_fragment_template
-    assert "A new scriv changelog fragment" in fmt
-
-
 def test_custom_template(changelog_d):
     # You can define your own template with your own name.
     (changelog_d / "start_here.j2").write_text("Custom template.")
