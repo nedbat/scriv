@@ -97,3 +97,10 @@ def test_override_default_name(changelog_d):
     (changelog_d / "new_fragment.rst.j2").write_text("Hello there!")
     fmt = Config().new_fragment_template
     assert "Hello there!" == fmt
+
+
+def test_file_reading(changelog_d):
+    # Any setting can be read from a file, even where it doesn't make sense.
+    (changelog_d / "hello.txt").write_text("Xyzzy")
+    text = Config(output_file="file:hello.txt").output_file
+    assert "Xyzzy" == text
