@@ -8,6 +8,7 @@ from typing import Dict, Iterable, List, Optional, Tuple, TypeVar
 
 import click
 import click_log
+import jinja2
 
 from .config import Config
 from .format import SectionDict, get_format_tools
@@ -109,10 +110,14 @@ def collect(add: Optional[bool], edit: Optional[bool], keep: bool) -> None:
         text_after = ""
 
     format_tools = get_format_tools(config.format, config)
-    header_data = {
+    title_data = {
         "date": datetime.datetime.now(),
     }
-    new_header = format_tools.format_header(header_data)
+    new_title = jinja2.Template(config.entry_title_template).render(config=config, **title_data)
+    if new_title.strip():
+        new_header = format_tools.format_header(new_title)
+    else:
+        new_header = ""
     new_text = format_tools.format_sections(sections)
     changelog.write_text(text_before + new_header + new_text + text_after)
 

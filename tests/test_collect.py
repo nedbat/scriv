@@ -140,8 +140,8 @@ def test_collect_inserts_at_marker(cli_invoke, changelog_d, temp_dir):
 
 
 def test_collect_inserts_at_marker_no_header(cli_invoke, changelog_d, temp_dir):
-    # No header this time.
-    (changelog_d / "scriv.ini").write_text("[scriv]\nheader =\n")
+    # No title this time.
+    (changelog_d / "scriv.ini").write_text("[scriv]\nentry_title_template =\n")
     # Collected text is inserted into CHANGELOG where marked.
     changelog = temp_dir / "CHANGELOG.rst"
     changelog.write_text(MARKED_CHANGELOG_A + UNMARKED_CHANGELOG_B)

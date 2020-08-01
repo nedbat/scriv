@@ -35,8 +35,8 @@ class Config:
     # The name of the template for new fragments.
     new_fragment_template = attr.ib(type=str, default="file: new_fragment.${config:format}.j2")
 
-    # The text of the changelog entry header.
-    header = attr.ib(type=str, default="{date:%Y-%m-%d}")
+    # The template for the title of the changelog entry.
+    entry_title_template = attr.ib(type=str, default="{{ date.strftime('%Y-%m-%d') }}")
 
     # Branches that aren't interesting enough to use in fragment file names.
     main_branches = attr.ib(type=list, default=["master", "main", "develop"])

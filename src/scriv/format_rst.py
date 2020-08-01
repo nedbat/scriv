@@ -1,7 +1,5 @@
 """ReStructured text knowledge for scriv."""
 
-from typing import Dict
-
 from .format import FormatTools, SectionDict
 
 
@@ -52,12 +50,8 @@ class RstTools(FormatTools):
 
         return sections
 
-    def format_header(self, data: Dict) -> str:  # noqa: D102 (inherited docstring)
-        if self.config.header:
-            text = self.config.header.format_map(data)
-            return "\n" + text + "\n" + self.config.rst_header_char * len(text) + "\n"
-        else:
-            return ""
+    def format_header(self, text: str) -> str:  # noqa: D102 (inherited docstring)
+        return "\n" + text + "\n" + self.config.rst_header_char * len(text) + "\n"
 
     def format_sections(self, sections: SectionDict) -> str:  # noqa: D102 (inherited docstring)
         lines = []

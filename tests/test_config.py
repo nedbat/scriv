@@ -38,7 +38,7 @@ def test_defaults(temp_dir):
     assert config.insert_marker == "scriv:insert-here"
     assert config.rst_header_char == "="
     assert config.rst_section_char == "-"
-    assert config.header == "{date:%Y-%m-%d}"
+    assert "{{ date.strftime('%Y-%m-%d') }}" in config.entry_title_template
     assert config.main_branches == ["master", "main", "develop"]
 
 
