@@ -255,3 +255,16 @@ def test_collect_edit(fake_git, mocker, cli_invoke, changelog_d, temp_dir):
     changelog_text = (temp_dir / "CHANGELOG.rst").read_text()
     assert CHANGELOG_1_2 == changelog_text
     mock_edit.assert_called_once_with(filename="CHANGELOG.rst", editor="my_fav_editor")
+
+
+def test_collect_version_in_config(cli_invoke, changelog_d, temp_dir):
+    # The version number to use in the changelog entry can be specified in the
+    # config file.
+    changelog = temp_dir / "CHANGELOG.rst"
+    (changelog_d / "scriv.ini").write_text("[scriv]\nversion = v12.34b\n")
+    (changelog_d / "20170616_nedbat.rst").write_text("- The first change.\n")
+    with freezegun.freeze_time("2020-02-26T15:18:19"):
+        cli_invoke(["collect"])
+    changelog_text = changelog.read_text()
+    expected = "\nv12.34b --- 2020-02-26\n======================\n\n- The first change.\n"
+    assert expected == changelog_text

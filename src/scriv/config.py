@@ -38,7 +38,9 @@ class Config:
     new_fragment_template = attr.ib(type=str, default="file: new_fragment.${config:format}.j2")
 
     # The template for the title of the changelog entry.
-    entry_title_template = attr.ib(type=str, default="{{ date.strftime('%Y-%m-%d') }}")
+    entry_title_template = attr.ib(
+        type=str, default="{% if version %}{{ version }} --- {% endif %}{{ date.strftime('%Y-%m-%d') }}"
+    )
 
     # The version string to include in the title if wanted.
     version = attr.ib(type=str, default="")
