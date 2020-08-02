@@ -63,6 +63,12 @@ from scriv.format_rst import RstTools
                 "Fixed": ["- This thing was fixed.", "- Another thing was fixed."],
             },
         ),
+        (
+            """\
+            - No header at all.
+            """,
+            {None: ["- No header at all."]},
+        ),
     ],
 )
 def test_parse_text(text, parsed):

@@ -193,6 +193,18 @@ def test_collect_no_categories(cli_invoke, changelog_d, temp_dir):
     assert expected == changelog_text
 
 
+def test_collect_uncategorized_fragments(cli_invoke, changelog_d, temp_dir):
+    # If using categories, even uncategorized fragments will be collected.
+    changelog = temp_dir / "CHANGELOG.rst"
+    (changelog_d / "20170616_nedbat.rst").write_text(FRAG1)
+    (changelog_d / "20170617_nedbat.rst").write_text("- The second change.\n")
+    with freezegun.freeze_time("2020-02-25T15:18:19"):
+        cli_invoke(["collect"])
+    changelog_text = changelog.read_text()
+    expected = "\n2020-02-25\n==========\n\n- The second change.\n\n" + FRAG1
+    assert expected == changelog_text
+
+
 def test_collect_add(mocker, cli_invoke, changelog_d, temp_dir):
     # --add tells collect to tell git what's going on.
     (changelog_d / "scriv.ini").write_text("# this shouldn't be collected\n")

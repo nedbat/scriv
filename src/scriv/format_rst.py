@@ -39,15 +39,20 @@ class RstTools(FormatTools):
                     paragraphs.append("")
                 continue
 
-            if paragraphs is not None:
-                paragraphs[-1] += line + "\n"
+            if paragraphs is None:
+                paragraphs = sections.setdefault(None, [])
+                paragraphs.append("")
+
+            paragraphs[-1] += line + "\n"
 
             prev_line = line
 
         # Trim out all empty paragraphs.
-        for section, paragraphs in sections.items():
-            sections[section] = [par.rstrip() for par in paragraphs if par]
-
+        sections = {
+            section: [par.rstrip() for par in paragraphs if par]
+            for section, paragraphs in sections.items()
+            if paragraphs
+        }
         return sections
 
     def format_header(self, text: str) -> str:  # noqa: D102 (inherited docstring)

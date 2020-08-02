@@ -4,7 +4,7 @@ import collections
 import datetime
 import logging
 from pathlib import Path
-from typing import Dict, Iterable, List, Optional, Tuple, TypeVar
+from typing import Dict, Iterable, List, Optional, Sequence, Tuple, TypeVar
 
 import click
 import click_log
@@ -50,7 +50,7 @@ T = TypeVar("T")
 K = TypeVar("K")
 
 
-def order_dict(d: Dict[K, T], keys: List[K]) -> Dict[K, T]:
+def order_dict(d: Dict[Optional[K], T], keys: Sequence[Optional[K]]) -> Dict[Optional[K], T]:
     """
     Produce an OrderedDict of `d`, but with the keys in `keys` order.
     """
@@ -99,7 +99,7 @@ def collect(add: Optional[bool], edit: Optional[bool], keep: bool) -> None:
     logger.info("Collecting from {}".format(config.fragment_directory))
     files = files_to_combine(config)
     sections = combine_sections(config, files)
-    sections = order_dict(sections, config.categories)
+    sections = order_dict(sections, [None] + config.categories)
 
     changelog = Path(config.output_file)
     if changelog.exists():
