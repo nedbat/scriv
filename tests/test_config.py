@@ -40,6 +40,7 @@ def test_defaults(temp_dir):
     assert config.rst_section_char == "-"
     assert "{{ date.strftime('%Y-%m-%d') }}" in config.entry_title_template
     assert config.main_branches == ["master", "main", "develop"]
+    assert config.version == ""
 
 
 def test_reading_config(temp_dir):
@@ -99,3 +100,25 @@ def test_file_reading(changelog_d):
     (changelog_d / "hello.txt").write_text("Xyzzy")
     text = Config(output_file="file:hello.txt").output_file
     assert "Xyzzy" == text
+
+
+def test_literal_reading(temp_dir):
+    # Any setting can be read from a literal in a file.
+    (temp_dir / "sub").mkdir()
+    (temp_dir / "sub" / "foob.py").write_text("""# comment\n__version__ = "12.34.56"\n""")
+    text = Config(version="literal:sub/foob.py: __version__").version
+    assert "12.34.56" == text
+
+
+def test_literal_no_file(temp_dir):
+    # What happens if the file for a literal doesn't exist?
+    with pytest.raises(FileNotFoundError, match=r"No such file or directory: 'sub/foob.py'"):
+        Config(version="literal:sub/foob.py: __version__")
+
+
+def test_literal_no_literal(temp_dir):
+    # What happens if the literal we're looking for isn't there?
+    (temp_dir / "sub").mkdir()
+    (temp_dir / "sub" / "foob.py").write_text("""# comment\n__version__ = "12.34.56"\n""")
+    with pytest.raises(Exception, match=r"Couldn't find literal: 'literal:sub/foob.py: version'"):
+        Config(version="literal:sub/foob.py: version")

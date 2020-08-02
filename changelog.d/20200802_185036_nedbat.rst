@@ -1,0 +1,38 @@
+.. A new scriv changelog fragment.
+..
+.. Uncomment the header that is right (remove the leading dots).
+..
+.. Removed
+.. -------
+..
+.. - A bullet item for the Removed category.
+
+Added
+-----
+
+- Configuratsion values can be read from string literals in Python code with a
+  "literal:" prefix.
+
+- "version" is now a configuration setting.  This will be most useful when used
+  with the "literal:" prefix.
+
+.. Changed
+.. -------
+..
+.. - A bullet item for the Changed category.
+..
+.. Deprecated
+.. ----------
+..
+.. - A bullet item for the Deprecated category.
+..
+.. Fixed
+.. -----
+..
+.. - A bullet item for the Fixed category.
+..
+.. Security
+.. --------
+..
+.. - A bullet item for the Security category.
+..

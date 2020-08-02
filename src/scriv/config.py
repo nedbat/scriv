@@ -8,6 +8,8 @@ from typing import Any, List
 
 import attr
 
+from scriv.literals import find_literal
+
 
 @attr.s
 class Config:
@@ -37,6 +39,9 @@ class Config:
 
     # The template for the title of the changelog entry.
     entry_title_template = attr.ib(type=str, default="{{ date.strftime('%Y-%m-%d') }}")
+
+    # The version string to include in the title if wanted.
+    version = attr.ib(type=str, default="")
 
     # Branches that aren't interesting enough to use in fragment file names.
     main_branches = attr.ib(type=list, default=["master", "main", "develop"])
@@ -120,6 +125,12 @@ class Config:
                     raise Exception("No such file: {}".format(file_path))
                 assert file_bytes
                 value = file_bytes.decode("utf-8")
+        elif value.startswith("literal:"):
+            _, file_name, literal_name = value.split(":", maxsplit=2)
+            found = find_literal(file_name.strip(), literal_name.strip())
+            if found is None:
+                raise Exception("Couldn't find literal: {!r}".format(value))
+            value = found
         return value
 
 
