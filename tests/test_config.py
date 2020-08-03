@@ -35,7 +35,7 @@ def test_defaults(temp_dir):
     assert config.new_fragment_template.startswith(".. A new scriv changelog fragment")
     assert config.categories == ["Removed", "Added", "Changed", "Deprecated", "Fixed", "Security"]
     assert config.output_file == "CHANGELOG.rst"
-    assert config.insert_marker == "scriv:insert-here"
+    assert config.insert_marker == "scriv-insert-here"
     assert config.rst_header_char == "="
     assert config.rst_section_char == "-"
     assert "{{ date.strftime('%Y-%m-%d') }}" in config.entry_title_template

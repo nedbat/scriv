@@ -81,7 +81,7 @@ Blah blah.
 Changes
 =======
 
-.. scriv:insert-here
+.. scriv-insert-here
 """
 
 UNMARKED_CHANGELOG_B = """\
