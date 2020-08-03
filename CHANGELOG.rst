@@ -1,5 +1,6 @@
-Change Log
-----------
+#########
+Changelog
+#########
 
 ..
    All enhancements and patches to scriv will be documented
@@ -9,17 +10,10 @@ Change Log
 
    This project adheres to Semantic Versioning (http://semver.org/).
 
-.. There should always be an "Unreleased" section for changes pending release.
+.. scriv-insert-here
 
-Unreleased
-~~~~~~~~~~
 
-*
-
-[0.1.0] - 2019-12-30
-~~~~~~~~~~~~~~~~~~~~
-
-Added
-_____
+[0.1.0] — 2019-12-30
+====================
 
 * Doesn't really do anything yet.
