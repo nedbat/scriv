@@ -266,5 +266,5 @@ def test_collect_version_in_config(cli_invoke, changelog_d, temp_dir):
     with freezegun.freeze_time("2020-02-26T15:18:19"):
         cli_invoke(["collect"])
     changelog_text = changelog.read_text()
-    expected = "\nv12.34b --- 2020-02-26\n======================\n\n- The first change.\n"
+    expected = "\n[v12.34b] — 2020-02-26\n======================\n\n- The first change.\n"
     assert expected == changelog_text

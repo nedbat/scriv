@@ -39,7 +39,7 @@ class Config:
 
     # The template for the title of the changelog entry.
     entry_title_template = attr.ib(
-        type=str, default="{% if version %}{{ version }} --- {% endif %}{{ date.strftime('%Y-%m-%d') }}"
+        type=str, default="{% if version %}[{{ version }}] — {% endif %}{{ date.strftime('%Y-%m-%d') }}"
     )
 
     # The version string to include in the title if wanted.
