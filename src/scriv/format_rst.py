@@ -6,6 +6,14 @@ from .format import FormatTools, SectionDict
 class RstTools(FormatTools):
     """Specifics about how to work with ReStructured Text."""
 
+    HEADER_CHARS = "!\"#$%&'()*+,-./:;<=>?@[\\]^_`{|}~"
+
+    def _is_underline(self, text: str) -> bool:
+        """
+        Determine if `text` is a valid RST underline.
+        """
+        return len(text) >= 3 and text[0] in self.HEADER_CHARS and len(set(text)) == 1
+
     def parse_text(self, text: str) -> SectionDict:  # noqa: D102 (inherited docstring)
         # Parse a very restricted subset of rst.
         sections = {}  # type: SectionDict
@@ -19,11 +27,11 @@ class RstTools(FormatTools):
         for line in lines:
             line = line.rstrip()
 
-            if line[:2] == "..":
+            if line == ".." or line[:3] == ".. ":
                 # Comment, do nothing.
                 continue
 
-            if line[:3] == self.config.rst_header_chars[1] * 3:
+            if self._is_underline(line):
                 # Section underline. Previous line was the heading.
                 if paragraphs is not None:
                     # Heading was made a paragraph, undo that.

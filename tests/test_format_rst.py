@@ -12,6 +12,7 @@ from scriv.format_rst import RstTools
 @pytest.mark.parametrize(
     "text, parsed",
     [
+        # Comments are ignored, and the section headers found.
         (
             """\
             .. Comments can be here
@@ -31,6 +32,7 @@ from scriv.format_rst import RstTools
             """,
             {"Added": ["- This thing was added.\n  And we liked it."]},
         ),
+        # Multiple section headers.
         (
             """\
             Added
@@ -63,6 +65,34 @@ from scriv.format_rst import RstTools
                 "Fixed": ["- This thing was fixed.", "- Another thing was fixed."],
             },
         ),
+        # The specific character used for the header line is unimportant.
+        (
+            """\
+            Added
+            ^^^^^
+            - This thing was added.
+
+            Fixed
+            ^^^^^
+            - This thing was fixed.
+            """,
+            {"Added": ["- This thing was added."], "Fixed": ["- This thing was fixed."]},
+        ),
+        # You can even use periods as the underline, it won't be confused for a
+        # comment.
+        (
+            """\
+            Fixed
+            .....
+            - This thing was fixed.
+
+            Added
+            .....
+            - This thing was added.
+            """,
+            {"Added": ["- This thing was added."], "Fixed": ["- This thing was fixed."]},
+        ),
+        # It's fine to have no header at all.
         (
             """\
             - No header at all.
