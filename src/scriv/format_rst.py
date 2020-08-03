@@ -23,7 +23,7 @@ class RstTools(FormatTools):
                 # Comment, do nothing.
                 continue
 
-            if line[:3] == self.config.rst_section_char * 3:
+            if line[:3] == self.config.rst_header_chars[1] * 3:
                 # Section underline. Previous line was the heading.
                 if paragraphs is not None:
                     # Heading was made a paragraph, undo that.
@@ -56,7 +56,7 @@ class RstTools(FormatTools):
         return sections
 
     def format_header(self, text: str) -> str:  # noqa: D102 (inherited docstring)
-        return "\n" + text + "\n" + self.config.rst_header_char * len(text) + "\n"
+        return "\n" + text + "\n" + self.config.rst_header_chars[0] * len(text) + "\n"
 
     def format_sections(self, sections: SectionDict) -> str:  # noqa: D102 (inherited docstring)
         lines = []
@@ -64,7 +64,7 @@ class RstTools(FormatTools):
             if section:
                 lines.append("")
                 lines.append(section)
-                lines.append(self.config.rst_section_char * len(section))
+                lines.append(self.config.rst_header_chars[1] * len(section))
             for paragraph in paragraphs:
                 lines.append("")
                 lines.append(paragraph)

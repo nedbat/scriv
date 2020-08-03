@@ -36,8 +36,7 @@ def test_defaults(temp_dir):
     assert config.categories == ["Removed", "Added", "Changed", "Deprecated", "Fixed", "Security"]
     assert config.output_file == "CHANGELOG.rst"
     assert config.insert_marker == "scriv-insert-here"
-    assert config.rst_header_char == "="
-    assert config.rst_section_char == "-"
+    assert config.rst_header_chars == "=-"
     assert "{{ date.strftime('%Y-%m-%d') }}" in config.entry_title_template
     assert config.main_branches == ["master", "main", "develop"]
     assert config.version == ""
@@ -122,3 +121,10 @@ def test_literal_no_literal(temp_dir):
     (temp_dir / "sub" / "foob.py").write_text("""# comment\n__version__ = "12.34.56"\n""")
     with pytest.raises(Exception, match=r"Couldn't find literal: 'literal:sub/foob.py: version'"):
         Config(version="literal:sub/foob.py: version")
+
+
+@pytest.mark.parametrize("chars", ["", "#", "#=-", "# ", "  "])
+def test_rst_chars_is_two_chars(chars):
+    # rst_header_chars must be exactly two non-space characters.
+    with pytest.raises(ValueError):
+        Config(rst_header_chars=chars)

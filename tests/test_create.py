@@ -41,7 +41,7 @@ def test_new_fragment_contents_rst():
 
 
 def test_new_fragment_contents_rst_with_customized_header():
-    config = Config(format="rst", rst_section_char="~")
+    config = Config(format="rst", rst_header_chars="#~")
     contents = new_fragment_contents(config)
     assert contents.startswith(".. ")
     assert ".. A new scriv changelog fragment" in contents

@@ -108,7 +108,7 @@ def test_format_sections():
 
         - Another thing was fixed.
         """
-    actual = RstTools(Config(rst_section_char="~")).format_sections(sections)
+    actual = RstTools(Config(rst_header_chars="#~")).format_sections(sections)
     assert textwrap.dedent(expected) == actual
 
 
@@ -116,7 +116,7 @@ def test_format_sections():
     "config_kwargs, text, result",
     [
         ({}, "2020-07-26", "\n2020-07-26\n==========\n"),
-        ({"rst_header_char": "*"}, "2020-07-26", "\n2020-07-26\n**********\n"),
+        ({"rst_header_chars": "*-"}, "2020-07-26", "\n2020-07-26\n**********\n"),
     ],
 )
 def test_format_header(config_kwargs, text, result):

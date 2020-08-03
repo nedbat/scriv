@@ -5,7 +5,7 @@
 ..
 {% for cat in config.categories -%}
 .. {{ cat }}
-.. {{ config.rst_section_char * (cat|length) }}
+.. {{ config.rst_header_chars[1] * (cat|length) }}
 ..
 .. - A bullet item for the {{ cat }} category.
 ..

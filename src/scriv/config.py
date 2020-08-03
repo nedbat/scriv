@@ -31,8 +31,7 @@ class Config:
     insert_marker = attr.ib(type=str, default="scriv-insert-here")
 
     # The characters to use for header and section underlines in rst files.
-    rst_header_char = attr.ib(type=str, default="=")
-    rst_section_char = attr.ib(type=str, default="-")
+    rst_header_chars = attr.ib(type=str, default="=-", validator=attr.validators.matches_re(r"\S\S"))
 
     # The name of the template for new fragments.
     new_fragment_template = attr.ib(type=str, default="file: new_fragment.${config:format}.j2")
