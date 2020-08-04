@@ -1,25 +1,25 @@
-=====
+#####
 Scriv
-=====
+#####
 
 |pypi-badge| |travis-badge| |doc-badge| |pyversions-badge| |license-badge|
 
 Scriv changelog management tool
 
 Overview
---------
+========
 
 Scriv is a command-line tool for helping developers maintain useful changelogs.
 It manages a directory of changelog fragments. It aggregates them into entries
 in a CHANGELOG file.
 
 Documentation
--------------
+=============
 
 The full documentation is at https://scriv.readthedocs.org.
 
 License
--------
+=======
 
 The code in this repository is licensed under the Apache Software License 2.0
 unless otherwise noted.
@@ -27,7 +27,7 @@ unless otherwise noted.
 Please see ``LICENSE.txt`` for details.
 
 How To Contribute
------------------
+=================
 
 Contributions are very welcome.
 

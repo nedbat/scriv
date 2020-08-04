@@ -1,6 +1,7 @@
-#########
+.. this will be appended to README.rst
+
 Changelog
-#########
+=========
 
 ..
    All enhancements and patches to scriv will be documented
@@ -10,10 +11,16 @@ Changelog
 
    This project adheres to Semantic Versioning (http://semver.org/).
 
+Unreleased
+----------
+
+See the fragment files in ./changelog.d
+
+
 .. scriv-insert-here
 
 
 [0.1.0] — 2019-12-30
-====================
+--------------------
 
 * Doesn't really do anything yet.
