@@ -19,6 +19,98 @@ See the fragment files in ./changelog.d
 
 .. scriv-insert-here
 
+[0.8.0] — 2020-08-04
+--------------------
+
+Added
+.....
+
+- Added the `collect` command.
+
+- Configuration is now read from setup.cfg or tox.ini.
+
+- A new configuration setting, rst_section_char, determines the character used
+  in the underlines for the section headings in .rst files.
+
+- The `new_entry_template` configuration setting is the name of the template
+  file to use when creating new entries.  The file will be found in the
+  `fragment_directory` directory.  The file name defaults to ``new_entry.FMT.j2``.
+  If the file doesn't exist, an internal default will be used.
+
+- Now the collect command also includes a header for the entire entry.  The
+  underline is determined by the "rst_header_char" settings.  The heading text
+  is determined by the "header" setting, which defaults to the current date.
+
+- The categories list in the config can be empty, meaning entries are not
+  categorized.
+
+- The create command now accepts --edit (to open the new entry in your text
+  editor), and --add (to "git add" the new entry).
+
+- The collect command now accepts --edit (to open the changelog file in an
+  editor after the new entries have been collected) and --add (to git-add the
+  changelog file and git rm the entries).
+
+- The names of the main git branches are configurable as "main_branches" in the
+  configuration file.  The default is "master", "main", and "develop".
+
+- Configuration values can now be read from files by prefixing them with
+  "file:".  File names will be interpreted relative to the changelog.d
+  directory, or will be found in a few files installed with scriv.
+
+- Configuration values can interpolate the currently configured format (rst or
+  md) with "${config:format}".
+
+- The default value for new templates is now
+  "file: new_entry.${config:format}.j2".
+
+- Configuratsion values can be read from string literals in Python code with a
+  "literal:" prefix.
+
+- "version" is now a configuration setting.  This will be most useful when used
+  with the "literal:" prefix.
+
+- By default, the title of collected changelog entries includes the version if
+  it's defined.
+
+- The collect command now accepts a ``--version`` option to set the version
+  name used in the changelog entry title.
+
+Changed
+.......
+
+- RST now uses minuses instead of equals.
+
+- The `create` command now includes the time as well as the date in the entry
+  file name.
+
+- The --delete option to collect is now called --keep, and defaults to False.
+  By default, the collected entry files are removed.
+
+- Created file names now include the seconds from the current time.
+
+- "scriv create" will refuse to overwrite an existing entry file.
+
+- Made terminology more uniform: files in changelog.d are "fragments."  When
+  collected together, they make one changelog "entry."
+
+- The title text for the collected changelog entry is now created from the
+  "entry_title_template" configuration setting.  It's a Jinja2 template.
+
+- Combined the rst_header_char and rst_section_char settings into one:
+  rst_header_chars, which much be exactly two characters.
+
+- Parsing RST fragments is more flexible: the sections can use any valid RST
+  header characters for the underline.  Previously, it had to match the
+  configured RST header character.
+
+Fixed
+.....
+
+- Fragments with no category header were being dropped if categories were in
+  use.  This is now fixed.  Uncategorized fragments get sorted before any
+  categorized fragments.
+
 
 [0.1.0] — 2019-12-30
 --------------------
