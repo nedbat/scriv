@@ -36,8 +36,8 @@ Contributions are very welcome.
     :target: https://pypi.python.org/pypi/scriv/
     :alt: PyPI
 
-.. |travis-badge| image:: https://travis-ci.org/nedbat/scriv.svg?branch=master
-    :target: https://travis-ci.org/nedbat/scriv
+.. |travis-badge| image:: https://travis-ci.com/nedbat/scriv.svg?branch=master
+    :target: https://travis-ci.com/github/nedbat/scriv
     :alt: Travis
 
 .. |doc-badge| image:: https://readthedocs.org/projects/scriv/badge/?version=latest
