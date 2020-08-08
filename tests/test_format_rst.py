@@ -103,7 +103,7 @@ from scriv.format_rst import RstTools
 )
 def test_parse_text(text, parsed):
     actual = RstTools().parse_text(textwrap.dedent(text))
-    assert parsed == actual
+    assert actual == parsed
 
 
 def test_format_sections():
@@ -139,7 +139,7 @@ def test_format_sections():
         - Another thing was fixed.
         """
     actual = RstTools(Config(rst_header_chars="#~")).format_sections(sections)
-    assert textwrap.dedent(expected) == actual
+    assert actual == textwrap.dedent(expected)
 
 
 @pytest.mark.parametrize(
@@ -151,4 +151,4 @@ def test_format_sections():
 )
 def test_format_header(config_kwargs, text, result):
     actual = RstTools(Config(**config_kwargs)).format_header(text)
-    assert result == actual
+    assert actual == result

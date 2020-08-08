@@ -90,7 +90,7 @@ def test_create_fragment(fake_git, cli_invoke, changelog_d):
     frags = sorted(changelog_d.iterdir())
     assert len(frags) == 1
     frag = frags[0]
-    assert "20130225_151617_joedev.rst" == frag.name
+    assert frag.name == "20130225_151617_joedev.rst"
     contents = frag.read_text()
     assert "A new scriv changelog fragment" in contents
     assert ".. Added\n.. -----\n" in contents
@@ -102,7 +102,7 @@ def test_create_fragment(fake_git, cli_invoke, changelog_d):
     frags = sorted(changelog_d.iterdir())
     assert len(frags) == 2
     latest_frag = frags[-1]
-    assert "20130225_151819_joedev.rst" == latest_frag.name
+    assert latest_frag.name == "20130225_151819_joedev.rst"
 
 
 def test_create_edit(mocker, fake_git, cli_invoke, changelog_d):
@@ -192,12 +192,12 @@ def test_create_file_exists(fake_git, cli_invoke, changelog_d):
         result = cli_invoke(["create"], expect_ok=False)
 
     # "create" ended with an error and a message.
-    assert 1 == result.exit_code
-    assert "File changelog.d/20130225_151617_joedev.rst already exists, not overwriting\n" == result.stdout
+    assert result.exit_code == 1
+    assert result.stdout == "File changelog.d/20130225_151617_joedev.rst already exists, not overwriting\n"
 
     # Our precious file is unharmed.
     frags = sorted(changelog_d.iterdir())
     assert len(frags) == 1
     frag = frags[0]
-    assert "20130225_151617_joedev.rst" == frag.name
-    assert "I'm precious!" == frag.read_text()
+    assert frag.name == "20130225_151617_joedev.rst"
+    assert frag.read_text() == "I'm precious!"

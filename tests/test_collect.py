@@ -108,7 +108,7 @@ def test_collect_simple(cli_invoke, changelog_d, temp_dir):
     with freezegun.freeze_time("2020-02-25T15:18:19"):
         cli_invoke(["collect"])
     changelog_text = (temp_dir / "CHANGELOG.rst").read_text()
-    assert CHANGELOG_1_2 == changelog_text
+    assert changelog_text == CHANGELOG_1_2
     # We didn't use --keep, so the files should be gone.
     assert (changelog_d / "scriv.ini").exists()
     assert not (changelog_d / "20170616_nedbat.rst").exists()
@@ -124,7 +124,7 @@ def test_collect_ordering(cli_invoke, changelog_d, temp_dir):
     with freezegun.freeze_time("2020-02-25T15:18:19"):
         cli_invoke(["collect"])
     changelog_text = (temp_dir / "CHANGELOG.rst").read_text()
-    assert CHANGELOG_2_1_3 == changelog_text
+    assert changelog_text == CHANGELOG_2_1_3
 
 
 def test_collect_inserts_at_marker(cli_invoke, changelog_d, temp_dir):
@@ -136,7 +136,7 @@ def test_collect_inserts_at_marker(cli_invoke, changelog_d, temp_dir):
         cli_invoke(["collect"])
     changelog_text = changelog.read_text()
     expected = MARKED_CHANGELOG_A + CHANGELOG_HEADER + "\n" + FRAG1 + UNMARKED_CHANGELOG_B
-    assert expected == changelog_text
+    assert changelog_text == expected
 
 
 def test_collect_inserts_at_marker_no_header(cli_invoke, changelog_d, temp_dir):
@@ -150,7 +150,7 @@ def test_collect_inserts_at_marker_no_header(cli_invoke, changelog_d, temp_dir):
         cli_invoke(["collect"])
     changelog_text = changelog.read_text()
     expected = MARKED_CHANGELOG_A + "\n" + FRAG1 + UNMARKED_CHANGELOG_B
-    assert expected == changelog_text
+    assert changelog_text == expected
 
 
 def test_collect_prepends_if_no_marker(cli_invoke, changelog_d, temp_dir):
@@ -162,7 +162,7 @@ def test_collect_prepends_if_no_marker(cli_invoke, changelog_d, temp_dir):
         cli_invoke(["collect"])
     changelog_text = changelog.read_text()
     expected = CHANGELOG_HEADER + "\n" + FRAG1 + UNMARKED_CHANGELOG_B
-    assert expected == changelog_text
+    assert changelog_text == expected
 
 
 def test_collect_keep(cli_invoke, changelog_d, temp_dir):
@@ -173,7 +173,7 @@ def test_collect_keep(cli_invoke, changelog_d, temp_dir):
     with freezegun.freeze_time("2020-02-25T15:18:19"):
         cli_invoke(["collect", "--keep"])
     changelog_text = (temp_dir / "CHANGELOG.rst").read_text()
-    assert CHANGELOG_1_2 == changelog_text
+    assert changelog_text == CHANGELOG_1_2
     # We used --keep, so the collected files should still exist.
     assert (changelog_d / "scriv.ini").exists()
     assert (changelog_d / "20170616_nedbat.rst").exists()
@@ -190,7 +190,7 @@ def test_collect_no_categories(cli_invoke, changelog_d, temp_dir):
         cli_invoke(["collect"])
     changelog_text = changelog.read_text()
     expected = "\n2020-02-25\n==========\n\n- The first change.\n\n- The second change.\n"
-    assert expected == changelog_text
+    assert changelog_text == expected
 
 
 def test_collect_uncategorized_fragments(cli_invoke, changelog_d, temp_dir):
@@ -202,7 +202,7 @@ def test_collect_uncategorized_fragments(cli_invoke, changelog_d, temp_dir):
         cli_invoke(["collect"])
     changelog_text = changelog.read_text()
     expected = "\n2020-02-25\n==========\n\n- The second change.\n\n" + FRAG1
-    assert expected == changelog_text
+    assert changelog_text == expected
 
 
 def test_collect_add(mocker, cli_invoke, changelog_d, temp_dir):
@@ -215,7 +215,7 @@ def test_collect_add(mocker, cli_invoke, changelog_d, temp_dir):
     with freezegun.freeze_time("2020-02-25T15:18:19"):
         cli_invoke(["collect", "--add"])
     changelog_text = (temp_dir / "CHANGELOG.rst").read_text()
-    assert CHANGELOG_1_2 == changelog_text
+    assert changelog_text == CHANGELOG_1_2
     # We used --add, so the collected files were git rm'd
     assert mock_call.mock_calls == [
         call(["git", "add", "CHANGELOG.rst"]),
@@ -235,7 +235,7 @@ def test_collect_add_rm_fail(mocker, cli_invoke, changelog_d, temp_dir):
         result = cli_invoke(["collect", "--add"], expect_ok=False)
     assert result.exit_code == 99
     changelog_text = (temp_dir / "CHANGELOG.rst").read_text()
-    assert CHANGELOG_1_2 == changelog_text
+    assert changelog_text == CHANGELOG_1_2
     # We used --add, so the collected files were git rm'd
     assert mock_call.mock_calls == [
         call(["git", "add", "CHANGELOG.rst"]),
@@ -253,7 +253,7 @@ def test_collect_edit(fake_git, mocker, cli_invoke, changelog_d, temp_dir):
     with freezegun.freeze_time("2020-02-25T15:18:19"):
         cli_invoke(["collect", "--edit"])
     changelog_text = (temp_dir / "CHANGELOG.rst").read_text()
-    assert CHANGELOG_1_2 == changelog_text
+    assert changelog_text == CHANGELOG_1_2
     mock_edit.assert_called_once_with(filename="CHANGELOG.rst", editor="my_fav_editor")
 
 
@@ -267,4 +267,4 @@ def test_collect_version_in_config(cli_invoke, changelog_d, temp_dir):
         cli_invoke(["collect"])
     changelog_text = changelog.read_text()
     expected = "\n[v12.34b] — 2020-02-26\n======================\n\n- The first change.\n"
-    assert expected == changelog_text
+    assert changelog_text == expected

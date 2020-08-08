@@ -77,7 +77,7 @@ def test_custom_template(changelog_d):
     # You can define your own template with your own name.
     (changelog_d / "start_here.j2").write_text("Custom template.")
     fmt = Config(new_fragment_template="file: start_here.j2").new_fragment_template
-    assert "Custom template." == fmt
+    assert fmt == "Custom template."
 
 
 def test_no_such_template():
@@ -91,14 +91,14 @@ def test_override_default_name(changelog_d):
     # as the template.
     (changelog_d / "new_fragment.rst.j2").write_text("Hello there!")
     fmt = Config().new_fragment_template
-    assert "Hello there!" == fmt
+    assert fmt == "Hello there!"
 
 
 def test_file_reading(changelog_d):
     # Any setting can be read from a file, even where it doesn't make sense.
     (changelog_d / "hello.txt").write_text("Xyzzy")
     text = Config(output_file="file:hello.txt").output_file
-    assert "Xyzzy" == text
+    assert text == "Xyzzy"
 
 
 def test_literal_reading(temp_dir):
@@ -106,7 +106,7 @@ def test_literal_reading(temp_dir):
     (temp_dir / "sub").mkdir()
     (temp_dir / "sub" / "foob.py").write_text("""# comment\n__version__ = "12.34.56"\n""")
     text = Config(version="literal:sub/foob.py: __version__").version
-    assert "12.34.56" == text
+    assert text == "12.34.56"
 
 
 def test_literal_no_file(temp_dir):
