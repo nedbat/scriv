@@ -37,12 +37,9 @@ def combine_sections(config: Config, files: Iterable[Path]) -> SectionDict:
         format_tools = get_format_tools(file.suffix.lstrip("."), config)
         with file.open() as f:
             text = f.read().rstrip()
-        if config.categories:
-            file_sections = format_tools.parse_text(text)
-            for section, paragraphs in file_sections.items():
-                sections[section].extend(paragraphs)
-        else:
-            sections[None].append(text)
+        file_sections = format_tools.parse_text(text)
+        for section, paragraphs in file_sections.items():
+            sections[section].extend(paragraphs)
     return sections
 
 

@@ -4,6 +4,11 @@ from unittest.mock import call
 
 import freezegun
 
+COMMENT = """\
+.. this line should be dropped
+
+"""
+
 FRAG1 = """\
 Fixed
 -----
@@ -103,8 +108,8 @@ def test_collect_simple(cli_invoke, changelog_d, temp_dir):
     # Sections are ordered by the config file.
     # Fragments in sections are in time order.
     (changelog_d / "scriv.ini").write_text("# this shouldn't be collected\n")
-    (changelog_d / "20170616_nedbat.rst").write_text(FRAG1)
-    (changelog_d / "20170617_nedbat.rst").write_text(FRAG2)
+    (changelog_d / "20170616_nedbat.rst").write_text(COMMENT + FRAG1 + COMMENT)
+    (changelog_d / "20170617_nedbat.rst").write_text(COMMENT + FRAG2)
     with freezegun.freeze_time("2020-02-25T15:18:19"):
         cli_invoke(["collect"])
     changelog_text = (temp_dir / "CHANGELOG.rst").read_text()
@@ -118,9 +123,9 @@ def test_collect_simple(cli_invoke, changelog_d, temp_dir):
 def test_collect_ordering(cli_invoke, changelog_d, temp_dir):
     # Fragments in sections are in time order.
     # Unknown sections come after the known ones.
-    (changelog_d / "20170616_nedbat.rst").write_text(FRAG2)
-    (changelog_d / "20170617_nedbat.rst").write_text(FRAG1)
-    (changelog_d / "20170618_joedev.rst").write_text(FRAG3)
+    (changelog_d / "20170616_nedbat.rst").write_text(COMMENT + FRAG2)
+    (changelog_d / "20170617_nedbat.rst").write_text(COMMENT + FRAG1)
+    (changelog_d / "20170618_joedev.rst").write_text(COMMENT + FRAG3)
     with freezegun.freeze_time("2020-02-25T15:18:19"):
         cli_invoke(["collect"])
     changelog_text = (temp_dir / "CHANGELOG.rst").read_text()
@@ -185,7 +190,7 @@ def test_collect_no_categories(cli_invoke, changelog_d, temp_dir):
     changelog = temp_dir / "CHANGELOG.rst"
     (changelog_d / "scriv.ini").write_text("[scriv]\ncategories=\n")
     (changelog_d / "20170616_nedbat.rst").write_text("- The first change.\n")
-    (changelog_d / "20170617_nedbat.rst").write_text("- The second change.\n")
+    (changelog_d / "20170617_nedbat.rst").write_text(COMMENT + "- The second change.\n")
     with freezegun.freeze_time("2020-02-25T15:18:19"):
         cli_invoke(["collect"])
     changelog_text = changelog.read_text()

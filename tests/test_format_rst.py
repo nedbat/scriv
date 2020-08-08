@@ -88,6 +88,9 @@ from scriv.format_rst import RstTools
 
             Added
             .....
+
+            .. a comment.
+
             - This thing was added.
             """,
             {"Added": ["- This thing was added."], "Fixed": ["- This thing was fixed."]},
@@ -98,6 +101,17 @@ from scriv.format_rst import RstTools
             - No header at all.
             """,
             {None: ["- No header at all."]},
+        ),
+        # It's fine to have comments with no header, and multiple bulllets.
+        (
+            """\
+            .. This is a scriv fragment.
+
+            - No header at all.
+
+            - Just plain bullets.
+            """,
+            {None: ["- No header at all.", "- Just plain bullets."]},
         ),
     ],
 )
