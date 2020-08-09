@@ -119,6 +119,36 @@ from scriv.format_rst import RstTools
             {None: ["- No header at all.", "- Just plain bullets."]},
             id="no_header_2",
         ),
+        # RST syntax is intricate. We understand a subset of it.
+        pytest.param(
+            """\
+            Fixed
+            .....
+            - This thing was fixed: `issue 42`_.
+
+            .. _issue 42: https://github.com/thing/issue/42
+
+            Added
+            .....
+
+            .. a comment.
+
+            - This thing was added.
+
+            .. note::
+                This thing doesn't work yet.
+                Not sure it ever will... :(
+
+            """,
+            {
+                "Added": [
+                    "- This thing was added.",
+                    ".. note::\n    This thing doesn't work yet.\n    Not sure it ever will... :(",
+                ],
+                "Fixed": ["- This thing was fixed: `issue 42`_.", ".. _issue 42: https://github.com/thing/issue/42"],
+            },
+            id="intricate_syntax",
+        ),
     ],
 )
 def test_parse_text(text, parsed):

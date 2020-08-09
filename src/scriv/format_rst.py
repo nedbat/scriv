@@ -1,5 +1,7 @@
 """ReStructured text knowledge for scriv."""
 
+import re
+
 from .format import FormatTools, SectionDict
 
 
@@ -8,11 +10,32 @@ class RstTools(FormatTools):
 
     HEADER_CHARS = "!\"#$%&'()*+,-./:;<=>?@[\\]^_`{|}~"
 
-    def _is_underline(self, text: str) -> bool:
+    def _is_underline(self, line: str) -> bool:
         """
-        Determine if `text` is a valid RST underline.
+        Determine if `line` is a valid RST underline.
         """
-        return len(text) >= 3 and text[0] in self.HEADER_CHARS and len(set(text)) == 1
+        return len(line) >= 3 and line[0] in self.HEADER_CHARS and len(set(line)) == 1
+
+    def _is_comment(self, line: str) -> bool:
+        """
+        Determine if a line is a comment.
+
+        RST syntax is subtle, so we have to check for other kinds of dot-dot
+        lines that are not comments.
+        """
+        if line.startswith(".."):
+            if line == "..":
+                return True
+            elif line.startswith(("...", ".. _", ".. [", ".. |")):
+                # It's an underline, hyperlink, citation, or substitution: not a comment.
+                return False
+            elif re.search(r"^.. [\w_+:.-]+::", line):
+                # A directive: not a comment.
+                return False
+            else:
+                return True
+        else:
+            return False
 
     def parse_text(self, text: str) -> SectionDict:  # noqa: D102 (inherited docstring)
         # Parse a very restricted subset of rst.
@@ -27,7 +50,7 @@ class RstTools(FormatTools):
         for line in lines:
             line = line.rstrip()
 
-            if line == ".." or line[:3] == ".. ":
+            if self._is_comment(line):
                 # Comment, do nothing.
                 continue
 
