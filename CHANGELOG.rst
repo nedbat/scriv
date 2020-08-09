@@ -19,6 +19,38 @@ See the fragment files in ./changelog.d
 
 .. scriv-insert-here
 
+[0.8.1] — 2020-08-09
+--------------------
+
+Added
+.....
+
+- When editing a new fragment during "scriv create", if the edited fragment has
+  no content (only comments or blank lines), then the create operation will be
+  aborted, and the file will be removed. (Closes `issue 2`_.)
+
+.. _issue 2: https://github.com/nedbat/scriv/issues/2
+
+Changed
+.......
+
+- If the fragment directory doesn't exist, a simple direct message is shown,
+  rather than a misleading FileNotFound error (closes `issue 1`_).
+
+.. _issue 1: https://github.com/nedbat/scriv/issues/1
+
+Fixed
+.....
+
+- When not using categories, comments in fragment files would be copied to the
+  changelog file (`issue 3`_).  This is now fixed.
+
+.. _issue 3: https://github.com/nedbat/scriv/issues/3
+
+- RST syntax is better understood, so that hyperlink references and directives
+  will be preserved. Previously, they were mistakenly interpreted as comments
+  and discarded.
+
 [0.8.0] — 2020-08-04
 --------------------
 
