@@ -13,7 +13,7 @@ from scriv.format_rst import RstTools
     "text, parsed",
     [
         # Comments are ignored, and the section headers found.
-        (
+        pytest.param(
             """\
             .. Comments can be here
             .. and here.
@@ -31,9 +31,10 @@ from scriv.format_rst import RstTools
 
             """,
             {"Added": ["- This thing was added.\n  And we liked it."]},
+            id="comments_ignored",
         ),
         # Multiple section headers.
-        (
+        pytest.param(
             """\
             Added
             -----
@@ -64,9 +65,10 @@ from scriv.format_rst import RstTools
                 ],
                 "Fixed": ["- This thing was fixed.", "- Another thing was fixed."],
             },
+            id="multiple_headers",
         ),
         # The specific character used for the header line is unimportant.
-        (
+        pytest.param(
             """\
             Added
             ^^^^^
@@ -77,10 +79,11 @@ from scriv.format_rst import RstTools
             - This thing was fixed.
             """,
             {"Added": ["- This thing was added."], "Fixed": ["- This thing was fixed."]},
+            id="different_underlines",
         ),
         # You can even use periods as the underline, it won't be confused for a
         # comment.
-        (
+        pytest.param(
             """\
             Fixed
             .....
@@ -94,16 +97,18 @@ from scriv.format_rst import RstTools
             - This thing was added.
             """,
             {"Added": ["- This thing was added."], "Fixed": ["- This thing was fixed."]},
+            id="period_underline",
         ),
         # It's fine to have no header at all.
-        (
+        pytest.param(
             """\
             - No header at all.
             """,
             {None: ["- No header at all."]},
+            id="no_header",
         ),
         # It's fine to have comments with no header, and multiple bulllets.
-        (
+        pytest.param(
             """\
             .. This is a scriv fragment.
 
@@ -112,6 +117,7 @@ from scriv.format_rst import RstTools
             - Just plain bullets.
             """,
             {None: ["- No header at all.", "- Just plain bullets."]},
+            id="no_header_2",
         ),
     ],
 )
