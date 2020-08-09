@@ -1,0 +1,37 @@
+.. A new scriv changelog fragment.
+..
+.. Uncomment the header that is right (remove the leading dots).
+..
+.. Removed
+.. .......
+..
+.. - A bullet item for the Removed category.
+..
+.. Added
+.. .....
+..
+.. - A bullet item for the Added category.
+
+Changed
+.......
+
+- If the fragment directory doesn't exist, a simple direct message is shown,
+  rather than a misleading FileNotFound error (closes `issue 1`_).
+
+.. _issue 1: https://github.com/nedbat/scriv/issues/1
+
+.. Deprecated
+.. ..........
+..
+.. - A bullet item for the Deprecated category.
+..
+.. Fixed
+.. .....
+..
+.. - A bullet item for the Fixed category.
+..
+.. Security
+.. ........
+..
+.. - A bullet item for the Security category.
+..

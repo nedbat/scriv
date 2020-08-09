@@ -53,6 +53,9 @@ def create(add: Optional[bool], edit: Optional[bool]) -> None:
         edit = git_config_bool("scriv.create.edit")
 
     config = Config.read()
+    if not Path(config.fragment_directory).exists():
+        sys.exit("Output directory {!r} doesn't exist, please create it.".format(config.fragment_directory))
+
     file_path = new_fragment_path(config)
     if file_path.exists():
         sys.exit("File {} already exists, not overwriting".format(file_path))

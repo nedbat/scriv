@@ -83,8 +83,7 @@ class TestCreate:
         # With no changelog.d directory, create fails with a FileNotFoundError.
         result = cli_invoke(["create"], expect_ok=False)
         assert result.exit_code == 1
-        assert isinstance(result.exception, FileNotFoundError)
-        assert "changelog.d" in str(result.exception)
+        assert str(result.exception) == "Output directory 'changelog.d' doesn't exist, please create it."
 
     def test_create_fragment(self, fake_git, cli_invoke, changelog_d):
         # Create will make one file with the current time in the name.
