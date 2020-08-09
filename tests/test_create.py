@@ -1,5 +1,7 @@
 """Test creation logic."""
 
+from pathlib import Path
+
 import freezegun
 import pytest
 
@@ -12,7 +14,7 @@ def test_new_fragment_path(fake_git):
     fake_git.set_config("github.user", "joedev")
     fake_git.set_branch("master")
     config = Config(fragment_directory="notes")
-    assert new_fragment_path(config) == "notes/20121001_070809_joedev.rst"
+    assert new_fragment_path(config) == Path("notes/20121001_070809_joedev.rst")
 
 
 @freezegun.freeze_time("2012-10-01T07:08:09")
@@ -20,7 +22,7 @@ def test_new_fragment_path_with_custom_main(fake_git):
     fake_git.set_config("github.user", "joedev")
     fake_git.set_branch("mainline")
     config = Config(fragment_directory="notes", main_branches=["main", "mainline"])
-    assert new_fragment_path(config) == "notes/20121001_070809_joedev.rst"
+    assert new_fragment_path(config) == Path("notes/20121001_070809_joedev.rst")
 
 
 @freezegun.freeze_time("2013-02-25T15:16:17")
@@ -28,7 +30,7 @@ def test_new_fragment_path_with_branch(fake_git):
     fake_git.set_config("github.user", "joedev")
     fake_git.set_branch("joedeveloper/feature-123.4")
     config = Config(fragment_directory="notes")
-    assert new_fragment_path(config) == "notes/20130225_151617_joedev_feature_123_4.rst"
+    assert new_fragment_path(config) == Path("notes/20130225_151617_joedev_feature_123_4.rst")
 
 
 def test_new_fragment_contents_rst():
@@ -121,9 +123,10 @@ def test_create_edit_preference(mocker, fake_git, cli_invoke, changelog_d):
     fake_git.set_config("github.user", "joedev")
     fake_git.set_editor("my_fav_editor")
     mock_edit = mocker.patch("click.edit")
+    expected = Path("changelog.d/20130225_151617_joedev.rst")
     with freezegun.freeze_time("2013-02-25T15:16:17"):
         cli_invoke(["create"])
-    mock_edit.assert_called_once_with(filename="changelog.d/20130225_151617_joedev.rst", editor="my_fav_editor")
+    mock_edit.assert_called_once_with(filename=str(expected), editor="my_fav_editor")
 
 
 def test_create_edit_preference_no_edit(mocker, fake_git, cli_invoke, changelog_d):

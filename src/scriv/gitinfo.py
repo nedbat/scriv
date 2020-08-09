@@ -4,6 +4,7 @@ import logging
 import os
 import subprocess
 import sys
+from pathlib import Path
 
 import click
 
@@ -56,14 +57,14 @@ def git_editor() -> str:
     return run_simple_command("git var GIT_EDITOR")
 
 
-def git_edit(filename: str) -> None:
+def git_edit(filename: Path) -> None:
     """Edit a file using the same editor Git chooses."""
-    click.edit(filename=filename, editor=git_editor())
+    click.edit(filename=str(filename), editor=git_editor())
 
 
-def git_add(filename: str) -> None:
+def git_add(filename: Path) -> None:
     """Git add a file. If it fails, sys.exit."""
-    ret = subprocess.call(["git", "add", filename])
+    ret = subprocess.call(["git", "add", str(filename)])
     if ret == 0:
         logger.info("Added {}".format(filename))
     else:
@@ -71,9 +72,9 @@ def git_add(filename: str) -> None:
         sys.exit(ret)
 
 
-def git_rm(filename: str) -> None:
+def git_rm(filename: Path) -> None:
     """Git rm a file. If it fails, sys.exit."""
-    ret = subprocess.call(["git", "rm", filename])
+    ret = subprocess.call(["git", "rm", str(filename)])
     if ret == 0:
         logger.info("Removed {}".format(filename))
     else:

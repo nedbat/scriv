@@ -2,10 +2,10 @@
 
 import datetime
 import logging
-import os.path
 import re
 import sys
 import textwrap
+from pathlib import Path
 from typing import Optional
 
 import click
@@ -18,7 +18,7 @@ from .gitinfo import current_branch_name, git_add, git_config_bool, git_edit, us
 logger = logging.getLogger()
 
 
-def new_fragment_path(config: Config) -> str:
+def new_fragment_path(config: Config) -> Path:
     """
     Return the file path for a new fragment.
     """
@@ -29,7 +29,7 @@ def new_fragment_path(config: Config) -> str:
         branch_name = re.sub(r"[^a-zA-Z0-9_]", "_", branch_name)
         file_name += "_{}".format(branch_name)
     file_name += ".{}".format(config.format)
-    file_path = os.path.join(config.fragment_directory, file_name)
+    file_path = Path(config.fragment_directory) / file_name
     return file_path
 
 
@@ -53,12 +53,11 @@ def create(add: Optional[bool], edit: Optional[bool]) -> None:
 
     config = Config.read()
     file_path = new_fragment_path(config)
-    if os.path.exists(file_path):
+    if file_path.exists():
         sys.exit("File {} already exists, not overwriting".format(file_path))
 
     logger.info("Creating {}".format(file_path))
-    with open(file_path, "w") as f:
-        f.write(new_fragment_contents(config))
+    file_path.write_text(new_fragment_contents(config))
 
     if edit:
         git_edit(file_path)

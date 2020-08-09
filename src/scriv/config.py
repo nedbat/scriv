@@ -117,8 +117,7 @@ class Config:
             file_name = value.partition(":")[2].strip()
             file_path = Path(self.fragment_directory) / file_name
             if file_path.exists():
-                with open(str(file_path)) as f:
-                    value = f.read()
+                value = file_path.read_text()
             else:
                 try:
                     file_bytes = pkgutil.get_data("scriv", "templates/" + file_name)

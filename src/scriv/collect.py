@@ -121,15 +121,15 @@ def collect(add: Optional[bool], edit: Optional[bool], keep: bool, version: str)
     changelog.write_text(text_before + new_header + new_text + text_after)
 
     if edit:
-        git_edit(str(changelog))
+        git_edit(changelog)
 
     if add:
-        git_add(str(changelog))
+        git_add(changelog)
 
     if not keep:
         for file in files:
             logger.info("Deleting fragment file {}".format(file))
             if add:
-                git_rm(str(file))
+                git_rm(file)
             else:
                 file.unlink()
