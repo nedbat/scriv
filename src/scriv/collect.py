@@ -28,16 +28,23 @@ def files_to_combine(config: Config) -> List[Path]:
     return sorted(Path(config.fragment_directory).glob(pattern))
 
 
+def sections_from_file(config: Config, filename: Path) -> SectionDict:
+    """
+    Collect the sections from a file.
+    """
+    format_tools = get_format_tools(filename.suffix.lstrip("."), config)
+    text = filename.read_text().rstrip()
+    file_sections = format_tools.parse_text(text)
+    return file_sections
+
+
 def combine_sections(config: Config, files: Iterable[Path]) -> SectionDict:
     """
     Read files, and produce a combined SectionDict of their contents.
     """
     sections = collections.defaultdict(list)  # type: SectionDict
     for file in files:
-        format_tools = get_format_tools(file.suffix.lstrip("."), config)
-        with file.open() as f:
-            text = f.read().rstrip()
-        file_sections = format_tools.parse_text(text)
+        file_sections = sections_from_file(config, file)
         for section, paragraphs in file_sections.items():
             sections[section].extend(paragraphs)
     return sections

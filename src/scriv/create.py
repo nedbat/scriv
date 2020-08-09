@@ -12,6 +12,7 @@ import click
 import click_log
 import jinja2
 
+from .collect import sections_from_file
 from .config import Config
 from .gitinfo import current_branch_name, git_add, git_config_bool, git_edit, user_nick
 
@@ -61,6 +62,11 @@ def create(add: Optional[bool], edit: Optional[bool]) -> None:
 
     if edit:
         git_edit(file_path)
+        sections = sections_from_file(config, file_path)
+        if not sections:
+            logger.info("Empty fragment, aborting...")
+            file_path.unlink()
+            sys.exit()
 
     if add:
         git_add(file_path)

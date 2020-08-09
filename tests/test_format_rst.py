@@ -149,6 +149,19 @@ from scriv.format_rst import RstTools
             },
             id="intricate_syntax",
         ),
+        # A file with only comments and blanks will produce nothing.
+        pytest.param(
+            """\
+            .. Nothing to see here.
+            ..
+
+            .. Or here.
+
+
+            """,
+            {},
+            id="empty",
+        ),
     ],
 )
 def test_parse_text(text, parsed):

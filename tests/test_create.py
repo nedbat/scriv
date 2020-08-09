@@ -107,14 +107,32 @@ def test_create_fragment(fake_git, cli_invoke, changelog_d):
     assert latest_frag.name == "20130225_151819_joedev.rst"
 
 
+def fake_edit(mocker, expected_filename, expected_editor=None, contents=None):
+    """
+    Create a fake editing session.
+    """
+
+    def do_the_edit(filename, editor):
+        pfilename = Path(filename)
+        assert pfilename == expected_filename
+        assert pfilename.exists()
+        if expected_editor is not None:
+            assert editor == expected_editor
+        if contents is not None:
+            pfilename.write_text(contents)
+
+    return mocker.patch("click.edit", do_the_edit)
+
+
 def test_create_edit(mocker, fake_git, cli_invoke, changelog_d):
     # "scriv create --edit" will invoke a text editor.
     fake_git.set_config("github.user", "joedev")
     fake_git.set_editor("my_fav_editor")
-    mock_edit = mocker.patch("click.edit")
+    expected = Path("changelog.d/20130225_151617_joedev.rst")
+    fake_edit(mocker, expected, expected_editor="my_fav_editor", contents="- My change is great!")
     with freezegun.freeze_time("2013-02-25T15:16:17"):
         cli_invoke(["create", "--edit"])
-    mock_edit.assert_called_once_with(filename="changelog.d/20130225_151617_joedev.rst", editor="my_fav_editor")
+    assert expected.exists()
 
 
 def test_create_edit_preference(mocker, fake_git, cli_invoke, changelog_d):
@@ -138,6 +156,17 @@ def test_create_edit_preference_no_edit(mocker, fake_git, cli_invoke, changelog_
     with freezegun.freeze_time("2013-02-25T15:16:17"):
         cli_invoke(["create", "--no-edit"])
     mock_edit.assert_not_called()
+
+
+def test_create_edit_abort(mocker, fake_git, cli_invoke, changelog_d):
+    # User can edit the file to have no content, that will abort the create.
+    fake_git.set_config("scriv.create.edit", "true")
+    fake_git.set_config("github.user", "joedev")
+    expected = Path("changelog.d/20130225_151617_joedev.rst")
+    fake_edit(mocker, expected, contents=".. Nothing\n.. more nothing.\n")
+    with freezegun.freeze_time("2013-02-25T15:16:17"):
+        cli_invoke(["create"])
+    assert not expected.exists()
 
 
 def test_create_add(caplog, mocker, fake_git, cli_invoke, changelog_d):
