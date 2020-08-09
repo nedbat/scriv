@@ -80,6 +80,11 @@ def test_custom_template(changelog_d):
     assert fmt == "Custom template."
 
 
+def test_unknown_format():
+    with pytest.raises(ValueError, match=r"'format' must be in \['rst', 'md'\] \(got 'xyzzy'\)"):
+        Config(format="xyzzy")
+
+
 def test_no_such_template():
     # If you specify a template name, and it doesn't exist, an error will be raised.
     with pytest.raises(Exception, match="No such file: changelog.d/foo.j2"):
