@@ -127,7 +127,7 @@ class TestCreate:
         assert frag.read_text() == "I'm precious!"
 
 
-def fake_edit(mocker, expected_filename, expected_editor=None, contents=None):
+def fake_edit(mocker, expected_filename, contents, expected_editor=None):
     """
     Create a fake editing session.
     """
@@ -138,8 +138,7 @@ def fake_edit(mocker, expected_filename, expected_editor=None, contents=None):
         assert pfilename.exists()
         if expected_editor is not None:
             assert editor == expected_editor
-        if contents is not None:
-            pfilename.write_text(contents)
+        pfilename.write_text(contents)
 
     return mocker.patch("click.edit", do_the_edit)
 
