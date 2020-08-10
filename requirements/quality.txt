@@ -10,10 +10,10 @@ attrs==19.3.0             # via -r requirements/test.txt, black, pytest
 black==19.10b0            # via -r requirements/quality.in
 click-log==0.3.2          # via -r requirements/test.txt, edx-lint
 click==7.1.2              # via -r requirements/test.txt, black, click-log, edx-lint
-coverage==5.2.1           # via -r requirements/test.txt, pytest-cov
+coverage==5.2.1           # via -r requirements/test.txt
 edx-lint==1.5.0           # via -r requirements/quality.in
 freezegun==0.3.15         # via -r requirements/test.txt
-iniconfig==1.0.0          # via -r requirements/test.txt, pytest
+iniconfig==1.0.1          # via -r requirements/test.txt, pytest
 isort==4.3.21             # via -r requirements/quality.in, pylint
 jinja2==2.11.2            # via -r requirements/test.txt
 lazy-object-proxy==1.4.3  # via astroid
@@ -36,9 +36,8 @@ pylint-plugin-utils==0.6  # via pylint-celery, pylint-django
 pylint-pytest==0.2.0      # via -r requirements/quality.in
 pylint==2.4.4             # via edx-lint, pylint-celery, pylint-django, pylint-plugin-utils, pylint-pytest
 pyparsing==2.4.7          # via -r requirements/test.txt, packaging
-pytest-cov==2.10.0        # via -r requirements/test.txt
 pytest-mock==3.2.0        # via -r requirements/test.txt
-pytest==6.0.1             # via -r requirements/test.txt, pylint-pytest, pytest-cov, pytest-mock
+pytest==6.0.1             # via -r requirements/test.txt, pylint-pytest, pytest-mock
 python-dateutil==2.8.1    # via -r requirements/test.txt, freezegun
 regex==2020.7.14          # via black
 six==1.15.0               # via -r requirements/test.txt, astroid, edx-lint, freezegun, packaging, python-dateutil

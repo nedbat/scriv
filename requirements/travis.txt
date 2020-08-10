@@ -13,5 +13,5 @@ py==1.9.0                 # via tox
 pyparsing==2.4.7          # via packaging
 six==1.15.0               # via packaging, tox, virtualenv
 toml==0.10.1              # via tox
-tox==3.18.1               # via -r requirements/travis.in
-virtualenv==20.0.28       # via tox
+tox==3.19.0               # via -r requirements/travis.in
+virtualenv==20.0.30       # via tox

@@ -10,17 +10,14 @@ attrs==19.3.0             # via -r requirements/quality.txt, black, pytest
 black==19.10b0            # via -r requirements/quality.txt
 click-log==0.3.2          # via -r requirements/quality.txt, edx-lint
 click==7.1.2              # via -r requirements/pip-tools.txt, -r requirements/quality.txt, black, click-log, edx-lint, pip-tools
-coverage==5.2.1           # via -r requirements/quality.txt, pytest-cov
-diff-cover==3.0.1         # via -r requirements/dev.in
+coverage==5.2.1           # via -r requirements/quality.txt
 distlib==0.3.1            # via -r requirements/travis.txt, virtualenv
 edx-lint==1.5.0           # via -r requirements/quality.txt
 filelock==3.0.12          # via -r requirements/travis.txt, tox, virtualenv
 freezegun==0.3.15         # via -r requirements/quality.txt
-inflect==4.1.0            # via jinja2-pluralize
-iniconfig==1.0.0          # via -r requirements/quality.txt, pytest
+iniconfig==1.0.1          # via -r requirements/quality.txt, pytest
 isort==4.3.21             # via -r requirements/quality.txt, pylint
-jinja2-pluralize==0.3.0   # via diff-cover
-jinja2==2.11.2            # via -r requirements/quality.txt, diff-cover, jinja2-pluralize
+jinja2==2.11.2            # via -r requirements/quality.txt
 lazy-object-proxy==1.4.3  # via -r requirements/quality.txt, astroid
 markupsafe==1.1.1         # via -r requirements/quality.txt, jinja2
 mccabe==0.6.1             # via -r requirements/quality.txt, pylint
@@ -29,33 +26,32 @@ mypy-extensions==0.4.3    # via -r requirements/quality.txt, mypy
 mypy==0.782               # via -r requirements/quality.txt
 packaging==20.4           # via -r requirements/quality.txt, -r requirements/travis.txt, pytest, tox
 pathspec==0.8.0           # via -r requirements/quality.txt, black
-pip-tools==5.3.0          # via -r requirements/pip-tools.txt
-pluggy==0.13.1            # via -r requirements/quality.txt, -r requirements/travis.txt, diff-cover, pytest, tox
+pip-tools==5.3.1          # via -r requirements/pip-tools.txt
+pluggy==0.13.1            # via -r requirements/quality.txt, -r requirements/travis.txt, pytest, tox
 pudb==2019.2              # via -r requirements/quality.txt
 py==1.9.0                 # via -r requirements/quality.txt, -r requirements/travis.txt, pytest, tox
 pycodestyle==2.6.0        # via -r requirements/quality.txt
 pydocstyle==5.0.2         # via -r requirements/quality.txt
-pygments==2.6.1           # via -r requirements/quality.txt, diff-cover, pudb
+pygments==2.6.1           # via -r requirements/quality.txt, pudb
 pylint-celery==0.3        # via -r requirements/quality.txt, edx-lint
 pylint-django==2.0.11     # via -r requirements/quality.txt, edx-lint
 pylint-plugin-utils==0.6  # via -r requirements/quality.txt, pylint-celery, pylint-django
 pylint-pytest==0.2.0      # via -r requirements/quality.txt
 pylint==2.4.4             # via -r requirements/quality.txt, edx-lint, pylint-celery, pylint-django, pylint-plugin-utils, pylint-pytest
 pyparsing==2.4.7          # via -r requirements/quality.txt, -r requirements/travis.txt, packaging
-pytest-cov==2.10.0        # via -r requirements/quality.txt
 pytest-mock==3.2.0        # via -r requirements/quality.txt
-pytest==6.0.1             # via -r requirements/quality.txt, pylint-pytest, pytest-cov, pytest-mock
+pytest==6.0.1             # via -r requirements/quality.txt, pylint-pytest, pytest-mock
 python-dateutil==2.8.1    # via -r requirements/quality.txt, freezegun
 regex==2020.7.14          # via -r requirements/quality.txt, black
-six==1.15.0               # via -r requirements/pip-tools.txt, -r requirements/quality.txt, -r requirements/travis.txt, astroid, diff-cover, edx-lint, freezegun, packaging, pip-tools, python-dateutil, tox, virtualenv
+six==1.15.0               # via -r requirements/pip-tools.txt, -r requirements/quality.txt, -r requirements/travis.txt, astroid, edx-lint, freezegun, packaging, pip-tools, python-dateutil, tox, virtualenv
 snowballstemmer==2.0.0    # via -r requirements/quality.txt, pydocstyle
 toml==0.10.1              # via -r requirements/quality.txt, -r requirements/travis.txt, black, pytest, tox
 tox-battery==0.6.1        # via -r requirements/dev.in
-tox==3.18.1               # via -r requirements/travis.txt, tox-battery
+tox==3.19.0               # via -r requirements/travis.txt, tox-battery
 typed-ast==1.4.1          # via -r requirements/quality.txt, black, mypy
 typing-extensions==3.7.4.2  # via -r requirements/quality.txt, mypy
 urwid==2.1.1              # via -r requirements/quality.txt, pudb
-virtualenv==20.0.28       # via -r requirements/travis.txt, tox
+virtualenv==20.0.30       # via -r requirements/travis.txt, tox
 wrapt==1.11.2             # via -r requirements/quality.txt, astroid
 
 # The following packages are considered to be unsafe in a requirements file:

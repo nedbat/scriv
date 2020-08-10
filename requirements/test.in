@@ -6,5 +6,4 @@
 coverage                  # for measuring coverage
 freezegun                 # for mocking datetime
 pudb                      # for when we need to debug
-pytest-cov                # pytest extension for code coverage statistics
 pytest-mock               # pytest wrapper around mock
