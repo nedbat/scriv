@@ -65,7 +65,8 @@ class TestNewFragmentContents:
         assert all(cat in contents for cat in config.categories)
 
     def test_no_categories_rst(self, changelog_d):
-        # If the project isn't using categories, then the new fragment is simpler.
+        # If the project isn't using categories, then the new fragment is
+        # simpler with no heading.
         config = Config(categories="")
         contents = new_fragment_contents(config)
         assert ".. A new scriv changelog fragment." in contents
@@ -128,10 +129,11 @@ class TestCreate:
 
         # "create" ended with an error and a message.
         assert result.exit_code == 1
-        assert (
-            result.stdout
-            == "File changelog.d/20130225_151617_joedev.rst already exists, not overwriting\n"
+        expected = (
+            "File changelog.d/20130225_151617_joedev.rst already exists, "
+            + "not overwriting\n"
         )
+        assert result.stdout == expected
 
         # Our precious file is unharmed.
         frags = sorted(changelog_d.iterdir())
@@ -195,8 +197,8 @@ class TestCreateEdit:
     def test_create_edit_preference_no_edit(
         self, mocker, fake_git, cli_invoke, changelog_d
     ):
-        # The user can set a git configuration to default to --edit, but --no-edit
-        # will turn it off.
+        # The user can set a git configuration to default to --edit, but
+        # --no-edit will turn it off.
         fake_git.set_config("scriv.create.edit", "true")
         fake_git.set_config("github.user", "joedev")
         mock_edit = mocker.patch("click.edit")

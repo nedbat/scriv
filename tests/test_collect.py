@@ -227,7 +227,13 @@ def test_collect_no_categories(cli_invoke, changelog_d, temp_dir):
     with freezegun.freeze_time("2020-02-25T15:18:19"):
         cli_invoke(["collect"])
     changelog_text = changelog.read_text()
-    expected = "\n2020-02-25\n==========\n\n- The first change.\n\n- The second change.\n"
+    expected = (
+        "\n"
+        + "2020-02-25\n"
+        + "==========\n\n"
+        + "- The first change.\n\n"
+        + "- The second change.\n"
+    )
     assert changelog_text == expected
 
 
@@ -330,5 +336,10 @@ def test_collect_version_in_config(cli_invoke, changelog_d, temp_dir):
     with freezegun.freeze_time("2020-02-26T15:18:19"):
         cli_invoke(["collect"])
     changelog_text = changelog.read_text()
-    expected = "\n[v12.34b] — 2020-02-26\n======================\n\n- The first change.\n"
+    expected = (
+        "\n"
+        + "[v12.34b] — 2020-02-26\n"
+        + "======================\n\n"
+        + "- The first change.\n"
+    )
     assert changelog_text == expected

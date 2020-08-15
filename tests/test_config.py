@@ -74,7 +74,8 @@ def test_reading_config_from_directory(changelog_d):
 
 
 def test_reading_config_from_other_directory(temp_dir):
-    # setup.cfg can set the fragment directory, and then scriv.ini will be found there.
+    # setup.cfg can set the fragment directory, and then scriv.ini will
+    # be found there.
     (temp_dir / "scriv.d").mkdir()
     (temp_dir / "scriv.d" / "scriv.ini").write_text(CONFIG1)
     (temp_dir / "setup.cfg").write_text(
@@ -102,7 +103,8 @@ def test_unknown_format():
 
 
 def test_no_such_template():
-    # If you specify a template name, and it doesn't exist, an error will be raised.
+    # If you specify a template name, and it doesn't exist, an error will
+    # be raised.
     with pytest.raises(Exception, match="No such file: changelog.d/foo.j2"):
         Config(new_fragment_template="file: foo.j2")
 

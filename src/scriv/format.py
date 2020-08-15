@@ -34,7 +34,7 @@ class FormatTools(abc.ABC):
     @abc.abstractmethod
     def format_header(self, text: str) -> str:
         """
-        Format the header for a new changelog entry, using the provided title text.
+        Format the header for a new changelog entry.
         """
 
     @abc.abstractmethod
@@ -54,15 +54,15 @@ def get_format_tools(fmt: str, config: Config) -> FormatTools:
 
     """
     if fmt == "rst":
-        from . import (
+        from . import (  # pylint: disable=cyclic-import,import-outside-toplevel
             format_rst,
-        )  # pylint: disable=cyclic-import,import-outside-toplevel
+        )
 
         return format_rst.RstTools(config)
     else:
         assert fmt == "md"
-        from . import (
+        from . import (  # pylint: disable=cyclic-import,import-outside-toplevel
             format_md,
-        )  # pylint: disable=cyclic-import,import-outside-toplevel
+        )
 
         return format_md.MdTools(config)

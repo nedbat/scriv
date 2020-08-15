@@ -152,7 +152,11 @@ from scriv.format_rst import RstTools
             {
                 "Added": [
                     "- This thing was added.",
-                    ".. note::\n    This thing doesn't work yet.\n    Not sure it ever will... :(",
+                    (
+                        ".. note::\n"
+                        + "    This thing doesn't work yet.\n"
+                        + "    Not sure it ever will... :("
+                    ),
                 ],
                 "Fixed": [
                     "- This thing was fixed: `issue 42`_.",

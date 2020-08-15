@@ -19,7 +19,8 @@ def test_user_nick_from_env(fake_git, monkeypatch):
 
 
 def test_user_nick_from_nowhere(fake_git, monkeypatch):
-    # With no git information, and no USER env var, we just call the user "somebody"
+    # With no git information, and no USER env var,
+    # we just call the user "somebody"
     monkeypatch.delenv("USER", raising=False)
     assert user_nick() == "somebody"
 

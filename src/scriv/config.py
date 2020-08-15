@@ -26,7 +26,8 @@ class Config:
         type=str, default="rst", validator=attr.validators.in_(["rst", "md"])
     )
 
-    # The categories for changelog fragments. Can be empty for no categorization.
+    # The categories for changelog fragments. Can be empty for no
+    # categorization.
     categories = attr.ib(
         type=list,
         default=[
@@ -60,7 +61,10 @@ class Config:
     # The template for the title of the changelog entry.
     entry_title_template = attr.ib(
         type=str,
-        default="{% if version %}[{{ version }}] — {% endif %}{{ date.strftime('%Y-%m-%d') }}",
+        default=(
+            "{% if version %}[{{ version }}] — {% endif %}"
+            + "{{ date.strftime('%Y-%m-%d') }}"
+        ),
     )
 
     # The version string to include in the title if wanted.

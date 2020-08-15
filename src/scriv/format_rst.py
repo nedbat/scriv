@@ -31,7 +31,8 @@ class RstTools(FormatTools):
             if line == "..":
                 return True
             elif line.startswith(("...", ".. _", ".. [", ".. |")):
-                # It's an underline, hyperlink, citation, or substitution: not a comment.
+                # It's an underline, hyperlink, citation, or substitution, so
+                # not a comment.
                 return False
             elif re.search(r"^.. [\w_+:.-]+::", line):
                 # A directive: not a comment.
@@ -64,9 +65,9 @@ class RstTools(FormatTools):
                 # Section underline. Previous line was the heading.
                 if paragraphs is not None:
                     # Heading was made a paragraph, undo that.
-                    if (
+                    if (  # pylint: disable=unsubscriptable-object
                         paragraphs[-1] == prev_line + "\n"
-                    ):  # pylint: disable=unsubscriptable-object
+                    ):
                         paragraphs.pop()
                 paragraphs = sections.setdefault(prev_line, [])
                 paragraphs.append("")
