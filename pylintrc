@@ -379,7 +379,7 @@ no-docstring-rgx = __.*__$|test_.+|setUp$|setUpClass$|tearDown$|tearDownClass$|M
 docstring-min-length = 5
 
 [FORMAT]
-max-line-length = 120
+max-line-length = 80
 ignore-long-lines = ^\s*(# )?((<?https?://\S+>?)|(\.\. \w+: .*))$
 single-line-if-stmt = no
 no-space-check = trailing-comma,dict-separator
@@ -453,4 +453,4 @@ int-import-graph =
 [EXCEPTIONS]
 overgeneral-exceptions = Exception
 
-# 4708450bfa3010568ca184cb6380fa5654b1ed55
+# 60aa6c432e7a98af919b356f6ba933bf1e54bb9c
