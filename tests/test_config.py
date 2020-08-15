@@ -32,8 +32,17 @@ def test_defaults(temp_dir):
     config = Config.read()
     assert config.fragment_directory == "changelog.d"
     assert config.format == "rst"
-    assert config.new_fragment_template.startswith(".. A new scriv changelog fragment")
-    assert config.categories == ["Removed", "Added", "Changed", "Deprecated", "Fixed", "Security"]
+    assert config.new_fragment_template.startswith(
+        ".. A new scriv changelog fragment"
+    )
+    assert config.categories == [
+        "Removed",
+        "Added",
+        "Changed",
+        "Deprecated",
+        "Fixed",
+        "Security",
+    ]
     assert config.output_file == "CHANGELOG.rst"
     assert config.insert_marker == "scriv-insert-here"
     assert config.rst_header_chars == "=-"
@@ -68,7 +77,9 @@ def test_reading_config_from_other_directory(temp_dir):
     # setup.cfg can set the fragment directory, and then scriv.ini will be found there.
     (temp_dir / "scriv.d").mkdir()
     (temp_dir / "scriv.d" / "scriv.ini").write_text(CONFIG1)
-    (temp_dir / "setup.cfg").write_text("[tool.scriv]\nfragment_directory = scriv.d\n")
+    (temp_dir / "setup.cfg").write_text(
+        "[tool.scriv]\nfragment_directory = scriv.d\n"
+    )
     config = Config.read()
     assert config.fragment_directory == "scriv.d"
     assert config.categories == ["New", "Different", "Gone", "Bad"]
@@ -77,12 +88,16 @@ def test_reading_config_from_other_directory(temp_dir):
 def test_custom_template(changelog_d):
     # You can define your own template with your own name.
     (changelog_d / "start_here.j2").write_text("Custom template.")
-    fmt = Config(new_fragment_template="file: start_here.j2").new_fragment_template
+    fmt = Config(
+        new_fragment_template="file: start_here.j2"
+    ).new_fragment_template
     assert fmt == "Custom template."
 
 
 def test_unknown_format():
-    with pytest.raises(ValueError, match=r"'format' must be in \['rst', 'md'\] \(got 'xyzzy'\)"):
+    with pytest.raises(
+        ValueError, match=r"'format' must be in \['rst', 'md'\] \(got 'xyzzy'\)"
+    ):
         Config(format="xyzzy")
 
 
@@ -110,22 +125,31 @@ def test_file_reading(changelog_d):
 def test_literal_reading(temp_dir):
     # Any setting can be read from a literal in a file.
     (temp_dir / "sub").mkdir()
-    (temp_dir / "sub" / "foob.py").write_text("""# comment\n__version__ = "12.34.56"\n""")
+    (temp_dir / "sub" / "foob.py").write_text(
+        """# comment\n__version__ = "12.34.56"\n"""
+    )
     text = Config(version="literal:sub/foob.py: __version__").version
     assert text == "12.34.56"
 
 
 def test_literal_no_file(temp_dir):
     # What happens if the file for a literal doesn't exist?
-    with pytest.raises(FileNotFoundError, match=r"No such file or directory: 'sub/foob.py'"):
+    with pytest.raises(
+        FileNotFoundError, match=r"No such file or directory: 'sub/foob.py'"
+    ):
         Config(version="literal:sub/foob.py: __version__")
 
 
 def test_literal_no_literal(temp_dir):
     # What happens if the literal we're looking for isn't there?
     (temp_dir / "sub").mkdir()
-    (temp_dir / "sub" / "foob.py").write_text("""# comment\n__version__ = "12.34.56"\n""")
-    with pytest.raises(Exception, match=r"Couldn't find literal: 'literal:sub/foob.py: version'"):
+    (temp_dir / "sub" / "foob.py").write_text(
+        """# comment\n__version__ = "12.34.56"\n"""
+    )
+    with pytest.raises(
+        Exception,
+        match=r"Couldn't find literal: 'literal:sub/foob.py: version'",
+    ):
         Config(version="literal:sub/foob.py: version")
 
 

@@ -53,7 +53,9 @@ class FakeGit:
 
     def set_branch(self, branch_name: str) -> None:
         """Set the current branch."""
-        self.frc.add_fake("git rev-parse --abbrev-ref HEAD", (True, branch_name + "\n"))
+        self.frc.add_fake(
+            "git rev-parse --abbrev-ref HEAD", (True, branch_name + "\n")
+        )
 
     def set_editor(self, editor_name: str) -> None:
         """Set the name of the editor Git will launch."""
@@ -90,7 +92,9 @@ def cli_invoke(temp_dir):
         result = runner.invoke(scriv_cli, command)
         print(result.output)
         if result.exception:
-            traceback.print_exception(None, result.exception, result.exception.__traceback__)
+            traceback.print_exception(
+                None, result.exception, result.exception.__traceback__
+            )
         if expect_ok:
             assert result.exception is None
             assert result.exit_code == 0

@@ -21,7 +21,9 @@ def find_literal(file_name: str, literal_name: str) -> Optional[str]:
             node = ast.parse(f.read())
         return PythonLiteralFinder().find(node, literal_name)
     else:
-        raise Exception("Can't read literals from files like {!r}".format(file_name))
+        raise Exception(
+            "Can't read literals from files like {!r}".format(file_name)
+        )
 
 
 class PythonLiteralFinder(ast.NodeVisitor):

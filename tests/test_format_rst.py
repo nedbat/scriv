@@ -63,7 +63,10 @@ from scriv.format_rst import RstTools
                     "- This thing was added.\n  And we liked it.",
                     "- Also added\n  this thing\n  that is very important.",
                 ],
-                "Fixed": ["- This thing was fixed.", "- Another thing was fixed."],
+                "Fixed": [
+                    "- This thing was fixed.",
+                    "- Another thing was fixed.",
+                ],
             },
             id="multiple_headers",
         ),
@@ -78,7 +81,10 @@ from scriv.format_rst import RstTools
             ^^^^^
             - This thing was fixed.
             """,
-            {"Added": ["- This thing was added."], "Fixed": ["- This thing was fixed."]},
+            {
+                "Added": ["- This thing was added."],
+                "Fixed": ["- This thing was fixed."],
+            },
             id="different_underlines",
         ),
         # You can even use periods as the underline, it won't be confused for a
@@ -96,7 +102,10 @@ from scriv.format_rst import RstTools
 
             - This thing was added.
             """,
-            {"Added": ["- This thing was added."], "Fixed": ["- This thing was fixed."]},
+            {
+                "Added": ["- This thing was added."],
+                "Fixed": ["- This thing was fixed."],
+            },
             id="period_underline",
         ),
         # It's fine to have no header at all.
@@ -145,7 +154,10 @@ from scriv.format_rst import RstTools
                     "- This thing was added.",
                     ".. note::\n    This thing doesn't work yet.\n    Not sure it ever will... :(",
                 ],
-                "Fixed": ["- This thing was fixed: `issue 42`_.", ".. _issue 42: https://github.com/thing/issue/42"],
+                "Fixed": [
+                    "- This thing was fixed: `issue 42`_.",
+                    ".. _issue 42: https://github.com/thing/issue/42",
+                ],
             },
             id="intricate_syntax",
         ),
@@ -181,7 +193,10 @@ def test_parse_text(text, parsed):
                         "- Also added\n  this thing\n  that is very important.",
                     ],
                 ),
-                ("Fixed", ["- This thing was fixed.", "- Another thing was fixed."]),
+                (
+                    "Fixed",
+                    ["- This thing was fixed.", "- Another thing was fixed."],
+                ),
             ],
             """\
 
@@ -237,7 +252,11 @@ def test_format_sections(sections, expected):
     "config_kwargs, text, result",
     [
         ({}, "2020-07-26", "\n2020-07-26\n==========\n"),
-        ({"rst_header_chars": "*-"}, "2020-07-26", "\n2020-07-26\n**********\n"),
+        (
+            {"rst_header_chars": "*-"},
+            "2020-07-26",
+            "\n2020-07-26\n**********\n",
+        ),
     ],
 )
 def test_format_header(config_kwargs, text, result):

@@ -8,7 +8,9 @@ from .format import FormatTools, SectionDict
 class MdTools(FormatTools):
     """Specifics about how to work with Markdown."""
 
-    def parse_text(self, text) -> SectionDict:  # noqa: D102 (inherited docstring)
+    def parse_text(
+        self, text
+    ) -> SectionDict:  # noqa: D102 (inherited docstring)
         sections = {}  # type: SectionDict
         lines = text.splitlines()
         in_comment = False
@@ -51,16 +53,22 @@ class MdTools(FormatTools):
         }
         return sections
 
-    def format_header(self, text: str) -> str:  # noqa: D102 (inherited docstring)
+    def format_header(
+        self, text: str
+    ) -> str:  # noqa: D102 (inherited docstring)
         num = int(self.config.md_header_level)
         return "\n" + "#" * num + " " + text + "\n"
 
-    def format_sections(self, sections: SectionDict) -> str:  # noqa: D102 (inherited docstring)
+    def format_sections(
+        self, sections: SectionDict
+    ) -> str:  # noqa: D102 (inherited docstring)
         lines = []
         for section, paragraphs in sections.items():
             if section:
                 lines.append("")
-                lines.append("#" * (int(self.config.md_header_level) + 1) + " " + section)
+                lines.append(
+                    "#" * (int(self.config.md_header_level) + 1) + " " + section
+                )
             for paragraph in paragraphs:
                 lines.append("")
                 lines.append(paragraph)

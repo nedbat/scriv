@@ -165,7 +165,13 @@ def test_collect_inserts_at_marker(cli_invoke, changelog_d, temp_dir):
     with freezegun.freeze_time("2020-02-25T15:18:19"):
         cli_invoke(["collect"])
     changelog_text = changelog.read_text()
-    expected = MARKED_CHANGELOG_A + CHANGELOG_HEADER + "\n" + FRAG1 + UNMARKED_CHANGELOG_B
+    expected = (
+        MARKED_CHANGELOG_A
+        + CHANGELOG_HEADER
+        + "\n"
+        + FRAG1
+        + UNMARKED_CHANGELOG_B
+    )
     assert changelog_text == expected
 
 
@@ -215,7 +221,9 @@ def test_collect_no_categories(cli_invoke, changelog_d, temp_dir):
     changelog = temp_dir / "CHANGELOG.rst"
     (changelog_d / "scriv.ini").write_text("[scriv]\ncategories=\n")
     (changelog_d / "20170616_nedbat.rst").write_text("- The first change.\n")
-    (changelog_d / "20170617_nedbat.rst").write_text(COMMENT + "- The second change.\n")
+    (changelog_d / "20170617_nedbat.rst").write_text(
+        COMMENT + "- The second change.\n"
+    )
     with freezegun.freeze_time("2020-02-25T15:18:19"):
         cli_invoke(["collect"])
     changelog_text = changelog.read_text()
@@ -249,8 +257,24 @@ def test_collect_add(mocker, cli_invoke, changelog_d, temp_dir):
     # We used --add, so the collected files were git rm'd
     assert mock_call.mock_calls == [
         call(["git", "add", "CHANGELOG.rst"]),
-        call(["git", "rm", str((changelog_d / "20170616_nedbat.rst").relative_to(temp_dir))]),
-        call(["git", "rm", str((changelog_d / "20170617_nedbat.rst").relative_to(temp_dir))]),
+        call(
+            [
+                "git",
+                "rm",
+                str(
+                    (changelog_d / "20170616_nedbat.rst").relative_to(temp_dir)
+                ),
+            ]
+        ),
+        call(
+            [
+                "git",
+                "rm",
+                str(
+                    (changelog_d / "20170617_nedbat.rst").relative_to(temp_dir)
+                ),
+            ]
+        ),
     ]
 
 
@@ -269,7 +293,15 @@ def test_collect_add_rm_fail(mocker, cli_invoke, changelog_d, temp_dir):
     # We used --add, so the collected files were git rm'd
     assert mock_call.mock_calls == [
         call(["git", "add", "CHANGELOG.rst"]),
-        call(["git", "rm", str((changelog_d / "20170616_nedbat.rst").relative_to(temp_dir))]),
+        call(
+            [
+                "git",
+                "rm",
+                str(
+                    (changelog_d / "20170616_nedbat.rst").relative_to(temp_dir)
+                ),
+            ]
+        ),
     ]
 
 
@@ -284,7 +316,9 @@ def test_collect_edit(fake_git, mocker, cli_invoke, changelog_d, temp_dir):
         cli_invoke(["collect", "--edit"])
     changelog_text = (temp_dir / "CHANGELOG.rst").read_text()
     assert changelog_text == CHANGELOG_1_2
-    mock_edit.assert_called_once_with(filename="CHANGELOG.rst", editor="my_fav_editor")
+    mock_edit.assert_called_once_with(
+        filename="CHANGELOG.rst", editor="my_fav_editor"
+    )
 
 
 def test_collect_version_in_config(cli_invoke, changelog_d, temp_dir):

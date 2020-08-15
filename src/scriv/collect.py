@@ -26,7 +26,12 @@ def files_to_combine(config: Config) -> List[Path]:
 
     """
     return sorted(
-        itertools.chain.from_iterable([Path(config.fragment_directory).glob(pattern) for pattern in ["*.rst", "*.md"]])
+        itertools.chain.from_iterable(
+            [
+                Path(config.fragment_directory).glob(pattern)
+                for pattern in ["*.rst", "*.md"]
+            ]
+        )
     )
 
 
@@ -56,7 +61,9 @@ T = TypeVar("T")
 K = TypeVar("K")
 
 
-def order_dict(d: Dict[Optional[K], T], keys: Sequence[Optional[K]]) -> Dict[Optional[K], T]:
+def order_dict(
+    d: Dict[Optional[K], T], keys: Sequence[Optional[K]]
+) -> Dict[Optional[K], T]:
     """
     Produce an OrderedDict of `d`, but with the keys in `keys` order.
     """
@@ -88,12 +95,24 @@ def cut_at_line(text: str, marker: str) -> Tuple[str, str]:
 
 
 @click.command()
-@click.option("--add/--no-add", default=None, help="'git add' the updated changelog file.")
-@click.option("--edit/--no-edit", default=None, help="Open the changelog file in your text editor.")
-@click.option("--keep", is_flag=True, help="Keep the fragment files that are collected.")
-@click.option("--version", default=None, help="The version name to use for this entry.")
+@click.option(
+    "--add/--no-add", default=None, help="'git add' the updated changelog file."
+)
+@click.option(
+    "--edit/--no-edit",
+    default=None,
+    help="Open the changelog file in your text editor.",
+)
+@click.option(
+    "--keep", is_flag=True, help="Keep the fragment files that are collected."
+)
+@click.option(
+    "--version", default=None, help="The version name to use for this entry."
+)
 @click_log.simple_verbosity_option(logger)
-def collect(add: Optional[bool], edit: Optional[bool], keep: bool, version: str) -> None:
+def collect(
+    add: Optional[bool], edit: Optional[bool], keep: bool, version: str
+) -> None:
     """
     Collect fragments and produce a combined entry in the CHANGELOG file.
     """
@@ -111,7 +130,9 @@ def collect(add: Optional[bool], edit: Optional[bool], keep: bool, version: str)
     changelog = Path(config.output_file)
     if changelog.exists():
         changelog_text = changelog.read_text()
-        text_before, text_after = cut_at_line(changelog_text, config.insert_marker)
+        text_before, text_after = cut_at_line(
+            changelog_text, config.insert_marker
+        )
     else:
         text_before = ""
         text_after = ""
@@ -121,7 +142,9 @@ def collect(add: Optional[bool], edit: Optional[bool], keep: bool, version: str)
         "date": datetime.datetime.now(),
         "version": version or config.version,
     }
-    new_title = jinja2.Template(config.entry_title_template).render(config=config, **title_data)
+    new_title = jinja2.Template(config.entry_title_template).render(
+        config=config, **title_data
+    )
     if new_title.strip():
         new_header = format_tools.format_header(new_title)
     else:

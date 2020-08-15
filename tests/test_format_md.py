@@ -37,7 +37,12 @@ from scriv.format_md import MdTools
             And here.
             -->
             """,
-            {"Added": ["- This thing was added.\n  And we liked it.", "- Another thing we added."]},
+            {
+                "Added": [
+                    "- This thing was added.\n  And we liked it.",
+                    "- Another thing we added.",
+                ]
+            },
             id="comments_ignored",
         ),
         # Multiple section headers.
@@ -67,7 +72,10 @@ from scriv.format_md import MdTools
                     "- This thing was added.\n  And we liked it.",
                     "- Also added\n  this thing\n  that is very important.",
                 ],
-                "Fixed": ["- This thing was fixed.", "- Another thing was fixed."],
+                "Fixed": [
+                    "- This thing was fixed.",
+                    "- Another thing was fixed.",
+                ],
             },
             id="multiple_headers",
         ),
@@ -123,7 +131,10 @@ def test_parse_text(text, parsed):
                         "- Also added\n  this thing\n  that is very important.",
                     ],
                 ),
-                ("Fixed", ["- This thing was fixed.", "- Another thing was fixed."]),
+                (
+                    "Fixed",
+                    ["- This thing was fixed.", "- Another thing was fixed."],
+                ),
             ],
             """\
 
@@ -175,7 +186,10 @@ def test_format_sections(sections, expected):
 
 @pytest.mark.parametrize(
     "config_kwargs, text, result",
-    [({}, "2020-07-26", "\n# 2020-07-26\n"), ({"md_header_level": "3"}, "2020-07-26", "\n### 2020-07-26\n")],
+    [
+        ({}, "2020-07-26", "\n# 2020-07-26\n"),
+        ({"md_header_level": "3"}, "2020-07-26", "\n### 2020-07-26\n"),
+    ],
 )
 def test_format_header(config_kwargs, text, result):
     actual = MdTools(Config(**config_kwargs)).format_header(text)

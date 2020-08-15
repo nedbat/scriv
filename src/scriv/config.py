@@ -22,26 +22,45 @@ class Config:
     fragment_directory = attr.ib(type=str, default="changelog.d")
 
     # What format for fragments? ReStructuredText ("rst") or Markdown ("md").
-    format = attr.ib(type=str, default="rst", validator=attr.validators.in_(["rst", "md"]))
+    format = attr.ib(
+        type=str, default="rst", validator=attr.validators.in_(["rst", "md"])
+    )
 
     # The categories for changelog fragments. Can be empty for no categorization.
-    categories = attr.ib(type=list, default=["Removed", "Added", "Changed", "Deprecated", "Fixed", "Security"])
+    categories = attr.ib(
+        type=list,
+        default=[
+            "Removed",
+            "Added",
+            "Changed",
+            "Deprecated",
+            "Fixed",
+            "Security",
+        ],
+    )
 
     output_file = attr.ib(type=str, default="CHANGELOG.rst")
     insert_marker = attr.ib(type=str, default="scriv-insert-here")
 
     # The characters to use for header and section underlines in rst files.
-    rst_header_chars = attr.ib(type=str, default="=-", validator=attr.validators.matches_re(r"\S\S"))
+    rst_header_chars = attr.ib(
+        type=str, default="=-", validator=attr.validators.matches_re(r"\S\S")
+    )
 
     # What header level to use for markdown changelog entries?
-    md_header_level = attr.ib(type=str, default="1", validator=attr.validators.matches_re(r"[123456]"))
+    md_header_level = attr.ib(
+        type=str, default="1", validator=attr.validators.matches_re(r"[123456]")
+    )
 
     # The name of the template for new fragments.
-    new_fragment_template = attr.ib(type=str, default="file: new_fragment.${config:format}.j2")
+    new_fragment_template = attr.ib(
+        type=str, default="file: new_fragment.${config:format}.j2"
+    )
 
     # The template for the title of the changelog entry.
     entry_title_template = attr.ib(
-        type=str, default="{% if version %}[{{ version }}] — {% endif %}{{ date.strftime('%Y-%m-%d') }}"
+        type=str,
+        default="{% if version %}[{{ version }}] — {% endif %}{{ date.strftime('%Y-%m-%d') }}",
     )
 
     # The version string to include in the title if wanted.
@@ -50,7 +69,9 @@ class Config:
     # Branches that aren't interesting enough to use in fragment file names.
     main_branches = attr.ib(type=list, default=["master", "main", "develop"])
 
-    def __attrs_post_init__(self):  # noqa: D105 (Missing docstring in magic method)
+    def __attrs_post_init__(
+        self,
+    ):  # noqa: D105 (Missing docstring in magic method)
         self.resolve_all()
 
     def resolve_all(self):
@@ -83,7 +104,9 @@ class Config:
         config = cls()
         for configfile in ["setup.cfg", "tox.ini"]:
             config.read_one_config(configfile)
-        config.read_one_config(str(Path(config.fragment_directory) / "scriv.ini"))
+        config.read_one_config(
+            str(Path(config.fragment_directory) / "scriv.ini")
+        )
         config.resolve_all()
         return config
 
@@ -94,7 +117,9 @@ class Config:
         parser = configparser.ConfigParser()
         parser.read(configfile)
         section_names = ["scriv", "tool.scriv"]
-        section_name = next((name for name in section_names if parser.has_section(name)), None)
+        section_name = next(
+            (name for name in section_names if parser.has_section(name)), None
+        )
         if section_name:
             for attrdef in attr.fields(Config):
                 try:
@@ -123,7 +148,9 @@ class Config:
                 value = file_path.read_text()
             else:
                 try:
-                    file_bytes = pkgutil.get_data("scriv", "templates/" + file_name)
+                    file_bytes = pkgutil.get_data(
+                        "scriv", "templates/" + file_name
+                    )
                 except IOError:
                     raise Exception("No such file: {}".format(file_path))
                 assert file_bytes

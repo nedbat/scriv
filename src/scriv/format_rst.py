@@ -14,7 +14,11 @@ class RstTools(FormatTools):
         """
         Determine if `line` is a valid RST underline.
         """
-        return len(line) >= 3 and line[0] in self.HEADER_CHARS and len(set(line)) == 1
+        return (
+            len(line) >= 3
+            and line[0] in self.HEADER_CHARS
+            and len(set(line)) == 1
+        )
 
     def _is_comment(self, line: str) -> bool:
         """
@@ -37,7 +41,9 @@ class RstTools(FormatTools):
         else:
             return False
 
-    def parse_text(self, text: str) -> SectionDict:  # noqa: D102 (inherited docstring)
+    def parse_text(
+        self, text: str
+    ) -> SectionDict:  # noqa: D102 (inherited docstring)
         # Parse a very restricted subset of rst.
         sections = {}  # type: SectionDict
 
@@ -58,7 +64,9 @@ class RstTools(FormatTools):
                 # Section underline. Previous line was the heading.
                 if paragraphs is not None:
                     # Heading was made a paragraph, undo that.
-                    if paragraphs[-1] == prev_line + "\n":  # pylint: disable=unsubscriptable-object
+                    if (
+                        paragraphs[-1] == prev_line + "\n"
+                    ):  # pylint: disable=unsubscriptable-object
                         paragraphs.pop()
                 paragraphs = sections.setdefault(prev_line, [])
                 paragraphs.append("")
@@ -86,10 +94,20 @@ class RstTools(FormatTools):
         }
         return sections
 
-    def format_header(self, text: str) -> str:  # noqa: D102 (inherited docstring)
-        return "\n" + text + "\n" + self.config.rst_header_chars[0] * len(text) + "\n"
+    def format_header(
+        self, text: str
+    ) -> str:  # noqa: D102 (inherited docstring)
+        return (
+            "\n"
+            + text
+            + "\n"
+            + self.config.rst_header_chars[0] * len(text)
+            + "\n"
+        )
 
-    def format_sections(self, sections: SectionDict) -> str:  # noqa: D102 (inherited docstring)
+    def format_sections(
+        self, sections: SectionDict
+    ) -> str:  # noqa: D102 (inherited docstring)
         lines = []
         for section, paragraphs in sections.items():
             if section:
