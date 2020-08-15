@@ -9,6 +9,10 @@ COMMENT = """\
 
 """
 
+COMMENT_MD = """\
+<!-- this line should be dropped -->
+"""
+
 FRAG1 = """\
 Fixed
 -----
@@ -24,6 +28,16 @@ Added
 
 Fixed
 -----
+
+- Typos corrected.
+"""
+
+FRAG2_MD = """\
+# Added
+
+- Now you can send email with this tool.
+
+# Fixed
 
 - Typos corrected.
 """
@@ -124,6 +138,17 @@ def test_collect_ordering(cli_invoke, changelog_d, temp_dir):
     # Fragments in sections are in time order.
     # Unknown sections come after the known ones.
     (changelog_d / "20170616_nedbat.rst").write_text(COMMENT + FRAG2)
+    (changelog_d / "20170617_nedbat.rst").write_text(COMMENT + FRAG1)
+    (changelog_d / "20170618_joedev.rst").write_text(COMMENT + FRAG3)
+    with freezegun.freeze_time("2020-02-25T15:18:19"):
+        cli_invoke(["collect"])
+    changelog_text = (temp_dir / "CHANGELOG.rst").read_text()
+    assert changelog_text == CHANGELOG_2_1_3
+
+
+def test_collect_mixed_format(cli_invoke, changelog_d, temp_dir):
+    # Fragments can be in mixed formats.
+    (changelog_d / "20170616_nedbat.md").write_text(COMMENT_MD + FRAG2_MD)
     (changelog_d / "20170617_nedbat.rst").write_text(COMMENT + FRAG1)
     (changelog_d / "20170618_joedev.rst").write_text(COMMENT + FRAG3)
     with freezegun.freeze_time("2020-02-25T15:18:19"):

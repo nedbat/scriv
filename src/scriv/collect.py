@@ -2,6 +2,7 @@
 
 import collections
 import datetime
+import itertools
 import logging
 from pathlib import Path
 from typing import Dict, Iterable, List, Optional, Sequence, Tuple, TypeVar
@@ -24,8 +25,9 @@ def files_to_combine(config: Config) -> List[Path]:
     The files are returned in the order they should be processed.
 
     """
-    pattern = "**/*.{}".format(config.format)
-    return sorted(Path(config.fragment_directory).glob(pattern))
+    return sorted(
+        itertools.chain.from_iterable([Path(config.fragment_directory).glob(pattern) for pattern in ["*.rst", "*.md"]])
+    )
 
 
 def sections_from_file(config: Config, filename: Path) -> SectionDict:
