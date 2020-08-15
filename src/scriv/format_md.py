@@ -56,4 +56,13 @@ class MdTools(FormatTools):
         return "\n" + "#" * num + " " + text + "\n"
 
     def format_sections(self, sections: SectionDict) -> str:  # noqa: D102 (inherited docstring)
-        pass
+        lines = []
+        for section, paragraphs in sections.items():
+            if section:
+                lines.append("")
+                lines.append("#" * (int(self.config.md_header_level) + 1) + " " + section)
+            for paragraph in paragraphs:
+                lines.append("")
+                lines.append(paragraph)
+
+        return "\n".join(lines) + "\n"

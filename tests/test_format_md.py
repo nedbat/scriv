@@ -1,6 +1,6 @@
 """Tests for scriv/format_md.py."""
 
-# import collections
+import collections
 import textwrap
 
 import pytest
@@ -109,6 +109,68 @@ from scriv.format_md import MdTools
 def test_parse_text(text, parsed):
     actual = MdTools().parse_text(textwrap.dedent(text))
     assert actual == parsed
+
+
+@pytest.mark.parametrize(
+    "sections, expected",
+    [
+        pytest.param(
+            [
+                (
+                    "Added",
+                    [
+                        "- This thing was added.\n  And we liked it.",
+                        "- Also added\n  this thing\n  that is very important.",
+                    ],
+                ),
+                ("Fixed", ["- This thing was fixed.", "- Another thing was fixed."]),
+            ],
+            """\
+
+            ### Added
+
+            - This thing was added.
+              And we liked it.
+
+            - Also added
+              this thing
+              that is very important.
+
+            ### Fixed
+
+            - This thing was fixed.
+
+            - Another thing was fixed.
+            """,
+            id="one",
+        ),
+        pytest.param(
+            [
+                (
+                    None,
+                    [
+                        "- This thing was added.\n  And we liked it.",
+                        "- Also added\n  this thing\n  that is very important.",
+                    ],
+                ),
+            ],
+            """\
+
+            - This thing was added.
+              And we liked it.
+
+            - Also added
+              this thing
+              that is very important.
+            """,
+            id="two",
+        ),
+    ],
+)
+def test_format_sections(sections, expected):
+    sections = collections.OrderedDict(sections)
+    actual = MdTools(Config(md_header_level="2")).format_sections(sections)
+    assert actual == textwrap.dedent(expected)
 
 
 @pytest.mark.parametrize(
