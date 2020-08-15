@@ -37,6 +37,7 @@ def test_defaults(temp_dir):
     assert config.output_file == "CHANGELOG.rst"
     assert config.insert_marker == "scriv-insert-here"
     assert config.rst_header_chars == "=-"
+    assert config.md_header_level == "1"
     assert "{{ date.strftime('%Y-%m-%d') }}" in config.entry_title_template
     assert config.main_branches == ["master", "main", "develop"]
     assert config.version == ""

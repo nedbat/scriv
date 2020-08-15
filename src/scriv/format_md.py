@@ -52,7 +52,8 @@ class MdTools(FormatTools):
         return sections
 
     def format_header(self, text: str) -> str:  # noqa: D102 (inherited docstring)
-        pass
+        num = int(self.config.md_header_level)
+        return "\n" + "#" * num + " " + text + "\n"
 
     def format_sections(self, sections: SectionDict) -> str:  # noqa: D102 (inherited docstring)
         pass

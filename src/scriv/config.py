@@ -33,6 +33,9 @@ class Config:
     # The characters to use for header and section underlines in rst files.
     rst_header_chars = attr.ib(type=str, default="=-", validator=attr.validators.matches_re(r"\S\S"))
 
+    # What header level to use for markdown changelog entries?
+    md_header_level = attr.ib(type=str, default="1", validator=attr.validators.matches_re(r"[123456]"))
+
     # The name of the template for new fragments.
     new_fragment_template = attr.ib(type=str, default="file: new_fragment.${config:format}.j2")
 

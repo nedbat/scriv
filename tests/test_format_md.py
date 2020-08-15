@@ -5,7 +5,7 @@ import textwrap
 
 import pytest
 
-# from scriv.config import Config
+from scriv.config import Config
 from scriv.format_md import MdTools
 
 
@@ -109,3 +109,12 @@ from scriv.format_md import MdTools
 def test_parse_text(text, parsed):
     actual = MdTools().parse_text(textwrap.dedent(text))
     assert actual == parsed
+
+
+@pytest.mark.parametrize(
+    "config_kwargs, text, result",
+    [({}, "2020-07-26", "\n# 2020-07-26\n"), ({"md_header_level": "3"}, "2020-07-26", "\n### 2020-07-26\n")],
+)
+def test_format_header(config_kwargs, text, result):
+    actual = MdTools(Config(**config_kwargs)).format_header(text)
+    assert actual == result
