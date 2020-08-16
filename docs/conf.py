@@ -1,4 +1,4 @@
-# pylint: disable=invalid-name
+# pylint: disable=invalid-name, redefined-builtin
 """
 Scriv documentation build configuration file.
 
@@ -18,12 +18,11 @@ import io
 import os
 import re
 import sys
-from subprocess import check_call
 
 
 def get_version(*file_paths):
     """
-    Extract the version string from the file at the given relative path fragments.
+    Extract the version string from a file.
     """
     filename = os.path.join(os.path.dirname(__file__), *file_paths)
     version_file = io.open(filename).read()
