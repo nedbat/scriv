@@ -1,0 +1,16 @@
+
+.. code::
+
+    $ scriv collect --help
+    Usage: scriv collect [OPTIONS]
+
+      Collect fragments and produce a combined entry in the CHANGELOG file.
+
+    Options:
+      --add / --no-add     'git add' the updated changelog file.
+      --edit / --no-edit   Open the changelog file in your text editor.
+      --keep               Keep the fragment files that are collected.
+      --version TEXT       The version name to use for this entry.
+      -v, --verbosity LVL  Either CRITICAL, ERROR, WARNING, INFO or DEBUG
+      --help               Show this message and exit.
+
