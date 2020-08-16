@@ -19,11 +19,28 @@ class Config:
 
     # The directory for fragments waiting to be collected. Also can have
     # templates and settings for scriv.
-    fragment_directory = attr.ib(type=str, default="changelog.d")
+    fragment_directory = attr.ib(
+        type=str,
+        default="changelog.d",
+        metadata={
+            "doc": """\
+                The directory for fragments.  This directory must exist, it
+                will not be created.
+                """,
+        },
+    )
 
     # What format for fragments? ReStructuredText ("rst") or Markdown ("md").
     format = attr.ib(
-        type=str, default="rst", validator=attr.validators.in_(["rst", "md"])
+        type=str,
+        default="rst",
+        validator=attr.validators.in_(["rst", "md"]),
+        metadata={
+            "doc": """\
+                The format for the output changelog file.
+                Can be either "rst" or "md".
+                """,
+        },
     )
 
     # The categories for changelog fragments. Can be empty for no
@@ -38,6 +55,10 @@ class Config:
             "Fixed",
             "Security",
         ],
+        metadata={
+            "doc": """\
+                """,
+        },
     )
 
     output_file = attr.ib(type=str, default="CHANGELOG.rst")
@@ -65,10 +86,27 @@ class Config:
             "{% if version %}[{{ version }}] — {% endif %}"
             + "{{ date.strftime('%Y-%m-%d') }}"
         ),
+        metadata={
+            "doc": """\
+                """,
+            "doc_default": "A combination of version (if specified) and date.",
+        },
     )
 
     # The version string to include in the title if wanted.
-    version = attr.ib(type=str, default="")
+    version = attr.ib(
+        type=str,
+        default="",
+        metadata={
+            "doc": """\
+                The string to use as the version number in the next header
+                created by ``scriv collect``.  Often, this will be a
+                ``literal:`` directive, to get the version from a string in a
+                source file.
+                """,
+            "doc_default": "(empty)",
+        },
+    )
 
     # Branches that aren't interesting enough to use in fragment file names.
     main_branches = attr.ib(type=list, default=["master", "main", "develop"])
