@@ -65,9 +65,7 @@ class RstTools(FormatTools):
                 # Section underline. Previous line was the heading.
                 if paragraphs is not None:
                     # Heading was made a paragraph, undo that.
-                    if (  # pylint: disable=unsubscriptable-object
-                        paragraphs[-1] == prev_line + "\n"
-                    ):
+                    if paragraphs[-1] == prev_line + "\n":
                         paragraphs.pop()
                 paragraphs = sections.setdefault(prev_line, [])
                 paragraphs.append("")

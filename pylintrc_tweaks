@@ -1,9 +1,0 @@
-# pylintrc tweaks for use with edx_lint.
-[MASTER]
-load-plugins = edx_lint.pylint,pylint_pytest
-
-[FORMAT]
-max-line-length = 80
-
-[REPORTS]
-score=no
