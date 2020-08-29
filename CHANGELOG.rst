@@ -21,7 +21,7 @@ See the fragment files in the `changelog.d directory`_.
 
 .. scriv-insert-here
 
-[0.9.1] — 2020-08-29
+[0.9.2] — 2020-08-29
 --------------------
 
 - Packaging fix.
