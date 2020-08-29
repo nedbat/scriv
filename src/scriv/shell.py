@@ -3,10 +3,10 @@
 import logging
 import shlex
 import subprocess
-from typing import Tuple
+from typing import List, Tuple, Union
 
 
-def run_command(cmd: str) -> Tuple[bool, str]:
+def run_command(cmd: Union[str, List[str]]) -> Tuple[bool, str]:
     """
     Run a command line (with no shell).
 
@@ -16,8 +16,10 @@ def run_command(cmd: str) -> Tuple[bool, str]:
 
     """
     logging.debug("Running command {!r}".format(cmd))
+    if isinstance(cmd, str):
+        cmd = shlex.split(cmd)
     proc = subprocess.run(
-        shlex.split(cmd),
+        cmd,
         shell=False,
         check=False,
         stdout=subprocess.PIPE,
