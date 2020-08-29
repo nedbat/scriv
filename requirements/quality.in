@@ -2,6 +2,7 @@
 -c constraints.txt
 
 -r test.txt               # Core and testing dependencies for this package
+-r doc.txt                # Need doc packages for full linting
 
 black                     # Uncompromising code formatting
 isort                     # to standardize order of imports
