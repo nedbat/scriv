@@ -194,8 +194,9 @@ class Config:
                     file_bytes = pkgutil.get_data(
                         "scriv", "templates/" + file_name
                     )
-                except IOError:
-                    raise Exception("No such file: {}".format(file_path))
+                except IOError as err:
+                    msg = "No such file: {}".format(file_path)
+                    raise Exception(msg) from err
                 assert file_bytes
                 value = file_bytes.decode("utf-8")
         elif value.startswith("literal:"):
