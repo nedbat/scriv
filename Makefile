@@ -1,5 +1,5 @@
 .PHONY: clean coverage docs help \
-	quality requirements selfcheck test test-all upgrade validate
+	quality requirements test test-all upgrade validate
 
 .DEFAULT_GOAL := help
 
@@ -62,6 +62,3 @@ test-all: quality ## run tests on every supported Python combination
 	tox
 
 validate: quality test ## run tests and quality checks
-
-selfcheck: ## check that the Makefile is well-formed
-	@echo "The Makefile is well-formed."
