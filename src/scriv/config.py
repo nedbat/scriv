@@ -57,26 +57,70 @@ class Config:
         ],
         metadata={
             "doc": """\
+                Categories to use as headings for changelog items.
+                See :ref:`categories`.
                 """,
         },
     )
 
-    output_file = attr.ib(type=str, default="CHANGELOG.rst")
-    insert_marker = attr.ib(type=str, default="scriv-insert-here")
+    output_file = attr.ib(
+        type=str,
+        default="CHANGELOG.${config:format}",
+        metadata={
+            "doc": """\
+                The changelog file updated by ":ref:`cmd_collect`".
+                """,
+        },
+    )
+
+    insert_marker = attr.ib(
+        type=str,
+        default="scriv-insert-here",
+        metadata={
+            "doc": """\
+                A marker string indicating where in the changelog file new
+                entries should be inserted.
+                """,
+        },
+    )
 
     # The characters to use for header and section underlines in rst files.
     rst_header_chars = attr.ib(
-        type=str, default="=-", validator=attr.validators.matches_re(r"\S\S")
+        type=str,
+        default="=-",
+        validator=attr.validators.matches_re(r"\S\S"),
+        metadata={
+            "doc": """\
+                Two characters: for ReStructured Text changelog files, these
+                are the two underline characters to use.  The first is for the
+                heading for each changelog entry, the second is for the
+                category sections within the entry.
+                """,
+        },
     )
 
     # What header level to use for markdown changelog entries?
     md_header_level = attr.ib(
-        type=str, default="1", validator=attr.validators.matches_re(r"[123456]")
+        type=str,
+        default="1",
+        validator=attr.validators.matches_re(r"[123456]"),
+        metadata={
+            "doc": """\
+                A number: for Markdown changelog files, this is the heading
+                level to use for the entry heading.
+                """,
+        },
     )
 
     # The name of the template for new fragments.
     new_fragment_template = attr.ib(
-        type=str, default="file: new_fragment.${config:format}.j2"
+        type=str,
+        default="file: new_fragment.${config:format}.j2",
+        metadata={
+            "doc": """\
+                The `Jinja`_ template to use for new fragments.
+                """,
+        },
     )
 
     # The template for the title of the changelog entry.
@@ -88,6 +132,8 @@ class Config:
         ),
         metadata={
             "doc": """\
+                The `Jinja`_ template to use for the entry heading text for
+                changelog entries created by ":ref:`cmd_collect`".
                 """,
             "doc_default": "A combination of version (if specified) and date.",
         },
@@ -109,7 +155,16 @@ class Config:
     )
 
     # Branches that aren't interesting enough to use in fragment file names.
-    main_branches = attr.ib(type=list, default=["master", "main", "develop"])
+    main_branches = attr.ib(
+        type=list,
+        default=["master", "main", "develop"],
+        metadata={
+            "doc": """\
+                The branch names considered uninteresting to use in new
+                fragment file names.
+                """,
+        },
+    )
 
     def __attrs_post_init__(
         self,

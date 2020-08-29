@@ -14,7 +14,9 @@ Changelog
 Unreleased
 ----------
 
-See the fragment files in ./changelog.d
+See the fragment files in the `changelog.d directory`_.
+
+.. _changelog.d directory: https://github.com/nedbat/scriv/tree/master/changelog.d
 
 
 .. scriv-insert-here

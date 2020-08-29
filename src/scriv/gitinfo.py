@@ -45,7 +45,7 @@ def git_config(option: str) -> str:
 
 def git_config_bool(option: str) -> bool:
     """
-    Return a boolean git config value.
+    Return a boolean git config value, defaulting to False.
     """
     return git_config(option) == "true"
 

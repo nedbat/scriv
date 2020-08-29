@@ -18,19 +18,19 @@ Scriv writes changelog fragments into a directory called "changelog.d".  Start
 by creating this directory.  (By the way, like many aspects of scriv's
 operation, you can choose a different name for this directory.)
 
-To make a new changelog fragment, use the ``scriv create`` command.  It will
+To make a new changelog fragment, use the ":ref:`cmd_create`" command.  It will
 make a new file with a filename using the current date and time, your GitHub or
 Git user name, and your branch name.  Changelog fragments should be committed
 along with all the other changes on your branch.
 
-When it is time to release your project, the ``scriv collect`` command
+When it is time to release your project, the ":ref:`cmd_collect`" command
 aggregates all the fragments into a new entry in your changelog file.
 
 
 .. toctree::
     :maxdepth: 1
 
-    details
+    concepts
     commands
     configuration
     changelog
