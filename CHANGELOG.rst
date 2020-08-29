@@ -21,6 +21,26 @@ See the fragment files in the `changelog.d directory`_.
 
 .. scriv-insert-here
 
+[0.9.0] — 2020-08-29
+--------------------
+
+Added
+.....
+
+- Markdown format is supported, both for fragments and changelog entries.
+
+- Fragments can be mixed (some .rst and some .md). They will be collected and
+  output in the format configured in the settings.
+
+- Documentation.
+
+- "python -m scriv" now works.
+
+Changed
+.......
+
+- The version number is displayed in the help message.
+
 [0.8.1] — 2020-08-09
 --------------------
 

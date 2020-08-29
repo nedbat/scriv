@@ -37,8 +37,8 @@ class Config:
         validator=attr.validators.in_(["rst", "md"]),
         metadata={
             "doc": """\
-                The format for the output changelog file.
-                Can be either "rst" or "md".
+                The format to use for fragments and for the output changelog
+                file.  Can be either "rst" or "md".
                 """,
         },
     )
