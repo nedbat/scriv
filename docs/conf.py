@@ -12,12 +12,12 @@ All configuration values have a default; values that are commented out
 serve to show the default.
 """
 
-from __future__ import absolute_import, unicode_literals
-
 import io
 import os
 import re
 import sys
+
+# import sphinx_rtd_theme
 
 
 def get_version(*file_paths):
@@ -62,6 +62,7 @@ extensions = [
     "sphinx.ext.intersphinx",
     "sphinx.ext.ifconfig",
     "sphinx.ext.napoleon",
+    "sphinx_rtd_theme",
 ]
 
 # A list of warning types to suppress arbitrary warning messages.
@@ -164,7 +165,7 @@ todo_include_todos = False
 # The theme to use for HTML and HTML Help pages.  See the documentation for
 # a list of builtin themes.
 
-html_theme = "default"
+html_theme = "sphinx_rtd_theme"
 
 # Theme options are theme-specific and customize the look and feel of a theme
 # further.  For a list of options available for each theme, see the
