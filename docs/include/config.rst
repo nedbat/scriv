@@ -25,8 +25,8 @@ Default: A combination of version (if specified) and date.
 format
 ------
 
-The format for the output changelog file.
-Can be either "rst" or "md".
+The format to use for fragments and for the output changelog
+file.  Can be either "rst" or "md".
 
 Default: ``rst``
 
