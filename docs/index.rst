@@ -11,6 +11,10 @@ Scriv is a command-line tool for helping developers maintain useful changelogs.
 It manages a directory of changelog fragments. It aggregates them into entries
 in a CHANGELOG file.
 
+Currently scriv implements a simple workflow. The goal is to adapt to more
+styles of changelog management in the future.
+
+
 Getting Started
 ===============
 
@@ -30,6 +34,7 @@ aggregates all the fragments into a new entry in your changelog file.
 .. toctree::
     :maxdepth: 1
 
+    philosophy
     concepts
     commands
     configuration

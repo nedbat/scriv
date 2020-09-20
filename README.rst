@@ -32,7 +32,7 @@ aggregates all the fragments into a new entry in your changelog file.
 Documentation
 =============
 
-The full documentation is at https://scriv.readthedocs.org.
+Full documentation is at https://scriv.readthedocs.org.
 
 License
 =======
