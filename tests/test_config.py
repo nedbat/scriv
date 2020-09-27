@@ -3,6 +3,7 @@
 import pytest
 
 from scriv.config import Config
+from scriv.extras import without
 
 CONFIG1 = """\
 [scriv]
@@ -25,6 +26,45 @@ categories =
 [more stuff]
 value = 17
 """
+
+GENERIC_TOML_CONFIG = """\
+[project]
+name = "spam"
+version = "2020.0.0"
+description = "Lovely Spam! Wonderful Spam!"
+readme = "README.rst"
+requires-python = ">=3.8"
+license = {file = "LICENSE.txt"}
+keywords = ["egg", "bacon", "sausage", "tomatoes", "Lobster Thermidor"]
+authors = [
+  {email = "hi@pradyunsg.me"},
+  {name = "Tzu-Ping Chung"}
+]
+maintainers = [
+  {name = "Brett Cannon", email = "brett@python.org"}
+]
+classifiers = [
+  "Development Status :: 4 - Beta",
+  "Programming Language :: Python"
+]
+"""
+
+TOML_CONFIG = (
+    GENERIC_TOML_CONFIG
+    + """
+[tool.scriv]
+output_file = "README.md"
+categories = [
+    "New",
+    "Different",
+    "Gone",
+    "Bad",
+]
+
+["more stuff"]
+value = 17
+"""
+)
 
 
 def test_defaults(temp_dir):
@@ -160,3 +200,43 @@ def test_rst_chars_is_two_chars(chars):
     # rst_header_chars must be exactly two non-space characters.
     with pytest.raises(ValueError):
         Config(rst_header_chars=chars)
+
+
+class TestTomlConfig:
+    """
+    Tests of the TOML configuration support.
+    """
+
+    def test_reading_toml_file(self, temp_dir):
+        (temp_dir / "pyproject.toml").write_text(TOML_CONFIG)
+        config = Config.read()
+        assert config.categories == ["New", "Different", "Gone", "Bad"]
+
+    def test_toml_without_us(self, temp_dir):
+        (temp_dir / "pyproject.toml").write_text(GENERIC_TOML_CONFIG)
+        config = Config.read()
+        assert config.categories == [
+            "Removed",
+            "Added",
+            "Changed",
+            "Deprecated",
+            "Fixed",
+            "Security",
+        ]
+
+    def test_no_toml_installed(self, temp_dir):
+        # Without toml installed, raise an error if we have settings in the toml
+        # file.
+        (temp_dir / "pyproject.toml").write_text(TOML_CONFIG)
+        with without("toml"):
+            msg_pat = r"Can't read .* without TOML support"
+            with pytest.raises(Exception, match=msg_pat):
+                Config.read()
+
+    def test_no_toml_installed_no_settings(self, temp_dir):
+        # Without toml installed, and also none of our settings in the toml
+        # file, there is no exception.
+        (temp_dir / "pyproject.toml").write_text(GENERIC_TOML_CONFIG)
+        with without("toml"):
+            config = Config.read()
+        assert config.categories[0] == "Removed"

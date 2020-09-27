@@ -201,6 +201,7 @@ class Config:
         config = cls()
         for configfile in ["setup.cfg", "tox.ini"]:
             config.read_one_config(configfile)
+        config.read_one_toml("pyproject.toml")
         config.read_one_config(
             str(Path(config.fragment_directory) / "scriv.ini")
         )
@@ -209,7 +210,7 @@ class Config:
 
     def read_one_config(self, configfile: str) -> None:
         """
-        Read one configuration file, adding values to `config`.
+        Read one configuration file, adding values to `self`.
         """
         parser = configparser.ConfigParser()
         parser.read(configfile)
@@ -221,6 +222,43 @@ class Config:
             for attrdef in attr.fields(Config):
                 try:
                     val = parser[section_name][attrdef.name]  # type: Any
+                except KeyError:
+                    pass
+                else:
+                    setattr(self, attrdef.name, val)
+
+    def read_one_toml(self, tomlfile: str) -> None:
+        """
+        Read one .toml file if it exists, adding values to `self`.
+        """
+        tomlpath = Path(tomlfile)
+        if not tomlpath.exists():
+            return
+
+        toml_text = tomlpath.read_text()
+        from scriv.extras import toml  # pylint: disable=import-outside-toplevel
+
+        if toml is None:
+            # Toml support isn't installed. Only print an exception if the
+            # config file seems to have settings for us.
+            has_scriv = re.search(r"(?m)^\[tool\.scriv\]", toml_text)
+            if has_scriv:
+                msg = (
+                    "Can't read {!r} without TOML support. "
+                    + "Install with [toml] extra"
+                ).format(tomlfile)
+                raise Exception(msg)
+        else:
+            # We have toml installed, parse the file and look for our settings.
+            data = toml.loads(toml_text)
+            try:
+                scriv_data = data["tool"]["scriv"]
+            except KeyError:
+                # No settings for us
+                return
+            for attrdef in attr.fields(Config):
+                try:
+                    val = scriv_data[attrdef.name]
                 except KeyError:
                     pass
                 else:
