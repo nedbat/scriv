@@ -55,10 +55,10 @@ requirements: ## install development environment requirements
 	pip install -qr requirements/pip-tools.txt
 	pip-sync requirements/dev.txt requirements/private.*
 
-test: clean ## run tests in the current virtualenv
-	pytest
+test: ## run tests in the current virtualenv
+	tox -e py38
 
-test-all: quality ## run tests on every supported Python combination
+test-all: ## run tests on every supported Python combination
 	tox
 
-validate: quality test ## run tests and quality checks
+validate: clean quality test ## run tests and quality checks
