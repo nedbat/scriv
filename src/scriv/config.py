@@ -127,7 +127,7 @@ class Config:
     entry_title_template = attr.ib(
         type=str,
         default=(
-            "{% if version %}[{{ version }}] — {% endif %}"
+            "{% if version %}{{ version }} — {% endif %}"
             + "{{ date.strftime('%Y-%m-%d') }}"
         ),
         metadata={

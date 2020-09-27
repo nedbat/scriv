@@ -21,13 +21,13 @@ See the fragment files in the `changelog.d directory`_.
 
 .. scriv-insert-here
 
-[0.9.2] — 2020-08-29
---------------------
+0.9.2 — 2020-08-29
+------------------
 
 - Packaging fix.
 
-[0.9.0] — 2020-08-29
---------------------
+0.9.0 — 2020-08-29
+------------------
 
 Added
 .....
@@ -46,8 +46,8 @@ Changed
 
 - The version number is displayed in the help message.
 
-[0.8.1] — 2020-08-09
---------------------
+0.8.1 — 2020-08-09
+------------------
 
 Added
 .....
@@ -78,8 +78,8 @@ Fixed
   will be preserved. Previously, they were mistakenly interpreted as comments
   and discarded.
 
-[0.8.0] — 2020-08-04
---------------------
+0.8.0 — 2020-08-04
+------------------
 
 Added
 .....
@@ -171,7 +171,7 @@ Fixed
   categorized fragments.
 
 
-[0.1.0] — 2019-12-30
---------------------
+0.1.0 — 2019-12-30
+------------------
 
 * Doesn't really do anything yet.
