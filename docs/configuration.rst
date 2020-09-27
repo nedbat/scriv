@@ -17,7 +17,10 @@ Scriv will read settings from any of these files:
 - changelog.d/scriv.ini
 
 In any of these files, scriv will read settings from a section named either
-`[scriv]` or `[tool.scriv]`.
+``[scriv]`` or ``[tool.scriv]``.
+
+If the ``[toml]`` extra is installed, then scriv will also read settings from
+pyproject.toml, in the ``[tool.scriv]`` section.
 
 
 Settings Syntax
