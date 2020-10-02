@@ -67,7 +67,7 @@ class TestNewFragmentContents:
     def test_no_categories_rst(self, changelog_d):
         # If the project isn't using categories, then the new fragment is
         # simpler with no heading.
-        config = Config(categories="")
+        config = Config(categories=[])
         contents = new_fragment_contents(config)
         assert ".. A new scriv changelog fragment." in contents
         assert "- A bullet item for this fragment. EDIT ME!" in contents

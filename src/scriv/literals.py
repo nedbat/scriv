@@ -64,7 +64,7 @@ class PythonLiteralFinder(ast.NodeVisitor):
             If it is, save the string value as `self.value`.
             This is the 3.8+ implementation.
             """
-            if isinstance(value, ast.Constant):
+            if isinstance(value, ast.Constant):  # type: ignore
                 if isinstance(value.value, str):
                     self.value = value.value
 
