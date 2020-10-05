@@ -2,8 +2,10 @@
 
 import pytest
 
+import scriv.config
 from scriv.config import Config
-from scriv.extras import without
+
+from .helpers import without_module
 
 CONFIG1 = """\
 [scriv]
@@ -228,7 +230,7 @@ class TestTomlConfig:
         # Without toml installed, raise an error if we have settings in the toml
         # file.
         (temp_dir / "pyproject.toml").write_text(TOML_CONFIG)
-        with without("toml"):
+        with without_module(scriv.config, "toml"):
             msg_pat = r"Can't read .* without TOML support"
             with pytest.raises(Exception, match=msg_pat):
                 Config.read()
@@ -237,6 +239,6 @@ class TestTomlConfig:
         # Without toml installed, and also none of our settings in the toml
         # file, there is no exception.
         (temp_dir / "pyproject.toml").write_text(GENERIC_TOML_CONFIG)
-        with without("toml"):
+        with without_module(scriv.config, "toml"):
             config = Config.read()
         assert config.categories[0] == "Removed"

@@ -8,6 +8,11 @@ from typing import Any, List
 
 import attr
 
+try:
+    import toml
+except ImportError:  # pragma: no cover
+    toml = None  # type: ignore
+
 from scriv.literals import find_literal
 
 
@@ -236,7 +241,6 @@ class Config:
             return
 
         toml_text = tomlpath.read_text()
-        from scriv.extras import toml  # pylint: disable=import-outside-toplevel
 
         if toml is None:
             # Toml support isn't installed. Only print an exception if the
