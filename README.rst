@@ -2,7 +2,7 @@
 Scriv
 #####
 
-|pypi-badge| |travis-badge| |doc-badge| |pyversions-badge| |license-badge|
+|pypi-badge| |ci-badge| |doc-badge| |pyversions-badge| |license-badge|
 
 Scriv changelog management tool
 
@@ -52,9 +52,9 @@ Contributions are very welcome.
     :target: https://pypi.python.org/pypi/scriv/
     :alt: PyPI
 
-.. |travis-badge| image:: https://travis-ci.com/nedbat/scriv.svg?branch=master
-    :target: https://travis-ci.com/github/nedbat/scriv
-    :alt: Travis
+.. |ci-badge| image:: https://github.com/nedbat/scriv/workflows/Test%20Suite/badge.svg
+    :target: https://github.com/nedbat/scriv/actions?query=workflow%3A%22Test+Suite%22
+    :alt: Build status
 
 .. |doc-badge| image:: https://readthedocs.org/projects/scriv/badge/?version=latest
     :target: http://scriv.readthedocs.io/en/latest/

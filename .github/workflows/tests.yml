@@ -1,0 +1,55 @@
+name: "Test Suite"
+
+on:
+  push:
+    branches: ["master"]
+  pull_request:
+  workflow_dispatch:
+
+defaults:
+  run:
+    shell: bash
+
+jobs:
+  tests:
+    name: "Python ${{ matrix.python-version }} on ${{ matrix.os }}"
+    runs-on: "${{ matrix.os }}"
+
+    strategy:
+      matrix:
+        os:
+          - ubuntu-latest
+          - macos-latest
+          # Enable this again in pr #16:
+          #- windows-latest
+        python-version:
+          - "3.5"
+          #- "3.6"
+          #- "3.7"
+          - "3.8"
+          #- "3.9"
+          #- "pypy3"
+        exclude:
+          # Windows PyPy doesn't seem to work?
+          - os: windows-latest
+            python-version: "pypy3"
+      fail-fast: false
+
+    steps:
+      - name: "Check out the repo"
+        uses: "actions/checkout@v2"
+
+      - name: "Set up Python"
+        uses: "actions/setup-python@v2"
+        with:
+          python-version: "${{ matrix.python-version }}"
+
+      - name: "Install dependencies"
+        run: |
+          python -m pip install -U setuptools
+          python -m pip install -r requirements/travis.txt
+          python -m pip install -c requirements/constraints.txt tox-gh-actions
+
+      - name: "Run tox for ${{ matrix.python-version }}"
+        run: |
+          python -m tox

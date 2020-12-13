@@ -25,3 +25,7 @@ trim_trailing_whitespace = false
 
 [*.rst]
 max_line_length = 79
+
+[requirements/*.{in,txt}]
+# No idea why, but pip-tools puts comments on 2-space indents.
+indent_size = 2
