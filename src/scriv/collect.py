@@ -128,8 +128,15 @@ def collect(
     sections = order_dict(sections, [None] + config.categories)
 
     changelog = Path(config.output_file)
+    newline = ""
     if changelog.exists():
-        changelog_text = changelog.read_text()
+        with changelog.open("r") as f:
+            changelog_text = f.read()
+            if f.newlines:  # .newlines may be None, str, or tuple
+                if isinstance(f.newlines, str):
+                    newline = f.newlines
+                else:
+                    newline = f.newlines[0]
         text_before, text_after = cut_at_line(
             changelog_text, config.insert_marker
         )
@@ -150,7 +157,8 @@ def collect(
     else:
         new_header = ""
     new_text = format_tools.format_sections(sections)
-    changelog.write_text(text_before + new_header + new_text + text_after)
+    with changelog.open("w", newline=newline or None) as f:
+        f.write(text_before + new_header + new_text + text_after)
 
     if edit:
         git_edit(changelog)
