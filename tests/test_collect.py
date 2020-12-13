@@ -3,6 +3,7 @@
 from unittest.mock import call
 
 import freezegun
+import pytest
 
 COMMENT = """\
 .. this line should be dropped
@@ -343,3 +344,45 @@ def test_collect_version_in_config(cli_invoke, changelog_d, temp_dir):
         + "- The first change.\n"
     )
     assert changelog_text == expected
+
+
+@pytest.mark.parametrize(
+    "platform, newline",
+    (
+        ("Windows", "\r\n"),
+        ("Linux", "\n"),
+        ("Mac", "\r"),
+    ),
+)
+def test_collect_respect_existing_newlines(
+    cli_invoke,
+    changelog_d,
+    temp_dir,
+    platform,
+    newline,
+):
+    """Verify that existing newline styles are preserved during collection."""
+
+    index_map = {
+        "\r\n": 0,
+        "\n": 1,
+        "\r": 2,
+    }
+
+    changelog = temp_dir / "CHANGELOG.rst"
+    existing_text = "Line one" + newline + "Line two"
+    with changelog.open("wb") as file:
+        file.write(existing_text.encode("utf8"))
+    (changelog_d / "20170616_nedbat.rst").write_text(COMMENT + FRAG1 + COMMENT)
+    with freezegun.freeze_time("2020-02-25T15:18:19"):
+        cli_invoke(["collect"])
+    with changelog.open("rb") as file:
+        new_text = file.read().decode("utf8")
+
+    counts = [new_text.count("\r\n")]  # Windows
+    counts.append(new_text.count("\n") - counts[0])  # Linux
+    counts.append(new_text.count("\r") - counts[0])  # Mac
+
+    msg = platform + " newlines were not preserved"
+    assert counts.pop(index_map[newline]), msg
+    assert counts == [0, 0], msg
