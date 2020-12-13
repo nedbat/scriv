@@ -24,11 +24,11 @@ jobs:
           #- windows-latest
         python-version:
           - "3.5"
-          #- "3.6"
-          #- "3.7"
+          - "3.6"
+          - "3.7"
           - "3.8"
-          #- "3.9"
-          #- "pypy3"
+          - "3.9"
+          - "pypy3"
         exclude:
           # Windows PyPy doesn't seem to work?
           - os: windows-latest
