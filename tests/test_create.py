@@ -1,5 +1,6 @@
 """Test creation logic."""
 
+import os.path
 from pathlib import Path
 
 import freezegun
@@ -130,8 +131,9 @@ class TestCreate:
         # "create" ended with an error and a message.
         assert result.exit_code == 1
         expected = (
-            "File changelog.d/20130225_151617_joedev.rst already exists, "
-            + "not overwriting\n"
+            "File changelog.d"
+            + getattr(os.path, "sep", "")
+            + "20130225_151617_joedev.rst already exists, not overwriting\n"
         )
         assert result.stdout == expected
 
@@ -231,10 +233,13 @@ class TestCreateAdd:
         mock_call.return_value = 0
         with freezegun.freeze_time("2013-02-25T15:16:17"):
             cli_invoke(["create", "--add"])
-        mock_call.assert_called_once_with(
-            ["git", "add", "changelog.d/20130225_151617_joedev.rst"]
+        file_path = (
+            "changelog.d"
+            + getattr(os.path, "sep", "")
+            + "20130225_151617_joedev.rst"
         )
-        assert "Added changelog.d/20130225_151617_joedev.rst" in caplog.text
+        mock_call.assert_called_once_with(["git", "add", file_path])
+        assert "Added " + file_path in caplog.text
 
     def test_create_add_preference(
         self, mocker, fake_git, cli_invoke, changelog_d
@@ -246,9 +251,12 @@ class TestCreateAdd:
         mock_call.return_value = 0
         with freezegun.freeze_time("2013-02-25T15:16:17"):
             cli_invoke(["create"])
-        mock_call.assert_called_once_with(
-            ["git", "add", "changelog.d/20130225_151617_joedev.rst"]
+        file_path = (
+            "changelog.d"
+            + getattr(os.path, "sep", "")
+            + "20130225_151617_joedev.rst"
         )
+        mock_call.assert_called_once_with(["git", "add", file_path])
 
     def test_create_add_preference_no_add(
         self, caplog, mocker, fake_git, cli_invoke, changelog_d
@@ -272,11 +280,12 @@ class TestCreateAdd:
         mock_call.return_value = 99
         with freezegun.freeze_time("2013-02-25T15:16:17"):
             result = cli_invoke(["create", "--add"], expect_ok=False)
-        mock_call.assert_called_once_with(
-            ["git", "add", "changelog.d/20130225_151617_joedev.rst"]
+        file_path = (
+            "changelog.d"
+            + getattr(os.path, "sep", "")  # getattr() prevents MyPy errors
+            + "20130225_151617_joedev.rst"
         )
+        mock_call.assert_called_once_with(["git", "add", file_path])
         assert result.exit_code == 99
         assert "Added" not in caplog.text
-        assert (
-            "Couldn't add changelog.d/20130225_151617_joedev.rst" in caplog.text
-        )
+        assert "Couldn't add " + file_path in caplog.text
