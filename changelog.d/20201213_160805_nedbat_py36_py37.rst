@@ -1,0 +1,7 @@
+Fixed
+.....
+
+- Using "literal:" values in the configuration file didn't work on Python 3.6
+  or 3.7, as reported in `issue 18`_.  This is now fixed.
+
+.. _issue 18: https://github.com/nedbat/scriv/issues/18

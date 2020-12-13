@@ -55,27 +55,15 @@ class PythonLiteralFinder(ast.NodeVisitor):
                 if target.id == self.name:
                     self.check_value(node.value)
 
-    if hasattr(ast, "Constant"):
+    def check_value(self, value):
+        """
+        Check a value node to see if it's a string constant.
 
-        def check_value(self, value):
-            """
-            Check a value node to see if it's a string constant.
-
-            If it is, save the string value as `self.value`.
-            This is the 3.8+ implementation.
-            """
-            if isinstance(value, ast.Constant):  # type: ignore
-                if isinstance(value.value, str):
-                    self.value = value.value
-
-    else:
-
-        def check_value(self, value):
-            """
-            Check a value node to see if it's a string constant.
-
-            If it is, save the string value as `self.value`.
-            This is the pre-3.8 implementation.
-            """
-            if isinstance(value, ast.Str):
-                self.value = value.s
+        If it is, save the string value as `self.value`.
+        """
+        ast_Constant = getattr(ast, "Constant", None)
+        if ast_Constant and isinstance(value, ast_Constant):
+            if isinstance(value.value, str):
+                self.value = value.value
+        elif isinstance(value, ast.Str):
+            self.value = value.s
