@@ -12,7 +12,7 @@ defaults:
 
 jobs:
   tests:
-    name: "Python ${{ matrix.python-version }} on ${{ matrix.os }}"
+    name: "Python ${{ matrix.python-version }} tests on ${{ matrix.os }}"
     runs-on: "${{ matrix.os }}"
 
     strategy:
@@ -20,8 +20,7 @@ jobs:
         os:
           - ubuntu-latest
           - macos-latest
-          # Enable this again in pr #16:
-          #- windows-latest
+          - windows-latest
         python-version:
           - "3.5"
           - "3.6"
@@ -33,7 +32,6 @@ jobs:
           # Windows PyPy doesn't seem to work?
           - os: windows-latest
             python-version: "pypy3"
-      fail-fast: false
 
     steps:
       - name: "Check out the repo"
@@ -53,3 +51,47 @@ jobs:
       - name: "Run tox for ${{ matrix.python-version }}"
         run: |
           python -m tox
+
+  docs:
+    name: Docs
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: "Check out the repo"
+        uses: "actions/checkout@v2"
+
+      - name: "Set up Python"
+        uses: "actions/setup-python@v2"
+        with:
+          python-version: "3.8"
+
+      - name: "Install dependencies"
+        run: |
+          python -m pip install -U setuptools
+          python -m pip install -r requirements/travis.txt
+
+      - name: "Build docs"
+        run: |
+          python -m tox -e docs
+
+  quality:
+    name: Linters etc
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: "Check out the repo"
+        uses: "actions/checkout@v2"
+
+      - name: "Set up Python"
+        uses: "actions/setup-python@v2"
+        with:
+          python-version: "3.8"
+
+      - name: "Install dependencies"
+        run: |
+          python -m pip install -U setuptools
+          python -m pip install -r requirements/travis.txt
+
+      - name: "Linters etc"
+        run: |
+          python -m tox -e quality
