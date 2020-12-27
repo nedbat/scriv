@@ -1,6 +1,0 @@
-Fixed
-.....
-
-- Explicitly specify the directories and files that Black should scan. (#15)
-
-  This prevents Black from scanning every file in a virtual environment.

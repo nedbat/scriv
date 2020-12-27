@@ -21,6 +21,49 @@ See the fragment files in the `changelog.d directory`_.
 
 .. scriv-insert-here
 
+0.10.0 — 2020-12-27
+-------------------
+
+Added
+.....
+
+- Settings can now be read from a pyproject.toml file.  Install with the
+  "[toml]" extra to be sure TOML support is available.  Closes `issue 9`_.
+
+.. _issue 9: https://github.com/nedbat/scriv/issues/9
+
+- Added the Philosophy section of the docs.
+
+Changed
+.......
+
+- The default entry header no longer puts the version number in square
+  brackets: this was a misunderstanding of the keepachangelog formatting.
+
+- Respect the existing newline style of changelog files. (`#14`_)
+  This means that a changelog file with Linux newlines on a Windows platform
+  will be updated with Linux newlines, not rewritten with Windows newlines.
+  Thanks, Kurt McKee.
+
+.. _#14: https://github.com/nedbat/scriv/issues/14
+
+Fixed
+.....
+
+- Support Windows' directory separator (``\``) in unit test output. (`#15`_)
+  This allows the unit tests to run in Windows environments. Thanks, Kurt
+  McKee.
+
+- Explicitly specify the directories and files that Black should scan. (`#15`_)
+  This prevents Black from scanning every file in a virtual environment.
+  Thanks, Kurt McKee.
+
+- Using "literal:" values in the configuration file didn't work on Python 3.6
+  or 3.7, as reported in `issue 18`_.  This is now fixed.
+
+.. _#15: https://github.com/nedbat/scriv/issues/15
+.. _issue 18: https://github.com/nedbat/scriv/issues/18
+
 0.9.2 — 2020-08-29
 ------------------
 

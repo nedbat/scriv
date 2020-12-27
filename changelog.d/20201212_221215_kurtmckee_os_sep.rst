@@ -1,6 +1,0 @@
-Fixed
-.....
-
-- Support Windows' directory separator (``\``) in unit test output. (#15)
-
-  This allows the unit tests to run in Windows environments.

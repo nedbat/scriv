@@ -1,4 +1,0 @@
-Added
-.....
-
-- Added the Philosophy section of the docs.
