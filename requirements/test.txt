@@ -4,23 +4,23 @@
 #
 #    make upgrade
 #
-attrs==20.2.0             # via -r requirements/base.txt, pytest
+attrs==20.3.0             # via -r requirements/base.txt, pytest
 click-log==0.3.2          # via -r requirements/base.txt
 click==7.1.2              # via -r requirements/base.txt, click-log
-coverage==5.3             # via -r requirements/test.in
+coverage==5.3.1           # via -r requirements/test.in
 freezegun==1.0.0          # via -r requirements/test.in
-iniconfig==1.0.1          # via pytest
+iniconfig==1.1.1          # via pytest
 jinja2==2.11.2            # via -r requirements/base.txt
 markupsafe==1.1.1         # via -r requirements/base.txt, jinja2
-packaging==20.4           # via pytest
+packaging==20.8           # via pytest
 pluggy==0.13.1            # via pytest
-pudb==2019.2              # via -r requirements/test.in
-py==1.9.0                 # via pytest
-pygments==2.7.1           # via pudb
+pudb==2019.2              # via -c requirements/constraints.txt, -r requirements/test.in
+py==1.10.0                # via pytest
+pygments==2.7.3           # via pudb
 pyparsing==2.4.7          # via packaging
-pytest-mock==3.3.1        # via -r requirements/test.in
-pytest==6.1.0             # via pytest-mock
+pytest-mock==3.4.0        # via -r requirements/test.in
+pytest==6.1.2             # via -c requirements/constraints.txt, pytest-mock
 python-dateutil==2.8.1    # via freezegun
-six==1.15.0               # via packaging, python-dateutil
-toml==0.10.1              # via pytest
+six==1.15.0               # via python-dateutil
+toml==0.10.2              # via pytest
 urwid==2.1.2              # via pudb
