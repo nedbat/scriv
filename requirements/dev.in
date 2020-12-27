@@ -5,4 +5,5 @@
 -r quality.txt            # Core and quality check dependencies
 -r travis.txt             # tox and related dependencies
 
+build                     # For kitting
 tox-battery               # Makes tox aware of requirements file changes
