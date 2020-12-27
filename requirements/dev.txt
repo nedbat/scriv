@@ -24,8 +24,10 @@ filelock==3.0.12          # via -r requirements/travis.txt, tox, virtualenv
 freezegun==1.0.0          # via -r requirements/quality.txt
 idna==2.10                # via -r requirements/quality.txt, requests
 imagesize==1.2.0          # via -r requirements/quality.txt, sphinx
-iniconfig==1.0.1          # via -r requirements/quality.txt, pytest
-isort==5.5.3              # via -r requirements/quality.txt, pylint
+importlib-metadata==2.1.1  # via -c requirements/constraints.txt, -r requirements/quality.txt, -r requirements/travis.txt, build, keyring, pluggy, pytest, stevedore, tox, twine, virtualenv
+importlib-resources==3.2.1  # via -c requirements/constraints.txt, -r requirements/travis.txt, virtualenv
+iniconfig==1.1.1          # via -r requirements/quality.txt, pytest
+isort==5.6.4              # via -r requirements/quality.txt, pylint
 jinja2==2.11.2            # via -r requirements/quality.txt, sphinx
 keyring==21.4.0           # via -r requirements/quality.txt, twine
 lazy-object-proxy==1.4.3  # via -r requirements/quality.txt, astroid
