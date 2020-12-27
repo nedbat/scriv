@@ -62,3 +62,14 @@ test-all: ## run tests on every supported Python combination
 	tox
 
 validate: clean quality test ## run tests and quality checks
+
+.PHONY: dist pypi testpypi
+
+dist: ## Build the distributions
+	python -m build --sdist --wheel
+
+pypi: ## Upload the built distributions to PyPI.
+	python -m twine upload --verbose dist/*
+
+testpypi: ## Upload the distrubutions to PyPI's testing server.
+	python -m twine upload --verbose --repository testpypi dist/*
