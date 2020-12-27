@@ -12,6 +12,9 @@
 importlib-metadata==2.1.1
 importlib-resources==3.2.1
 
+# 6.2.0 requires 3.6
+pytest<6.2.0
+
 # 2020.1 requires 3.6
 pudb<2020
 
