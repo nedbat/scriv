@@ -1,0 +1,5 @@
+Added
+.....
+
+- A new poorly documented API is available.  See the Scriv, Changelog, and
+  Fragment classes in the scriv.scriv module.
