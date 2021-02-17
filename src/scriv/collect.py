@@ -130,7 +130,7 @@ def collect(
     changelog = Path(config.output_file)
     newline = ""
     if changelog.exists():
-        with changelog.open("r") as f:
+        with changelog.open("r", encoding="utf-8") as f:
             changelog_text = f.read()
             if f.newlines:  # .newlines may be None, str, or tuple
                 if isinstance(f.newlines, str):
@@ -157,7 +157,7 @@ def collect(
     else:
         new_header = ""
     new_text = format_tools.format_sections(sections)
-    with changelog.open("w", newline=newline or None) as f:
+    with changelog.open("w", encoding="utf-8", newline=newline or None) as f:
         f.write(text_before + new_header + new_text + text_after)
 
     if edit:
