@@ -168,8 +168,10 @@ pygments==2.9.0
     #   sphinx
 pylint==2.8.3
     # via pylint-pytest
-pylint-pytest==1.1.2
-    # via -r requirements/quality.in
+pylint-pytest==1.0.3
+    # via
+    #   -c requirements/constraints.txt
+    #   -r requirements/quality.in
 pyparsing==2.4.7
     # via
     #   -r requirements/doc.txt

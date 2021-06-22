@@ -210,8 +210,10 @@ pylint==2.8.3
     # via
     #   -r requirements/quality.txt
     #   pylint-pytest
-pylint-pytest==1.1.2
-    # via -r requirements/quality.txt
+pylint-pytest==1.0.3
+    # via
+    #   -c requirements/constraints.txt
+    #   -r requirements/quality.txt
 pyparsing==2.4.7
     # via
     #   -r requirements/quality.txt
