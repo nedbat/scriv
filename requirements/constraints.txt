@@ -7,16 +7,3 @@
 # link to other information that will help people in the future to remove the
 # pin when possible.  Writing an issue against the offending project and
 # linking to it here is good.
-
-# Not sure, maybe this will make it work?
-importlib-metadata==2.1.1
-importlib-resources==3.2.1
-
-# 6.2.0 requires 3.6
-pytest<6.2.0
-
-# 2020.1 requires 3.6
-pudb<2020
-
-# 2.0 requires Python 3.6
-zipp<2.0
