@@ -336,7 +336,7 @@ def test_collect_version_in_config(cli_invoke, changelog_d, temp_dir):
     (changelog_d / "20170616_nedbat.rst").write_text("- The first change.\n")
     with freezegun.freeze_time("2020-02-26T15:18:19"):
         cli_invoke(["collect"])
-    changelog_text = changelog.read_text()
+    changelog_text = changelog.read_text(encoding="utf-8")
     expected = (
         "\n"
         + "v12.34b — 2020-02-26\n"

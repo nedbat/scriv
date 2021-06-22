@@ -53,7 +53,7 @@ class Changelog:
     def read(self) -> None:
         """Read the changelog if it exists."""
         if self.path.exists():
-            with self.path.open("r") as f:
+            with self.path.open("r", encoding="utf-8") as f:
                 changelog_text = f.read()
                 if f.newlines:  # .newlines may be None, str, or tuple
                     if isinstance(f.newlines, str):
@@ -88,7 +88,9 @@ class Changelog:
 
     def write(self, header: str, text: str) -> None:
         """Write the changelog, with a new entry."""
-        with self.path.open("w", newline=self.newline or None) as f:
+        with self.path.open(
+            "w", encoding="utf-8", newline=self.newline or None
+        ) as f:
             f.write(self.text_before + header + text + self.text_after)
 
 
