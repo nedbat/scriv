@@ -7,3 +7,7 @@
 # link to other information that will help people in the future to remove the
 # pin when possible.  Writing an issue against the offending project and
 # linking to it here is good.
+
+# Not sure why I'm getting cannot-enumerate-pytest-fixtures failures:
+# https://github.com/reverbc/pylint-pytest/issues/20
+pylint-pytest==1.0.3
