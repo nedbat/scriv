@@ -1,0 +1,8 @@
+* Releasing
+
+- increment the version in src/scriv/__init__.py
+- scriv collect
+- make clean dist
+- make pypi
+- git tag -a 0.11.0
+- git push --all
