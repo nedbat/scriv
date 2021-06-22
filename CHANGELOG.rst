@@ -21,6 +21,26 @@ See the fragment files in the `changelog.d directory`_.
 
 .. scriv-insert-here
 
+0.11.0 — 2021-06-22
+-------------------
+
+Added
+.....
+
+- A new poorly documented API is available.  See the Scriv, Changelog, and
+  Fragment classes in the scriv.scriv module.
+
+Changed
+.......
+
+- Python 3.6 is now the minimum supported Python version.
+
+Fixed
+.....
+
+- The changelog is now always written as UTF-8, regardless of the default
+  encoding of the system.  Thanks, Hei (yhlam).
+
 0.10.0 — 2020-12-27
 -------------------
 

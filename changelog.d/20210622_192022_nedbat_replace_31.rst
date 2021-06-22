@@ -1,5 +1,0 @@
-Fixed
-.....
-
-- The changelog is now always written as UTF-8, regardless of the default
-  encoding of the system.  Thanks, Hei (yhlam).

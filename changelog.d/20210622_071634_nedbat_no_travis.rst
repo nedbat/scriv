@@ -1,5 +1,0 @@
-Changed
-.......
-
-- Python 3.6 is now the minimum supported Python version.
-
