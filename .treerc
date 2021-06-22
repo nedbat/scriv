@@ -1,0 +1,9 @@
+# .treerc for coverage: controls what files get searched.
+[default]
+ignore =
+    .treerc
+    build
+    htmlcov
+    .tox*
+    _build _spell
+    *.egg *.egg-info
