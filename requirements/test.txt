@@ -18,7 +18,7 @@ coverage==5.5
     # via -r requirements/test.in
 freezegun==1.1.0
     # via -r requirements/test.in
-importlib-metadata==4.5.0
+importlib-metadata==4.6.1
     # via
     #   -r requirements/base.txt
     #   click
@@ -34,7 +34,7 @@ markupsafe==2.0.1
     # via
     #   -r requirements/base.txt
     #   jinja2
-packaging==20.9
+packaging==21.0
     # via pytest
 parso==0.8.2
     # via jedi
@@ -52,7 +52,7 @@ pytest==6.2.4
     # via pytest-mock
 pytest-mock==3.6.1
     # via -r requirements/test.in
-python-dateutil==2.8.1
+python-dateutil==2.8.2
     # via freezegun
 six==1.16.0
     # via python-dateutil
@@ -64,7 +64,7 @@ typing-extensions==3.10.0.0
     #   importlib-metadata
 urwid==2.1.2
     # via pudb
-zipp==3.4.1
+zipp==3.5.0
     # via
     #   -r requirements/base.txt
     #   importlib-metadata

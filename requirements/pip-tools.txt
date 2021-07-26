@@ -6,21 +6,21 @@
 #
 click==8.0.1
     # via pip-tools
-importlib-metadata==4.5.0
+importlib-metadata==4.6.1
     # via
     #   click
     #   pep517
-pep517==0.10.0
+pep517==0.11.0
     # via pip-tools
 pip-tools==6.2.0
     # via -r requirements/pip-tools.in
-toml==0.10.2
+tomli==1.1.0
     # via pep517
 typing-extensions==3.10.0.0
     # via importlib-metadata
 wheel==0.36.2
     # via pip-tools
-zipp==3.4.1
+zipp==3.5.0
     # via
     #   importlib-metadata
     #   pep517
