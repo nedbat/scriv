@@ -231,7 +231,7 @@ class TestTomlConfig:
         # Without toml installed, raise an error if we have settings in the toml
         # file.
         (temp_dir / "pyproject.toml").write_text(TOML_CONFIG)
-        with without_module(scriv.config, "toml"):
+        with without_module(scriv.config, "tomli"):
             msg_pat = r"Can't read .* without TOML support"
             with pytest.raises(Exception, match=msg_pat):
                 Config.read()
@@ -240,6 +240,6 @@ class TestTomlConfig:
         # Without toml installed, and also none of our settings in the toml
         # file, there is no exception.
         (temp_dir / "pyproject.toml").write_text(GENERIC_TOML_CONFIG)
-        with without_module(scriv.config, "toml"):
+        with without_module(scriv.config, "tomli"):
             config = Config.read()
         assert config.categories[0] == "Removed"
