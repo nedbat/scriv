@@ -63,10 +63,13 @@ class RstTools(FormatTools):
 
             if self._is_underline(line):
                 # Section underline. Previous line was the heading.
-                if paragraphs is not None:
-                    # Heading was made a paragraph, undo that.
-                    if paragraphs[-1] == prev_line + "\n":
-                        paragraphs.pop()
+                # General RST can have overlines as well as underlines, but
+                # we only deal with underlines, so some paragraphs must have
+                # preceded us.
+                assert paragraphs is not None
+                # Heading was made a paragraph, undo that.
+                assert paragraphs[-1] == prev_line + "\n"
+                paragraphs.pop()
                 paragraphs = sections.setdefault(prev_line, [])
                 paragraphs.append("")
                 continue
