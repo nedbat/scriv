@@ -123,6 +123,7 @@ def test_collect_simple(cli_invoke, changelog_d, temp_dir):
     # Sections are ordered by the config file.
     # Fragments in sections are in time order.
     (changelog_d / "scriv.ini").write_text("# this shouldn't be collected\n")
+    (changelog_d / "README.rst").write_text("This directory has fragments")
     (changelog_d / "20170616_nedbat.rst").write_text(COMMENT + FRAG1 + COMMENT)
     (changelog_d / "20170617_nedbat.rst").write_text(COMMENT + FRAG2)
     with freezegun.freeze_time("2020-02-25T15:18:19"):
@@ -149,6 +150,7 @@ def test_collect_ordering(cli_invoke, changelog_d, temp_dir):
 
 def test_collect_mixed_format(cli_invoke, changelog_d, temp_dir):
     # Fragments can be in mixed formats.
+    (changelog_d / "README.md").write_text("Don't take this file.")
     (changelog_d / "20170616_nedbat.md").write_text(COMMENT_MD + FRAG2_MD)
     (changelog_d / "20170617_nedbat.rst").write_text(COMMENT + FRAG1)
     (changelog_d / "20170618_joedev.rst").write_text(COMMENT + FRAG3)
@@ -386,3 +388,16 @@ def test_collect_respect_existing_newlines(
     msg = platform + " newlines were not preserved"
     assert counts.pop(index_map[newline]), msg
     assert counts == [0, 0], msg
+
+
+def test_configure_skipped_fragments(cli_invoke, changelog_d, temp_dir):
+    # The skipped "readme" files can be configured.
+    (changelog_d / "scriv.ini").write_text("[scriv]\nskip_fragments = ALL*\n")
+    (changelog_d / "ALLABOUT.md").write_text("Don't take this file.")
+    (changelog_d / "20170616_nedbat.md").write_text(COMMENT_MD + FRAG2_MD)
+    (changelog_d / "20170617_nedbat.rst").write_text(COMMENT + FRAG1)
+    (changelog_d / "20170618_joedev.rst").write_text(COMMENT + FRAG3)
+    with freezegun.freeze_time("2020-02-25T15:18:19"):
+        cli_invoke(["collect"])
+    changelog_text = (temp_dir / "CHANGELOG.rst").read_text()
+    assert changelog_text == CHANGELOG_2_1_3

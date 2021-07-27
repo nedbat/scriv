@@ -100,6 +100,16 @@ category sections within the entry.
 
 Default: ``=-``
 
+.. _config_skip_fragments:
+
+skip_fragments
+--------------
+
+A glob pattern for files in the fragment directory that should
+not be collected.
+
+Default: ``README.*``
+
 .. _config_version:
 
 version

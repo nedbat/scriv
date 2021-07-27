@@ -171,6 +171,18 @@ class Config:
         },
     )
 
+    # Glob for files in the fragments directory that should not be collected.
+    skip_fragments = attr.ib(
+        type=str,
+        default="README.*",
+        metadata={
+            "doc": """\
+                A glob pattern for files in the fragment directory that should
+                not be collected.
+                """,
+        },
+    )
+
     def __attrs_post_init__(
         self,
     ):  # noqa: D105 (Missing docstring in magic method)
