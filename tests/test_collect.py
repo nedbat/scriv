@@ -390,6 +390,30 @@ def test_collect_respect_existing_newlines(
     assert counts == [0, 0], msg
 
 
+def test_no_newlines(cli_invoke, changelog_d, temp_dir):
+    changelog = temp_dir / "CHANGELOG.rst"
+    with changelog.open("wb") as file:
+        file.write(b"no newline")
+    (changelog_d / "20170616_nedbat.rst").write_text("A bare line")
+    with freezegun.freeze_time("2020-02-25T15:18:19"):
+        cli_invoke(["collect"])
+    new_text = changelog.read_text()
+    assert new_text == "\n2020-02-25\n==========\n\nA bare line\nno newline"
+
+
+def test_mixed_newlines(cli_invoke, changelog_d, temp_dir):
+    changelog = temp_dir / "CHANGELOG.rst"
+    with changelog.open("wb") as file:
+        file.write(b"slashr\rslashn\n")
+    (changelog_d / "20170616_nedbat.rst").write_text("A bare line")
+    with freezegun.freeze_time("2020-02-25T15:18:19"):
+        cli_invoke(["collect"])
+    new_text = changelog.read_text()
+    assert (
+        new_text == "\n2020-02-25\n==========\n\nA bare line\nslashr\nslashn\n"
+    )
+
+
 def test_configure_skipped_fragments(cli_invoke, changelog_d, temp_dir):
     # The skipped "readme" files can be configured.
     (changelog_d / "scriv.ini").write_text("[scriv]\nskip_fragments = ALL*\n")
