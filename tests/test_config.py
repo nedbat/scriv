@@ -91,6 +91,7 @@ def test_defaults(temp_dir):
     assert config.md_header_level == "1"
     assert "{{ date.strftime('%Y-%m-%d') }}" in config.entry_title_template
     assert config.main_branches == ["master", "main", "develop"]
+    assert config.skip_fragments == "README.*"
     assert config.version == ""
 
 
