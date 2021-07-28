@@ -1,5 +1,7 @@
 """Tests of scriv/config.py"""
 
+import re
+
 import pytest
 
 import scriv.config
@@ -129,6 +131,13 @@ def test_reading_config_from_other_directory(temp_dir):
     assert config.categories == ["New", "Different", "Gone", "Bad"]
 
 
+def test_unknown_option():
+    config = Config.read()
+    expected = "Scriv configuration has no 'foo' option"
+    with pytest.raises(AttributeError, match=expected):
+        config.foo  # pylint: disable=pointless-statement
+
+
 def test_custom_template(changelog_d):
     # You can define your own template with your own name.
     (changelog_d / "start_here.j2").write_text("Custom template.")
@@ -150,7 +159,8 @@ def test_no_such_template():
     # be raised.
     msg = r"No such file: changelog\.d[/\\]foo\.j2"
     with pytest.raises(Exception, match=msg):
-        Config(new_fragment_template="file: foo.j2")
+        config = Config(new_fragment_template="file: foo.j2")
+        config.new_fragment_template  # pylint: disable=pointless-statement
 
 
 def test_override_default_name(changelog_d):
@@ -178,12 +188,13 @@ def test_literal_reading(temp_dir):
     assert text == "12.34.56"
 
 
-def test_literal_no_file(temp_dir):
+def test_literal_no_file():
     # What happens if the file for a literal doesn't exist?
     with pytest.raises(
         FileNotFoundError, match=r"No such file or directory: 'sub/foob.py'"
     ):
-        Config(version="literal:sub/foob.py: __version__")
+        config = Config(version="literal:sub/foob.py: __version__")
+        config.version  # pylint: disable=pointless-statement
 
 
 def test_literal_no_literal(temp_dir):
@@ -196,7 +207,8 @@ def test_literal_no_literal(temp_dir):
         Exception,
         match=r"Couldn't find literal: 'literal:sub/foob.py: version'",
     ):
-        Config(version="literal:sub/foob.py: version")
+        config = Config(version="literal:sub/foob.py: version")
+        config.version  # pylint: disable=pointless-statement
 
 
 @pytest.mark.parametrize("chars", ["", "#", "#=-", "# ", "  "])
@@ -204,6 +216,14 @@ def test_rst_chars_is_two_chars(chars):
     # rst_header_chars must be exactly two non-space characters.
     with pytest.raises(ValueError):
         Config(rst_header_chars=chars)
+
+
+def test_md_format(changelog_d):
+    (changelog_d / "scriv.ini").write_text("[scriv]\nformat = md\n")
+    config = Config.read()
+    assert config.output_file == "CHANGELOG.md"
+    template = re.sub(r"\s+", " ", config.new_fragment_template)
+    assert template.startswith("<!-- A new scriv changelog fragment.")
 
 
 class TestTomlConfig:

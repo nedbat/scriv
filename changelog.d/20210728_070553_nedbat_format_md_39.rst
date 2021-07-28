@@ -1,0 +1,9 @@
+Fixed
+.....
+
+- Setting ``format=md`` didn't properly cascade into other default settings,
+  leaving you with RST settings that needed to be explicitly overriden
+  (`issue 39`_).  This is now fixed.
+
+.. _issue 39: https://github.com/nedbat/scriv/issues/39
+
