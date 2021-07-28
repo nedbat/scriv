@@ -17,7 +17,7 @@ from scriv.literals import find_literal
 
 
 @attr.s
-class Config:
+class _Options:
     """
     All the settable options for Scriv.
     """
@@ -183,25 +183,34 @@ class Config:
         },
     )
 
-    def __attrs_post_init__(
-        self,
-    ):  # noqa: D105 (Missing docstring in magic method)
-        self.resolve_all()
 
-    def resolve_all(self):
-        """
-        Prepare all fields in the config.
+class Config:
+    """
+    Configuration for Scriv.
 
-        Call resolve_value on them, and convert strings to lists as needed.
-        """
-        for attrdef in attr.fields(Config):
-            value = getattr(self, attrdef.name)
-            if attrdef.type is list:
-                if isinstance(value, str):
-                    value = convert_list(value)
-            else:
-                value = self.resolve_value(value)
-            setattr(self, attrdef.name, value)
+    All the settable options for Scriv, with resolution of values within other
+    values.
+
+    """
+
+    def __init__(self, **kwargs):
+        """All values in _Options can be set as keywords."""
+        self._options = _Options(**kwargs)
+
+    def __getattr__(self, name):
+        """Proxy to self._options, and resolve the value."""
+        fields = attr.fields_dict(_Options)
+        if name not in fields:
+            raise AttributeError(f"Scriv configuration has no {name!r} option")
+        attrdef = fields[name]
+        value = getattr(self._options, name)
+        if attrdef.type is list:
+            if isinstance(value, str):
+                value = convert_list(value)
+        else:
+            value = self.resolve_value(value)
+        setattr(self, name, value)
+        return value
 
     @classmethod
     def read(cls) -> "Config":
@@ -222,7 +231,6 @@ class Config:
         config.read_one_config(
             str(Path(config.fragment_directory) / "scriv.ini")
         )
-        config.resolve_all()
         return config
 
     def read_one_config(self, configfile: str) -> None:
@@ -236,13 +244,13 @@ class Config:
             (name for name in section_names if parser.has_section(name)), None
         )
         if section_name:
-            for attrdef in attr.fields(Config):
+            for attrdef in attr.fields(_Options):
                 try:
                     val = parser[section_name][attrdef.name]  # type: Any
                 except KeyError:
                     pass
                 else:
-                    setattr(self, attrdef.name, val)
+                    setattr(self._options, attrdef.name, val)
 
     def read_one_toml(self, tomlfile: str) -> None:
         """
@@ -272,13 +280,13 @@ class Config:
             except KeyError:
                 # No settings for us
                 return
-            for attrdef in attr.fields(Config):
+            for attrdef in attr.fields(_Options):
                 try:
                     val = scriv_data[attrdef.name]
                 except KeyError:
                     pass
                 else:
-                    setattr(self, attrdef.name, val)
+                    setattr(self._options, attrdef.name, val)
 
     def resolve_value(self, value: str) -> str:
         """
@@ -292,7 +300,7 @@ class Config:
             "literal:" read a literal string from a file.
 
         """
-        value = value.replace("${config:format}", self.format)
+        value = value.replace("${config:format}", self._options.format)
         if value.startswith("file:"):
             file_name = value.partition(":")[2].strip()
             file_path = Path(self.fragment_directory) / file_name
