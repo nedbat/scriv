@@ -1,9 +1,0 @@
-Added
-.....
-
-- Fragment files in the fragment directory will be skipped if they match the
-  new configuration value ``skip_fragments``, a glob pattern.  The default
-  value is "README.*". This lets you put a README.md file in that directory to
-  explain its purpose, as requested in `issue 40`_.
-
-.. _issue 40: https://github.com/nedbat/scriv/issues/40

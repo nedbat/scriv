@@ -21,6 +21,33 @@ See the fragment files in the `changelog.d directory`_.
 
 .. scriv-insert-here
 
+0.12.0 — 2021-07-28
+-------------------
+
+Added
+.....
+
+- Fragment files in the fragment directory will be skipped if they match the
+  new configuration value ``skip_fragments``, a glob pattern.  The default
+  value is "README.*". This lets you put a README.md file in that directory to
+  explain its purpose, as requested in `issue 40`_.
+
+.. _issue 40: https://github.com/nedbat/scriv/issues/40
+
+Changed
+.......
+
+- Switched from "toml" to "tomli" for reading TOML files.
+
+Fixed
+.....
+
+- Setting ``format=md`` didn't properly cascade into other default settings,
+  leaving you with RST settings that needed to be explicitly overridden
+  (`issue 39`_).  This is now fixed.
+
+.. _issue 39: https://github.com/nedbat/scriv/issues/39
+
 0.11.0 — 2021-06-22
 -------------------
 
@@ -186,7 +213,7 @@ Added
 - The default value for new templates is now
   "file: new_entry.${config:format}.j2".
 
-- Configuratsion values can be read from string literals in Python code with a
+- Configuration values can be read from string literals in Python code with a
   "literal:" prefix.
 
 - "version" is now a configuration setting.  This will be most useful when used
