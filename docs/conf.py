@@ -25,7 +25,7 @@ def get_version(*file_paths):
     Extract the version string from a file.
     """
     filename = os.path.join(os.path.dirname(__file__), *file_paths)
-    with io.open(filename) as version_file:
+    with io.open(filename, encoding="utf-8") as version_file:
         version_text = version_file.read()
     version_match = re.search(
         r"^__version__ = ['\"]([^'\"]*)['\"]", version_text, re.M

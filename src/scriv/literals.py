@@ -17,7 +17,7 @@ def find_literal(file_name: str, literal_name: str) -> Optional[str]:
     """
     ext = os.path.splitext(file_name)[-1]
     if ext == ".py":
-        with open(file_name) as f:
+        with open(file_name, encoding="utf-8") as f:
             node = ast.parse(f.read())
         return PythonLiteralFinder().find(node, literal_name)
     else:

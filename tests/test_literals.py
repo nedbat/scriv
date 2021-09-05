@@ -43,13 +43,13 @@ def foo():
     ],
 )
 def test_find_python_literal(name, value, temp_dir):
-    with open("foo.py", "w") as f:
+    with open("foo.py", "w", encoding="utf-8") as f:
         f.write(PYTHON_CODE)
     assert find_literal("foo.py", name) == value
 
 
 def test_unknown_file_type(temp_dir):
-    with open("what.xyz", "w") as f:
+    with open("what.xyz", "w", encoding="utf-8") as f:
         f.write("Hello there!")
     expected = "Can't read literals from files like 'what.xyz'"
     with pytest.raises(Exception, match=expected):
