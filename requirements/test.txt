@@ -18,7 +18,7 @@ coverage==5.5
     # via -r requirements/test.in
 freezegun==1.1.0
     # via -r requirements/test.in
-importlib-metadata==4.6.1
+importlib-metadata==4.8.1
     # via
     #   -r requirements/base.txt
     #   click
@@ -38,17 +38,17 @@ packaging==21.0
     # via pytest
 parso==0.8.2
     # via jedi
-pluggy==0.13.1
+pluggy==1.0.0
     # via pytest
 pudb==2021.1
     # via -r requirements/test.in
 py==1.10.0
     # via pytest
-pygments==2.9.0
+pygments==2.10.0
     # via pudb
 pyparsing==2.4.7
     # via packaging
-pytest==6.2.4
+pytest==6.2.5
     # via pytest-mock
 pytest-mock==3.6.1
     # via -r requirements/test.in
@@ -58,7 +58,7 @@ six==1.16.0
     # via python-dateutil
 toml==0.10.2
     # via pytest
-typing-extensions==3.10.0.0
+typing-extensions==3.10.0.2
     # via
     #   -r requirements/base.txt
     #   importlib-metadata

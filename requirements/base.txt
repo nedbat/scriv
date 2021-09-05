@@ -12,13 +12,13 @@ click==8.0.1
     #   click-log
 click-log==0.3.2
     # via -r requirements/base.in
-importlib-metadata==4.6.1
+importlib-metadata==4.8.1
     # via click
 jinja2==3.0.1
     # via -r requirements/base.in
 markupsafe==2.0.1
     # via jinja2
-typing-extensions==3.10.0.0
+typing-extensions==3.10.0.2
     # via importlib-metadata
 zipp==3.5.0
     # via importlib-metadata

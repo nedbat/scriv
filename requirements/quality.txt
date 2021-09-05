@@ -8,9 +8,7 @@ alabaster==0.7.12
     # via
     #   -r requirements/doc.txt
     #   sphinx
-appdirs==1.4.4
-    # via black
-astroid==2.6.5
+astroid==2.7.3
     # via pylint
 attrs==21.2.0
     # via
@@ -21,15 +19,15 @@ babel==2.9.1
     # via
     #   -r requirements/doc.txt
     #   sphinx
-black==21.7b0
+black==21.8b0
     # via -r requirements/quality.in
-bleach==3.3.1
+bleach==4.1.0
     # via readme-renderer
 certifi==2021.5.30
     # via
     #   -r requirements/doc.txt
     #   requests
-charset-normalizer==2.0.3
+charset-normalizer==2.0.4
     # via
     #   -r requirements/doc.txt
     #   requests
@@ -73,7 +71,7 @@ imagesize==1.2.0
     # via
     #   -r requirements/doc.txt
     #   sphinx
-importlib-metadata==4.6.1
+importlib-metadata==4.8.1
     # via
     #   -r requirements/doc.txt
     #   -r requirements/test.txt
@@ -88,7 +86,7 @@ iniconfig==1.1.1
     #   -r requirements/doc.txt
     #   -r requirements/test.txt
     #   pytest
-isort==5.9.2
+isort==5.9.3
     # via
     #   -r requirements/quality.in
     #   pylint
@@ -102,7 +100,7 @@ jinja2==3.0.1
     #   -r requirements/doc.txt
     #   -r requirements/test.txt
     #   sphinx
-keyring==23.0.1
+keyring==23.1.0
     # via twine
 lazy-object-proxy==1.6.0
     # via astroid
@@ -139,7 +137,11 @@ pbr==5.6.0
     #   stevedore
 pkginfo==1.7.1
     # via twine
-pluggy==0.13.1
+platformdirs==2.3.0
+    # via
+    #   black
+    #   pylint
+pluggy==1.0.0
     # via
     #   -r requirements/doc.txt
     #   -r requirements/test.txt
@@ -157,7 +159,7 @@ pycodestyle==2.7.0
     # via -r requirements/quality.in
 pydocstyle==6.1.1
     # via -r requirements/quality.in
-pygments==2.9.0
+pygments==2.10.0
     # via
     #   -r requirements/doc.txt
     #   -r requirements/test.txt
@@ -165,7 +167,7 @@ pygments==2.9.0
     #   pudb
     #   readme-renderer
     #   sphinx
-pylint==2.9.5
+pylint==2.10.2
     # via pylint-pytest
 pylint-pytest==1.0.3
     # via
@@ -176,7 +178,7 @@ pyparsing==2.4.7
     #   -r requirements/doc.txt
     #   -r requirements/test.txt
     #   packaging
-pytest==6.2.4
+pytest==6.2.5
     # via
     #   -r requirements/doc.txt
     #   -r requirements/test.txt
@@ -197,7 +199,7 @@ pytz==2021.1
     #   babel
 readme-renderer==29.0
     # via twine
-regex==2021.7.6
+regex==2021.8.28
     # via black
 requests==2.26.0
     # via
@@ -225,7 +227,7 @@ snowballstemmer==2.1.0
     #   -r requirements/doc.txt
     #   pydocstyle
     #   sphinx
-sphinx==4.1.1
+sphinx==4.1.2
     # via
     #   -r requirements/doc.txt
     #   sphinx-rtd-theme
@@ -255,7 +257,7 @@ sphinxcontrib-serializinghtml==1.1.5
     # via
     #   -r requirements/doc.txt
     #   sphinx
-stevedore==3.3.0
+stevedore==3.4.0
     # via
     #   -r requirements/doc.txt
     #   doc8
@@ -266,9 +268,9 @@ toml==0.10.2
     #   mypy
     #   pylint
     #   pytest
-tomli==1.1.0
+tomli==1.2.1
     # via black
-tqdm==4.61.2
+tqdm==4.62.2
     # via twine
 twine==3.4.2
     # via -r requirements/quality.in
@@ -277,7 +279,7 @@ typed-ast==1.4.3
     #   astroid
     #   black
     #   mypy
-typing-extensions==3.10.0.0
+typing-extensions==3.10.0.2
     # via
     #   -r requirements/doc.txt
     #   -r requirements/test.txt
