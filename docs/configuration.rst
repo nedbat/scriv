@@ -61,8 +61,14 @@ separated by colons::
 In this case, the file ``myproj/__init__.py`` will be read, and the
 ``__version__`` value will be found and used as the version setting.
 
-Currently only Python files are supported for literals, but other syntaxes
-can be supported in the future.
+It is also possible to specify a variable in a TOML file
+using periods to separate the sections and key names::
+
+    [scriv]
+    version = literal: pyproject.toml: tool.poetry.version
+
+Currently only Python and TOML files are supported for literals,
+but other syntaxes can be supported in the future.
 
 Value Substitution
 ------------------
