@@ -65,7 +65,7 @@ It is also possible to specify a variable in a TOML file
 using periods to separate the sections and key names::
 
     [scriv]
-    version = literal: pyproject.toml: tool.poetry.version
+    version = literal: pyproject.toml: project.version
 
 Currently only Python and TOML files are supported for literals,
 but other syntaxes can be supported in the future.
