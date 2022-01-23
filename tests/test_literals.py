@@ -2,7 +2,7 @@
 
 import pytest
 
-from scriv.literals import find_literal
+import scriv.literals
 
 PYTHON_CODE = """\
 # A string we should get.
@@ -45,7 +45,7 @@ def foo():
 def test_find_python_literal(name, value, temp_dir):
     with open("foo.py", "w", encoding="utf-8") as f:
         f.write(PYTHON_CODE)
-    assert find_literal("foo.py", name) == value
+    assert scriv.literals.find_literal("foo.py", name) == value
 
 
 def test_unknown_file_type(temp_dir):
@@ -53,4 +53,56 @@ def test_unknown_file_type(temp_dir):
         f.write("Hello there!")
     expected = "Can't read literals from files like 'what.xyz'"
     with pytest.raises(Exception, match=expected):
-        find_literal("what.xyz", "hi")
+        scriv.literals.find_literal("what.xyz", "hi")
+
+
+TOML_LITERAL = """
+version = "1"
+
+[tool.poetry]
+version = "2"
+
+[metadata]
+version = "3"
+objects = { version = "4", other = "ignore" }
+
+[bogus]
+# Non-strings don't count.
+number = 123
+boolean = true
+lists = [1, 2, 3]
+bad_type = nan
+
+# Sections don't count.
+[bogus.section]
+
+"""
+
+
+@pytest.mark.parametrize(
+    "name, value",
+    [
+        ("version", "1"),
+        ("tool.poetry.version", "2"),
+        ("tool.poetry.version.too.deep", None),
+        ("metadata.version", "3"),
+        ("metadata.objects.version", "4"),
+        ("bogus", None),
+        ("bogus.number", None),
+        ("bogus.boolean", None),
+        ("bogus.lists", None),
+        ("bogus.bad_type", None),
+        ("bogus.section", None),
+        ("bogus.section.too.deep", None),
+    ],
+)
+def test_find_toml_literal(name, value, temp_dir):
+    with open("foo.toml", "w", encoding="utf-8") as f:
+        f.write(TOML_LITERAL)
+    assert scriv.literals.find_literal("foo.toml", name) == value
+
+
+def test_find_toml_literal_fail_if_unavailable(monkeypatch):
+    monkeypatch.setattr(scriv.literals, "tomli", None)
+    with pytest.raises(Exception, match="Can't read .+ without TOML support"):
+        scriv.literals.find_literal("foo.toml", "fail")

@@ -4,7 +4,12 @@ Find literals in various kinds of files.
 
 import ast
 import os.path
-from typing import Optional
+from typing import Any, MutableMapping, Optional
+
+try:
+    import tomli
+except ImportError:
+    tomli = None  # type: ignore
 
 
 def find_literal(file_name: str, literal_name: str) -> Optional[str]:
@@ -20,6 +25,16 @@ def find_literal(file_name: str, literal_name: str) -> Optional[str]:
         with open(file_name, encoding="utf-8") as f:
             node = ast.parse(f.read())
         return PythonLiteralFinder().find(node, literal_name)
+    elif ext == ".toml":
+        if tomli is None:
+            msg = (
+                "Can't read {!r} without TOML support. "
+                + "Install with [toml] extra"
+            ).format(file_name)
+            raise Exception(msg)
+        with open(file_name, encoding="utf-8") as f:
+            data = tomli.loads(f.read())
+        return find_toml_value(data, literal_name)
     else:
         raise Exception(
             "Can't read literals from files like {!r}".format(file_name)
@@ -67,3 +82,21 @@ class PythonLiteralFinder(ast.NodeVisitor):
                 self.value = value.value
         elif isinstance(value, ast.Str):
             self.value = value.s
+
+
+def find_toml_value(data: MutableMapping[str, Any], name: str) -> Optional[str]:
+    """
+    Use a period-separated name to traverse a dictionary.
+
+    Only string values are supported.
+    """
+    current_object = data
+    for key in name.split("."):
+        try:
+            current_object = current_object[key]
+        except (KeyError, TypeError):
+            return None
+
+    if isinstance(current_object, str):
+        return current_object
+    return None
