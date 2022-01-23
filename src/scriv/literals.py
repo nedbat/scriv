@@ -8,7 +8,7 @@ from typing import Any, MutableMapping, Optional
 
 try:
     import tomli
-except ImportError:
+except ImportError:  # pragma: no cover
     tomli = None  # type: ignore
 
 

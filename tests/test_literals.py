@@ -3,6 +3,7 @@
 import pytest
 
 import scriv.literals
+from scriv.literals import find_literal
 
 PYTHON_CODE = """\
 # A string we should get.
@@ -45,7 +46,7 @@ def foo():
 def test_find_python_literal(name, value, temp_dir):
     with open("foo.py", "w", encoding="utf-8") as f:
         f.write(PYTHON_CODE)
-    assert scriv.literals.find_literal("foo.py", name) == value
+    assert find_literal("foo.py", name) == value
 
 
 def test_unknown_file_type(temp_dir):
@@ -53,7 +54,7 @@ def test_unknown_file_type(temp_dir):
         f.write("Hello there!")
     expected = "Can't read literals from files like 'what.xyz'"
     with pytest.raises(Exception, match=expected):
-        scriv.literals.find_literal("what.xyz", "hi")
+        find_literal("what.xyz", "hi")
 
 
 TOML_LITERAL = """
@@ -99,10 +100,10 @@ bad_type = nan
 def test_find_toml_literal(name, value, temp_dir):
     with open("foo.toml", "w", encoding="utf-8") as f:
         f.write(TOML_LITERAL)
-    assert scriv.literals.find_literal("foo.toml", name) == value
+    assert find_literal("foo.toml", name) == value
 
 
 def test_find_toml_literal_fail_if_unavailable(monkeypatch):
     monkeypatch.setattr(scriv.literals, "tomli", None)
     with pytest.raises(Exception, match="Can't read .+ without TOML support"):
-        scriv.literals.find_literal("foo.toml", "fail")
+        find_literal("foo.toml", "fail")
