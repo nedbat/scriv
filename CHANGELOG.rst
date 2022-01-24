@@ -21,6 +21,15 @@ See the fragment files in the `changelog.d directory`_.
 
 .. scriv-insert-here
 
+0.13.0 — 2022-01-23
+-------------------
+
+Added
+.....
+
+-   Support finding version information in TOML files (like ``pyproject.toml``)
+    using the ``literal`` configuration directive.  Thanks, Kurt McKee
+
 0.12.0 — 2021-07-28
 -------------------
 
