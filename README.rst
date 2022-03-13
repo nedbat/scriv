@@ -2,9 +2,10 @@
 Scriv
 #####
 
-|pypi-badge| |ci-badge| |doc-badge| |pyversions-badge| |license-badge|
-
 Scriv changelog management tool
+
+|pypi-badge| |ci-badge| |doc-badge| |pyversions-badge| |license-badge|
+|sponsor-badge| |twitter-nedbat|
 
 Overview
 ========
@@ -67,3 +68,11 @@ Contributions are very welcome.
 .. |license-badge| image:: https://img.shields.io/github/license/nedbat/scriv.svg
     :target: https://github.com/nedbat/scriv/blob/master/LICENSE.txt
     :alt: License
+
+.. |twitter-nedbat| image:: https://img.shields.io/twitter/follow/nedbat.svg?label=nedbat&style=flat&logo=twitter&logoColor=4FADFF
+    :target: https://twitter.com/nedbat
+    :alt: nedbat on Twitter
+
+.. |sponsor-badge| image:: https://img.shields.io/badge/%E2%9D%A4-Sponsor%20me-brightgreen?style=flat&logo=GitHub
+    :target: https://github.com/sponsors/nedbat
+    :alt: Sponsor me on GitHub
