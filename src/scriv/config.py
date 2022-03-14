@@ -132,9 +132,8 @@ class _Options:
     entry_title_template = attr.ib(
         type=str,
         default=(
-            """{% if version %}.. _changelog-{{version}}:
-
-{{ version }} — """
+            "{% if version %}.. _changelog-{{version}}:\n\n"
+            "{{ version }} — "
             "{% endif %}"
             "{{ date.strftime('%Y-%m-%d') }}"
         ),
