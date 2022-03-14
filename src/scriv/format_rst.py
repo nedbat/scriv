@@ -103,7 +103,7 @@ class RstTools(FormatTools):
             "\n"
             + text
             + "\n"
-            + self.config.rst_header_chars[0] * len(text)
+            + self.config.rst_header_chars[0] * len(text.split('\n')[-1])
             + "\n"
         )
 

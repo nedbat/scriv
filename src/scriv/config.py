@@ -132,8 +132,11 @@ class _Options:
     entry_title_template = attr.ib(
         type=str,
         default=(
-            "{% if version %}{{ version }} — {% endif %}"
-            + "{{ date.strftime('%Y-%m-%d') }}"
+            """{% if version %}.. _changelog-{{version}}:
+
+{{ version }} — """
+            "{% endif %}"
+            "{{ date.strftime('%Y-%m-%d') }}"
         ),
         metadata={
             "doc": """\
