@@ -341,6 +341,8 @@ def test_collect_version_in_config(cli_invoke, changelog_d, temp_dir):
     changelog_text = changelog.read_text(encoding="utf-8")
     expected = (
         "\n"
+        + ".. _changelog-v12.34b:\n"
+        + "\n"
         + "v12.34b — 2020-02-26\n"
         + "====================\n\n"
         + "- The first change.\n"
