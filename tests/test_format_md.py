@@ -111,7 +111,7 @@ from scriv.format_md import MdTools
                     "- Another thing was fixed.",
                 ],
             },
-            id="multiple_headers",
+            id="multiple_headers_2",
         ),
         # It's fine to have no header at all.
         pytest.param(
