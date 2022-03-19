@@ -79,6 +79,40 @@ from scriv.format_md import MdTools
             },
             id="multiple_headers",
         ),
+        # Multiple section headers at a different level.
+        pytest.param(
+            """\
+            ### Added
+
+            - This thing was added.
+              And we liked it.
+
+
+            ### Fixed or Something
+
+            - This thing was fixed.
+
+            - Another thing was fixed.
+
+            ### Added
+
+            - Also added
+              this thing
+              that is very important.
+
+            """,
+            {
+                "Added": [
+                    "- This thing was added.\n  And we liked it.",
+                    "- Also added\n  this thing\n  that is very important.",
+                ],
+                "Fixed or Something": [
+                    "- This thing was fixed.",
+                    "- Another thing was fixed.",
+                ],
+            },
+            id="multiple_headers",
+        ),
         # It's fine to have no header at all.
         pytest.param(
             """\

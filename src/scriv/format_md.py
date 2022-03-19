@@ -28,8 +28,8 @@ class MdTools(FormatTools):
                 if re.search(r"^\s*<!--", line):
                     in_comment = True
                     continue
-                if line.startswith("# "):
-                    section_title = line[2:]
+                if re.search(r"^#+ ", line):
+                    section_title = line.partition(" ")[2]
                     paragraphs = sections.setdefault(section_title, [])
                     paragraphs.append("")
                     continue

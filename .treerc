@@ -7,3 +7,4 @@ ignore =
     .tox*
     _build _spell
     *.egg *.egg-info
+    .mypy_cache
