@@ -104,10 +104,7 @@ class RstTools(FormatTools):
         if anchor:
             header += f".. _{anchor}:\n\n"
         header += (
-            text
-            + "\n"
-            + self.config.rst_header_chars[0] * len(text)
-            + "\n"
+            text + "\n" + self.config.rst_header_chars[0] * len(text) + "\n"
         )
         return header
 
