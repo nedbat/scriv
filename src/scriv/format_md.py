@@ -60,7 +60,7 @@ class MdTools(FormatTools):
         num = int(self.config.md_header_level)
         header = "\n"
         if anchor:
-            header += f"<a id='{anchor}'/>\n"
+            header += f"<a id='{anchor}'></a>\n"
         header += "#" * num + " " + text + "\n"
         return header
 
