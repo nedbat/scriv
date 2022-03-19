@@ -58,7 +58,11 @@ class MdTools(FormatTools):
         self, text: str, anchor: Optional[str] = None
     ) -> str:  # noqa: D102 (inherited docstring)
         num = int(self.config.md_header_level)
-        return "\n" + "#" * num + " " + text + "\n"
+        header = "\n"
+        if anchor:
+            header += f"<a id='{anchor}'/>\n\n"
+        header += "#" * num + " " + text + "\n"
+        return header
 
     def format_sections(
         self, sections: SectionDict
