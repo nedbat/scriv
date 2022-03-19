@@ -32,7 +32,7 @@ class FormatTools(abc.ABC):
         """
 
     @abc.abstractmethod
-    def format_header(self, text: str) -> str:
+    def format_header(self, text: str, anchor: Optional[str] = None) -> str:
         """
         Format the header for a new changelog entry.
         """

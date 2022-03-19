@@ -67,15 +67,17 @@ class Changelog:
     def entry_header(self, date=None, version=None) -> str:
         """Format the header for a new entry."""
         format_tools = get_format_tools(self.config.format, self.config)
+        version = version or self.config.version
         title_data = {
             "date": date or datetime.datetime.now(),
-            "version": version or self.config.version,
+            "version": version,
         }
         new_title = jinja2.Template(self.config.entry_title_template).render(
             config=self.config, **title_data
         )
         if new_title.strip():
-            new_header = format_tools.format_header(new_title)
+            anchor = f"changelog-{version}" if version else None
+            new_header = format_tools.format_header(new_title, anchor=anchor)
         else:
             new_header = ""
         return new_header

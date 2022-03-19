@@ -1,6 +1,7 @@
 """ReStructured text knowledge for scriv."""
 
 import re
+from typing import Optional
 
 from .format import FormatTools, SectionDict
 
@@ -97,15 +98,18 @@ class RstTools(FormatTools):
         return sections
 
     def format_header(
-        self, text: str
+        self, text: str, anchor: Optional[str] = None
     ) -> str:  # noqa: D102 (inherited docstring)
-        return (
-            "\n"
-            + text
+        header = "\n"
+        if anchor:
+            header += f".. _{anchor}:\n\n"
+        header += (
+            text
             + "\n"
-            + self.config.rst_header_chars[0] * len(text.split("\n")[-1])
+            + self.config.rst_header_chars[0] * len(text)
             + "\n"
         )
+        return header
 
     def format_sections(
         self, sections: SectionDict

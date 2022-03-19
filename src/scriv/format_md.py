@@ -1,6 +1,7 @@
 """Markdown text knowledge for scriv."""
 
 import re
+from typing import Optional
 
 from .format import FormatTools, SectionDict
 
@@ -54,7 +55,7 @@ class MdTools(FormatTools):
         return sections
 
     def format_header(
-        self, text: str
+        self, text: str, anchor: Optional[str] = None
     ) -> str:  # noqa: D102 (inherited docstring)
         num = int(self.config.md_header_level)
         return "\n" + "#" * num + " " + text + "\n"
