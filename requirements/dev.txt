@@ -49,6 +49,8 @@ click==8.0.1
     #   pip-tools
 click-log==0.3.2
     # via -r requirements/quality.txt
+cogapp==3.3.0
+    # via -r requirements/quality.txt
 colorama==0.4.4
     # via
     #   -r requirements/quality.txt

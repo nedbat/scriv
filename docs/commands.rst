@@ -2,12 +2,44 @@
 Commands
 ########
 
+.. [[[cog
+    import contextlib
+    import io
+    import textwrap
+    from scriv.cli import cli
+
+    def show_help(cmd):
+        with contextlib.redirect_stdout(io.StringIO()) as help_out:
+            with contextlib.suppress(SystemExit):
+                cli([cmd, "--help"])
+        help_text = help_out.getvalue()
+        help_text = help_text.replace("python -m cogapp", "scriv")
+        print("\n.. code::\n")
+        print(f"    $ scriv {cmd} --help")
+        print(textwrap.indent(help_text, "    ").rstrip())
+.. ]]]
+.. [[[end]]] (checksum: d41d8cd98f00b204e9800998ecf8427e)
+
 .. _cmd_create:
 
 scriv create
 ============
 
-.. include:: include/create_help.rst
+.. [[[cog show_help("create") ]]]
+
+.. code::
+
+    $ scriv create --help
+    Usage: scriv create [OPTIONS]
+
+      Create a new scriv changelog fragment.
+
+    Options:
+      --add / --no-add     'git add' the created file.
+      --edit / --no-edit   Open the created file in your text editor.
+      -v, --verbosity LVL  Either CRITICAL, ERROR, WARNING, INFO or DEBUG
+      --help               Show this message and exit.
+.. [[[end]]] (checksum: 7971e9a84f47c500c7d7afdb29879888)
 
 The create command creates new :ref:`fragments <fragments>`.
 
@@ -65,7 +97,23 @@ it is ready to commit.
 scriv collect
 =============
 
-.. include:: include/collect_help.rst
+.. [[[cog show_help("collect") ]]]
+
+.. code::
+
+    $ scriv collect --help
+    Usage: scriv collect [OPTIONS]
+
+      Collect fragments and produce a combined entry in the CHANGELOG file.
+
+    Options:
+      --add / --no-add     'git add' the updated changelog file.
+      --edit / --no-edit   Open the changelog file in your text editor.
+      --keep               Keep the fragment files that are collected.
+      --version TEXT       The version name to use for this entry.
+      -v, --verbosity LVL  Either CRITICAL, ERROR, WARNING, INFO or DEBUG
+      --help               Show this message and exit.
+.. [[[end]]] (checksum: 5a37816dcb12829eca58f1ccd42a8e62)
 
 The collect command aggregates all the current fragments into the changelog
 file.

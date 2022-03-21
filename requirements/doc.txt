@@ -23,7 +23,8 @@ click==8.0.1
 click-log==0.3.2
     # via -r requirements/test.txt
 coverage==5.5
-    # via -r requirements/test.txt
+cogapp==3.3.0
+    # via -r requirements/doc.in
 doc8==0.9.0
     # via -r requirements/doc.in
 docutils==0.16
