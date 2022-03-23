@@ -30,7 +30,7 @@ class MdTools(FormatTools):
                     in_comment = True
                     continue
                 if re.search(r"^#+ ", line):
-                    section_title = line.partition(" ")[2]
+                    section_title = line.split(maxsplit=1)[1]
                     paragraphs = sections.setdefault(section_title, [])
                     paragraphs.append("")
                     continue
