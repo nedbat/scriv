@@ -5,5 +5,5 @@
 - commit changes
 - make clean dist
 - make pypi
-- git tag -a 0.11.0
+- make tag
 - git push --all

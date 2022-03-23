@@ -73,3 +73,6 @@ pypi: ## Upload the built distributions to PyPI.
 
 testpypi: ## Upload the distrubutions to PyPI's testing server.
 	python -m twine upload --verbose --repository testpypi dist/*
+
+tag: ## Make a git tag with the version number
+	git tag -a -m "Version $$(python setup.py --version)" $$(python setup.py --version)
