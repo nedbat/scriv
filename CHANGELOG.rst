@@ -21,6 +21,27 @@ See the fragment files in the `changelog.d directory`_.
 
 .. scriv-insert-here
 
+.. _changelog-0.14.0:
+
+0.14.0 — 2022-03-23
+-------------------
+
+Added
+.....
+
+- Add an anchor before each version section in the output of ``scriv collect``
+  so URLs for the sections are predictable and stable for each new version
+  (Fixes `issue 46`_). Thanks Abhilash Raj and Rodrigo Girão Serrão.
+
+Fixed
+.....
+
+- Markdown fragments weren't combined properly. Now they are. Thanks Rodrigo
+  Girão Serrão.
+
+.. _issue 46: https://github.com/nedbat/scriv/issues/46
+
+
 0.13.0 — 2022-01-23
 -------------------
 
