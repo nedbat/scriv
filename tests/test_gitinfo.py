@@ -1,6 +1,6 @@
 """Tests of gitinfo.py"""
 
-from scriv.gitinfo import current_branch_name, user_nick
+from scriv.gitinfo import current_branch_name, get_github_repo, user_nick
 
 
 def test_user_nick_from_github(fake_git):
@@ -28,3 +28,30 @@ def test_user_nick_from_nowhere(fake_git, monkeypatch):
 def test_current_branch_name(fake_git):
     fake_git.set_branch("joedev/feature-123")
     assert current_branch_name() == "joedev/feature-123"
+
+
+def test_get_github_repo_no_remotes(fake_git):
+    assert get_github_repo() is None
+
+
+def test_get_github_repo_one_github_remote(fake_git):
+    fake_git.add_remote("mygithub", "git@github.com:joe/myproject.git")
+    assert get_github_repo() == "joe/myproject"
+
+
+def test_get_github_repo_two_github_remotes(fake_git):
+    fake_git.add_remote("mygithub", "git@github.com:joe/myproject.git")
+    fake_git.add_remote("upstream", "git@github.com:psf/myproject.git")
+    assert get_github_repo() is None
+
+
+def test_get_github_repo_one_github_plus_others(fake_git):
+    fake_git.add_remote("mygithub", "git@github.com:joe/myproject.git")
+    fake_git.add_remote("upstream", "git@gitlab.com:psf/myproject.git")
+    assert get_github_repo() == "joe/myproject"
+
+
+def test_get_github_repo_no_github_remotes(fake_git):
+    fake_git.add_remote("mygitlab", "git@gitlab.com:joe/myproject.git")
+    fake_git.add_remote("upstream", "git@gitlab.com:psf/myproject.git")
+    assert get_github_repo() is None

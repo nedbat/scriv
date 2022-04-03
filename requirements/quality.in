@@ -13,4 +13,5 @@ pylint
 pylint-pytest             # Understanding of pytest fixtures.
 twine                     # For checking distributions
 types-freezegun
+types-requests
 types-toml

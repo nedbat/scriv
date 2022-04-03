@@ -82,3 +82,8 @@ class MdTools(FormatTools):
                 lines.append(paragraph)
 
         return "\n".join(lines) + "\n"
+
+    def convert_to_markdown(
+        self, text: str
+    ) -> str:  # noqa: D102 (inherited docstring)
+        return text

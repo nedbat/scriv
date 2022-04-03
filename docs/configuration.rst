@@ -121,6 +121,16 @@ See :ref:`categories`.
 
 Default: ``Removed, Added, Changed, Deprecated, Fixed, Security``
 
+.. _config_end_marker:
+
+end_marker
+----------
+
+A marker string indicating where in the changelog file the
+changelog ends.
+
+Default: ``scriv-end-here``
+
 .. _config_entry_title_template:
 
 entry_title_template
@@ -233,7 +243,7 @@ source file.
 
 Default: (empty)
 
-.. [[[end]]] (checksum: f6b8c77c32d4309e2ad16350b1ca6055)
+.. [[[end]]] (checksum: d0202bed8295d5dae7bbd18577de6745)
 
 
 .. _git_settings:

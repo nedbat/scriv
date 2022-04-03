@@ -6,7 +6,7 @@ from typing import Dict, List, Optional
 from .config import Config
 
 # When collecting changelog fragments, we group them by their category into
-# Sections.  A SectionDict maps category names to a list of the fragments in
+# Sections.  A SectionDict maps category names to a list of the paragraphs in
 # that section.  For projects not using categories, the key will be None.
 SectionDict = Dict[Optional[str], List[str]]
 
@@ -41,6 +41,12 @@ class FormatTools(abc.ABC):
     def format_sections(self, sections: SectionDict) -> str:
         """
         Format a series of sections into marked-up text.
+        """
+
+    @abc.abstractmethod
+    def convert_to_markdown(self, text: str) -> str:
+        """
+        Convert this format to Markdown.
         """
 
 

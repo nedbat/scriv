@@ -16,7 +16,7 @@ attrs==21.4.0
     # via
     #   -r requirements/quality.txt
     #   pytest
-babel==2.9.1
+babel==2.10.1
     # via
     #   -r requirements/quality.txt
     #   sphinx
@@ -216,7 +216,7 @@ pyparsing==3.0.8
     #   -r requirements/quality.txt
     #   -r requirements/tox.txt
     #   packaging
-pytest==7.1.1
+pytest==7.1.2
     # via
     #   -r requirements/quality.txt
     #   pylint-pytest
@@ -239,12 +239,15 @@ requests==2.27.1
     # via
     #   -r requirements/quality.txt
     #   requests-toolbelt
+    #   responses
     #   sphinx
     #   twine
 requests-toolbelt==0.9.1
     # via
     #   -r requirements/quality.txt
     #   twine
+responses==0.20.0
+    # via -r requirements/quality.txt
 restructuredtext-lint==1.4.0
     # via
     #   -r requirements/quality.txt
@@ -335,7 +338,7 @@ typed-ast==1.4.3
     #   mypy
 types-freezegun==1.1.9
     # via -r requirements/quality.txt
-types-requests==2.27.19
+types-requests==2.27.20
     # via -r requirements/quality.txt
 types-toml==0.10.5
     # via -r requirements/quality.txt
@@ -357,6 +360,7 @@ urllib3==1.26.9
     # via
     #   -r requirements/quality.txt
     #   requests
+    #   responses
     #   twine
 urwid==2.1.2
     # via

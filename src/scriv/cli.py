@@ -8,6 +8,7 @@ import click_log
 from . import __version__
 from .collect import collect
 from .create import create
+from .ghrel import github_release
 
 logger = logging.getLogger()
 click_log.basic_config(logger)
@@ -29,3 +30,4 @@ def cli() -> None:  # noqa: D401
 
 cli.add_command(create)
 cli.add_command(collect)
+cli.add_command(github_release)

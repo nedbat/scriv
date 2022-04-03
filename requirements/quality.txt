@@ -15,7 +15,7 @@ attrs==21.4.0
     #   -r requirements/doc.txt
     #   -r requirements/test.txt
     #   pytest
-babel==2.9.1
+babel==2.10.1
     # via
     #   -r requirements/doc.txt
     #   sphinx
@@ -186,7 +186,7 @@ pyparsing==3.0.8
     #   -r requirements/doc.txt
     #   -r requirements/test.txt
     #   packaging
-pytest==7.1.1
+pytest==7.1.2
     # via
     #   -r requirements/doc.txt
     #   -r requirements/test.txt
@@ -212,10 +212,15 @@ requests==2.27.1
     #   -r requirements/doc.txt
     #   -r requirements/test.txt
     #   requests-toolbelt
+    #   responses
     #   sphinx
     #   twine
 requests-toolbelt==0.9.1
     # via twine
+responses==0.20.0
+    # via
+    #   -r requirements/doc.txt
+    #   -r requirements/test.txt
 restructuredtext-lint==1.4.0
     # via
     #   -r requirements/doc.txt
@@ -287,7 +292,7 @@ typed-ast==1.4.3
     #   mypy
 types-freezegun==1.1.9
     # via -r requirements/quality.in
-types-requests==2.27.19
+types-requests==2.27.20
     # via -r requirements/quality.in
 types-toml==0.10.5
     # via -r requirements/quality.in
@@ -307,6 +312,7 @@ urllib3==1.26.9
     #   -r requirements/doc.txt
     #   -r requirements/test.txt
     #   requests
+    #   responses
     #   twine
 urwid==2.1.2
     # via

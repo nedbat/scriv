@@ -1,7 +1,8 @@
 """Fake implementations of some of our external information sources."""
 
+import re
 import shlex
-from typing import Callable, Dict, List
+from typing import Callable, Dict, Iterable, List, Set
 
 from scriv.shell import CmdResult
 
@@ -45,9 +46,16 @@ class FakeGit:
 
     def __init__(self, frc: FakeRunCommand) -> None:
         """Make a FakeGit from a FakeRunCommand."""
-        self.config: Dict[str, str] = {}
+        # Initialize with basic defaults.
+        self.config: Dict[str, str] = {
+            "core.bare": "false",
+            "core.repositoryformatversion": "0",
+        }
         self.branch = "main"
         self.editor = "vi"
+        self.tags: Set[str] = set()
+
+        # Hook up our run_command handler.
         frc.add_handler("git", self.run_command)
 
     def run_command(self, argv: List[str]) -> CmdResult:
@@ -59,10 +67,19 @@ class FakeGit:
                     return (True, self.config[argv[3]] + "\n")
                 else:
                     return (False, f"error: no such key: {argv[3]}")
+            elif argv[2] == "--get-regex":
+                out = []
+                for name, value in self.config.items():
+                    if re.fullmatch(argv[3], name):
+                        out.append(f"{name} {value}\n")
+                return (True, "".join(out))
         elif argv[1:] == ["rev-parse", "--abbrev-ref", "HEAD"]:
             return (True, self.branch + "\n")
+        elif argv[1:] == ["tags"]:
+            return (True, "".join(tag + "\n" for tag in self.tags))
         elif argv[1:] == ["var", "GIT_EDITOR"]:
             return (True, self.editor + "\n")
+        # raise Exception(f"no fake git command: {argv}")
         return (False, f"no fake git command: {argv}")
 
     def set_config(self, name: str, value: str) -> None:
@@ -76,3 +93,11 @@ class FakeGit:
     def set_editor(self, editor_name: str) -> None:
         """Set the name of the fake editor Git will launch."""
         self.editor = editor_name
+
+    def add_tags(self, tags: Iterable[str]) -> None:
+        """Add tags to the repo."""
+        self.tags.update(tags)
+
+    def add_remote(self, name: str, url: str) -> None:
+        """Add a remote with a name and a url."""
+        self.config[f"remote.{name}.url"] = url

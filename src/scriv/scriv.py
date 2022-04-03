@@ -12,7 +12,7 @@ import attr
 import jinja2
 
 from .config import Config
-from .format import SectionDict, get_format_tools
+from .format import FormatTools, SectionDict, get_format_tools
 from .gitinfo import current_branch_name, user_nick
 from .util import cut_at_line, order_dict
 
@@ -64,9 +64,12 @@ class Changelog:
                 changelog_text, self.config.insert_marker
             )
 
+    def format_tools(self) -> FormatTools:
+        """Get the appropriate FormatTools for this changelog."""
+        return get_format_tools(self.config.format, self.config)
+
     def entry_header(self, date=None, version=None) -> str:
         """Format the header for a new entry."""
-        format_tools = get_format_tools(self.config.format, self.config)
         version = version or self.config.version
         title_data = {
             "date": date or datetime.datetime.now(),
@@ -76,15 +79,16 @@ class Changelog:
         new_title = title_template.render(config=self.config, **title_data)
         if new_title.strip():
             anchor = f"changelog-{version}" if version else None
-            new_header = format_tools.format_header(new_title, anchor=anchor)
+            new_header = self.format_tools().format_header(
+                new_title, anchor=anchor
+            )
         else:
             new_header = ""
         return new_header
 
     def entry_text(self, sections: SectionDict) -> str:
         """Format the text of a new entry."""
-        format_tools = get_format_tools(self.config.format, self.config)
-        new_text = format_tools.format_sections(sections)
+        new_text = self.format_tools().format_sections(sections)
         return new_text
 
     def add_entry(self, header: str, text: str) -> None:
@@ -96,6 +100,13 @@ class Changelog:
         f = self.path.open("w", encoding="utf-8", newline=self.newline or None)
         with f:
             f.write(self.text_before + self.text_after)
+
+    def entries(self) -> SectionDict:
+        """Parse the changelog into a SectionDict."""
+        log, after = cut_at_line(self.text_after, self.config.end_marker)
+        if log == "":
+            log = after
+        return self.format_tools().parse_text(log)
 
 
 class Scriv:

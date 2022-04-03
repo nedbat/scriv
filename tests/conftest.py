@@ -6,6 +6,7 @@ from pathlib import Path
 from typing import Iterable
 
 import pytest
+import responses
 from click.testing import CliRunner
 
 from scriv.cli import cli as scriv_cli
@@ -66,3 +67,10 @@ def changelog_d(temp_dir: Path) -> Path:
     the_changelog_d = temp_dir / "changelog.d"
     the_changelog_d.mkdir()
     return the_changelog_d
+
+
+@pytest.fixture(autouse=True, name="responses")
+def no_http_requests():
+    """Activate `responses` for all tests, so no real HTTP happens."""
+    with responses.RequestsMock() as rsps:
+        yield rsps

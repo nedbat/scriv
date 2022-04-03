@@ -10,7 +10,7 @@ attrs==21.4.0
     # via
     #   -r requirements/test.txt
     #   pytest
-babel==2.9.1
+babel==2.10.1
     # via sphinx
 certifi==2021.10.8
     # via
@@ -102,7 +102,7 @@ pyparsing==3.0.8
     # via
     #   -r requirements/test.txt
     #   packaging
-pytest==7.1.1
+pytest==7.1.2
     # via
     #   -r requirements/test.txt
     #   pytest-mock
@@ -117,7 +117,10 @@ pytz==2022.1
 requests==2.27.1
     # via
     #   -r requirements/test.txt
+    #   responses
     #   sphinx
+responses==0.20.0
+    # via -r requirements/test.txt
 restructuredtext-lint==1.4.0
     # via doc8
 six==1.16.0
@@ -158,6 +161,7 @@ urllib3==1.26.9
     # via
     #   -r requirements/test.txt
     #   requests
+    #   responses
 urwid==2.1.2
     # via
     #   -r requirements/test.txt

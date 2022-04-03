@@ -1,9 +1,11 @@
 """ReStructured text knowledge for scriv."""
 
 import re
+import tempfile
 from typing import Optional
 
 from .format import FormatTools, SectionDict
+from .shell import run_command
 
 
 class RstTools(FormatTools):
@@ -125,3 +127,20 @@ class RstTools(FormatTools):
                 lines.append(paragraph)
 
         return "\n".join(lines) + "\n"
+
+    def convert_to_markdown(
+        self, text: str
+    ) -> str:  # noqa: D102 (inherited docstring)
+        with tempfile.NamedTemporaryFile(
+            mode="w", prefix="scriv_rst_"
+        ) as rst_file:
+            rst_file.write(text)
+            rst_file.flush()
+            ok, output = run_command(
+                "pandoc -frst -tmarkdown_strict "
+                + "--markdown-headings=atx --wrap=none "
+                + rst_file.name
+            )
+            if not ok:
+                raise Exception("Couldn't convert ReST to Markdown: {output}")
+            return output

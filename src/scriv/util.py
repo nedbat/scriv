@@ -1,6 +1,7 @@
 """Miscellanous helpers."""
 
 import collections
+import re
 from typing import Dict, Optional, Sequence, Tuple, TypeVar
 
 T = TypeVar("T")
@@ -41,3 +42,32 @@ def cut_at_line(text: str, marker: str) -> Tuple[str, str]:
         if marker in line:
             return "".join(lines[: i + 1]), "".join(lines[i + 1 :])
     return ("", text)
+
+
+VERSION_REGEX = r"""(?ix)   # based on https://peps.python.org/pep-0440/
+    \b                      # at a word boundary
+    v?                      # maybe a leading "v"
+    (\d+!)?                 # maybe a version epoch
+    \d+(\.\d+)+             # the meat of the version number: N.N.N
+    (?P<pre>
+        [-._]?[a-z]+\.?\d*
+    )?                      # maybe a pre-release: .beta3
+    ([-._][a-z]+\d*)*       # maybe post and dev releases
+    (\+\w[\w.]*\w)?         # maybe a local version
+    \b
+    """
+
+
+def extract_version(text: str) -> Optional[str]:
+    """Find a version number in a text string."""
+    m = re.search(VERSION_REGEX, text)
+    if m:
+        return m[0]
+    return None
+
+
+def is_prerelease_version(version: str) -> bool:  # noqa: D400
+    """Is this version number a pre-release?"""
+    m = re.fullmatch(VERSION_REGEX, version)
+    assert m  # the version must be a valid version
+    return bool(m["pre"])

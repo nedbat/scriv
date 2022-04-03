@@ -89,6 +89,17 @@ class _Options:
         },
     )
 
+    end_marker = attr.ib(
+        type=str,
+        default="scriv-end-here",
+        metadata={
+            "doc": """\
+                A marker string indicating where in the changelog file the
+                changelog ends.
+                """,
+        },
+    )
+
     # The characters to use for header and section underlines in rst files.
     rst_header_chars = attr.ib(
         type=str,

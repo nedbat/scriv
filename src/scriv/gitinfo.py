@@ -2,9 +2,11 @@
 
 import logging
 import os
+import re
 import subprocess
 import sys
 from pathlib import Path
+from typing import Optional
 
 import click
 
@@ -74,3 +76,26 @@ def git_rm(filename: Path) -> None:
     else:
         logger.error("Couldn't remove {}".format(filename))
         sys.exit(ret)
+
+
+def get_github_repo() -> Optional[str]:
+    """
+    Find the GitHub name/repo for this project.
+
+    If there is no remote on GitHub, or more than one, return None.
+    """
+    urls = run_simple_command(
+        r"git config --get-regex 'remote\..*\.url'"
+    ).splitlines()
+    github_repos = []
+    for url in urls:
+        m = re.search(r"github.com[:/]([^/]+/[^/]+)", url)
+        if m:
+            repo = m[1]
+            # I think it always has .git appended..
+            if repo.endswith(".git"):  # pragma: no branch
+                repo = repo[:-4]
+            github_repos.append(repo)
+    if len(github_repos) == 1:
+        return github_repos[0]
+    return None
