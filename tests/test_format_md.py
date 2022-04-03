@@ -146,6 +146,43 @@ from scriv.format_md import MdTools
             {},
             id="empty",
         ),
+        # Multiple levels of headings only splits on the top-most one.
+        pytest.param(
+            """\
+            (prelude)
+
+            ## Section one
+
+            ### subhead
+
+            In the sub
+
+            ### subhead 2
+
+            Also sub
+
+            ## Section two
+
+            In section two.
+
+            ### subhead 3
+            s2s3
+            """,
+            {
+                None: ["(prelude)"],
+                "Section one": [
+                    "### subhead",
+                    "In the sub",
+                    "### subhead 2",
+                    "Also sub",
+                ],
+                "Section two": [
+                    "In section two.",
+                    "### subhead 3\ns2s3",
+                ],
+            },
+            id="multilevel",
+        ),
     ],
 )
 def test_parse_text(text, parsed):

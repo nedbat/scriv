@@ -16,6 +16,7 @@ class MdTools(FormatTools):
         lines = text.splitlines()
         in_comment = False
         paragraphs = None
+        section_mark = None
 
         for line in lines:
             line = line.rstrip()
@@ -30,10 +31,12 @@ class MdTools(FormatTools):
                     in_comment = True
                     continue
                 if re.search(r"^#+ ", line):
-                    section_title = line.split(maxsplit=1)[1]
-                    paragraphs = sections.setdefault(section_title, [])
-                    paragraphs.append("")
-                    continue
+                    if section_mark is None or line.startswith(section_mark):
+                        section_title = line.split(maxsplit=1)[1]
+                        paragraphs = sections.setdefault(section_title, [])
+                        paragraphs.append("")
+                        section_mark = line.partition(" ")[0] + " "
+                        continue
 
                 if not line:
                     if paragraphs is not None:

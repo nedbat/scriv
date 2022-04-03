@@ -178,6 +178,48 @@ from scriv.format_rst import RstTools
             {},
             id="empty",
         ),
+        # Multiple levels of headings only splits on the top-most one.
+        pytest.param(
+            """\
+            (prelude)
+
+            Section one
+            ===========
+
+            subhead
+            -------
+
+            In the sub
+
+            subhead 2
+            ---------
+
+            Also sub
+
+            Section two
+            ===========
+
+            In section two.
+
+            subhead 3
+            ---------
+            s2s3
+            """,
+            {
+                None: ["(prelude)"],
+                "Section one": [
+                    "subhead\n-------",
+                    "In the sub",
+                    "subhead 2\n---------",
+                    "Also sub",
+                ],
+                "Section two": [
+                    "In section two.",
+                    "subhead 3\n---------\ns2s3",
+                ],
+            },
+            id="multilevel",
+        ),
     ],
 )
 def test_parse_text(text, parsed):

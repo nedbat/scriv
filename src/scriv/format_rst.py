@@ -54,6 +54,7 @@ class RstTools(FormatTools):
 
         prev_line = ""
         paragraphs = None
+        section_char = None
 
         for line in lines:
             line = line.rstrip()
@@ -63,17 +64,19 @@ class RstTools(FormatTools):
                 continue
 
             if self._is_underline(line):
-                # Section underline. Previous line was the heading.
-                # General RST can have overlines as well as underlines, but
-                # we only deal with underlines, so some paragraphs must have
-                # preceded us.
-                assert paragraphs is not None
-                # Heading was made a paragraph, undo that.
-                assert paragraphs[-1] == prev_line + "\n"
-                paragraphs.pop()
-                paragraphs = sections.setdefault(prev_line, [])
-                paragraphs.append("")
-                continue
+                if section_char is None or line[0] == section_char:
+                    # Section underline. Previous line was the heading.
+                    # General RST can have overlines as well as underlines, but
+                    # we only deal with underlines, so some paragraphs must have
+                    # preceded us.
+                    assert paragraphs is not None
+                    # Heading was made a paragraph, undo that.
+                    assert paragraphs[-1] == prev_line + "\n"
+                    paragraphs.pop()
+                    paragraphs = sections.setdefault(prev_line, [])
+                    paragraphs.append("")
+                    section_char = line[0]
+                    continue
 
             if not line:
                 # A blank, start a new paragraph.
