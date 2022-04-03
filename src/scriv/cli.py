@@ -22,6 +22,7 @@ click_log.basic_config(logger)
         version=__version__
     )
 )
+@click.version_option()
 def cli() -> None:  # noqa: D401
     """The main entry point for the scriv command."""
 
