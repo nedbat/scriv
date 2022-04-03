@@ -295,16 +295,23 @@ def test_format_sections(sections, expected):
 
 
 @pytest.mark.parametrize(
-    "config_kwargs, text, result",
+    "config_kwargs, text, fh_kwargs, result",
     [
-        ({}, "2020-07-26", "\n2020-07-26\n==========\n"),
+        ({}, "2020-07-26", {}, "\n2020-07-26\n==========\n"),
         (
             {"rst_header_chars": "*-"},
             "2020-07-26",
+            {},
             "\n2020-07-26\n**********\n",
+        ),
+        (
+            {},
+            "2022-04-03",
+            {"anchor": "here"},
+            "\n.. _here:\n\n2022-04-03\n==========\n",
         ),
     ],
 )
-def test_format_header(config_kwargs, text, result):
-    actual = RstTools(Config(**config_kwargs)).format_header(text)
+def test_format_header(config_kwargs, text, fh_kwargs, result):
+    actual = RstTools(Config(**config_kwargs)).format_header(text, **fh_kwargs)
     assert actual == result

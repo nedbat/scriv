@@ -256,12 +256,18 @@ def test_format_sections(sections, expected):
 
 
 @pytest.mark.parametrize(
-    "config_kwargs, text, result",
+    "config_kwargs, text, fh_kwargs, result",
     [
-        ({}, "2020-07-26", "\n# 2020-07-26\n"),
-        ({"md_header_level": "3"}, "2020-07-26", "\n### 2020-07-26\n"),
+        ({}, "2020-07-26", {}, "\n# 2020-07-26\n"),
+        ({"md_header_level": "3"}, "2020-07-26", {}, "\n### 2020-07-26\n"),
+        (
+            {},
+            "2022-04-03",
+            {"anchor": "here"},
+            "\n<a id='here'></a>\n# 2022-04-03\n",
+        ),
     ],
 )
-def test_format_header(config_kwargs, text, result):
-    actual = MdTools(Config(**config_kwargs)).format_header(text)
+def test_format_header(config_kwargs, text, fh_kwargs, result):
+    actual = MdTools(Config(**config_kwargs)).format_header(text, **fh_kwargs)
     assert actual == result
