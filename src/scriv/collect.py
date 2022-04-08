@@ -48,7 +48,8 @@ def collect(
 
     new_header = changelog.entry_header(version=version)
     new_text = changelog.entry_text(scriv.combine_fragments(frags))
-    changelog.write(new_header, new_text)
+    changelog.add_entry(new_header, new_text)
+    changelog.write()
 
     if edit:
         git_edit(changelog.path)

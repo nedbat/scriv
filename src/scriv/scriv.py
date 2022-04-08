@@ -72,9 +72,8 @@ class Changelog:
             "date": date or datetime.datetime.now(),
             "version": version,
         }
-        new_title = jinja2.Template(self.config.entry_title_template).render(
-            config=self.config, **title_data
-        )
+        title_template = jinja2.Template(self.config.entry_title_template)
+        new_title = title_template.render(config=self.config, **title_data)
         if new_title.strip():
             anchor = f"changelog-{version}" if version else None
             new_header = format_tools.format_header(new_title, anchor=anchor)
@@ -88,12 +87,15 @@ class Changelog:
         new_text = format_tools.format_sections(sections)
         return new_text
 
-    def write(self, header: str, text: str) -> None:
-        """Write the changelog, with a new entry."""
-        with self.path.open(
-            "w", encoding="utf-8", newline=self.newline or None
-        ) as f:
-            f.write(self.text_before + header + text + self.text_after)
+    def add_entry(self, header: str, text: str) -> None:
+        """Add a new entry to the top of the changelog."""
+        self.text_after = header + text + self.text_after
+
+    def write(self) -> None:
+        """Write the changelog."""
+        f = self.path.open("w", encoding="utf-8", newline=self.newline or None)
+        with f:
+            f.write(self.text_before + self.text_after)
 
 
 class Scriv:
