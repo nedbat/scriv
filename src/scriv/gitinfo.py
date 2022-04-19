@@ -50,16 +50,10 @@ def git_config_bool(option: str) -> bool:
     return git_config(option) == "true"
 
 
-def git_editor() -> str:
-    """
-    Get the command name of the editor Git will launch.
-    """
-    return run_simple_command("git var GIT_EDITOR")
-
-
 def git_edit(filename: Path) -> None:
     """Edit a file using the same editor Git chooses."""
-    click.edit(filename=str(filename), editor=git_editor())
+    git_editor = run_simple_command("git var GIT_EDITOR")
+    click.edit(filename=str(filename), editor=git_editor)
 
 
 def git_add(filename: Path) -> None:
