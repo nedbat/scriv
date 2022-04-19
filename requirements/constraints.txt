@@ -11,3 +11,6 @@
 # Not sure why I'm getting cannot-enumerate-pytest-fixtures failures:
 # https://github.com/reverbc/pylint-pytest/issues/20
 pylint-pytest==1.0.3
+
+# Not ready to fix new violations yet.
+pylint<2.11
