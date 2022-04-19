@@ -248,6 +248,7 @@ disable =
 	locally-disabled,
 	locally-enabled,
 	logging-format-interpolation,
+	logging-fstring-interpolation,
 	long-builtin,
 	long-suffix,
 	map-builtin-not-iterating,
