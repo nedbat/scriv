@@ -9,5 +9,8 @@ isort                     # to standardize order of imports
 mypy                      # Static type checking
 pycodestyle               # PEP 8 compliance validation
 pydocstyle                # PEP 257 compliance validation
+pylint
 pylint-pytest             # Understanding of pytest fixtures.
 twine                     # For checking distributions
+types-freezegun
+types-toml
