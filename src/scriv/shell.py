@@ -5,8 +5,11 @@ import shlex
 import subprocess
 from typing import List, Tuple, Union
 
+# The return value of run_command.
+CmdResult = Tuple[bool, str]
 
-def run_command(cmd: Union[str, List[str]]) -> Tuple[bool, str]:
+
+def run_command(cmd: Union[str, List[str]]) -> CmdResult:
     """
     Run a command line (with no shell).
 
