@@ -1,0 +1,4 @@
+Removed
+.......
+
+- Dropped support for Python 3.6.
