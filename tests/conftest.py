@@ -1,8 +1,8 @@
 """Fixture definitions."""
 
 import os
-import pathlib
 import traceback
+from pathlib import Path
 from typing import Iterable
 
 import pytest
@@ -26,18 +26,18 @@ def fake_git(fake_run_command) -> FakeGit:
 
 
 @pytest.fixture()
-def temp_dir(tmpdir) -> Iterable[pathlib.Path]:
+def temp_dir(tmpdir) -> Iterable[Path]:
     """Make and change into the tmpdir directory, as a Path."""
     old_dir = os.getcwd()
     tmpdir.chdir()
     try:
-        yield pathlib.Path(str(tmpdir))
+        yield Path(str(tmpdir))
     finally:
         os.chdir(old_dir)
 
 
 @pytest.fixture()
-def cli_invoke(temp_dir):
+def cli_invoke(temp_dir: Path):
     """
     Produce a function to invoke the Scriv cli with click.CliRunner.
 
@@ -61,7 +61,7 @@ def cli_invoke(temp_dir):
 
 
 @pytest.fixture()
-def changelog_d(temp_dir) -> pathlib.Path:
+def changelog_d(temp_dir: Path) -> Path:
     """Make a changelog.d directory, and return a Path() to it."""
     the_changelog_d = temp_dir / "changelog.d"
     the_changelog_d.mkdir()
