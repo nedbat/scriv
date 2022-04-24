@@ -86,6 +86,7 @@ testpypi: ## Upload the distrubutions to PyPI's testing server.
 
 tag: ## Make a git tag with the version number
 	git tag -a -m "Version $$(python setup.py --version)" $$(python setup.py --version)
+	git push --all
 
 gh_release: ## Make a GitHub release
 	python -m scriv github-release
@@ -94,11 +95,17 @@ gh_release: ## Make a GitHub release
 
 release: clean check_release dist pypi tag gh_release ## do all the steps for a release
 
-check_release: check_manifest check_version check_scriv ## check that we are ready for a release
+check_release: check_manifest check_tree check_version check_scriv ## check that we are ready for a release
 	@echo "Release checks passed"
 
 check_manifest:
 	python -m check_manifest
+
+check_tree:
+	@if [[ -n $$(git status --porcelain) ]]; then \
+		echo 'There are modified files! Did you forget to check them in?'; \
+		exit 1; \
+	fi
 
 check_version:
 	@if [[ $$(git tags | grep -q -w $$(python setup.py --version) && echo "x") == "x" ]]; then \
