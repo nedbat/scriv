@@ -62,7 +62,3 @@ docs/_build
 docs/modules.rst
 docs/journo.rst
 docs/journo.*.rst
-
-# Private requirements
-requirements/private.in
-requirements/private.txt
