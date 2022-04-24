@@ -1,4 +1,0 @@
-Added
-.....
-
-- Added a ``--version`` option.

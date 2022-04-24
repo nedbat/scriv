@@ -1,5 +1,0 @@
-Changed
-.......
-
-- Parsing of fragments now only attends to the top-level section headers, and
-  includes nested headers instead of splitting on all headers.

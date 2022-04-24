@@ -21,6 +21,31 @@ See the fragment files in the `changelog.d directory`_.
 
 .. scriv-insert-here
 
+.. _changelog-0.15.0:
+
+0.15.0 — 2022-04-24
+-------------------
+
+Removed
+.......
+
+- Dropped support for Python 3.6.
+
+Added
+.....
+
+- The `github-release` command parses the changelog and creates GitHub releases
+  from the entries.  Changed entries will update the corresponding release.
+
+- Added a ``--version`` option.
+
+Changed
+.......
+
+- Parsing of fragments now only attends to the top-level section headers, and
+  includes nested headers instead of splitting on all headers.
+
+
 .. _changelog-0.14.0:
 
 0.14.0 — 2022-03-23
