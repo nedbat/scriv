@@ -1,0 +1,4 @@
+Added
+.....
+
+- Added docs for ``scriv github-release``.

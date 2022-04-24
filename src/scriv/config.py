@@ -35,7 +35,7 @@ class _Options:
         },
     )
 
-    # What format for fragments? ReStructuredText ("rst") or Markdown ("md").
+    # What format for fragments? reStructuredText ("rst") or Markdown ("md").
     format = attr.ib(
         type=str,
         default="rst",
@@ -107,7 +107,7 @@ class _Options:
         validator=attr.validators.matches_re(r"\S\S"),
         metadata={
             "doc": """\
-                Two characters: for ReStructured Text changelog files, these
+                Two characters: for reStructuredText changelog files, these
                 are the two underline characters to use.  The first is for the
                 heading for each changelog entry, the second is for the
                 category sections within the entry.

@@ -1,4 +1,4 @@
-"""ReStructured text knowledge for scriv."""
+"""reStructuredText knowledge for scriv."""
 
 import re
 import tempfile
@@ -9,7 +9,7 @@ from .shell import run_command
 
 
 class RstTools(FormatTools):
-    """Specifics about how to work with ReStructured Text."""
+    """Specifics about how to work with reStructuredText."""
 
     HEADER_CHARS = "!\"#$%&'()*+,-./:;<=>?@[\\]^_`{|}~"
 

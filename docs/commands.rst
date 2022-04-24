@@ -58,7 +58,7 @@ noise.  The branch names considered uninteresting are settable with the
 
 The initial contents of the fragment file are populated from the
 :ref:`config_new_fragment_template` template.  The format is either
-ReStructured Text or Markdown, selectable with the :ref:`config_format`
+reStructuredText or Markdown, selectable with the :ref:`config_format`
 setting.
 
 The default new fragment templates create empty sections for each
@@ -159,5 +159,35 @@ If ``--add`` is provided, or if ``scriv.collect.add`` is set to true in your
 changelog file, and the fragment file deletions, so that they are ready to
 commit.
 
+
+.. _cmd_github_release:
+
+scriv github-release
+====================
+
+.. [[[cog show_help("github-release") ]]]
+
+.. code::
+
+    $ scriv github-release --help
+    Usage: scriv github-release [OPTIONS]
+
+      Update GitHub releases from the changelog.
+
+    Options:
+      -v, --verbosity LVL  Either CRITICAL, ERROR, WARNING, INFO or DEBUG
+      --help               Show this message and exit.
+.. [[[end]]] (checksum: 957174b2cc5caa3843a9099caddc42f7)
+
+The ``github-release`` command reads the changelog file, parses it into
+entries, and then creates or updates GitHub releases to match.
+
+This command is independent of the other commands.  It can be used with a
+hand-edited changelog file that wasn't created with scriv.
+
+If your changelog file is in reStructuredText format, you will need `pandoc`_
+installed for the command to work.
+
+.. _pandoc: https://pandoc.org/
 
 .. include:: include/links.rst

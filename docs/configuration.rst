@@ -45,7 +45,7 @@ scriv:
 - ``new_fragment.md.j2``: The default Jinja template for new Markdown
   fragments.
 
-- ``new_fragment.rst.j2``: The default Jinja template for new ReStructured Text
+- ``new_fragment.rst.j2``: The default Jinja template for new reStructuredText
   fragments.
 
 Literal Prefix
@@ -214,7 +214,7 @@ Default: ``CHANGELOG.${config:format}``
 rst_header_chars
 ----------------
 
-Two characters: for ReStructured Text changelog files, these
+Two characters: for reStructuredText changelog files, these
 are the two underline characters to use.  The first is for the
 heading for each changelog entry, the second is for the
 category sections within the entry.
@@ -243,7 +243,7 @@ source file.
 
 Default: (empty)
 
-.. [[[end]]] (checksum: d0202bed8295d5dae7bbd18577de6745)
+.. [[[end]]] (checksum: d03f710518bf8c94238e821fbb22b3e1)
 
 
 .. _git_settings:

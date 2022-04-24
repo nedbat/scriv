@@ -18,6 +18,9 @@ Scriv's design is guided by a few principles:
   changelog entries directly, rather than copying text from commit messages or
   pull requests.
 
+- The changelog file in the repo should be the source of truth.  The
+  information can also be published elsewhere, like GitHub releases.
+
 - Different projects have different needs; flexibility is a plus. Scriv doesn't
   assume any particular issue tracker or packaging system, and allows either
   .rst or .md files.
@@ -29,7 +32,7 @@ Other tools
 ===========
 
 Scriv is not the first tool to help manage changelogs, there have been many.
-None fully embodied scriv's philopsohy.
+None fully embodied scriv's philopsophy.
 
 Tools most similar to scriv:
 
@@ -68,6 +71,3 @@ Other release note tools:
 .. _Chronicler: https://github.com/NYTimes/Chronicler
 .. _Release Drafter: https://probot.github.io/apps/release-drafter/
 .. _reno: https://docs.openstack.org/reno/latest/user/usage.html
-
-
-

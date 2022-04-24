@@ -30,6 +30,10 @@ along with all the other changes on your branch.
 When it is time to release your project, the ":ref:`cmd_collect`" command
 aggregates all the fragments into a new entry in your changelog file.
 
+You can also choose to publish your changelog entries as GitHub releases with
+the ":ref:`cmd_github_release`" command.  It parses the changelog file and
+creates or updates GitHub releases to match.  It can be used even with
+changelog files that were not created by scriv.
 
 .. toctree::
     :maxdepth: 1
