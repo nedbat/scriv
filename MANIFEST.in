@@ -1,3 +1,15 @@
+include .editorconfig
 include CHANGELOG.rst
 include LICENSE.txt
+include Makefile
+include pylintrc
 include README.rst
+include tox.ini
+
+recursive-include changelog.d *
+recursive-include docs Makefile *.py *.rst
+recursive-include docs/_static *
+recursive-include requirements *.in *.txt
+recursive-include tests *
+
+prune doc/_build

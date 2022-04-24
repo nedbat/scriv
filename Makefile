@@ -1,3 +1,13 @@
+# Makefile for scriv
+#
+# To release:
+#   - increment the version in src/scriv/__init__.py
+#   - scriv collect
+#   - commit changes
+#   - make check_release
+#   - make release
+#   - git push --all
+
 .PHONY: clean coverage docs help \
 	quality requirements test test-all upgrade validate
 
@@ -63,7 +73,7 @@ test-all: ## run tests on every supported Python combination
 
 validate: clean quality test ## run tests and quality checks
 
-.PHONY: dist pypi testpypi
+.PHONY: dist pypi testpypi tag gh_release
 
 dist: ## Build the distributions
 	python -m build --sdist --wheel
@@ -76,3 +86,28 @@ testpypi: ## Upload the distrubutions to PyPI's testing server.
 
 tag: ## Make a git tag with the version number
 	git tag -a -m "Version $$(python setup.py --version)" $$(python setup.py --version)
+
+gh_release: ## Make a GitHub release
+	python -m scriv github-release
+
+.PHONY: release check_manifest check_release check_version check_scriv
+
+release: clean check_release dist pypi tag gh_release ## do all the steps for a release
+
+check_release: check_manifest check_version check_scriv ## check that we are ready for a release
+	@echo "Release checks passed"
+
+check_manifest:
+	python -m check_manifest
+
+check_version:
+	@if [[ $$(git tags | grep -q -w $$(python setup.py --version) && echo "x") == "x" ]]; then \
+		echo 'A git tag for this version exists! Did you forget to bump the version?'; \
+		exit 1; \
+	fi
+
+check_scriv:
+	@if (( $$(ls -1 changelog.d | wc -l) != 1 )); then \
+		echo 'There are scriv fragments! Did you forget `scriv collect`?'; \
+		exit 1; \
+	fi

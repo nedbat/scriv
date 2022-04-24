@@ -27,7 +27,10 @@ bleach==5.0.0
     #   -r requirements/quality.txt
     #   readme-renderer
 build==0.7.0
-    # via -r requirements/dev.in
+    # via
+    #   -r requirements/dev.in
+    #   -r requirements/quality.txt
+    #   check-manifest
 certifi==2021.10.8
     # via
     #   -r requirements/quality.txt
@@ -36,6 +39,8 @@ charset-normalizer==2.0.12
     # via
     #   -r requirements/quality.txt
     #   requests
+check-manifest==0.48
+    # via -r requirements/quality.txt
 click==8.1.2
     # via
     #   -r requirements/pip-tools.txt
@@ -161,6 +166,7 @@ pbr==5.8.1
 pep517==0.12.0
     # via
     #   -r requirements/pip-tools.txt
+    #   -r requirements/quality.txt
     #   build
     #   pip-tools
 pip-tools==6.6.0
@@ -194,7 +200,7 @@ pycodestyle==2.8.0
     # via -r requirements/quality.txt
 pydocstyle==6.1.1
     # via -r requirements/quality.txt
-pygments==2.11.2
+pygments==2.12.0
     # via
     #   -r requirements/quality.txt
     #   doc8
@@ -319,6 +325,7 @@ tomli==2.0.1
     #   -r requirements/quality.txt
     #   black
     #   build
+    #   check-manifest
     #   mypy
     #   pep517
     #   pytest

@@ -1,9 +1,0 @@
-* Releasing
-
-- increment the version in src/scriv/__init__.py
-- scriv collect
-- commit changes
-- make clean dist
-- make pypi
-- make tag
-- git push --all

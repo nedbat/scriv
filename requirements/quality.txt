@@ -23,6 +23,8 @@ black==22.3.0
     # via -r requirements/quality.in
 bleach==5.0.0
     # via readme-renderer
+build==0.7.0
+    # via check-manifest
 certifi==2021.10.8
     # via
     #   -r requirements/doc.txt
@@ -33,6 +35,8 @@ charset-normalizer==2.0.12
     #   -r requirements/doc.txt
     #   -r requirements/test.txt
     #   requests
+check-manifest==0.48
+    # via -r requirements/quality.in
 click==8.1.2
     # via
     #   -r requirements/doc.txt
@@ -78,8 +82,10 @@ importlib-metadata==4.11.3
     # via
     #   -r requirements/doc.txt
     #   -r requirements/test.txt
+    #   build
     #   click
     #   keyring
+    #   pep517
     #   pluggy
     #   pytest
     #   sphinx
@@ -125,6 +131,7 @@ packaging==21.3
     # via
     #   -r requirements/doc.txt
     #   -r requirements/test.txt
+    #   build
     #   pudb
     #   pytest
     #   sphinx
@@ -139,6 +146,8 @@ pbr==5.8.1
     # via
     #   -r requirements/doc.txt
     #   stevedore
+pep517==0.12.0
+    # via build
 pkginfo==1.8.2
     # via twine
 platformdirs==2.5.2
@@ -163,7 +172,7 @@ pycodestyle==2.8.0
     # via -r requirements/quality.in
 pydocstyle==6.1.1
     # via -r requirements/quality.in
-pygments==2.11.2
+pygments==2.12.0
     # via
     #   -r requirements/doc.txt
     #   -r requirements/test.txt
@@ -281,7 +290,10 @@ tomli==2.0.1
     #   -r requirements/doc.txt
     #   -r requirements/test.txt
     #   black
+    #   build
+    #   check-manifest
     #   mypy
+    #   pep517
     #   pytest
 twine==4.0.0
     # via -r requirements/quality.in
@@ -334,6 +346,7 @@ zipp==3.8.0
     #   -r requirements/doc.txt
     #   -r requirements/test.txt
     #   importlib-metadata
+    #   pep517
 
 # The following packages are considered to be unsafe in a requirements file:
 # setuptools

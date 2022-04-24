@@ -5,6 +5,7 @@
 -r doc.txt                # Need doc packages for full linting
 
 black                     # Uncompromising code formatting
+check-manifest            # are we packaging files properly?
 isort                     # to standardize order of imports
 mypy                      # Static type checking
 pycodestyle               # PEP 8 compliance validation
