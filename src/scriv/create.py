@@ -37,15 +37,14 @@ def create(add: Optional[bool], edit: Optional[bool]) -> None:
     file_path = frag.path
     if not file_path.parent.exists():
         sys.exit(
-            "Output directory {!r} doesn't exist, please create it.".format(
-                str(file_path.parent)
-            )
+            f"Output directory {str(file_path.parent)!r} doesn't exist,"
+            + " please create it."
         )
 
     if file_path.exists():
-        sys.exit("File {} already exists, not overwriting".format(file_path))
+        sys.exit(f"File {file_path} already exists, not overwriting")
 
-    logger.info("Creating {}".format(file_path))
+    logger.info(f"Creating {file_path}")
     frag.write()
 
     if edit:

@@ -271,7 +271,7 @@ class Config:
         if not tomlpath.exists():
             return
 
-        toml_text = tomlpath.read_text()
+        toml_text = tomlpath.read_text(encoding="utf-8")
 
         if tomli is None:
             # Toml support isn't installed. Only print an exception if the
@@ -322,8 +322,8 @@ class Config:
                     file_bytes = pkgutil.get_data(
                         "scriv", "templates/" + file_name
                     )
-                except IOError as err:
-                    msg = "No such file: {}".format(file_path)
+                except OSError as err:
+                    msg = f"No such file: {file_path}"
                     raise Exception(msg) from err
                 assert file_bytes
                 value = file_bytes.decode("utf-8")
@@ -331,7 +331,7 @@ class Config:
             _, file_name, literal_name = value.split(":", maxsplit=2)
             found = find_literal(file_name.strip(), literal_name.strip())
             if found is None:
-                raise Exception("Couldn't find literal: {!r}".format(value))
+                raise Exception(f"Couldn't find literal: {value!r}")
             value = found
         return value
 

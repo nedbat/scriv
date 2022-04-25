@@ -158,7 +158,7 @@ def fake_edit(mocker, expected_filename, contents, expected_editor=None):
         assert pfilename.exists()
         if expected_editor is not None:
             assert editor == expected_editor
-        pfilename.write_text(contents)
+        pfilename.write_text(contents, encoding="utf-8")
 
     return mocker.patch("click.edit", do_the_edit)
 

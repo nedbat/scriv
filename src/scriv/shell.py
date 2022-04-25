@@ -18,7 +18,7 @@ def run_command(cmd: Union[str, List[str]]) -> CmdResult:
         str: the output of the command.
 
     """
-    logging.debug("Running command {!r}".format(cmd))
+    logging.debug(f"Running command {cmd!r}")
     if isinstance(cmd, str):
         cmd = shlex.split(cmd)
     proc = subprocess.run(
@@ -30,9 +30,7 @@ def run_command(cmd: Union[str, List[str]]) -> CmdResult:
     )
     output = proc.stdout.decode("utf-8")
     logging.debug(
-        "Command exited with {} status. Output: {!r}".format(
-            proc.returncode, output
-        )
+        f"Command exited with {proc.returncode} status. Output: {output!r}"
     )
 
     return proc.returncode == 0, output

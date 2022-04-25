@@ -36,9 +36,7 @@ def find_literal(file_name: str, literal_name: str) -> Optional[str]:
             data = tomli.loads(f.read())
         return find_toml_value(data, literal_name)
     else:
-        raise Exception(
-            "Can't read literals from files like {!r}".format(file_name)
-        )
+        raise Exception(f"Can't read literals from files like {file_name!r}")
 
 
 class PythonLiteralFinder(ast.NodeVisitor):

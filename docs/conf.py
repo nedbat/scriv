@@ -12,7 +12,6 @@ All configuration values have a default; values that are commented out
 serve to show the default.
 """
 
-import io
 import os
 import re
 import sys
@@ -25,7 +24,7 @@ def get_version(*file_paths):
     Extract the version string from a file.
     """
     filename = os.path.join(os.path.dirname(__file__), *file_paths)
-    with io.open(filename, encoding="utf-8") as version_file:
+    with open(filename, encoding="utf-8") as version_file:
         version_text = version_file.read()
     version_match = re.search(
         r"^__version__ = ['\"]([^'\"]*)['\"]", version_text, re.M
@@ -92,7 +91,7 @@ project = "Scriv"
 copyright = "2019\N{EN DASH}2022, Ned Batchelder"
 author = "Ned Batchelder"
 project_title = "scriv"
-documentation_title = "{project_title}".format(project_title=project_title)
+documentation_title = f"{project_title}"
 
 # The version info for the project you're documenting, acts as replacement for
 # |version| and |release|, also used in various other places throughout the
@@ -280,7 +279,7 @@ html_static_path = ["_static"]
 # html_search_scorer = 'scorer.js'
 
 # Output file base name for HTML help builder.
-htmlhelp_basename = "{project_name}doc".format(project_name=project)
+htmlhelp_basename = f"{project}doc"
 
 # -- Options for LaTeX output ---------------------------------------------
 
@@ -302,7 +301,7 @@ latex_elements = {
 # Grouping the document tree into LaTeX files. List of tuples
 # (source start file, target name, title,
 #  author, documentclass [howto, manual, or own class]).
-latex_target = "{project}.tex".format(project=project)
+latex_target = f"{project}.tex"
 latex_documents = [
     (master_doc, latex_target, documentation_title, author, "manual"),
 ]

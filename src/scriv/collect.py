@@ -40,7 +40,7 @@ def collect(
         edit = git_config_bool("scriv.collect.edit")
 
     scriv = Scriv()
-    logger.info("Collecting from {}".format(scriv.config.fragment_directory))
+    logger.info(f"Collecting from {scriv.config.fragment_directory}")
     frags = scriv.fragments_to_combine()
 
     changelog = scriv.changelog()
@@ -59,7 +59,7 @@ def collect(
 
     if not keep:
         for frag in frags:
-            logger.info("Deleting fragment file {!r}".format(str(frag.path)))
+            logger.info(f"Deleting fragment file {str(frag.path)!r}")
             if add:
                 git_rm(frag.path)
             else:

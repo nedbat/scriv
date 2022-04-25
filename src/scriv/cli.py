@@ -15,13 +15,11 @@ click_log.basic_config(logger)
 
 
 @click.group(
-    help="""\
+    help=f"""\
         Manage changelogs.
 
-        Version {version}
-    """.format(
-        version=__version__
-    )
+        Version {__version__}
+    """
 )
 @click.version_option()
 def cli() -> None:  # noqa: D401

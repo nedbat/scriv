@@ -42,7 +42,7 @@ def git_config(option: str) -> str:
     """
     Return a git config value.
     """
-    return run_simple_command("git config --get {}".format(option))
+    return run_simple_command(f"git config --get {option}")
 
 
 def git_config_bool(option: str) -> bool:
@@ -62,9 +62,9 @@ def git_add(filename: Path) -> None:
     """Git add a file. If it fails, sys.exit."""
     ret = subprocess.call(["git", "add", str(filename)])
     if ret == 0:
-        logger.info("Added {}".format(filename))
+        logger.info(f"Added {filename}")
     else:
-        logger.error("Couldn't add {}".format(filename))
+        logger.error(f"Couldn't add {filename}")
         sys.exit(ret)
 
 
@@ -72,9 +72,9 @@ def git_rm(filename: Path) -> None:
     """Git rm a file. If it fails, sys.exit."""
     ret = subprocess.call(["git", "rm", str(filename)])
     if ret == 0:
-        logger.info("Removed {}".format(filename))
+        logger.info(f"Removed {filename}")
     else:
-        logger.error("Couldn't remove {}".format(filename))
+        logger.error(f"Couldn't remove {filename}")
         sys.exit(ret)
 
 
