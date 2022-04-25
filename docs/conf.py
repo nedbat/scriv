@@ -89,7 +89,7 @@ master_doc = "index"
 
 # General information about the project.
 project = "Scriv"
-copyright = "2019\N{EN DASH}2020, Ned Batchelder"
+copyright = "2019\N{EN DASH}2022, Ned Batchelder"
 author = "Ned Batchelder"
 project_title = "scriv"
 documentation_title = "{project_title}".format(project_title=project_title)
