@@ -21,6 +21,16 @@ See the fragment files in the `changelog.d directory`_.
 
 .. scriv-insert-here
 
+.. _changelog-0.15.2:
+
+0.15.2 — 2022-06-18
+-------------------
+
+Fixed
+.....
+
+- Quoted commands failed, so we couldn't determine the GitHub remote.
+
 .. _changelog-0.15.1:
 
 0.15.1 — 2022-06-18
