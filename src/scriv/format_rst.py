@@ -1,5 +1,6 @@
 """reStructuredText knowledge for scriv."""
 
+import os
 import re
 import tempfile
 from typing import Optional
@@ -131,16 +132,21 @@ class RstTools(FormatTools):
     def convert_to_markdown(
         self, text: str
     ) -> str:  # noqa: D102 (inherited docstring)
-        with tempfile.NamedTemporaryFile(
-            mode="w", prefix="scriv_rst_"
-        ) as rst_file:
-            rst_file.write(text)
-            rst_file.flush()
-            ok, output = run_command(
-                "pandoc -frst -tmarkdown_strict "
-                + "--markdown-headings=atx --wrap=none "
-                + rst_file.name
-            )
-            if not ok:
-                raise Exception("Couldn't convert ReST to Markdown: {output}")
-            return output
+        rst_file = None
+        try:
+            with tempfile.NamedTemporaryFile(
+                mode="w", prefix="scriv_rst_", delete=False,
+            ) as rst_file:
+                rst_file.write(text)
+                rst_file.flush()
+                ok, output = run_command(
+                    "pandoc -frst -tmarkdown_strict "
+                    + "--markdown-headings=atx --wrap=none "
+                    + rst_file.name
+                )
+                if not ok:
+                    raise Exception(f"Couldn't convert ReST to Markdown: {output!r}")
+                return output.replace("\r\n", "\n")
+        finally:
+            if rst_file is not None:
+                os.unlink(rst_file.name)

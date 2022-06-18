@@ -20,7 +20,7 @@ def run_command(cmd: Union[str, List[str]]) -> CmdResult:
     """
     logging.debug(f"Running command {cmd!r}")
     if isinstance(cmd, str):
-        cmd = shlex.split(cmd)
+        cmd = shlex.split(cmd, posix=False)
     proc = subprocess.run(
         cmd,
         shell=False,
