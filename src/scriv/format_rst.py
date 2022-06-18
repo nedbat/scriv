@@ -135,7 +135,7 @@ class RstTools(FormatTools):
         rst_file = None
         try:
             with tempfile.NamedTemporaryFile(
-                mode="w", prefix="scriv_rst_", delete=False,
+                mode="w", prefix="scriv_rst_", delete=False
             ) as rst_file:
                 rst_file.write(text)
                 rst_file.flush()
@@ -145,7 +145,9 @@ class RstTools(FormatTools):
                     + rst_file.name
                 )
                 if not ok:
-                    raise Exception(f"Couldn't convert ReST to Markdown: {output!r}")
+                    raise Exception(
+                        f"Couldn't convert ReST to Markdown: {output!r}"
+                    )
                 return output.replace("\r\n", "\n")
         finally:
             if rst_file is not None:

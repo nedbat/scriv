@@ -36,7 +36,7 @@ def run_command(cmd: Union[str, List[str]]) -> CmdResult:
     return proc.returncode == 0, output
 
 
-def run_simple_command(cmd: str) -> str:
+def run_simple_command(cmd: Union[str, List[str]]) -> str:
     """
     Run a command and return its output, or "" if it fails.
     """
