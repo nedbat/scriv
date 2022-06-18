@@ -21,6 +21,21 @@ See the fragment files in the `changelog.d directory`_.
 
 .. scriv-insert-here
 
+.. _changelog-0.15.1:
+
+0.15.1 — 2022-06-18
+-------------------
+
+Added
+.....
+
+- Added docs for ``scriv github-release``.
+
+Fixed
+.....
+
+- Call pandoc properly on Windows for the github_release command.
+
 .. _changelog-0.15.0:
 
 0.15.0 — 2022-04-24

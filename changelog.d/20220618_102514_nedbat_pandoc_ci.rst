@@ -1,4 +1,0 @@
-Fixed
-.....
-
-- Call pandoc properly on Windows for the github_release command.
