@@ -15,6 +15,7 @@ defaults:
 
 env:
   PIP_DISABLE_PIP_VERSION_CHECK: 1
+  PANDOC_VER: 2.18
 
 jobs:
   tests:
@@ -55,6 +56,23 @@ jobs:
           python -m pip install -U setuptools
           python -m pip install -r requirements/tox.txt
           python -m pip install -c requirements/constraints.txt tox-gh-actions
+
+      - name: "Install pandoc on Linux"
+        # sudo apt-get pandoc: will install a version from 2018!
+        if: runner.os == 'Linux'
+        run: |
+          wget -nv -O pandoc.deb https://github.com/jgm/pandoc/releases/download/${PANDOC_VER}/pandoc-${PANDOC_VER}-1-amd64.deb
+          sudo apt install ./pandoc.deb
+
+      - name: "Install pandoc on Mac"
+        if: runner.os == 'macOS'
+        run: |
+          brew install pandoc
+
+      - name: "Install pandoc on Windows"
+        if: runner.os == 'Windows'
+        run: |
+          choco install -y -r --no-progress pandoc
 
       - name: "Run tox for ${{ matrix.python-version }}"
         run: |
