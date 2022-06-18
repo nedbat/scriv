@@ -8,7 +8,7 @@ alabaster==0.7.12
     # via
     #   -r requirements/quality.txt
     #   sphinx
-astroid==2.11.3
+astroid==2.11.6
     # via
     #   -r requirements/quality.txt
     #   pylint
@@ -16,7 +16,7 @@ attrs==21.4.0
     # via
     #   -r requirements/quality.txt
     #   pytest
-babel==2.10.1
+babel==2.10.3
     # via
     #   -r requirements/quality.txt
     #   sphinx
@@ -26,12 +26,12 @@ bleach==5.0.0
     # via
     #   -r requirements/quality.txt
     #   readme-renderer
-build==0.7.0
+build==0.8.0
     # via
     #   -r requirements/dev.in
     #   -r requirements/quality.txt
     #   check-manifest
-certifi==2021.10.8
+certifi==2022.6.15
     # via
     #   -r requirements/quality.txt
     #   requests
@@ -41,7 +41,7 @@ charset-normalizer==2.0.12
     #   requests
 check-manifest==0.48
     # via -r requirements/quality.txt
-click==8.1.2
+click==8.1.3
     # via
     #   -r requirements/pip-tools.txt
     #   -r requirements/quality.txt
@@ -56,9 +56,9 @@ commonmark==0.9.1
     # via
     #   -r requirements/quality.txt
     #   rich
-coverage==6.3.2
+coverage==6.4.1
     # via -r requirements/quality.txt
-dill==0.3.4
+dill==0.3.5.1
     # via
     #   -r requirements/quality.txt
     #   pylint
@@ -66,7 +66,7 @@ distlib==0.3.4
     # via
     #   -r requirements/tox.txt
     #   virtualenv
-doc8==0.11.1
+doc8==0.11.2
     # via -r requirements/quality.txt
 docutils==0.17.1
     # via
@@ -76,7 +76,7 @@ docutils==0.17.1
     #   restructuredtext-lint
     #   sphinx
     #   sphinx-rtd-theme
-filelock==3.6.0
+filelock==3.7.1
     # via
     #   -r requirements/tox.txt
     #   tox
@@ -91,7 +91,7 @@ imagesize==1.3.0
     # via
     #   -r requirements/quality.txt
     #   sphinx
-importlib-metadata==4.11.3
+importlib-metadata==4.11.4
     # via
     #   -r requirements/pip-tools.txt
     #   -r requirements/quality.txt
@@ -119,11 +119,11 @@ jedi==0.18.1
     # via
     #   -r requirements/quality.txt
     #   pudb
-jinja2==3.1.1
+jinja2==3.1.2
     # via
     #   -r requirements/quality.txt
     #   sphinx
-keyring==23.5.0
+keyring==23.6.0
     # via
     #   -r requirements/quality.txt
     #   twine
@@ -139,7 +139,7 @@ mccabe==0.7.0
     # via
     #   -r requirements/quality.txt
     #   pylint
-mypy==0.942
+mypy==0.961
     # via -r requirements/quality.txt
 mypy-extensions==0.4.3
     # via
@@ -163,7 +163,7 @@ pathspec==0.9.0
     # via
     #   -r requirements/quality.txt
     #   black
-pbr==5.8.1
+pbr==5.9.0
     # via
     #   -r requirements/quality.txt
     #   stevedore
@@ -173,9 +173,9 @@ pep517==0.12.0
     #   -r requirements/quality.txt
     #   build
     #   pip-tools
-pip-tools==6.6.0
+pip-tools==6.6.2
     # via -r requirements/pip-tools.txt
-pkginfo==1.8.2
+pkginfo==1.8.3
     # via
     #   -r requirements/quality.txt
     #   twine
@@ -212,7 +212,7 @@ pygments==2.12.0
     #   readme-renderer
     #   rich
     #   sphinx
-pylint==2.13.7
+pylint==2.14.3
     # via
     #   -r requirements/quality.txt
     #   pylint-pytest
@@ -220,7 +220,7 @@ pylint-pytest==1.0.3
     # via
     #   -c requirements/constraints.txt
     #   -r requirements/quality.txt
-pyparsing==3.0.8
+pyparsing==3.0.9
     # via
     #   -r requirements/quality.txt
     #   -r requirements/tox.txt
@@ -244,7 +244,7 @@ readme-renderer==35.0
     # via
     #   -r requirements/quality.txt
     #   twine
-requests==2.27.1
+requests==2.28.0
     # via
     #   -r requirements/quality.txt
     #   requests-toolbelt
@@ -255,7 +255,7 @@ requests-toolbelt==0.9.1
     # via
     #   -r requirements/quality.txt
     #   twine
-responses==0.20.0
+responses==0.21.0
     # via -r requirements/quality.txt
 restructuredtext-lint==1.4.0
     # via
@@ -265,7 +265,7 @@ rfc3986==2.0.0
     # via
     #   -r requirements/quality.txt
     #   twine
-rich==12.2.0
+rich==12.4.4
     # via
     #   -r requirements/quality.txt
     #   twine
@@ -282,7 +282,7 @@ snowballstemmer==2.2.0
     #   -r requirements/quality.txt
     #   pydocstyle
     #   sphinx
-sphinx==4.5.0
+sphinx==5.0.2
     # via
     #   -r requirements/quality.txt
     #   sphinx-rtd-theme
@@ -331,27 +331,31 @@ tomli==2.0.1
     #   pep517
     #   pylint
     #   pytest
+tomlkit==0.11.0
+    # via
+    #   -r requirements/quality.txt
+    #   pylint
 tox==3.25.0
     # via
     #   -r requirements/tox.txt
     #   tox-battery
 tox-battery==0.6.1
     # via -r requirements/dev.in
-twine==4.0.0
+twine==4.0.1
     # via -r requirements/quality.txt
-typed-ast==1.5.3
+typed-ast==1.5.4
     # via
     #   -r requirements/quality.txt
     #   astroid
     #   black
     #   mypy
-types-freezegun==1.1.9
+types-freezegun==1.1.10
     # via -r requirements/quality.txt
-types-requests==2.27.20
+types-requests==2.27.30
     # via -r requirements/quality.txt
-types-toml==0.10.5
+types-toml==0.10.7
     # via -r requirements/quality.txt
-types-urllib3==1.26.13
+types-urllib3==1.26.15
     # via
     #   -r requirements/quality.txt
     #   types-requests
@@ -365,6 +369,7 @@ typing-extensions==4.2.0
     #   importlib-metadata
     #   mypy
     #   pylint
+    #   responses
     #   rich
 urllib3==1.26.9
     # via
@@ -393,7 +398,7 @@ wheel==0.37.1
     # via
     #   -r requirements/pip-tools.txt
     #   pip-tools
-wrapt==1.14.0
+wrapt==1.14.1
     # via
     #   -r requirements/quality.txt
     #   astroid
