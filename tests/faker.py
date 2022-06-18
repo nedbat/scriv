@@ -35,7 +35,10 @@ class FakeRunCommand:
 
     def __call__(self, cmd: str) -> CmdResult:
         """Do the faking!."""
-        argv = shlex.split(cmd)
+        if isinstance(cmd, str):
+            argv = shlex.split(cmd)
+        else:
+            argv = cmd
         if argv[0] in self.handlers:
             return self.handlers[argv[0]](argv)
         return (False, f"no fake command handler: {argv}")

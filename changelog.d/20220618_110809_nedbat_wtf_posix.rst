@@ -1,0 +1,4 @@
+Fixed
+.....
+
+- Quoted commands failed, so we couldn't determine the GitHub remote.
