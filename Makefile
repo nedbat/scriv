@@ -6,7 +6,6 @@
 #   - commit changes
 #   - make check_release
 #   - make release
-#   - git push --all
 
 .PHONY: clean coverage docs help \
 	quality requirements test test-all upgrade validate
