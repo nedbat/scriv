@@ -193,7 +193,7 @@ def files_to_combine(config: Config) -> List[Path]:
     The paths are returned in the order they should be processed.
 
     """
-    paths = itertools.chain.from_iterable(
+    paths: Iterable[Path] = itertools.chain.from_iterable(
         [
             Path(config.fragment_directory).glob(pattern)
             for pattern in ["*.rst", "*.md"]
