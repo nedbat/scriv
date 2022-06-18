@@ -91,29 +91,29 @@ tag: ## Make a git tag with the version number
 gh_release: ## Make a GitHub release
 	python -m scriv github-release
 
-.PHONY: release check_manifest check_release check_version check_scriv
+.PHONY: release check_release _check_manifest _check_version _check_scriv
 
 release: clean check_release dist pypi tag gh_release ## do all the steps for a release
 
-check_release: check_manifest check_tree check_version check_scriv ## check that we are ready for a release
+check_release: _check_manifest _check_tree _check_version _check_scriv ## check that we are ready for a release
 	@echo "Release checks passed"
 
-check_manifest:
+_check_manifest:
 	python -m check_manifest
 
-check_tree:
+_check_tree:
 	@if [[ -n $$(git status --porcelain) ]]; then \
 		echo 'There are modified files! Did you forget to check them in?'; \
 		exit 1; \
 	fi
 
-check_version:
+_check_version:
 	@if [[ $$(git tags | grep -q -w $$(python setup.py --version) && echo "x") == "x" ]]; then \
-		echo 'A git tag for this version exists! Did you forget to bump the version?'; \
+		echo 'A git tag for this version exists! Did you forget to bump the version in src/scriv/__init__.py?'; \
 		exit 1; \
 	fi
 
-check_scriv:
+_check_scriv:
 	@if (( $$(ls -1 changelog.d | wc -l) != 1 )); then \
 		echo 'There are scriv fragments! Did you forget `scriv collect`?'; \
 		exit 1; \
