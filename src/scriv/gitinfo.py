@@ -85,7 +85,8 @@ def get_github_repo() -> Optional[str]:
     If there is no remote on GitHub, or more than one, return None.
     """
     urls = run_simple_command(
-        r"git config --get-regex 'remote\..*\.url'"
+        # Backslashes and quoting are hard cross-platform, so avoid them.
+        ["git", "config", "--get-regex", "remote[.].*[.]url"]
     ).splitlines()
     github_repos = []
     for url in urls:
