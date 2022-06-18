@@ -10,6 +10,6 @@ recursive-include changelog.d *
 recursive-include docs Makefile *.py *.rst
 recursive-include docs/_static *
 recursive-include requirements *.in *.txt
-recursive-include tests *
+recursive-include tests *.py
 
 prune doc/_build
