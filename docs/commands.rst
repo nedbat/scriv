@@ -186,7 +186,7 @@ This command is independent of the other commands.  It can be used with a
 hand-edited changelog file that wasn't created with scriv.
 
 If your changelog file is in reStructuredText format, you will need `pandoc`_
-installed for the command to work.
+2.11.2 or later installed for the command to work.
 
 .. _pandoc: https://pandoc.org/
 
