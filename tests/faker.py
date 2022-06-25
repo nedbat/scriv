@@ -78,7 +78,7 @@ class FakeGit:
                 return (True, "".join(out))
         elif argv[1:] == ["rev-parse", "--abbrev-ref", "HEAD"]:
             return (True, self.branch + "\n")
-        elif argv[1:] == ["tags"]:
+        elif argv[1:] == ["tag"]:
             return (True, "".join(tag + "\n" for tag in self.tags))
         elif argv[1:] == ["var", "GIT_EDITOR"]:
             return (True, self.editor + "\n")

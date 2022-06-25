@@ -1,0 +1,5 @@
+Fixed
+.....
+
+- The github_release command was using `git tags` as a command when it should
+  have used `git tag`.
