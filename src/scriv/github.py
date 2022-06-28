@@ -1,6 +1,7 @@
 """Helpers for the GitHub REST API."""
 
 import logging
+import os
 from typing import Any, Dict, Iterable
 
 import requests
@@ -19,12 +20,25 @@ def check_ok(resp):
         resp.raise_for_status()
 
 
+def auth_headers() -> Dict[str, str]:
+    """
+    Get the authorization headers needed for GitHub.
+
+    Will read the GITHUB_TOKEN environment variable.
+    """
+    headers = {}
+    token = os.environ.get("GITHUB_TOKEN", "")
+    if token:
+        headers["Authorization"] = f"Bearer {token}"
+    return headers
+
+
 def github_paginated(url: str) -> Iterable[Dict[str, Any]]:
     """
     Get all the results from a paginated GitHub url.
     """
     while True:
-        resp = requests.get(url)
+        resp = requests.get(url, headers=auth_headers())
         check_ok(resp)
         yield from resp.json()
         next_link = resp.links.get("next", None)
@@ -64,7 +78,7 @@ def create_release(repo: str, release_data: Dict[str, Any]) -> None:
     """
     logger.info(f"Creating release {release_data['name']}")
     url = RELEASES_URL.format(repo=repo)
-    resp = requests.post(url, json=release_data)
+    resp = requests.post(url, json=release_data, headers=auth_headers())
     check_ok(resp)
 
 
@@ -80,5 +94,5 @@ def update_release(
             See create_release for the accepted keys.
     """
     logger.info(f"Updating release {release_data['name']}")
-    resp = requests.patch(release["url"], json=release_data)
+    resp = requests.patch(release["url"], json=release_data, headers=auth_headers())
     check_ok(resp)

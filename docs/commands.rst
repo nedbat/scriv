@@ -185,6 +185,9 @@ entries, and then creates or updates GitHub releases to match.
 This command is independent of the other commands.  It can be used with a
 hand-edited changelog file that wasn't created with scriv.
 
+For writing to GitHub, you need a GitHub personal access token, either stored
+in your .netrc file, or in the GITHUB_TOKEN environment variable.
+
 If your changelog file is in reStructuredText format, you will need `pandoc`_
 2.11.2 or later installed for the command to work.
 
