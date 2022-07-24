@@ -21,6 +21,28 @@ See the fragment files in the `changelog.d directory`_.
 
 .. scriv-insert-here
 
+.. _changelog-0.16.0:
+
+0.16.0 — 2022-07-24
+-------------------
+
+Added
+.....
+
+- The ``github_release`` command will use a GitHub personal access token stored
+  in the GITHUB_TOKEN environment variable, or from a .netrc file.
+
+Fixed
+.....
+
+- The github_release command was using `git tags` as a command when it should
+  have used `git tag`.
+
+- Anchors in the changelog were being included in the previous sections when
+  creating GitHub releases.  This has been fixed, closing `issue 53`_.
+
+.. _issue 53: https://github.com/nedbat/scriv/issues/53
+
 .. _changelog-0.15.2:
 
 0.15.2 — 2022-06-18

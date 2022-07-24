@@ -1,5 +1,0 @@
-Added
-.....
-
-- The ``github_release`` command will use a GitHub personal access token stored
-  in the GITHUB_TOKEN environment variable, or from a .netrc file.
