@@ -151,6 +151,7 @@ from scriv.format_md import MdTools
             """\
             (prelude)
 
+            <a id='sect-one.1'></a>
             ## Section one
 
             ### subhead
@@ -161,6 +162,7 @@ from scriv.format_md import MdTools
 
             Also sub
 
+            <a id='sect-two.2'></a>
             ## Section two
 
             In section two.

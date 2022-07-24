@@ -27,6 +27,9 @@ class MdTools(FormatTools):
                 if re.search(r"^\s*<!--.*-->$", line):
                     # A one-line comment, skip it.
                     continue
+                if re.search(r"""^<a id=(['"])[-.\w]+\1></a>$""", line):
+                    # An anchor, we don't need those.
+                    continue
                 if re.search(r"^\s*<!--", line):
                     in_comment = True
                     continue

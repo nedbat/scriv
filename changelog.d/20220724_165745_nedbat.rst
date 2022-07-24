@@ -1,0 +1,7 @@
+Fixed
+.....
+
+- Anchors in the changelog were being included in the previous sections when
+  creating GitHub releases.  This has been fixed, closing `issue 53`_.
+
+.. _issue 53: https://github.com/nedbat/scriv/issues/53

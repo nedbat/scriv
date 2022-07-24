@@ -46,6 +46,12 @@ class RstTools(FormatTools):
         else:
             return False
 
+    def _is_anchor(self, line: str) -> bool:
+        """
+        Determine if a line is an anchor.
+        """
+        return bool(re.search(r"^.. _[-.\w]+:$", line))
+
     def parse_text(
         self, text: str
     ) -> SectionDict:  # noqa: D102 (inherited docstring)
@@ -64,6 +70,9 @@ class RstTools(FormatTools):
 
             if self._is_comment(line):
                 # Comment, do nothing.
+                continue
+
+            if self._is_anchor(line):
                 continue
 
             if self._is_underline(line):

@@ -131,11 +131,15 @@ from scriv.format_rst import RstTools
         # RST syntax is intricate. We understand a subset of it.
         pytest.param(
             """\
+            .. _fixed.1:
+
             Fixed
             .....
             - This thing was fixed: `issue 42`_.
 
             .. _issue 42: https://github.com/thing/issue/42
+
+            .. _added:
 
             Added
             .....

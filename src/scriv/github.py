@@ -94,5 +94,7 @@ def update_release(
             See create_release for the accepted keys.
     """
     logger.info(f"Updating release {release_data['name']}")
-    resp = requests.patch(release["url"], json=release_data, headers=auth_headers())
+    resp = requests.patch(
+        release["url"], json=release_data, headers=auth_headers()
+    )
     check_ok(resp)
