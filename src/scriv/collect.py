@@ -42,6 +42,9 @@ def collect(
     scriv = Scriv()
     logger.info(f"Collecting from {scriv.config.fragment_directory}")
     frags = scriv.fragments_to_combine()
+    if not frags:
+        logger.info("No changelog fragments to collect")
+        return
 
     changelog = scriv.changelog()
     changelog.read()

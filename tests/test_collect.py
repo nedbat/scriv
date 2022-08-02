@@ -427,3 +427,13 @@ def test_configure_skipped_fragments(cli_invoke, changelog_d, temp_dir):
         cli_invoke(["collect"])
     changelog_text = (temp_dir / "CHANGELOG.rst").read_text()
     assert changelog_text == CHANGELOG_2_1_3
+
+
+def test_no_fragments(cli_invoke, changelog_d, temp_dir, caplog):
+    (changelog_d / "README.rst").write_text("This directory has fragments")
+    (temp_dir / "CHANGELOG.rst").write_text("Not much\n")
+    with freezegun.freeze_time("2020-02-25T15:18:19"):
+        cli_invoke(["collect"])
+    changelog_text = (temp_dir / "CHANGELOG.rst").read_text()
+    assert changelog_text == "Not much\n"
+    assert "No changelog fragments to collect" in caplog.text

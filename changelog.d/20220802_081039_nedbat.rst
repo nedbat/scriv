@@ -1,0 +1,8 @@
+Fixed
+.....
+
+- If there were no fragments to collect, `scriv collect` would make a new empty
+  section in the changelog.  This was wrong, and is now fixed. Now the
+  changelog remained unchanged in this case.  Closes `issue 55`_.
+
+.. _issue 55: https://github.com/nedbat/scriv/issues/55
