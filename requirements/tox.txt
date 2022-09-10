@@ -4,13 +4,13 @@
 #
 #    make upgrade
 #
-distlib==0.3.4
+distlib==0.3.6
     # via virtualenv
-filelock==3.7.1
+filelock==3.8.0
     # via
     #   tox
     #   virtualenv
-importlib-metadata==4.11.4
+importlib-metadata==4.12.0
     # via
     #   pluggy
     #   tox
@@ -26,16 +26,14 @@ py==1.11.0
 pyparsing==3.0.9
     # via packaging
 six==1.16.0
-    # via
-    #   tox
-    #   virtualenv
-toml==0.10.2
     # via tox
-tox==3.25.0
+tomli==2.0.1
+    # via tox
+tox==3.26.0
     # via -r requirements/tox.in
-typing-extensions==4.2.0
+typing-extensions==4.3.0
     # via importlib-metadata
-virtualenv==20.14.1
+virtualenv==20.16.5
     # via tox
-zipp==3.8.0
+zipp==3.8.1
     # via importlib-metadata
