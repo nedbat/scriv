@@ -11,3 +11,8 @@
 # Not sure why I'm getting cannot-enumerate-pytest-fixtures failures:
 # https://github.com/reverbc/pylint-pytest/issues/20
 pylint-pytest==1.0.3
+
+# docutils is causing problems for sphinx_rtd_theme, but doc8 wants to force it
+# forward. Hold back doc8 while everyone resolves their issues.
+# https://github.com/readthedocs/sphinx_rtd_theme/issues/1323
+doc8 < 1.0
