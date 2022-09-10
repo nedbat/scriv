@@ -9,6 +9,10 @@ import requests
 logger = logging.getLogger()
 
 
+# Only wait up to a minute for GitHub to respond.
+TIMEOUT = 60
+
+
 def check_ok(resp):
     """
     Check that the Requests response object was successful.
@@ -38,7 +42,7 @@ def github_paginated(url: str) -> Iterable[Dict[str, Any]]:
     Get all the results from a paginated GitHub url.
     """
     while True:
-        resp = requests.get(url, headers=auth_headers())
+        resp = requests.get(url, headers=auth_headers(), timeout=TIMEOUT)
         check_ok(resp)
         yield from resp.json()
         next_link = resp.links.get("next", None)
@@ -78,7 +82,9 @@ def create_release(repo: str, release_data: Dict[str, Any]) -> None:
     """
     logger.info(f"Creating release {release_data['name']}")
     url = RELEASES_URL.format(repo=repo)
-    resp = requests.post(url, json=release_data, headers=auth_headers())
+    resp = requests.post(
+        url, json=release_data, headers=auth_headers(), timeout=TIMEOUT
+    )
     check_ok(resp)
 
 
@@ -95,6 +101,9 @@ def update_release(
     """
     logger.info(f"Updating release {release_data['name']}")
     resp = requests.patch(
-        release["url"], json=release_data, headers=auth_headers()
+        release["url"],
+        json=release_data,
+        headers=auth_headers(),
+        timeout=TIMEOUT,
     )
     check_ok(resp)
