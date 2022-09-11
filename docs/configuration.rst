@@ -94,7 +94,7 @@ file.
     fields = sorted(attr.fields(_Options), key=lambda f: f.name)
     for field in fields:
         name = field.name
-        print(f"\n.. _config_{name}:\n")
+        print(f"\n\n.. _config_{name}:\n")
         print(name)
         print("-" * len(name))
         print()
@@ -111,6 +111,7 @@ file.
     print()
 .. ]]]
 
+
 .. _config_categories:
 
 categories
@@ -120,6 +121,7 @@ Categories to use as headings for changelog items.
 See :ref:`categories`.
 
 Default: ``Removed, Added, Changed, Deprecated, Fixed, Security``
+
 
 .. _config_end_marker:
 
@@ -131,6 +133,7 @@ changelog ends.
 
 Default: ``scriv-end-here``
 
+
 .. _config_entry_title_template:
 
 entry_title_template
@@ -140,6 +143,7 @@ The `Jinja`_ template to use for the entry heading text for
 changelog entries created by ":ref:`cmd_collect`".
 
 Default: A combination of version (if specified) and date.
+
 
 .. _config_format:
 
@@ -151,6 +155,7 @@ file.  Can be either "rst" or "md".
 
 Default: ``rst``
 
+
 .. _config_fragment_directory:
 
 fragment_directory
@@ -160,6 +165,7 @@ The directory for fragments.  This directory must exist, it
 will not be created.
 
 Default: ``changelog.d``
+
 
 .. _config_insert_marker:
 
@@ -171,6 +177,7 @@ entries should be inserted.
 
 Default: ``scriv-insert-here``
 
+
 .. _config_main_branches:
 
 main_branches
@@ -180,6 +187,7 @@ The branch names considered uninteresting to use in new
 fragment file names.
 
 Default: ``master, main, develop``
+
 
 .. _config_md_header_level:
 
@@ -191,6 +199,7 @@ level to use for the entry heading.
 
 Default: ``1``
 
+
 .. _config_new_fragment_template:
 
 new_fragment_template
@@ -200,6 +209,7 @@ The `Jinja`_ template to use for new fragments.
 
 Default: ``file: new_fragment.${config:format}.j2``
 
+
 .. _config_output_file:
 
 output_file
@@ -208,6 +218,7 @@ output_file
 The changelog file updated by ":ref:`cmd_collect`".
 
 Default: ``CHANGELOG.${config:format}``
+
 
 .. _config_rst_header_chars:
 
@@ -221,6 +232,7 @@ category sections within the entry.
 
 Default: ``=-``
 
+
 .. _config_skip_fragments:
 
 skip_fragments
@@ -230,6 +242,7 @@ A glob pattern for files in the fragment directory that should
 not be collected.
 
 Default: ``README.*``
+
 
 .. _config_version:
 
@@ -243,7 +256,7 @@ source file.
 
 Default: (empty)
 
-.. [[[end]]] (checksum: d03f710518bf8c94238e821fbb22b3e1)
+.. [[[end]]] (checksum: 9ad9ffaf84eaa0771a5f16b775c69fcb)
 
 
 .. _git_settings:
