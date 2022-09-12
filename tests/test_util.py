@@ -2,7 +2,7 @@
 
 import pytest
 
-from scriv.util import extract_version, is_prerelease_version
+from scriv.util import extract_version, is_prerelease_version, partition_lines
 
 
 @pytest.mark.parametrize(
@@ -38,3 +38,17 @@ def test_is_not_prerelease_version(version):
 )
 def test_is_prerelease_version(version):
     assert is_prerelease_version(version)
+
+
+@pytest.mark.parametrize(
+    "text, result",
+    [
+        ("one\ntwo\nthree\n", ("one\ntwo\nthree\n", "", "")),
+        ("oXe\ntwo\nthree\n", ("", "oXe\n", "two\nthree\n")),
+        ("one\ntXo\nthree\n", ("one\n", "tXo\n", "three\n")),
+        ("one\ntwo\ntXree\n", ("one\ntwo\n", "tXree\n", "")),
+        ("one\ntXo\ntXree\n", ("one\n", "tXo\n", "tXree\n")),
+    ],
+)
+def test_partition_lines(text, result):
+    assert partition_lines(text, "X") == result

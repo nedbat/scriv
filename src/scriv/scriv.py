@@ -14,7 +14,7 @@ import jinja2
 from .config import Config
 from .format import FormatTools, SectionDict, get_format_tools
 from .gitinfo import current_branch_name, user_nick
-from .util import cut_at_line, order_dict
+from .util import order_dict, partition_lines
 
 
 @attr.s
@@ -48,6 +48,7 @@ class Changelog:
     config = attr.ib(type=Config)
     newline = attr.ib(type=str, default="")
     text_before = attr.ib(type=str, default="")
+    changelog = attr.ib(type=str, default="")
     text_after = attr.ib(type=str, default="")
 
     def read(self) -> None:
@@ -60,9 +61,19 @@ class Changelog:
                         self.newline = f.newlines
                     else:
                         self.newline = f.newlines[0]
-            self.text_before, self.text_after = cut_at_line(
+            before, marker, after = partition_lines(
                 changelog_text, self.config.insert_marker
             )
+            if marker:
+                self.text_before = before + marker
+                rest = after
+            else:
+                self.text_before = ""
+                rest = before
+            self.changelog, marker, after = partition_lines(
+                rest, self.config.end_marker
+            )
+            self.text_after = marker + after
 
     def format_tools(self) -> FormatTools:
         """Get the appropriate FormatTools for this changelog."""
@@ -88,25 +99,23 @@ class Changelog:
 
     def entry_text(self, sections: SectionDict) -> str:
         """Format the text of a new entry."""
-        new_text = self.format_tools().format_sections(sections)
-        return new_text
+        return self.format_tools().format_sections(sections)
 
     def add_entry(self, header: str, text: str) -> None:
         """Add a new entry to the top of the changelog."""
-        self.text_after = header + text + self.text_after
+        self.changelog = header + text + self.changelog
 
     def write(self) -> None:
         """Write the changelog."""
         f = self.path.open("w", encoding="utf-8", newline=self.newline or None)
         with f:
-            f.write(self.text_before + self.text_after)
+            f.write(self.text_before)
+            f.write(self.changelog)
+            f.write(self.text_after)
 
     def entries(self) -> SectionDict:
         """Parse the changelog into a SectionDict."""
-        log, after = cut_at_line(self.text_after, self.config.end_marker)
-        if log == "":
-            log = after
-        return self.format_tools().parse_text(log)
+        return self.format_tools().parse_text(self.changelog)
 
 
 class Scriv:

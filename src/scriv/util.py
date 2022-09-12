@@ -31,17 +31,23 @@ def order_dict(
     return with_order
 
 
-def cut_at_line(text: str, marker: str) -> Tuple[str, str]:
+def partition_lines(text: str, marker: str) -> Tuple[str, str, str]:
     """
-    Split text into two parts: up to the line with marker, and lines after.
+    Split `text` by lines, similar to str.partition.
 
-    If `marker` isn't in the text, return ("", text)
+    The splitting line is the first line containing `marker`.
+
     """
     lines = text.splitlines(keepends=True)
-    for i, line in enumerate(lines):
-        if marker in line:
-            return "".join(lines[: i + 1]), "".join(lines[i + 1 :])
-    return ("", text)
+    marker_pos = [i for i, line in enumerate(lines) if marker in line]
+    if not marker_pos:
+        return (text, "", "")
+    pos = marker_pos[0]
+    return (
+        "".join(lines[:pos]),
+        lines[pos],
+        "".join(lines[pos + 1 :]),
+    )
 
 
 VERSION_REGEX = r"""(?ix)   # based on https://peps.python.org/pep-0440/
