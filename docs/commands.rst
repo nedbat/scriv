@@ -172,15 +172,19 @@ scriv github-release
     $ scriv github-release --help
     Usage: scriv github-release [OPTIONS]
 
-      Update GitHub releases from the changelog.
+      Create or update GitHub releases from the changelog.
+
+      Only the most recent changelog entry is used, unless --all is provided.
 
     Options:
+      --all                Use all of the changelog entries.
       -v, --verbosity LVL  Either CRITICAL, ERROR, WARNING, INFO or DEBUG
       --help               Show this message and exit.
-.. [[[end]]] (checksum: 957174b2cc5caa3843a9099caddc42f7)
+.. [[[end]]] (checksum: bf6add2df010e50a22cf2a17d2200394)
 
 The ``github-release`` command reads the changelog file, parses it into
-entries, and then creates or updates GitHub releases to match.
+entries, and then creates or updates GitHub releases to match.  Only the most
+recent changelog entry is used, unless ``--all`` is provided.
 
 This command is independent of the other commands.  It can be used with a
 hand-edited changelog file that wasn't created with scriv.

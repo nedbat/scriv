@@ -43,7 +43,8 @@ def scenario1(temp_dir, fake_git):
     (temp_dir / "CHANGELOG.rst").write_text(CHANGELOG1)
 
 
-def test_everything(cli_invoke, scenario1, mocker, caplog):
+@pytest.mark.parametrize("all_entries", [False, True])
+def test_everything(all_entries, cli_invoke, scenario1, mocker, caplog):
     mock_get_releases = mocker.patch("scriv.ghrel.get_releases")
     releases = {
         "v1.0": {
@@ -58,7 +59,12 @@ def test_everything(cli_invoke, scenario1, mocker, caplog):
     mock_get_releases.return_value = releases
     mock_create_release = mocker.patch("scriv.ghrel.create_release")
     mock_update_release = mocker.patch("scriv.ghrel.update_release")
-    cli_invoke(["github-release"])
+
+    if all_entries:
+        cli_invoke(["github-release", "--all"])
+    else:
+        cli_invoke(["github-release"])
+
     assert mock_create_release.mock_calls == [
         call(
             "joe/project",
@@ -71,25 +77,29 @@ def test_everything(cli_invoke, scenario1, mocker, caplog):
             },
         ),
     ]
-    assert mock_update_release.mock_calls == [
-        call(
-            releases["v0.9a7"],
-            {
-                "body": "A beginning\n",
-                "name": "v0.9a7",
-                "tag_name": "v0.9a7",
-                "draft": False,
-                "prerelease": True,
-            },
-        ),
-    ]
-    assert caplog.record_tuples == [
-        (
-            "root",
-            logging.WARNING,
-            "Version v0.0.1 has no tag. No release will be made.",
-        )
-    ]
+    if all_entries:
+        assert mock_update_release.mock_calls == [
+            call(
+                releases["v0.9a7"],
+                {
+                    "body": "A beginning\n",
+                    "name": "v0.9a7",
+                    "tag_name": "v0.9a7",
+                    "draft": False,
+                    "prerelease": True,
+                },
+            ),
+        ]
+        assert caplog.record_tuples == [
+            (
+                "root",
+                logging.WARNING,
+                "Version v0.0.1 has no tag. No release will be made.",
+            )
+        ]
+    else:
+        assert mock_update_release.mock_calls == []
+        assert caplog.record_tuples == []
 
 
 def test_no_clear_github_repo(cli_invoke, scenario1, fake_git):

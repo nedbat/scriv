@@ -1,0 +1,13 @@
+Changed
+.......
+
+- The ``github_release`` command now only considers the top-most entry in the
+  changelog.  You can use the ``--all`` option to continue the old behavior of
+  making or updating GitHub releases for all of the entries.
+
+  This change makes it easier for projects to start using scriv with an
+  existing populated changelog file.
+
+  Closes `issue 57`_.
+
+.. _issue 57: https://github.com/nedbat/scriv/issues/57

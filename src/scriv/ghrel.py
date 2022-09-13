@@ -16,10 +16,19 @@ logger = logging.getLogger()
 
 
 @click.command()
+@click.option(
+    "--all",
+    "all_entries",
+    is_flag=True,
+    help="Use all of the changelog entries.",
+)
 @click_log.simple_verbosity_option(logger)
-def github_release() -> None:
+def github_release(all_entries: bool) -> None:
     """
-    Update GitHub releases from the changelog.
+    Create or update GitHub releases from the changelog.
+
+    Only the most recent changelog entry is used, unless --all is provided.
+
     """
     scriv = Scriv()
     changelog = scriv.changelog()
@@ -59,3 +68,6 @@ def github_release() -> None:
             logger.warning(
                 f"Version {version} has no tag. No release will be made."
             )
+
+        if not all_entries:
+            break
