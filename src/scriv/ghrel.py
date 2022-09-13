@@ -25,11 +25,11 @@ def github_release() -> None:
     changelog = scriv.changelog()
     changelog.read()
 
-    tags = set(run_simple_command("git tag").split())
     repo = get_github_repo()
     if repo is None:
         sys.exit("Couldn't determine GitHub repo.")
 
+    tags = set(run_simple_command("git tag").split())
     releases = get_releases(repo)
 
     for title, sections in changelog.entries().items():
