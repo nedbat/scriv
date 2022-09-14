@@ -88,7 +88,7 @@ tag: ## Make a git tag with the version number
 	git push --all
 
 gh_release: ## Make a GitHub release
-	python -m scriv github-release
+	python -m scriv github-release --all
 
 .PHONY: release check_release _check_manifest _check_version _check_scriv
 
