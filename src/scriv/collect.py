@@ -1,6 +1,7 @@
 """Collecting fragments."""
 
 import logging
+import sys
 from typing import Optional
 
 import click
@@ -14,12 +15,17 @@ logger = logging.getLogger()
 
 @click.command()
 @click.option(
-    "--add/--no-add", default=None, help="'git add' the updated changelog file."
+    "--add/--no-add",
+    default=None,
+    help="'git add' the updated changelog file and removed fragments.",
 )
 @click.option(
     "--edit/--no-edit",
     default=None,
     help="Open the changelog file in your text editor.",
+)
+@click.option(
+    "--title", default=None, help="The title text to use for this entry."
 )
 @click.option(
     "--keep", is_flag=True, help="Keep the fragment files that are collected."
@@ -29,11 +35,18 @@ logger = logging.getLogger()
 )
 @click_log.simple_verbosity_option(logger)
 def collect(
-    add: Optional[bool], edit: Optional[bool], keep: bool, version: str
+    add: Optional[bool],
+    edit: Optional[bool],
+    title: str,
+    keep: bool,
+    version: str,
 ) -> None:
     """
     Collect fragments and produce a combined entry in the CHANGELOG file.
     """
+    if title is not None and version is not None:
+        sys.exit("Can't provide both --title and --version.")
+
     if add is None:
         add = git_config_bool("scriv.collect.add")
     if edit is None:
@@ -49,7 +62,10 @@ def collect(
     changelog = scriv.changelog()
     changelog.read()
 
-    new_header = changelog.entry_header(version=version)
+    if title is None:
+        new_header = changelog.entry_header(version=version)
+    else:
+        new_header = changelog.format_tools().format_header(title)
     new_text = changelog.entry_text(scriv.combine_fragments(frags))
     changelog.add_entry(new_header, new_text)
     changelog.write()

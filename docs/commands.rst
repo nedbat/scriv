@@ -107,13 +107,15 @@ scriv collect
       Collect fragments and produce a combined entry in the CHANGELOG file.
 
     Options:
-      --add / --no-add     'git add' the updated changelog file.
+      --add / --no-add     'git add' the updated changelog file and removed
+                           fragments.
       --edit / --no-edit   Open the changelog file in your text editor.
+      --title TEXT         The title text to use for this entry.
       --keep               Keep the fragment files that are collected.
       --version TEXT       The version name to use for this entry.
       -v, --verbosity LVL  Either CRITICAL, ERROR, WARNING, INFO or DEBUG
       --help               Show this message and exit.
-.. [[[end]]] (checksum: 5a37816dcb12829eca58f1ccd42a8e62)
+.. [[[end]]] (checksum: 3f25ae739160c63a0685e98f88681927)
 
 The collect command aggregates all the current fragments into the changelog
 file.
@@ -124,8 +126,11 @@ Entry Creation
 All of the .rst or .md files in the fragment directory are read, parsed, and
 re-assembled into a changelog entry.  The entry's title is determined by the
 :ref:`config_entry_title_template` setting. The default uses the version string
-(if one is specified in the from the :ref:`config_version` setting) and the
-current date.
+(if one is specified in the :ref:`config_version` setting) and the current
+date.
+
+Instead of using the title template, you can provide an exact title to use for
+the new entry with the ``--title`` option.
 
 The output file is specified by the :ref:`config_output_file` setting.  Scriv
 looks in the file for a special marker (usually in a comment) to determine
@@ -134,6 +139,7 @@ changed with the :ref:`config_insert_marker` setting.  Using a marker like
 this, you can have your changelog be just part of a larger README file.  If
 there is no marker in the file, the new entry is inserted at the top of the
 file.
+
 
 Fragment Deletion
 -----------------

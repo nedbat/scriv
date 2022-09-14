@@ -437,3 +437,24 @@ def test_no_fragments(cli_invoke, changelog_d, temp_dir, caplog):
     changelog_text = (temp_dir / "CHANGELOG.rst").read_text()
     assert changelog_text == "Not much\n"
     assert "No changelog fragments to collect" in caplog.text
+
+
+def test_title_provided(cli_invoke, changelog_d, temp_dir):
+    (changelog_d / "20170616_nedbat.rst").write_text(COMMENT + FRAG1 + COMMENT)
+    (changelog_d / "20170617_nedbat.rst").write_text(COMMENT + FRAG2)
+    title = "This is the Header"
+    cli_invoke(["collect", "--title", title])
+    changelog_text = (temp_dir / "CHANGELOG.rst").read_text()
+    # With --title provided, the first header is literally what was provided.
+    lines = CHANGELOG_1_2.splitlines()
+    lines[1] = title
+    lines[2] = len(title) * "="
+    assert changelog_text == "\n".join(lines) + "\n"
+
+
+def test_title_and_version_clash(cli_invoke):
+    result = cli_invoke(
+        ["collect", "--title", "xx", "--version", "1.2"], expect_ok=False
+    )
+    assert result.exit_code == 1
+    assert str(result.exception) == "Can't provide both --title and --version."
