@@ -46,6 +46,7 @@ def github_release(all_entries: bool) -> None:
             continue
         version = extract_version(title)
         if version is None:
+            logger.warning(f"Entry {title!r} has no version, skipping.")
             continue
 
         if version in tags:

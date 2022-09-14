@@ -94,8 +94,13 @@ def test_everything(all_entries, cli_invoke, scenario1, mocker, caplog):
             (
                 "root",
                 logging.WARNING,
+                "Entry 'Some fixes' has no version, skipping.",
+            ),
+            (
+                "root",
+                logging.WARNING,
                 "Version v0.0.1 has no tag. No release will be made.",
-            )
+            ),
         ]
     else:
         assert mock_update_release.mock_calls == []

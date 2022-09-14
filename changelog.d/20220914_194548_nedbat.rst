@@ -1,0 +1,8 @@
+Fixed
+.....
+
+- The ``github-release`` command will now issue a warning for changelog entries
+  that have no version number. These can't be made into releases, so they are
+  skipped.  (`issue 56`_).
+
+.. _issue 56: https://github.com/nedbat/scriv/issues/56
