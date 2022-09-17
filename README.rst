@@ -4,8 +4,8 @@ Scriv
 
 Scriv changelog management tool
 
-|pypi-badge| |ci-badge| |doc-badge| |pyversions-badge| |license-badge|
-|sponsor-badge| |twitter-nedbat|
+| |pypi-badge| |ci-badge| |coverage-badge| |doc-badge|
+| |pyversions-badge| |license-badge| |sponsor-badge| |twitter-nedbat|
 
 Overview
 ========
@@ -56,6 +56,10 @@ Contributions are very welcome.
 .. |ci-badge| image:: https://github.com/nedbat/scriv/workflows/Test%20Suite/badge.svg
     :target: https://github.com/nedbat/scriv/actions?query=workflow%3A%22Test+Suite%22
     :alt: Build status
+
+.. |coverage-badge| image:: https://img.shields.io/endpoint?url=https://gist.githubusercontent.com/nedbat/5a304c1c779d4bcc57be95f847e9327f/raw/covbadge.json
+    :target: https://github.com/nedbat/scriv/actions?query=workflow%3A%22Test+Suite%22
+    :alt: Coverage
 
 .. |doc-badge| image:: https://readthedocs.org/projects/scriv/badge/?version=latest
     :target: http://scriv.readthedocs.io/en/latest/

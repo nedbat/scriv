@@ -30,6 +30,7 @@ pip-log.txt
 .coverage
 .coverage.*
 .tox
+coverage.json
 coverage.xml
 htmlcov/
 
