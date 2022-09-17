@@ -192,6 +192,13 @@ The ``github-release`` command reads the changelog file, parses it into
 entries, and then creates or updates GitHub releases to match.  Only the most
 recent changelog entry is used, unless ``--all`` is provided.
 
+An entry must have a version number in the title, and that version number must
+correspond to a git tag.  For example, this changelog entry with the title
+``v1.2.3 -- 2022-04-06`` will be processed and the version number will be
+"v1.2.3".  If there's a "v1.2.3" git tag, then the entry is a valid release.
+If there's no detectable version number in the header, or there isn't a git
+tag with the same number, then the entry can't be created as a GitHub release.
+
 This command is independent of the other commands.  It can be used with a
 hand-edited changelog file that wasn't created with scriv.
 
