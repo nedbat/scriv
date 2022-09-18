@@ -21,6 +21,54 @@ See the fragment files in the `changelog.d directory`_.
 
 .. scriv-insert-here
 
+.. _changelog-0.17.0:
+
+0.17.0 — 2022-09-18
+-------------------
+
+Added
+.....
+
+- The ``collect`` command now has a ``--title=TEXT`` option to provide the
+  exact text to use as the title of the new changelog entry.  Finishes `issue
+  48`_.
+
+.. _issue 48: https://github.com/nedbat/scriv/issues/48
+
+Changed
+.......
+
+- The ``github_release`` command now only considers the top-most entry in the
+  changelog.  You can use the ``--all`` option to continue the old behavior of
+  making or updating GitHub releases for all of the entries.
+
+  This change makes it easier for projects to start using scriv with an
+  existing populated changelog file.
+
+  Closes `issue 57`_.
+
+.. _issue 57: https://github.com/nedbat/scriv/issues/57
+
+Fixed
+.....
+
+- If there were no fragments to collect, `scriv collect` would make a new empty
+  section in the changelog.  This was wrong, and is now fixed. Now the
+  changelog remains unchanged in this case.  Closes `issue 55`_.
+
+.. _issue 55: https://github.com/nedbat/scriv/issues/55
+
+- The ``github-release`` command will now issue a warning for changelog entries
+  that have no version number. These can't be made into releases, so they are
+  skipped.  (`issue 56`_).
+
+.. _issue 56: https://github.com/nedbat/scriv/issues/56
+
+- ``scriv collect`` will end with an error now if the version number would
+  duplicate a version number on an existing changelog entry. Fixes `issue 26`_.
+
+.. _issue 26: https://github.com/nedbat/scriv/issues/26
+
 .. _changelog-0.16.0:
 
 0.16.0 — 2022-07-24
