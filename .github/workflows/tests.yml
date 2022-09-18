@@ -133,6 +133,10 @@ jobs:
           maxColorRange: 90
           valColorRange: ${{ env.total }}
 
+      - name: "Create coverage summary"
+        run: |
+          echo '### Total coverage: ${{ env.total }}%' >> $GITHUB_STEP_SUMMARY
+
   docs:
     name: Docs
     runs-on: ubuntu-latest
