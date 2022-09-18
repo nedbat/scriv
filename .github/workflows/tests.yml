@@ -38,10 +38,6 @@ jobs:
           - "3.10"
           - "3.11.0-rc.2"
           - "pypy-3.7"
-        exclude:
-          # Windows PyPy doesn't seem to work?
-          - os: windows-latest
-            python-version: "pypy3"
 
     steps:
       - name: "Check out the repo"
