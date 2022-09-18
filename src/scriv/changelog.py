@@ -75,7 +75,6 @@ class Changelog:
 
     def entry_header(self, version, date=None) -> str:
         """Format the header for a new entry."""
-        assert version is not None
         title_data = {
             "date": date or datetime.datetime.now(),
             "version": version,
