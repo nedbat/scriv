@@ -458,3 +458,25 @@ def test_title_and_version_clash(cli_invoke):
     )
     assert result.exit_code == 1
     assert str(result.exception) == "Can't provide both --title and --version."
+
+
+def test_duplicate_version(cli_invoke, changelog_d, temp_dir):
+    (temp_dir / "foob.py").write_text(
+        """# comment\n__version__ = "12.34.56"\n"""
+    )
+    (changelog_d / "scriv.ini").write_text(
+        "[scriv]\nversion = literal:foob.py: __version__\n"
+    )
+    (changelog_d / "20170616_nedbat.rst").write_text(FRAG1)
+    with freezegun.freeze_time("2022-09-18T15:18:19"):
+        cli_invoke(["collect"])
+
+    # Make a new fragment, and collect again without changing the version.
+    (changelog_d / "20170617_nedbat.rst").write_text(FRAG2)
+    with freezegun.freeze_time("2022-09-18T16:18:19"):
+        result = cli_invoke(["collect"], expect_ok=False)
+    assert result.exit_code == 1
+    assert (
+        str(result.exception)
+        == "Entry '12.34.56 — 2022-09-18' already uses version '12.34.56'."
+    )

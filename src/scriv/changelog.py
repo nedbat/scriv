@@ -73,9 +73,9 @@ class Changelog:
         """Get the appropriate FormatTools for this changelog."""
         return get_format_tools(self.config.format, self.config)
 
-    def entry_header(self, date=None, version=None) -> str:
+    def entry_header(self, version, date=None) -> str:
         """Format the header for a new entry."""
-        version = version or self.config.version
+        assert version is not None
         title_data = {
             "date": date or datetime.datetime.now(),
             "version": version,

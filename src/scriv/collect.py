@@ -9,6 +9,7 @@ import click_log
 
 from .gitinfo import git_add, git_config_bool, git_edit, git_rm
 from .scriv import Scriv
+from .util import extract_version
 
 logger = logging.getLogger()
 
@@ -63,9 +64,21 @@ def collect(
     changelog.read()
 
     if title is None:
+        version = version or scriv.config.version
+        if version:
+            # Check that we haven't used this version before.
+            for etitle in changelog.entries().keys():
+                if etitle is None:
+                    continue
+                eversion = extract_version(etitle)
+                if eversion == version:
+                    sys.exit(
+                        f"Entry {etitle!r} already uses version {version!r}."
+                    )
         new_header = changelog.entry_header(version=version)
     else:
         new_header = changelog.format_tools().format_header(title)
+
     new_text = changelog.entry_text(scriv.combine_fragments(frags))
     changelog.add_entry(new_header, new_text)
     changelog.write()
