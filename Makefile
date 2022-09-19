@@ -36,7 +36,7 @@ coverage: clean ## generate and view HTML coverage report
 	tox -e py37,py311,coverage
 	$(BROWSER)htmlcov/index.html
 
-docs: ## generate Sphinx HTML documentation, including API docs
+docs: botedits ## generate Sphinx HTML documentation, including API docs
 	tox -e docs
 	$(BROWSER)docs/_build/html/index.html
 
@@ -57,6 +57,10 @@ upgrade: ## update the requirements/*.txt files with the latest packages satisfy
 	sed -n -e '/end_install_requires/,$$p' < setup.cfg >> setup.tmp
 	mv setup.tmp setup.cfg
 
+botedits: ## make source edits by tools
+	python -m black --line-length=80 src/scriv tests docs setup.py
+	python -m cogapp -crP docs/*.rst
+
 quality: ## check coding style with pycodestyle and pylint
 	tox -e quality
 
@@ -70,7 +74,7 @@ test: ## run tests in the current virtualenv
 test-all: ## run tests on every supported Python combination
 	tox
 
-validate: clean quality test ## run tests and quality checks
+validate: clean botedits quality test ## run tests and quality checks
 
 .PHONY: dist pypi testpypi tag gh_release
 
