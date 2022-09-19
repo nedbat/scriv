@@ -42,11 +42,66 @@ setting value will be read from that file.  The file name is relative to the
 fragment directory (changelog.d), or is the name of a built-in file provided by
 scriv:
 
+.. [[[cog
+    import textwrap
+    def include_file(fname):
+        """Include a source file into the docs as a code block."""
+        print(".. code::\n")
+        with open(fname) as f:
+            print(textwrap.indent(f.read(), prefix="    "))
+.. ]]]
+.. [[[end]]] (checksum: d41d8cd98f00b204e9800998ecf8427e)
+
 - ``new_fragment.md.j2``: The default Jinja template for new Markdown
-  fragments.
+  fragments:
+
+  .. [[[cog
+      include_file("src/scriv/templates/new_fragment.md.j2")
+  .. ]]]
+  .. code::
+
+      <!--
+      A new scriv changelog fragment.
+
+      Uncomment the section that is right (remove the HTML comment wrapper).
+      -->
+
+      {% for cat in config.categories -%}
+      <!--
+      ### {{ cat }}
+
+      - A bullet item for the {{ cat }} category.
+
+      -->
+      {% endfor -%}
+
+  .. [[[end]]] (checksum: 98c2fb99a14f6a1fe327cde5eb00e9a5)
 
 - ``new_fragment.rst.j2``: The default Jinja template for new reStructuredText
-  fragments.
+  fragments:
+
+  .. [[[cog
+      include_file("src/scriv/templates/new_fragment.rst.j2")
+  .. ]]]
+  .. code::
+
+      .. A new scriv changelog fragment.
+      {% if config.categories -%}
+      ..
+      .. Uncomment the header that is right (remove the leading dots).
+      ..
+      {% for cat in config.categories -%}
+      .. {{ cat }}
+      .. {{ config.rst_header_chars[1] * (cat|length) }}
+      ..
+      .. - A bullet item for the {{ cat }} category.
+      ..
+      {% endfor -%}
+      {% else %}
+      - A bullet item for this fragment. EDIT ME!
+      {% endif -%}
+
+  .. [[[end]]] (checksum: f1e1949e1f93a7963671861f6fb20189)
 
 Literal Prefix
 --------------
