@@ -114,6 +114,7 @@ jobs:
           python -m tox -e coverage
           export TOTAL=$(python -c "import json;print(json.load(open('coverage.json'))['totals']['percent_covered_display'])")
           echo "total=$TOTAL" >> $GITHUB_ENV
+          echo "### Total coverage: ${TOTAL}%" >> $GITHUB_STEP_SUMMARY
 
       - name: "Make badge"
         # https://gist.github.com/nedbat/5a304c1c779d4bcc57be95f847e9327f
@@ -128,10 +129,6 @@ jobs:
           minColorRange: 50
           maxColorRange: 90
           valColorRange: ${{ env.total }}
-
-      - name: "Create coverage summary"
-        run: |
-          echo '### Total coverage: ${{ env.total }}%' >> $GITHUB_STEP_SUMMARY
 
   docs:
     name: Docs
