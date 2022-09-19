@@ -8,7 +8,7 @@ alabaster==0.7.12
     # via
     #   -r requirements/quality.txt
     #   sphinx
-astroid==2.12.9
+astroid==2.12.10
     # via
     #   -r requirements/quality.txt
     #   pylint
@@ -33,7 +33,7 @@ build==0.8.0
     #   -r requirements/quality.txt
     #   check-manifest
     #   pip-tools
-certifi==2022.6.15.1
+certifi==2022.9.14
     # via
     #   -r requirements/quality.txt
     #   requests
@@ -87,7 +87,7 @@ filelock==3.8.0
     #   virtualenv
 freezegun==1.2.2
     # via -r requirements/quality.txt
-idna==3.3
+idna==3.4
     # via
     #   -r requirements/quality.txt
     #   requests
@@ -131,7 +131,7 @@ jinja2==3.1.2
     # via
     #   -r requirements/quality.txt
     #   sphinx
-keyring==23.9.1
+keyring==23.9.3
     # via
     #   -r requirements/quality.txt
     #   twine
