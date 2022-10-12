@@ -1,0 +1,6 @@
+Fixed
+.....
+
+- Fix issue #63 by applying a workaround, see
+  https://github.com/pallets/click/issues/486#issuecomment-185790528
+  for details.

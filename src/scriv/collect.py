@@ -14,7 +14,7 @@ from .util import extract_version
 logger = logging.getLogger()
 
 
-@click.command()
+@click.command(short_help = "Collect fragments and produce a combined entry in the CHANGELOG file.")
 @click.option(
     "--add/--no-add",
     default=None,
