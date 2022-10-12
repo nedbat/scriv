@@ -1,0 +1,6 @@
+Fixed
+.....
+
+- Fixed truncated help summaries by shortening them, closing `issue 63`_.
+
+.. _issue 63: https://github.com/nedbat/scriv/issues/63

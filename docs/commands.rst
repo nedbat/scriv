@@ -32,14 +32,14 @@ scriv create
     $ scriv create --help
     Usage: scriv create [OPTIONS]
 
-      Create a new scriv changelog fragment.
+      Create a new changelog fragment.
 
     Options:
       --add / --no-add     'git add' the created file.
       --edit / --no-edit   Open the created file in your text editor.
       -v, --verbosity LVL  Either CRITICAL, ERROR, WARNING, INFO or DEBUG
       --help               Show this message and exit.
-.. [[[end]]] (checksum: 7971e9a84f47c500c7d7afdb29879888)
+.. [[[end]]] (checksum: 45edec1fd1ebc343358cbf774ba5a49c)
 
 The create command creates new :ref:`fragments <fragments>`.
 
@@ -104,7 +104,7 @@ scriv collect
     $ scriv collect --help
     Usage: scriv collect [OPTIONS]
 
-      Collect fragments and produce a combined entry in the CHANGELOG file.
+      Collect and combine fragments into the changelog.
 
     Options:
       --add / --no-add     'git add' the updated changelog file and removed
@@ -115,7 +115,7 @@ scriv collect
       --version TEXT       The version name to use for this entry.
       -v, --verbosity LVL  Either CRITICAL, ERROR, WARNING, INFO or DEBUG
       --help               Show this message and exit.
-.. [[[end]]] (checksum: 3f25ae739160c63a0685e98f88681927)
+.. [[[end]]] (checksum: e93ca778396310ce406f1cc439cefdd4)
 
 The collect command aggregates all the current fragments into the changelog
 file.
@@ -178,7 +178,7 @@ scriv github-release
     $ scriv github-release --help
     Usage: scriv github-release [OPTIONS]
 
-      Create or update GitHub releases from the changelog.
+      Create GitHub releases from the changelog.
 
       Only the most recent changelog entry is used, unless --all is provided.
 
@@ -186,7 +186,7 @@ scriv github-release
       --all                Use all of the changelog entries.
       -v, --verbosity LVL  Either CRITICAL, ERROR, WARNING, INFO or DEBUG
       --help               Show this message and exit.
-.. [[[end]]] (checksum: bf6add2df010e50a22cf2a17d2200394)
+.. [[[end]]] (checksum: f3ca6057c8d802717ac4f25095bcce76)
 
 The ``github-release`` command reads the changelog file, parses it into
 entries, and then creates or updates GitHub releases to match.  Only the most

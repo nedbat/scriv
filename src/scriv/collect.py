@@ -43,7 +43,7 @@ def collect(
     version: str,
 ) -> None:
     """
-    Collect fragments and produce a combined entry in the CHANGELOG file.
+    Collect and combine fragments into the changelog.
     """
     if title is not None and version is not None:
         sys.exit("Can't provide both --title and --version.")

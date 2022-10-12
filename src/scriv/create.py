@@ -25,7 +25,7 @@ logger = logging.getLogger()
 @click_log.simple_verbosity_option(logger)
 def create(add: Optional[bool], edit: Optional[bool]) -> None:
     """
-    Create a new scriv changelog fragment.
+    Create a new changelog fragment.
     """
     if add is None:
         add = git_config_bool("scriv.create.add")

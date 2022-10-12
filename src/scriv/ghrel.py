@@ -25,7 +25,7 @@ logger = logging.getLogger()
 @click_log.simple_verbosity_option(logger)
 def github_release(all_entries: bool) -> None:
     """
-    Create or update GitHub releases from the changelog.
+    Create GitHub releases from the changelog.
 
     Only the most recent changelog entry is used, unless --all is provided.
 
