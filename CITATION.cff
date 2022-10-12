@@ -1,0 +1,28 @@
+# Parser settings.
+cff-version: 1.2.0
+message: Please cite this software using these meta data.
+
+# Version information.
+date-released: 2022-09-19
+version: 0.17.0
+
+# Project information.
+abstract: Changelog management tool
+authors:
+  - alias: nedbat
+    family-names: Batchelder
+    given-names: Ned
+  - alias: kurtmckee
+    family-names: McKee
+    given-names: Kurt
+  - alias: maxking
+    family-names: Raj
+    given-names: Abhilash
+  - alias: rodrigogiraoserrao
+    family-names: Serrão
+    given-names: Rodrigo Girão
+license: Apache-2.0
+repository-artifact: https://pypi.python.org/pypi/scriv/
+repository-code: https://github.com/nedbat/scriv
+title: Scriv
+url: https://github.com/nedbat/scriv
