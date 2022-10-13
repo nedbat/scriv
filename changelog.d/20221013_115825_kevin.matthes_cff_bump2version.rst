@@ -1,0 +1,9 @@
+Added
+.....
+
+- Added a valid ``CITATION.cff``.
+
+- Added a GitHub Action in order to automatically validate the newly added
+  ``CITATION.cff``.
+
+- Added a configuration file for ``bump2version``.
