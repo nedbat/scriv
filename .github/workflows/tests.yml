@@ -36,7 +36,7 @@ jobs:
           - "3.8"
           - "3.9"
           - "3.10"
-          - "3.11.0-rc.2"
+          - "3.11"
           - "pypy-3.7"
 
     steps:
@@ -94,7 +94,7 @@ jobs:
       - name: "Set up Python"
         uses: "actions/setup-python@v2"
         with:
-          python-version: "3.11.0-rc.2"
+          python-version: "3.11"
           cache: pip
           cache-dependency-path: 'requirements/*.txt'
 
