@@ -6,7 +6,7 @@
 #
 attrs==22.1.0
     # via -r requirements/base.in
-certifi==2022.9.14
+certifi==2022.9.24
     # via requests
 charset-normalizer==2.1.1
     # via requests
@@ -18,7 +18,7 @@ click-log==0.4.0
     # via -r requirements/base.in
 idna==3.4
     # via requests
-importlib-metadata==4.12.0
+importlib-metadata==5.1.0
     # via click
 jinja2==3.1.2
     # via -r requirements/base.in
@@ -26,9 +26,9 @@ markupsafe==2.1.1
     # via jinja2
 requests==2.28.1
     # via -r requirements/base.in
-typing-extensions==4.3.0
+typing-extensions==4.4.0
     # via importlib-metadata
-urllib3==1.26.12
+urllib3==1.26.13
     # via requests
-zipp==3.8.1
+zipp==3.11.0
     # via importlib-metadata

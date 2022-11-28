@@ -14,7 +14,7 @@ SectionDict = Dict[Optional[str], List[str]]
 class FormatTools(abc.ABC):
     """Methods and data about specific formats."""
 
-    def __init__(self, config: Config = None):
+    def __init__(self, config: Optional[Config] = None):
         """Create a FormatTools with the specified configuration."""
         self.config = config or Config()
 
