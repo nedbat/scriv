@@ -47,7 +47,7 @@ def find_literal(file_name: str, literal_name: str) -> Optional[str]:
             ).format(file_name)
             raise Exception(msg)
         with open(file_name, encoding="utf-8") as f:
-            data = yaml.safe_load(f.read())
+            data = yaml.safe_load(f)
         return find_yaml_value(data, literal_name)
     else:
         raise Exception(f"Can't read literals from files like {file_name!r}")
