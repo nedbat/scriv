@@ -40,7 +40,7 @@ def find_literal(file_name: str, literal_name: str) -> Optional[str]:
         with open(file_name, encoding="utf-8") as f:
             data = tomli.loads(f.read())
         return find_nested_value(data, literal_name)
-    elif ext == ".yml" or ext == ".yaml":
+    elif ext in ('.yml' , '.yaml'):
         if yaml is None:
             msg = (
                 "Can't read {!r} without yaml support. "
