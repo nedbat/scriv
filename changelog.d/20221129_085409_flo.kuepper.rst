@@ -1,0 +1,5 @@
+Added
+.....
+
+- yaml support for literals. closing `issue 69`_.
+.. _issue 69: https://github.com/nedbat/scriv/issues/69

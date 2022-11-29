@@ -16,6 +16,7 @@ try:
 except ImportError:  # pragma: no cover
     yaml = None  # type: ignore
 
+
 def find_literal(file_name: str, literal_name: str) -> Optional[str]:
     """
     Look inside a file for a literal value, and return it.
