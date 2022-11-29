@@ -97,7 +97,9 @@ class PythonLiteralFinder(ast.NodeVisitor):
             self.value = value.s
 
 
-def find_nested_value(data: MutableMapping[str, Any], name: str) -> Optional[str]:
+def find_nested_value(
+    data: MutableMapping[str, Any], name: str
+) -> Optional[str]:
     """
     Use a period-separated name to traverse a dictionary.
 
@@ -113,4 +115,3 @@ def find_nested_value(data: MutableMapping[str, Any], name: str) -> Optional[str
     if isinstance(current_object, str):
         return current_object
     return None
-
