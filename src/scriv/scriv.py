@@ -6,7 +6,7 @@ import itertools
 import re
 import textwrap
 from pathlib import Path
-from typing import Iterable, List
+from typing import Iterable, List, Optional
 
 import jinja2
 
@@ -20,7 +20,7 @@ from .util import order_dict
 class Scriv:
     """Public API to the scriv application."""
 
-    def __init__(self, *, config: Config = None):
+    def __init__(self, *, config: Optional[Config] = None):
         """Create a new Scriv."""
         if config is None:
             self.config = Config.read()
