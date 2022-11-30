@@ -117,7 +117,7 @@ myVersion:
   MAJOR: 2
   MINOR: 3
   PATCH: 5
-  
+
 myproduct:
   version: [mayor=5, minor=6, patch=7]
   versionString: "8.9.22"
