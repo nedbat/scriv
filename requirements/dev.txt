@@ -204,7 +204,7 @@ pep517==0.13.0
     #   build
 pip-tools==6.10.0
     # via -r requirements/pip-tools.txt
-pkginfo==1.9.0
+pkginfo==1.9.2
     # via
     #   -r requirements/quality.txt
     #   twine
@@ -272,6 +272,8 @@ pytz==2022.6
     # via
     #   -r requirements/quality.txt
     #   babel
+pyyaml==6.0
+    # via -r requirements/quality.txt
 readme-renderer==37.3
     # via
     #   -r requirements/quality.txt

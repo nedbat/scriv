@@ -8,3 +8,4 @@ freezegun                 # for mocking datetime
 pudb                      # for when we need to debug
 pytest-mock               # pytest wrapper around mock
 responses                 # mock requests
+pyyaml
