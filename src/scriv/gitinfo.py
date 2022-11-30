@@ -87,9 +87,13 @@ def get_github_repo() -> Optional[str]:
     urls = run_simple_command("git remote -v").splitlines()
     github_repos = set()
     for url in urls:
-        m = re.search(r"github.com[:/]([^/]+/.+)\.git", url)
+        m = re.search(r"github.com[:/]([^/]+/\S+)", url)
         if m:
-            github_repos.add(m[1])
+            repo = m[1]
+            # It might or might not have .git appended.
+            if repo.endswith(".git"):
+                repo = repo[:-4]
+            github_repos.add(repo)
     if len(github_repos) == 1:
         return github_repos.pop()
     return None
