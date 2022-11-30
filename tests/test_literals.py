@@ -140,7 +140,7 @@ def test_find_yaml_literal(name, value, temp_dir):
     assert find_literal("foo.yml", name) == value
 
 
-# def test_find_yaml_literal_fail_if_unavailable(monkeypatch):
-#    monkeypatch.setattr(scriv.literals, "yaml", None)
-#    with pytest.raises(Exception, match="Can't read .+ without YAML support"):
-#        find_literal("foo.yml", "fail")
+def test_find_yaml_literal_fail_if_unavailable(monkeypatch):
+    monkeypatch.setattr(scriv.literals, "yaml", None)
+    with pytest.raises(Exception, match="Can't read .+ without YAML support"):
+        find_literal("foo.yml", "fail")
