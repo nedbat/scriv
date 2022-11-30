@@ -132,7 +132,6 @@ myproduct:
         ("myproduct.versionString", "8.9.22"),
         ("myproduct.version", None),
         ("myVersion", None),
-        ("myVersion", "something"),
     ],
 )
 def test_find_yaml_literal(name, value, temp_dir):
