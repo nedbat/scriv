@@ -41,6 +41,11 @@ def test_get_github_repo_one_github_remote(fake_git):
     assert get_github_repo() == "joe/myproject"
 
 
+def test_get_github_repo_one_github_remote_no_extension(fake_git):
+    fake_git.add_remote("mygithub", "git@github.com:joe/myproject")
+    assert get_github_repo() == "joe/myproject"
+
+
 def test_get_github_repo_two_github_remotes(fake_git):
     fake_git.add_remote("mygithub", "git@github.com:joe/myproject.git")
     fake_git.add_remote("upstream", "git@github.com:psf/myproject.git")
