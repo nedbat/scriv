@@ -43,7 +43,7 @@ def find_literal(file_name: str, literal_name: str) -> Optional[str]:
     elif ext in (".yml", ".yaml"):
         if yaml is None:
             msg = (
-                "Can't read {!r} without yaml support. "
+                "Can't read {!r} without YAML support. "
                 + "Install with [yaml] extra"
             ).format(file_name)
             raise Exception(msg)
