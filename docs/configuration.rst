@@ -123,10 +123,10 @@ using periods to separate the sections and key names::
     version = literal: pyproject.toml: project.version
 
 It is also possible to specify a variable in a YAML file
-using periods to separate the sections and key names::
+using periods to access dictionary keys::
 
     [scriv]
-    version = literal: galaxy.yaml: version
+    version = literal: galaxy.yaml: myproduct.versionString
 
 Currently Python, TOML and YAML files are supported for literals,
 but other syntaxes can be supported in the future.
