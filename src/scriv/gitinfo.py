@@ -84,19 +84,12 @@ def get_github_repo() -> Optional[str]:
 
     If there is no remote on GitHub, or more than one, return None.
     """
-    urls = run_simple_command(
-        # Backslashes and quoting are hard cross-platform, so avoid them.
-        ["git", "config", "--get-regex", "remote[.].*[.]url"]
-    ).splitlines()
-    github_repos = []
+    urls = run_simple_command("git remote -v").splitlines()
+    github_repos = set()
     for url in urls:
-        m = re.search(r"github.com[:/]([^/]+/[^/]+)", url)
+        m = re.search(r"github.com[:/]([^/]+/.+)\.git", url)
         if m:
-            repo = m[1]
-            # I think it always has .git appended..
-            if repo.endswith(".git"):  # pragma: no branch
-                repo = repo[:-4]
-            github_repos.append(repo)
+            github_repos.add(m[1])
     if len(github_repos) == 1:
-        return github_repos[0]
+        return github_repos.pop()
     return None

@@ -1,8 +1,7 @@
 """Fake implementations of some of our external information sources."""
 
-import re
 import shlex
-from typing import Callable, Dict, Iterable, List, Set
+from typing import Callable, Dict, Iterable, List, Optional, Set, Tuple
 
 from scriv.shell import CmdResult
 
@@ -57,6 +56,7 @@ class FakeGit:
         self.branch = "main"
         self.editor = "vi"
         self.tags: Set[str] = set()
+        self.remotes: Dict[str, Tuple[str, str]] = {}
 
         # Hook up our run_command handler.
         frc.add_handler("git", self.run_command)
@@ -70,18 +70,18 @@ class FakeGit:
                     return (True, self.config[argv[3]] + "\n")
                 else:
                     return (False, f"error: no such key: {argv[3]}")
-            elif argv[2] == "--get-regex":
-                out = []
-                for name, value in self.config.items():
-                    if re.fullmatch(argv[3], name):
-                        out.append(f"{name} {value}\n")
-                return (True, "".join(out))
         elif argv[1:] == ["rev-parse", "--abbrev-ref", "HEAD"]:
             return (True, self.branch + "\n")
         elif argv[1:] == ["tag"]:
             return (True, "".join(tag + "\n" for tag in self.tags))
         elif argv[1:] == ["var", "GIT_EDITOR"]:
             return (True, self.editor + "\n")
+        elif argv[1:] == ["remote", "-v"]:
+            out = []
+            for name, (url, push_url) in self.remotes.items():
+                out.append(f"{name}\t{url} (fetch)\n")
+                out.append(f"{name}\t{push_url} (push)\n")
+            return (True, "".join(out))
         # raise Exception(f"no fake git command: {argv}")
         return (False, f"no fake git command: {argv}")
 
@@ -101,6 +101,8 @@ class FakeGit:
         """Add tags to the repo."""
         self.tags.update(tags)
 
-    def add_remote(self, name: str, url: str) -> None:
+    def add_remote(
+        self, name: str, url: str, push_url: Optional[str] = None
+    ) -> None:
         """Add a remote with a name and a url."""
-        self.config[f"remote.{name}.url"] = url
+        self.remotes[name] = (url, push_url or url)

@@ -1,5 +1,7 @@
 """Tests of gitinfo.py"""
 
+import re
+
 from scriv.gitinfo import current_branch_name, get_github_repo, user_nick
 
 
@@ -58,4 +60,10 @@ def test_get_github_repo_no_github_remotes(fake_git):
 
 
 def test_real_get_github_repo():
-    assert get_github_repo() == "nedbat/scriv"
+    # Since we don't know the name of this repo (forks could be anything),
+    # we can't be sure what we get, except it should be word/word, and not end
+    # with .git
+    repo = get_github_repo()
+    assert repo is not None
+    assert re.fullmatch(r"\w+/\w+", repo)
+    assert not repo.endswith(".git")
