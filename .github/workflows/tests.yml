@@ -117,6 +117,7 @@ jobs:
           echo "### Total coverage: ${TOTAL}%" >> $GITHUB_STEP_SUMMARY
 
       - name: "Make badge"
+        if: (github.repository == 'nedbat/scriv') && (github.ref == 'refs/heads/main')
         # https://gist.github.com/nedbat/5a304c1c779d4bcc57be95f847e9327f
         uses: schneegans/dynamic-badges-action@v1.4.0
         with:
