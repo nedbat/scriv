@@ -5,7 +5,8 @@ Scriv
 Scriv changelog management tool
 
 | |pypi-badge| |ci-badge| |coverage-badge| |doc-badge|
-| |pyversions-badge| |license-badge| |sponsor-badge| |mastodon-nedbat| |twitter-nedbat|
+| |pyversions-badge| |license-badge| |sponsor-badge| |mastodon-nedbat|
+  |twitter-nedbat|
 
 Overview
 ========
