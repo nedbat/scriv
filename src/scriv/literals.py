@@ -11,6 +11,11 @@ try:
 except ImportError:  # pragma: no cover
     tomli = None  # type: ignore
 
+try:
+    import yaml
+except ImportError:  # pragma: no cover
+    yaml = None  # type: ignore
+
 
 def find_literal(file_name: str, literal_name: str) -> Optional[str]:
     """
@@ -34,7 +39,17 @@ def find_literal(file_name: str, literal_name: str) -> Optional[str]:
             raise Exception(msg)
         with open(file_name, encoding="utf-8") as f:
             data = tomli.loads(f.read())
-        return find_toml_value(data, literal_name)
+        return find_nested_value(data, literal_name)
+    elif ext in (".yml", ".yaml"):
+        if yaml is None:
+            msg = (
+                "Can't read {!r} without YAML support. "
+                + "Install with [yaml] extra"
+            ).format(file_name)
+            raise Exception(msg)
+        with open(file_name, encoding="utf-8") as f:
+            data = yaml.safe_load(f)
+        return find_nested_value(data, literal_name)
     else:
         raise Exception(f"Can't read literals from files like {file_name!r}")
 
@@ -82,7 +97,9 @@ class PythonLiteralFinder(ast.NodeVisitor):
             self.value = value.s
 
 
-def find_toml_value(data: MutableMapping[str, Any], name: str) -> Optional[str]:
+def find_nested_value(
+    data: MutableMapping[str, Any], name: str
+) -> Optional[str]:
     """
     Use a period-separated name to traverse a dictionary.
 

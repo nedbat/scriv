@@ -16,3 +16,4 @@ twine                     # For checking distributions
 types-freezegun
 types-requests
 types-toml
+types-pyyaml

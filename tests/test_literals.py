@@ -107,3 +107,40 @@ def test_find_toml_literal_fail_if_unavailable(monkeypatch):
     monkeypatch.setattr(scriv.literals, "tomli", None)
     with pytest.raises(Exception, match="Can't read .+ without TOML support"):
         find_literal("foo.toml", "fail")
+
+
+YAML_LITERAL = """\
+---
+version: 1.2.3
+
+myVersion:
+  MAJOR: 2
+  MINOR: 3
+  PATCH: 5
+
+myproduct:
+  version: [mayor=5, minor=6, patch=7]
+  versionString: "8.9.22"
+...
+"""
+
+
+@pytest.mark.parametrize(
+    "name, value",
+    [
+        ("version", "1.2.3"),
+        ("myproduct.versionString", "8.9.22"),
+        ("myproduct.version", None),
+        ("myVersion", None),
+    ],
+)
+def test_find_yaml_literal(name, value, temp_dir):
+    with open("foo.yml", "w", encoding="utf-8") as f:
+        f.write(YAML_LITERAL)
+    assert find_literal("foo.yml", name) == value
+
+
+def test_find_yaml_literal_fail_if_unavailable(monkeypatch):
+    monkeypatch.setattr(scriv.literals, "yaml", None)
+    with pytest.raises(Exception, match="Can't read .+ without YAML support"):
+        find_literal("foo.yml", "fail")
