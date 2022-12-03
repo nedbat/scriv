@@ -30,7 +30,7 @@ Settings use the usual ".ini" syntax, but with some extra features:
 
 - A prefix of ``file:`` reads the setting from a file.
 
-- A prefix of ``literal:`` reads a string literal from a source file.
+- A prefix of ``literal:`` reads a literal data from a source file.
 
 - Value substitutions can make a setting depend on another setting.
 
@@ -107,8 +107,8 @@ Literal Prefix
 --------------
 
 A ``literal:`` prefix means the setting value will be a literal string read
-from a source file.  The setting provides a file name and variable name
-separated by colons::
+from a source file.  The setting provides a file name and value name separated
+by colons::
 
     [scriv]
     version = literal: myproj/__init__.py: __version__
@@ -116,20 +116,20 @@ separated by colons::
 In this case, the file ``myproj/__init__.py`` will be read, and the
 ``__version__`` value will be found and used as the version setting.
 
-It is also possible to specify a variable in a TOML file
-using periods to separate the sections and key names::
+Currently Python, TOML and YAML files are supported for literals, but other
+syntaxes can be supported in the future.
+
+When using a TOML file, the value is specified using periods to separate the
+sections and key names::
 
     [scriv]
     version = literal: pyproject.toml: project.version
 
-It is also possible to specify a variable in a YAML file
-using periods to access dictionary keys::
+In a YAML file, use periods in the value name to access dictionary keys::
 
     [scriv]
     version = literal: galaxy.yaml: myproduct.versionString
 
-Currently Python, TOML and YAML files are supported for literals,
-but other syntaxes can be supported in the future.
 
 Value Substitution
 ------------------
