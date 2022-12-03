@@ -5,7 +5,7 @@ Scriv
 Scriv changelog management tool
 
 | |pypi-badge| |ci-badge| |coverage-badge| |doc-badge|
-| |pyversions-badge| |license-badge| |sponsor-badge| |twitter-nedbat|
+| |pyversions-badge| |license-badge| |sponsor-badge| |mastodon-nedbat| |twitter-nedbat|
 
 Overview
 ========
@@ -72,6 +72,10 @@ Contributions are very welcome.
 .. |license-badge| image:: https://img.shields.io/github/license/nedbat/scriv.svg
     :target: https://github.com/nedbat/scriv/blob/master/LICENSE.txt
     :alt: License
+
+.. |mastodon-nedbat| image:: https://img.shields.io/badge/dynamic/json?style=flat&labelColor=450657&logo=mastodon&logoColor=ffffff&link=https%3A%2F%2Fhachyderm.io%2F%40nedbat&url=https%3A%2F%2Fhachyderm.io%2Fusers%2Fnedbat%2Ffollowers.json&query=totalItems&label=Mastodon
+    :target: https://hachyderm.io/@nedbat
+    :alt: nedbat on Mastodon
 
 .. |twitter-nedbat| image:: https://img.shields.io/twitter/follow/nedbat.svg?label=nedbat&style=flat&logo=twitter&logoColor=4FADFF
     :target: https://twitter.com/nedbat
