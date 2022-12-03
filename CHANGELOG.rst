@@ -21,6 +21,27 @@ See the fragment files in the `changelog.d directory`_.
 
 .. scriv-insert-here
 
+.. _changelog-1.0.0:
+
+1.0.0 — 2022-12-03
+------------------
+
+Added
+.....
+
+- Now literal configuration settings can be read from YAML files. Closes `issue 69`_.
+  Thanks, `Florian Küpper <pull 70_>`_.
+
+.. _pull 70: https://github.com/nedbat/scriv/pull/70
+.. _issue 69: https://github.com/nedbat/scriv/issues/69
+
+Fixed
+.....
+
+- Fixed truncated help summaries by shortening them, closing `issue 63`_.
+
+.. _issue 63: https://github.com/nedbat/scriv/issues/63
+
 .. _changelog-0.17.0:
 
 0.17.0 — 2022-09-18

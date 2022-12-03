@@ -1,8 +1,0 @@
-Added
-.....
-
-- Now literal configuration settings can be read from YAML files. Closes `issue 69`_.
-  Thanks, `Florian Küpper <pull 70_>`_.
-
-.. _pull 70: https://github.com/nedbat/scriv/pull/70
-.. _issue 69: https://github.com/nedbat/scriv/issues/69
