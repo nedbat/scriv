@@ -9,6 +9,8 @@ from typing import Any, List
 import attr
 
 try:
+    import tomllib as tomli
+except ModuleNotFoundError:  # pragma: no cover
     import tomli
 except ImportError:  # pragma: no cover
     tomli = None  # type: ignore
