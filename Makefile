@@ -41,22 +41,32 @@ docs: botedits ## generate Sphinx HTML documentation, including API docs
 	tox -e docs
 	$(BROWSER)docs/_build/html/index.html
 
+PIP_COMPILE = pip-compile --upgrade --resolver=backtracking
 upgrade: export CUSTOM_COMPILE_COMMAND=make upgrade
 upgrade: ## update the requirements/*.txt files with the latest packages satisfying requirements/*.in
 	pip install -qr requirements/pip-tools.txt
 	# Make sure to compile files after any other files they include!
-	pip-compile --upgrade -o requirements/pip-tools.txt requirements/pip-tools.in
-	pip-compile --upgrade -o requirements/base.txt requirements/base.in
-	pip-compile --upgrade -o requirements/test.txt requirements/test.in
-	pip-compile --upgrade -o requirements/doc.txt requirements/doc.in
-	pip-compile --upgrade -o requirements/quality.txt requirements/quality.in
-	pip-compile --upgrade -o requirements/tox.txt requirements/tox.in
-	pip-compile --upgrade -o requirements/dev.txt requirements/dev.in
+	$(PIP_COMPILE) -o requirements/pip-tools.txt requirements/pip-tools.in
+	$(PIP_COMPILE) -o requirements/base.txt requirements/base.in
+	$(PIP_COMPILE) -o requirements/test.txt requirements/test.in
+	$(PIP_COMPILE) -o requirements/doc.txt requirements/doc.in
+	$(PIP_COMPILE) -o requirements/quality.txt requirements/quality.in
+	$(PIP_COMPILE) -o requirements/tox.txt requirements/tox.in
+	$(PIP_COMPILE) -o requirements/dev.txt requirements/dev.in
 	# Splice requirements/base.in into setup.cfg
 	sed -n -e '1,/begin_install_requires/p' < setup.cfg > setup.tmp
 	sed -n -e '/^[a-zA-Z]/s/^/    /p' < requirements/base.in >> setup.tmp
 	sed -n -e '/end_install_requires/,$$p' < setup.cfg >> setup.tmp
 	mv setup.tmp setup.cfg
+
+diff_upgrade: ## summarize the last `make upgrade`
+	@# The sort flags sort by the package name first, then by the -/+, and
+	@# sort by version numbers, so we get a summary with lines like this:
+	@#	-bashlex==0.16
+	@#	+bashlex==0.17
+	@#	-build==0.9.0
+	@#	+build==0.10.0
+	@git diff -U0 | grep -v '^@' | grep == | sort -k1.2,1.99 -k1.1,1.1r -u -V
 
 botedits: ## make source edits by tools
 	python -m black --line-length=80 src/scriv tests docs setup.py
