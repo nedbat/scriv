@@ -7,7 +7,9 @@ import os.path
 from typing import Any, MutableMapping, Optional
 
 try:
-    import tomli
+    import tomllib as tomli
+except ModuleNotFoundError:  # pragma: no cover
+    import tomli  # type: ignore
 except ImportError:  # pragma: no cover
     tomli = None  # type: ignore
 
