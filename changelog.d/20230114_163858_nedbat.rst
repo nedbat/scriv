@@ -1,0 +1,4 @@
+Fixed
+.....
+
+- More internal activities are logged, to help debug operations.

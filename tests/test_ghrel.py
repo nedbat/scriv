@@ -92,6 +92,11 @@ def test_everything(all_entries, cli_invoke, scenario1, mocker, caplog):
         ]
         assert caplog.record_tuples == [
             (
+                "scriv.changelog",
+                logging.INFO,
+                "Reading changelog CHANGELOG.rst",
+            ),
+            (
                 "scriv.ghrel",
                 logging.WARNING,
                 "Entry 'Some fixes' has no version, skipping.",
@@ -104,7 +109,13 @@ def test_everything(all_entries, cli_invoke, scenario1, mocker, caplog):
         ]
     else:
         assert mock_update_release.mock_calls == []
-        assert caplog.record_tuples == []
+        assert caplog.record_tuples == [
+            (
+                "scriv.changelog",
+                logging.INFO,
+                "Reading changelog CHANGELOG.rst",
+            ),
+        ]
 
 
 def test_no_clear_github_repo(cli_invoke, scenario1, fake_git):
@@ -112,4 +123,7 @@ def test_no_clear_github_repo(cli_invoke, scenario1, fake_git):
     fake_git.add_remote("upstream", "git@github.com:psf/project.git")
     result = cli_invoke(["github-release"], expect_ok=False)
     assert result.exit_code == 1
-    assert result.output == "Couldn't determine GitHub repo.\n"
+    assert result.output == (
+        "Reading changelog CHANGELOG.rst\n"
+        + "Couldn't determine GitHub repo.\n"
+    )

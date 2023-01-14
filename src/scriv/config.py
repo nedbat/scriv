@@ -1,6 +1,7 @@
 """Scriv configuration."""
 
 import configparser
+import logging
 import pkgutil
 import re
 from pathlib import Path
@@ -16,6 +17,8 @@ except ImportError:  # pragma: no cover
     tomllib = None  # type: ignore
 
 from scriv.literals import find_literal
+
+logger = logging.getLogger(__name__)
 
 
 @attr.s
@@ -238,8 +241,8 @@ class Config:
 
         """
         config = cls()
-        for configfile in ["setup.cfg", "tox.ini"]:
-            config.read_one_config(configfile)
+        config.read_one_config("setup.cfg")
+        config.read_one_config("tox.ini")
         config.read_one_toml("pyproject.toml")
         config.read_one_config(
             str(Path(config.fragment_directory) / "scriv.ini")
@@ -250,8 +253,14 @@ class Config:
         """
         Read one configuration file, adding values to `self`.
         """
+        logger.debug(f"Looking for config file {configfile}")
         parser = configparser.ConfigParser()
-        parser.read(configfile)
+        files_read = parser.read(configfile)
+        if not files_read:
+            logger.debug(f"{configfile} doesn't exist")
+            return
+        logger.debug(f"{configfile} was read")
+
         section_names = ["scriv", "tool.scriv"]
         section_name = next(
             (name for name in section_names if parser.has_section(name)), None
@@ -269,11 +278,14 @@ class Config:
         """
         Read one .toml file if it exists, adding values to `self`.
         """
+        logger.debug(f"Looking for config file {tomlfile}")
         tomlpath = Path(tomlfile)
         if not tomlpath.exists():
+            logger.debug(f"{tomlfile} doesn't exist")
             return
 
         toml_text = tomlpath.read_text(encoding="utf-8")
+        logger.debug(f"{tomlfile} was read")
 
         if tomllib is None:
             # Toml support isn't installed. Only print an exception if the

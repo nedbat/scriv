@@ -1,6 +1,7 @@
 """Changelog and Fragment definitions for Scriv."""
 
 import datetime
+import logging
 from pathlib import Path
 
 import attr
@@ -9,6 +10,8 @@ import jinja2
 from .config import Config
 from .format import FormatTools, SectionDict, get_format_tools
 from .util import partition_lines
+
+logger = logging.getLogger(__name__)
 
 
 @attr.s
@@ -47,6 +50,7 @@ class Changelog:
 
     def read(self) -> None:
         """Read the changelog if it exists."""
+        logger.info(f"Reading changelog {self.path}")
         if self.path.exists():
             with self.path.open("r", encoding="utf-8") as f:
                 changelog_text = f.read()
@@ -68,6 +72,8 @@ class Changelog:
                 rest, self.config.end_marker
             )
             self.text_after = marker + after
+        else:
+            logger.warning(f"Changelog {self.path} doesn't exist")
 
     def format_tools(self) -> FormatTools:
         """Get the appropriate FormatTools for this changelog."""
