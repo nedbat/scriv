@@ -12,7 +12,7 @@ import click
 
 from .shell import run_command, run_simple_command
 
-logger = logging.getLogger()
+logger = logging.getLogger(__name__)
 
 
 def user_nick() -> str:

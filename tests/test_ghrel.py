@@ -92,12 +92,12 @@ def test_everything(all_entries, cli_invoke, scenario1, mocker, caplog):
         ]
         assert caplog.record_tuples == [
             (
-                "root",
+                "scriv.ghrel",
                 logging.WARNING,
                 "Entry 'Some fixes' has no version, skipping.",
             ),
             (
-                "root",
+                "scriv.ghrel",
                 logging.WARNING,
                 "Version v0.0.1 has no tag. No release will be made.",
             ),

@@ -10,8 +10,8 @@ from .collect import collect
 from .create import create
 from .ghrel import github_release
 
-logger = logging.getLogger()
-click_log.basic_config(logger)
+# Configure the root logger, so all logging works.
+click_log.basic_config(logging.getLogger())
 
 
 @click.group(

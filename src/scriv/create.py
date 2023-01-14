@@ -10,7 +10,7 @@ import click_log
 from .gitinfo import git_add, git_config_bool, git_edit
 from .scriv import Scriv
 
-logger = logging.getLogger()
+logger = logging.getLogger(__name__)
 
 
 @click.command()
@@ -22,7 +22,7 @@ logger = logging.getLogger()
     default=None,
     help="Open the created file in your text editor.",
 )
-@click_log.simple_verbosity_option(logger)
+@click_log.simple_verbosity_option()
 def create(add: Optional[bool], edit: Optional[bool]) -> None:
     """
     Create a new changelog fragment.

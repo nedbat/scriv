@@ -8,6 +8,8 @@ from typing import List, Tuple, Union
 # The return value of run_command.
 CmdResult = Tuple[bool, str]
 
+logger = logging.getLogger(__name__)
+
 
 def run_command(cmd: Union[str, List[str]]) -> CmdResult:
     """
@@ -18,7 +20,7 @@ def run_command(cmd: Union[str, List[str]]) -> CmdResult:
         str: the output of the command.
 
     """
-    logging.debug(f"Running command {cmd!r}")
+    logger.debug(f"Running command {cmd!r}")
     if isinstance(cmd, str):
         cmd = shlex.split(cmd, posix=False)
     proc = subprocess.run(
@@ -29,7 +31,7 @@ def run_command(cmd: Union[str, List[str]]) -> CmdResult:
         stderr=subprocess.STDOUT,
     )
     output = proc.stdout.decode("utf-8")
-    logging.debug(
+    logger.debug(
         f"Command exited with {proc.returncode} status. Output: {output!r}"
     )
 

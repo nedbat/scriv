@@ -241,7 +241,8 @@ class TestCreateAdd:
             + "20130225_151617_joedev.rst"
         )
         mock_call.assert_called_once_with(["git", "add", file_path])
-        assert "Added " + file_path in caplog.text
+        expected = "Added " + file_path
+        assert expected in caplog.text
 
     def test_create_add_preference(
         self, mocker, fake_git, cli_invoke, changelog_d

@@ -6,7 +6,7 @@ from typing import Any, Dict, Iterable
 
 import requests
 
-logger = logging.getLogger()
+logger = logging.getLogger(__name__)
 
 
 # Only wait up to a minute for GitHub to respond.

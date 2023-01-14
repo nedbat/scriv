@@ -11,7 +11,7 @@ from .gitinfo import git_add, git_config_bool, git_edit, git_rm
 from .scriv import Scriv
 from .util import extract_version
 
-logger = logging.getLogger()
+logger = logging.getLogger(__name__)
 
 
 @click.command()
@@ -34,7 +34,7 @@ logger = logging.getLogger()
 @click.option(
     "--version", default=None, help="The version name to use for this entry."
 )
-@click_log.simple_verbosity_option(logger)
+@click_log.simple_verbosity_option()
 def collect(
     add: Optional[bool],
     edit: Optional[bool],

@@ -105,7 +105,7 @@ def test_create_release(responses, caplog):
     create_release("someone/something", RELEASE_DATA)
     assert json.loads(responses.calls[0].request.body) == RELEASE_DATA
     assert caplog.record_tuples == [
-        ("root", logging.INFO, "Creating release v3.14")
+        ("scriv.github", logging.INFO, "Creating release v3.14")
     ]
 
 
@@ -126,7 +126,7 @@ def test_update_release(responses, caplog):
     update_release(release, RELEASE_DATA)
     assert json.loads(responses.calls[0].request.body) == RELEASE_DATA
     assert caplog.record_tuples == [
-        ("root", logging.INFO, "Updating release v3.14")
+        ("scriv.github", logging.INFO, "Updating release v3.14")
     ]
 
 

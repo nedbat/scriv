@@ -12,7 +12,7 @@ from .scriv import Scriv
 from .shell import run_simple_command
 from .util import extract_version, is_prerelease_version
 
-logger = logging.getLogger()
+logger = logging.getLogger(__name__)
 
 
 @click.command()
@@ -22,7 +22,7 @@ logger = logging.getLogger()
     is_flag=True,
     help="Use all of the changelog entries.",
 )
-@click_log.simple_verbosity_option(logger)
+@click_log.simple_verbosity_option()
 def github_release(all_entries: bool) -> None:
     """
     Create GitHub releases from the changelog.
