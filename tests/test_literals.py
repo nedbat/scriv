@@ -104,7 +104,7 @@ def test_find_toml_literal(name, value, temp_dir):
 
 
 def test_find_toml_literal_fail_if_unavailable(monkeypatch):
-    monkeypatch.setattr(scriv.literals, "tomli", None)
+    monkeypatch.setattr(scriv.literals, "tomllib", None)
     with pytest.raises(Exception, match="Can't read .+ without TOML support"):
         find_literal("foo.toml", "fail")
 

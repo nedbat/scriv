@@ -9,11 +9,11 @@ from typing import Any, List
 import attr
 
 try:
-    import tomllib as tomli
+    import tomllib
 except ModuleNotFoundError:  # pragma: no cover
-    import tomli  # type: ignore
+    import tomli as tomllib  # type: ignore
 except ImportError:  # pragma: no cover
-    tomli = None  # type: ignore
+    tomllib = None  # type: ignore
 
 from scriv.literals import find_literal
 
@@ -275,7 +275,7 @@ class Config:
 
         toml_text = tomlpath.read_text(encoding="utf-8")
 
-        if tomli is None:
+        if tomllib is None:
             # Toml support isn't installed. Only print an exception if the
             # config file seems to have settings for us.
             has_scriv = re.search(r"(?m)^\[tool\.scriv\]", toml_text)
@@ -287,7 +287,7 @@ class Config:
                 raise Exception(msg)
         else:
             # We have toml installed, parse the file and look for our settings.
-            data = tomli.loads(toml_text)
+            data = tomllib.loads(toml_text)
             try:
                 scriv_data = data["tool"]["scriv"]
             except KeyError:

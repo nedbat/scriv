@@ -7,11 +7,11 @@ import os.path
 from typing import Any, MutableMapping, Optional
 
 try:
-    import tomllib as tomli
+    import tomllib
 except ModuleNotFoundError:  # pragma: no cover
-    import tomli  # type: ignore
+    import tomli as tomllib  # type: ignore
 except ImportError:  # pragma: no cover
-    tomli = None  # type: ignore
+    tomllib = None  # type: ignore
 
 try:
     import yaml
@@ -33,14 +33,14 @@ def find_literal(file_name: str, literal_name: str) -> Optional[str]:
             node = ast.parse(f.read())
         return PythonLiteralFinder().find(node, literal_name)
     elif ext == ".toml":
-        if tomli is None:
+        if tomllib is None:
             msg = (
                 "Can't read {!r} without TOML support. "
                 + "Install with [toml] extra"
             ).format(file_name)
             raise Exception(msg)
         with open(file_name, encoding="utf-8") as f:
-            data = tomli.loads(f.read())
+            data = tomllib.loads(f.read())
         return find_nested_value(data, literal_name)
     elif ext in (".yml", ".yaml"):
         if yaml is None:
