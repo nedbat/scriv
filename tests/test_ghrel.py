@@ -34,88 +34,88 @@ v0.0.1 -- 2001-01-01
 Didn't bother to tag this one.
 """
 
+RELEASES1 = {
+    "v1.0": {
+        "url": "https://api.github.com/repos/joe/project/releases/120",
+        "body": "Nothing to say.\n",
+    },
+    "v0.9a7": {
+        "url": "https://api.github.com/repos/joe/project/releases/123",
+        "body": "original body",
+    },
+}
+
+V123_REL = {
+    "body": "A good release\n",
+    "name": "v1.2.3",
+    "tag_name": "v1.2.3",
+    "draft": False,
+    "prerelease": False,
+}
+
+V097_REL = {
+    "body": "A beginning\n",
+    "name": "v0.9a7",
+    "tag_name": "v0.9a7",
+    "draft": False,
+    "prerelease": True,
+}
+
 
 @pytest.fixture()
-def scenario1(temp_dir, fake_git):
+def scenario1(temp_dir, fake_git, mocker):
     """A common scenario for the tests."""
     fake_git.add_remote("origin", "git@github.com:joe/project.git")
     fake_git.add_tags(["v1.2.3", "v1.0", "v0.9a7"])
     (temp_dir / "CHANGELOG.rst").write_text(CHANGELOG1)
-
-
-@pytest.mark.parametrize("all_entries", [False, True])
-def test_everything(all_entries, cli_invoke, scenario1, mocker, caplog):
     mock_get_releases = mocker.patch("scriv.ghrel.get_releases")
-    releases = {
-        "v1.0": {
-            "url": "https://api.github.com/repos/joe/project/releases/120",
-            "body": "Nothing to say.\n",
-        },
-        "v0.9a7": {
-            "url": "https://api.github.com/repos/joe/project/releases/123",
-            "body": "original body",
-        },
-    }
-    mock_get_releases.return_value = releases
+    mock_get_releases.return_value = RELEASES1
+
+
+def test_default(cli_invoke, scenario1, mocker, caplog):
     mock_create_release = mocker.patch("scriv.ghrel.create_release")
     mock_update_release = mocker.patch("scriv.ghrel.update_release")
 
-    if all_entries:
-        cli_invoke(["github-release", "--all"])
-    else:
-        cli_invoke(["github-release"])
+    cli_invoke(["github-release"])
 
-    assert mock_create_release.mock_calls == [
-        call(
-            "joe/project",
-            {
-                "body": "A good release\n",
-                "name": "v1.2.3",
-                "tag_name": "v1.2.3",
-                "draft": False,
-                "prerelease": False,
-            },
+    assert mock_create_release.mock_calls == [call("joe/project", V123_REL)]
+    assert mock_update_release.mock_calls == []
+    assert caplog.record_tuples == [
+        (
+            "scriv.changelog",
+            logging.INFO,
+            "Reading changelog CHANGELOG.rst",
         ),
     ]
-    if all_entries:
-        assert mock_update_release.mock_calls == [
-            call(
-                releases["v0.9a7"],
-                {
-                    "body": "A beginning\n",
-                    "name": "v0.9a7",
-                    "tag_name": "v0.9a7",
-                    "draft": False,
-                    "prerelease": True,
-                },
-            ),
-        ]
-        assert caplog.record_tuples == [
-            (
-                "scriv.changelog",
-                logging.INFO,
-                "Reading changelog CHANGELOG.rst",
-            ),
-            (
-                "scriv.ghrel",
-                logging.WARNING,
-                "Entry 'Some fixes' has no version, skipping.",
-            ),
-            (
-                "scriv.ghrel",
-                logging.WARNING,
-                "Version v0.0.1 has no tag. No release will be made.",
-            ),
-        ]
-    else:
-        assert mock_update_release.mock_calls == []
-        assert caplog.record_tuples == [
-            (
-                "scriv.changelog",
-                logging.INFO,
-                "Reading changelog CHANGELOG.rst",
-            ),
-        ]
+
+
+def test_dash_all(cli_invoke, scenario1, mocker, caplog):
+    mock_create_release = mocker.patch("scriv.ghrel.create_release")
+    mock_update_release = mocker.patch("scriv.ghrel.update_release")
+
+    cli_invoke(["github-release", "--all"])
+
+    assert mock_create_release.mock_calls == [call("joe/project", V123_REL)]
+    assert mock_update_release.mock_calls == [
+        call(RELEASES1["v0.9a7"], V097_REL),
+    ]
+    assert caplog.record_tuples == [
+        (
+            "scriv.changelog",
+            logging.INFO,
+            "Reading changelog CHANGELOG.rst",
+        ),
+        (
+            "scriv.ghrel",
+            logging.WARNING,
+            "Entry 'Some fixes' has no version, skipping.",
+        ),
+        (
+            "scriv.ghrel",
+            logging.WARNING,
+            "Version v0.0.1 has no tag. No release will be made.",
+        ),
+    ]
 
 
 def test_no_clear_github_repo(cli_invoke, scenario1, fake_git):
