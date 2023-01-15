@@ -268,7 +268,7 @@ class Config:
         if section_name:
             for attrdef in attr.fields(_Options):
                 try:
-                    val = parser[section_name][attrdef.name]  # type: Any
+                    val: Any = parser[section_name][attrdef.name]
                 except KeyError:
                     pass
                 else:

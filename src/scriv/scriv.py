@@ -55,7 +55,7 @@ class Scriv:
         """
         Read fragments and produce a combined SectionDict of their contents.
         """
-        sections = collections.defaultdict(list)  # type: SectionDict
+        sections: SectionDict = collections.defaultdict(list)
         for fragment in fragments:
             frag_sections = self.sections_from_fragment(fragment)
             for section, paragraphs in frag_sections.items():

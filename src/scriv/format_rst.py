@@ -65,7 +65,7 @@ class RstTools(FormatTools):
                 break
         lines.append("")
 
-        sections = {}  # type: SectionDict
+        sections: SectionDict = {}
         prev_line = ""
         paragraphs = None
         section_char = None

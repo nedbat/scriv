@@ -20,7 +20,7 @@ class MdTools(FormatTools):
                 lines = lines[lineno + 1 :]
                 break
 
-        sections = {}  # type: SectionDict
+        sections: SectionDict = {}
         in_comment = False
         paragraphs = None
         section_mark = None
