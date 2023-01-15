@@ -56,11 +56,16 @@ class RstTools(FormatTools):
         self, text: str
     ) -> SectionDict:  # noqa: D102 (inherited docstring)
         # Parse a very restricted subset of rst.
-        sections = {}  # type: SectionDict
-
         lines = text.splitlines()
+
+        # If there's an insert marker, start there.
+        for lineno, line in enumerate(lines):
+            if self.config.insert_marker in line:
+                lines = lines[lineno + 1 :]
+                break
         lines.append("")
 
+        sections = {}  # type: SectionDict
         prev_line = ""
         paragraphs = None
         section_char = None
@@ -78,10 +83,10 @@ class RstTools(FormatTools):
             if self._is_underline(line):
                 if section_char is None or line[0] == section_char:
                     # Section underline. Previous line was the heading.
-                    # General RST can have overlines as well as underlines, but
-                    # we only deal with underlines, so some paragraphs must have
-                    # preceded us.
-                    assert paragraphs is not None
+                    # General RST can have overlines as well as underlines,
+                    # which we detect because there are no previous paragraphs.
+                    if paragraphs is None:
+                        continue
                     # Heading was made a paragraph, undo that.
                     assert paragraphs[-1] == prev_line + "\n"
                     paragraphs.pop()

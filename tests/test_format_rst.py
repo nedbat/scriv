@@ -185,6 +185,19 @@ from scriv.format_rst import RstTools
         # Multiple levels of headings only splits on the top-most one.
         pytest.param(
             """\
+            =====
+            TITLE
+            =====
+
+            Irrelevant stuff
+
+            Heading
+            =======
+
+            Ignore this
+
+            .. scriv-insert-here
+
             (prelude)
 
             Section one

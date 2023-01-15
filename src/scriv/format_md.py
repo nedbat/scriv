@@ -12,8 +12,15 @@ class MdTools(FormatTools):
     def parse_text(
         self, text
     ) -> SectionDict:  # noqa: D102 (inherited docstring)
-        sections = {}  # type: SectionDict
         lines = text.splitlines()
+
+        # If there's an insert marker, start there.
+        for lineno, line in enumerate(lines):
+            if self.config.insert_marker in line:
+                lines = lines[lineno + 1 :]
+                break
+
+        sections = {}  # type: SectionDict
         in_comment = False
         paragraphs = None
         section_mark = None

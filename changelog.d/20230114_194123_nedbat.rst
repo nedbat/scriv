@@ -1,0 +1,5 @@
+Fixed
+.....
+
+- Parsing changelogs now take the `insert-marker` setting into account. Only
+  content after the insert-marker line is parsed.

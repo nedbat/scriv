@@ -149,6 +149,12 @@ from scriv.format_md import MdTools
         # Multiple levels of headings only splits on the top-most one.
         pytest.param(
             """\
+            # The big title
+
+            Ignore this stuff
+
+            <!-- scriv-insert-here -->
+
             (prelude)
 
             <a id='sect-one.1'></a>
