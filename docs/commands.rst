@@ -184,9 +184,10 @@ scriv github-release
 
     Options:
       --all                Use all of the changelog entries.
+      --dry-run            Don't post to GitHub, just show what would be done.
       -v, --verbosity LVL  Either CRITICAL, ERROR, WARNING, INFO or DEBUG
       --help               Show this message and exit.
-.. [[[end]]] (checksum: f3ca6057c8d802717ac4f25095bcce76)
+.. [[[end]]] (checksum: 956bb66a5128e81e1e868fe14092f204)
 
 The ``github-release`` command reads the changelog file, parses it into
 entries, and then creates or updates GitHub releases to match.  Only the most

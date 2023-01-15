@@ -118,6 +118,57 @@ def test_dash_all(cli_invoke, scenario1, mocker, caplog):
     ]
 
 
+@pytest.fixture()
+def no_actions(mocker, responses):
+    """Check that nothing really happened."""
+    mock_create_release = mocker.patch("scriv.ghrel.create_release")
+    mock_update_release = mocker.patch("scriv.ghrel.update_release")
+
+    yield
+
+    assert mock_create_release.mock_calls == []
+    assert mock_update_release.mock_calls == []
+    assert len(responses.calls) == 0
+
+
+def test_default_dry_run(cli_invoke, scenario1, no_actions, caplog):
+    cli_invoke(["github-release", "--dry-run"])
+    assert caplog.record_tuples == [
+        (
+            "scriv.changelog",
+            logging.INFO,
+            "Reading changelog CHANGELOG.rst",
+        ),
+        ("scriv.ghrel", logging.INFO, "Would create release v1.2.3"),
+        ("scriv.ghrel", logging.INFO, "Body:\nA good release\n"),
+    ]
+
+
+def test_dash_all_dry_run(cli_invoke, scenario1, no_actions, caplog):
+    cli_invoke(["github-release", "--all", "--dry-run"])
+    assert caplog.record_tuples == [
+        (
+            "scriv.changelog",
+            logging.INFO,
+            "Reading changelog CHANGELOG.rst",
+        ),
+        ("scriv.ghrel", logging.INFO, "Would create release v1.2.3"),
+        ("scriv.ghrel", logging.INFO, "Body:\nA good release\n"),
+        (
+            "scriv.ghrel",
+            logging.WARNING,
+            "Entry 'Some fixes' has no version, skipping.",
+        ),
+        ("scriv.ghrel", logging.INFO, "Would update release v0.9a7"),
+        ("scriv.ghrel", logging.INFO, "Body:\nA beginning\n"),
+        (
+            "scriv.ghrel",
+            logging.WARNING,
+            "Version v0.0.1 has no tag. No release will be made.",
+        ),
+    ]
+
+
 def test_no_clear_github_repo(cli_invoke, scenario1, fake_git):
     # Add another GitHub remote, now there are two.
     fake_git.add_remote("upstream", "git@github.com:psf/project.git")

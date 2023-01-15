@@ -22,8 +22,13 @@ logger = logging.getLogger(__name__)
     is_flag=True,
     help="Use all of the changelog entries.",
 )
+@click.option(
+    "--dry-run",
+    is_flag=True,
+    help="Don't post to GitHub, just show what would be done.",
+)
 @click_log.simple_verbosity_option()
-def github_release(all_entries: bool) -> None:
+def github_release(all_entries: bool, dry_run: bool) -> None:
     """
     Create GitHub releases from the changelog.
 
@@ -62,9 +67,21 @@ def github_release(all_entries: bool) -> None:
             if version in releases:
                 release = releases[version]
                 if release["body"] != md:
-                    update_release(release, release_data)
+                    logger.debug(
+                        f"Updating release {version}, data = {release_data}"
+                    )
+                    if dry_run:
+                        logger.info(f"Would update release {version}")
+                        logger.info(f"Body:\n{md}")
+                    else:
+                        update_release(release, release_data)
             else:
-                create_release(repo, release_data)
+                logger.debug(f"Creating release, data = {release_data}")
+                if dry_run:
+                    logger.info(f"Would create release {version}")
+                    logger.info(f"Body:\n{md}")
+                else:
+                    create_release(repo, release_data)
         else:
             logger.warning(
                 f"Version {version} has no tag. No release will be made."

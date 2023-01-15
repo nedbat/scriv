@@ -1,0 +1,5 @@
+Added
+.....
+
+- The `github-release` command now has a `--dry-run` option to show what would
+  happen, without posting to GitHub.
