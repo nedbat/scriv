@@ -14,19 +14,27 @@ Scriv will read settings from any of these files:
 
 - tox.ini
 
-- changelog.d/scriv.ini
+- pyproject.toml
 
-In any of these files, scriv will read settings from a section named either
+- scriv.ini in the fragment directory ("changelog.d/" by default)
+
+In .ini or .cfg files, scriv will read settings from a section named either
 ``[scriv]`` or ``[tool.scriv]``.
 
-If the ``[toml]`` extra is installed, then scriv will also read settings from
-pyproject.toml, in the ``[tool.scriv]`` section.
+A .toml file will only be read if the tomli or tomllib modules is available.
+You can install scriv with the ``[toml]`` extra to install tomli, or tomllib is
+available with Python 3.11 or greater.  In a .toml file, settings will only be
+read from the ``[tool.scriv]`` section.
+
+All of the possible files will be read, and settings will cascade.  So for
+example, setup.cfg can set the fragment directory to "scriv.d", then
+"scriv.d/scriv.ini" will be read.
 
 
 Settings Syntax
 ===============
 
-Settings use the usual ".ini" syntax, but with some extra features:
+Settings use the usual syntax, but with some extra features:
 
 - A prefix of ``file:`` reads the setting from a file.
 
