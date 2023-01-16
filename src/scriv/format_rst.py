@@ -5,6 +5,7 @@ import re
 import tempfile
 from typing import Optional
 
+from .exceptions import ScrivException
 from .format import FormatTools, SectionDict
 from .shell import run_command
 
@@ -159,7 +160,7 @@ class RstTools(FormatTools):
                     + rst_file.name
                 )
                 if not ok:
-                    raise Exception(
+                    raise ScrivException(
                         f"Couldn't convert ReST to Markdown: {output!r}"
                     )
                 return output.replace("\r\n", "\n")

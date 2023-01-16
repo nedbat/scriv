@@ -79,7 +79,6 @@ class FakeGit:
                 out.append(f"{name}\t{url} (fetch)\n")
                 out.append(f"{name}\t{push_url} (push)\n")
             return (True, "".join(out))
-        # raise Exception(f"no fake git command: {argv}")
         return (False, f"no fake git command: {argv}")
 
     def set_config(self, name: str, value: str) -> None:

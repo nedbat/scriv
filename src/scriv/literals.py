@@ -18,6 +18,8 @@ try:
 except ImportError:  # pragma: no cover
     yaml = None  # type: ignore
 
+from scriv.exceptions import ScrivException
+
 
 def find_literal(file_name: str, literal_name: str) -> Optional[str]:
     """
@@ -38,7 +40,7 @@ def find_literal(file_name: str, literal_name: str) -> Optional[str]:
                 "Can't read {!r} without TOML support. "
                 + "Install with [toml] extra"
             ).format(file_name)
-            raise Exception(msg)
+            raise ScrivException(msg)
         with open(file_name, encoding="utf-8") as f:
             data = tomllib.loads(f.read())
         return find_nested_value(data, literal_name)
@@ -48,12 +50,14 @@ def find_literal(file_name: str, literal_name: str) -> Optional[str]:
                 "Can't read {!r} without YAML support. "
                 + "Install with [yaml] extra"
             ).format(file_name)
-            raise Exception(msg)
+            raise ScrivException(msg)
         with open(file_name, encoding="utf-8") as f:
             data = yaml.safe_load(f)
         return find_nested_value(data, literal_name)
     else:
-        raise Exception(f"Can't read literals from files like {file_name!r}")
+        raise ScrivException(
+            f"Can't read literals from files like {file_name!r}"
+        )
 
 
 class PythonLiteralFinder(ast.NodeVisitor):

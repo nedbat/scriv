@@ -1,0 +1,4 @@
+Changed
+.......
+
+- All exceptions raised by Scriv are now ScrivException.

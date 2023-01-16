@@ -6,6 +6,7 @@ import pytest
 
 import scriv.config
 from scriv.config import Config
+from scriv.exceptions import ScrivException
 
 from .helpers import without_module
 
@@ -158,7 +159,7 @@ def test_no_such_template():
     # If you specify a template name, and it doesn't exist, an error will
     # be raised.
     msg = r"No such file: changelog\.d[/\\]foo\.j2"
-    with pytest.raises(Exception, match=msg):
+    with pytest.raises(ScrivException, match=msg):
         config = Config(new_fragment_template="file: foo.j2")
         config.new_fragment_template  # pylint: disable=pointless-statement
 
@@ -204,7 +205,7 @@ def test_literal_no_literal(temp_dir):
         """# comment\n__version__ = "12.34.56"\n"""
     )
     with pytest.raises(
-        Exception,
+        ScrivException,
         match=r"Couldn't find literal: 'literal:sub/foob.py: version'",
     ):
         config = Config(version="literal:sub/foob.py: version")
@@ -254,7 +255,7 @@ class TestTomlConfig:
         (temp_dir / "pyproject.toml").write_text(TOML_CONFIG)
         with without_module(scriv.config, "tomllib"):
             msg_pat = r"Can't read .* without TOML support"
-            with pytest.raises(Exception, match=msg_pat):
+            with pytest.raises(ScrivException, match=msg_pat):
                 Config.read()
 
     def test_no_toml_installed_no_settings(self, temp_dir):

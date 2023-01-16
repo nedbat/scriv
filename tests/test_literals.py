@@ -3,6 +3,7 @@
 import pytest
 
 import scriv.literals
+from scriv.exceptions import ScrivException
 from scriv.literals import find_literal
 
 PYTHON_CODE = """\
@@ -53,7 +54,7 @@ def test_unknown_file_type(temp_dir):
     with open("what.xyz", "w", encoding="utf-8") as f:
         f.write("Hello there!")
     expected = "Can't read literals from files like 'what.xyz'"
-    with pytest.raises(Exception, match=expected):
+    with pytest.raises(ScrivException, match=expected):
         find_literal("what.xyz", "hi")
 
 
@@ -105,7 +106,9 @@ def test_find_toml_literal(name, value, temp_dir):
 
 def test_find_toml_literal_fail_if_unavailable(monkeypatch):
     monkeypatch.setattr(scriv.literals, "tomllib", None)
-    with pytest.raises(Exception, match="Can't read .+ without TOML support"):
+    with pytest.raises(
+        ScrivException, match="Can't read .+ without TOML support"
+    ):
         find_literal("foo.toml", "fail")
 
 
@@ -142,5 +145,7 @@ def test_find_yaml_literal(name, value, temp_dir):
 
 def test_find_yaml_literal_fail_if_unavailable(monkeypatch):
     monkeypatch.setattr(scriv.literals, "yaml", None)
-    with pytest.raises(Exception, match="Can't read .+ without YAML support"):
+    with pytest.raises(
+        ScrivException, match="Can't read .+ without YAML support"
+    ):
         find_literal("foo.yml", "fail")

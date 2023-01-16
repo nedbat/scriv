@@ -16,6 +16,7 @@ except ModuleNotFoundError:  # pragma: no cover
 except ImportError:  # pragma: no cover
     tomllib = None  # type: ignore
 
+from scriv.exceptions import ScrivException
 from scriv.literals import find_literal
 
 logger = logging.getLogger(__name__)
@@ -318,7 +319,7 @@ class Config:
                     "Can't read {!r} without TOML support. "
                     + "Install with [toml] extra"
                 ).format(tomlfile)
-                raise Exception(msg)
+                raise ScrivException(msg)
         else:
             # We have toml installed, parse the file and look for our settings.
             data = tomllib.loads(toml_text)
@@ -360,14 +361,14 @@ class Config:
                     )
                 except OSError as err:
                     msg = f"No such file: {file_path}"
-                    raise Exception(msg) from err
+                    raise ScrivException(msg) from err
                 assert file_bytes
                 value = file_bytes.decode("utf-8")
         elif value.startswith("literal:"):
             _, file_name, literal_name = value.split(":", maxsplit=2)
             found = find_literal(file_name.strip(), literal_name.strip())
             if found is None:
-                raise Exception(f"Couldn't find literal: {value!r}")
+                raise ScrivException(f"Couldn't find literal: {value!r}")
             value = found
         return value
 
