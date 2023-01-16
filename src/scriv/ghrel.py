@@ -5,6 +5,7 @@ import sys
 
 import click
 import click_log
+import jinja2
 
 from .github import create_release, get_releases, update_release
 from .gitinfo import get_github_repo
@@ -57,6 +58,7 @@ def github_release(all_entries: bool, dry_run: bool) -> None:
         if version in tags:
             section_text = "\n\n".join(sections)
             md = changelog.format_tools().convert_to_markdown(section_text)
+
             release_data = {
                 "body": md,
                 "name": version,
@@ -64,6 +66,16 @@ def github_release(all_entries: bool, dry_run: bool) -> None:
                 "draft": False,
                 "prerelease": is_prerelease_version(version),
             }
+
+            ghrel_template = jinja2.Template(scriv.config.ghrel_template)
+            md = ghrel_template.render(
+                body=md,
+                version=version,
+                release=release_data,
+                config=scriv.config,
+            )
+            release_data["body"] = md
+
             if version in releases:
                 release = releases[version]
                 if release["body"] != md:

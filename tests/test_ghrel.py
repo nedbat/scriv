@@ -178,3 +178,20 @@ def test_no_clear_github_repo(cli_invoke, scenario1, fake_git):
         "Reading changelog CHANGELOG.rst\n"
         + "Couldn't determine GitHub repo.\n"
     )
+
+
+def test_with_template(cli_invoke, temp_dir, scenario1, mocker):
+    (temp_dir / "setup.cfg").write_text(
+        """
+        [scriv]
+        ghrel_template = |{{body}}|{{config.format}}|{{version}}
+        """
+    )
+    mock_create_release = mocker.patch("scriv.ghrel.create_release")
+
+    cli_invoke(["github-release"])
+
+    expected = dict(V123_REL)
+    expected["body"] = "|A good release\n|rst|v1.2.3"
+
+    assert mock_create_release.mock_calls == [call("joe/project", expected)]

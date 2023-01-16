@@ -199,6 +199,28 @@ class _Options:
         },
     )
 
+    # Template for GitHub releases
+    ghrel_template = attr.ib(
+        type=str,
+        default="{{body}}",
+        metadata={
+            "doc": """\
+                The template to use for GitHub releases created by the
+                ``scriv github-release`` command.
+
+                The extracted Markdown text is available as ``{{body}}``.  You
+                must include this to use the text from the changelog file.  The
+                version is available as ``{{version}}``.
+
+                The data for the release is available in a ``{{release}}``
+                object, including ``{{release.prerelease}}``.  It's  a boolean,
+                true if this is a pre-release version.
+
+                The scriv configuration is available in a ``{{config}}`` object.
+                """,
+        },
+    )
+
 
 class Config:
     """

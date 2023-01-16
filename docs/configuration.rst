@@ -236,6 +236,27 @@ will not be created.
 Default: ``changelog.d``
 
 
+.. _config_ghrel_template:
+
+ghrel_template
+--------------
+
+The template to use for GitHub releases created by the
+``scriv github-release`` command.
+
+The extracted Markdown text is available as ``{{body}}``.  You
+must include this to use the text from the changelog file.  The
+version is available as ``{{version}}``.
+
+The data for the release is available in a ``{{release}}``
+object, including ``{{release.prerelease}}``.  It's  a boolean,
+true if this is a pre-release version.
+
+The scriv configuration is available in a ``{{config}}`` object.
+
+Default: ``{{body}}``
+
+
 .. _config_insert_marker:
 
 insert_marker
@@ -325,7 +346,7 @@ source file.
 
 Default: (empty)
 
-.. [[[end]]] (checksum: 9ad9ffaf84eaa0771a5f16b775c69fcb)
+.. [[[end]]] (checksum: b0f7694ada9dcecd8e7e14387ee7cd88)
 
 
 .. _git_settings:
