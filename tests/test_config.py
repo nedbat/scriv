@@ -136,7 +136,7 @@ def test_unknown_option():
     config = Config.read()
     expected = "Scriv configuration has no 'foo' option"
     with pytest.raises(AttributeError, match=expected):
-        config.foo  # pylint: disable=pointless-statement
+        _ = config.foo
 
 
 def test_custom_template(changelog_d):
@@ -180,7 +180,7 @@ def test_no_such_template():
     msg = r"No such file: changelog\.d[/\\]foo\.j2"
     with pytest.raises(ScrivException, match=msg):
         config = Config(new_fragment_template="file: foo.j2")
-        config.new_fragment_template  # pylint: disable=pointless-statement
+        _ = config.new_fragment_template
 
 
 def test_override_default_name(changelog_d):
@@ -214,7 +214,7 @@ def test_literal_no_file():
         FileNotFoundError, match=r"No such file or directory: 'sub/foob.py'"
     ):
         config = Config(version="literal:sub/foob.py: __version__")
-        config.version  # pylint: disable=pointless-statement
+        _ = config.version
 
 
 def test_literal_no_literal(temp_dir):
@@ -228,7 +228,7 @@ def test_literal_no_literal(temp_dir):
         match=r"Couldn't find literal: 'literal:sub/foob.py: version'",
     ):
         config = Config(version="literal:sub/foob.py: version")
-        config.version  # pylint: disable=pointless-statement
+        _ = config.version
 
 
 @pytest.mark.parametrize("chars", ["", "#", "#=-", "# ", "  "])
