@@ -37,7 +37,11 @@ tomli==2.0.1
     # via
     #   pyproject-api
     #   tox
-tox==4.2.8
+tox==4.3.1
+    # via
+    #   -r requirements/tox.in
+    #   tox-gh
+tox-gh==1.0.0
     # via -r requirements/tox.in
 typing-extensions==4.4.0
     # via

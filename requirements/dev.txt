@@ -244,7 +244,7 @@ pyproject-hooks==1.0.0
     #   -r requirements/pip-tools.txt
     #   -r requirements/quality.txt
     #   build
-pytest==7.2.0
+pytest==7.2.1
     # via
     #   -r requirements/quality.txt
     #   pylint-pytest
@@ -255,7 +255,7 @@ python-dateutil==2.8.2
     # via
     #   -r requirements/quality.txt
     #   freezegun
-pytz==2022.7
+pytz==2022.7.1
     # via
     #   -r requirements/quality.txt
     #   babel
@@ -286,7 +286,7 @@ rfc3986==2.0.0
     # via
     #   -r requirements/quality.txt
     #   twine
-rich==13.0.1
+rich==13.1.0
     # via
     #   -r requirements/quality.txt
     #   twine
@@ -355,7 +355,11 @@ tomlkit==0.11.6
     # via
     #   -r requirements/quality.txt
     #   pylint
-tox==4.2.8
+tox==4.3.1
+    # via
+    #   -r requirements/tox.txt
+    #   tox-gh
+tox-gh==1.0.0
     # via -r requirements/tox.txt
 twine==4.0.2
     # via -r requirements/quality.txt

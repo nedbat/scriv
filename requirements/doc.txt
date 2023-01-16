@@ -98,7 +98,7 @@ pygments==2.14.0
     #   doc8
     #   pudb
     #   sphinx
-pytest==7.2.0
+pytest==7.2.1
     # via
     #   -r requirements/test.txt
     #   pytest-mock
@@ -108,7 +108,7 @@ python-dateutil==2.8.2
     # via
     #   -r requirements/test.txt
     #   freezegun
-pytz==2022.7
+pytz==2022.7.1
     # via babel
 pyyaml==6.0
     # via -r requirements/test.txt
