@@ -128,7 +128,7 @@ _check_version:
 	fi
 
 _check_scriv:
-	@if (( $$(ls -1 changelog.d | wc -l) != 1 )); then \
+	@if [[ $$(find -E changelog.d -regex '.*\.(md|rst)$$') ]]; then \
 		echo 'There are scriv fragments! Did you forget `scriv collect`?'; \
 		exit 1; \
 	fi
