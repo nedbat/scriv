@@ -16,8 +16,8 @@ except ModuleNotFoundError:  # pragma: no cover
 except ImportError:  # pragma: no cover
     tomllib = None  # type: ignore
 
-from scriv.exceptions import ScrivException
-from scriv.literals import find_literal
+from .exceptions import ScrivException
+from .literals import find_literal
 
 logger = logging.getLogger(__name__)
 

@@ -18,7 +18,7 @@ try:
 except ImportError:  # pragma: no cover
     yaml = None  # type: ignore
 
-from scriv.exceptions import ScrivException
+from .exceptions import ScrivException
 
 
 def find_literal(file_name: str, literal_name: str) -> Optional[str]:
