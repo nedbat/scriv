@@ -21,6 +21,40 @@ See the fragment files in the `changelog.d directory`_.
 
 .. scriv-insert-here
 
+.. _changelog-1.1.0:
+
+1.1.0 — 2023-01-16
+------------------
+
+Added
+.....
+
+- The ``scriv github-release`` command has a new setting, ``ghrel_template``.
+  This is a template to use when building the release text, to add text before
+  or after the Markdown extracted from the changelog.
+
+- The ``scriv github-release`` command now has a ``--dry-run`` option to show
+  what would happen, without posting to GitHub.
+
+Changed
+.......
+
+- File names specified for ``file:`` settings will be interpreted relative to
+  the current directory if they have path components.  If the file name has no
+  slashes or backslashes, then the old behavior remains: the file will be found
+  in the fragment directory, or as a built-in template.
+
+- All exceptions raised by Scriv are now ScrivException.
+
+Fixed
+.....
+
+- Parsing changelogs now take the `insert-marker` setting into account. Only
+  content after the insert-marker line is parsed.
+
+- More internal activities are logged, to help debug operations.
+
+
 .. _changelog-1.0.0:
 
 1.0.0 — 2022-12-03
