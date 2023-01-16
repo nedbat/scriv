@@ -1,0 +1,7 @@
+Changed
+.......
+
+- File names specified for ``file:`` settings will be interpreted relative to
+  the current directory if they have path components.  If the file name has no
+  slashes or backslashes, then the old behavior remains: the file will be found
+  in the fragment directory, or as a built-in template.

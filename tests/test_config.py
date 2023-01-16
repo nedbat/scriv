@@ -148,6 +148,25 @@ def test_custom_template(changelog_d):
     assert fmt == "Custom template."
 
 
+def test_file_with_path(temp_dir, changelog_d):
+    # A file: spec with path components is relative to the current directory.
+    (changelog_d / "start_here.j2").write_text("The wrong one")
+    (temp_dir / "start_here.j2").write_text("The right one")
+    fmt = Config(
+        new_fragment_template="file: ./start_here.j2"
+    ).new_fragment_template
+    assert fmt == "The right one"
+
+
+def test_missing_file_with_path(temp_dir, changelog_d):
+    # A file: spec with path components is relative to the current directory.
+    (changelog_d / "start_here.j2").write_text("The wrong one")
+    msg = r"No such file: there[/\\]start_here.j2"
+    with pytest.raises(ScrivException, match=msg):
+        config = Config(new_fragment_template="file: there/start_here.j2")
+        _ = config.new_fragment_template
+
+
 def test_unknown_format():
     with pytest.raises(
         ValueError, match=r"'format' must be in \['rst', 'md'\] \(got 'xyzzy'\)"

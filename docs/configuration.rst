@@ -46,9 +46,12 @@ File Prefix
 -----------
 
 A ``file:`` prefix means the setting value is a file name, and the actual
-setting value will be read from that file.  The file name is relative to the
-fragment directory (changelog.d), or is the name of a built-in file provided by
-scriv:
+setting value will be read from that file.  If the file name has path
+separators, it is relative to the current directory.  If it doesn't have path
+separators, then it is either in the fragment directory (changelog.d by
+default), or one of the built-in provided templates.
+
+Scriv provides two built-in templates:
 
 .. [[[cog
     import textwrap

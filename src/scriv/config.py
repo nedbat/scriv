@@ -351,25 +351,46 @@ class Config:
         value = value.replace("${config:format}", self._options.format)
         if value.startswith("file:"):
             file_name = value.partition(":")[2].strip()
-            file_path = Path(self.fragment_directory) / file_name
-            if file_path.exists():
-                value = file_path.read_text()
-            else:
-                try:
-                    file_bytes = pkgutil.get_data(
-                        "scriv", "templates/" + file_name
-                    )
-                except OSError as err:
-                    msg = f"No such file: {file_path}"
-                    raise ScrivException(msg) from err
-                assert file_bytes
-                value = file_bytes.decode("utf-8")
+            value = self.read_file_value(file_name)
         elif value.startswith("literal:"):
             _, file_name, literal_name = value.split(":", maxsplit=2)
             found = find_literal(file_name.strip(), literal_name.strip())
             if found is None:
                 raise ScrivException(f"Couldn't find literal: {value!r}")
             value = found
+        return value
+
+    def read_file_value(self, file_name: str) -> str:
+        """
+        Find the value of a setting that has been specified as a file name.
+        """
+        no_file = False
+        has_path = bool(re.search(r"[/\\]", file_name))
+        if has_path:
+            # It has path components: relative to current directory.
+            file_path = Path(".") / file_name
+        else:
+            # Plain file name: in fragdir, or built-in.
+            file_path = Path(self.fragment_directory) / file_name
+
+        if file_path.exists():
+            value = file_path.read_text()
+        elif has_path:
+            # With a path, it has to exist.
+            no_file = True
+        else:
+            # No path, and doesn't exist: try it as a built-in.
+            try:
+                file_bytes = pkgutil.get_data("scriv", "templates/" + file_name)
+            except OSError:
+                no_file = True
+            else:
+                assert file_bytes
+                value = file_bytes.decode("utf-8")
+
+        if no_file:
+            raise ScrivException(f"No such file: {file_path}")
+
         return value
 
 
