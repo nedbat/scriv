@@ -102,3 +102,7 @@ class FakeGit:
     ) -> None:
         """Add a remote with a name and a url."""
         self.remotes[name] = (url, push_url or url)
+
+    def remove_remote(self, name: str) -> None:
+        """Remove the remote `name`."""
+        del self.remotes[name]

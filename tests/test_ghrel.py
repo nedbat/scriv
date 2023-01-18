@@ -169,6 +169,16 @@ def test_dash_all_dry_run(cli_invoke, scenario1, no_actions, caplog):
     ]
 
 
+def test_no_github_repo(cli_invoke, scenario1, fake_git):
+    fake_git.remove_remote("origin")
+    result = cli_invoke(["github-release"], expect_ok=False)
+    assert result.exit_code == 1
+    assert result.output == (
+        "Reading changelog CHANGELOG.rst\n"
+        + "Couldn't find a GitHub repo\n"
+    )
+
+
 def test_no_clear_github_repo(cli_invoke, scenario1, fake_git):
     # Add another GitHub remote, now there are two.
     fake_git.add_remote("upstream", "git@github.com:psf/project.git")
@@ -176,7 +186,7 @@ def test_no_clear_github_repo(cli_invoke, scenario1, fake_git):
     assert result.exit_code == 1
     assert result.output == (
         "Reading changelog CHANGELOG.rst\n"
-        + "Couldn't determine GitHub repo.\n"
+        + "More than one GitHub repo found: joe/project, psf/project\n"
     )
 
 
