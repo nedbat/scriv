@@ -105,9 +105,14 @@ tag: ## Make a git tag with the version number
 gh_release: ## Make a GitHub release
 	python -m scriv github-release --all
 
+comment_text:
+	@echo "Use this to comment on issues and pull requests:"
+	@export V=$$(python setup.py --version); \
+		echo "This is now released as part of [scriv $$V](https://pypi.org/project/scriv/$$V)."
+
 .PHONY: release check_release _check_manifest _check_version _check_scriv
 
-release: clean check_release dist pypi tag gh_release ## do all the steps for a release
+release: clean check_release dist pypi tag gh_release comment_text ## do all the steps for a release
 
 check_release: _check_manifest _check_tree _check_version _check_scriv ## check that we are ready for a release
 	@echo "Release checks passed"
