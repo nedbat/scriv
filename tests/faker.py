@@ -19,8 +19,13 @@ class FakeRunCommand:
     def __init__(self, mocker):
         """Make the faker."""
         self.handlers: Dict[str, CmdHandler] = {}
-        mocker.patch("scriv.gitinfo.run_command", self)
-        mocker.patch("scriv.shell.run_command", self)
+        self.mocker = mocker
+        self.patch_module("scriv.gitinfo")
+        self.patch_module("scriv.shell")
+
+    def patch_module(self, mod_name: str) -> None:
+        """Replace ``run_command`` in `mod_name` with our fake."""
+        self.mocker.patch(f"{mod_name}.run_command", self)
 
     def add_handler(self, argv0: str, handler: CmdHandler) -> None:
         """

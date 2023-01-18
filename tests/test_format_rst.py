@@ -1,11 +1,13 @@
 """Tests for scriv/format_rst.py."""
 
 import collections
+import re
 import textwrap
 
 import pytest
 
 from scriv.config import Config
+from scriv.exceptions import ScrivException
 from scriv.format_rst import RstTools
 
 
@@ -333,3 +335,37 @@ def test_format_sections(sections, expected):
 def test_format_header(config_kwargs, text, fh_kwargs, result):
     actual = RstTools(Config(**config_kwargs)).format_header(text, **fh_kwargs)
     assert actual == result
+
+
+def test_fake_pandoc(fake_run_command):
+    fake_run_command.patch_module("scriv.format_rst")
+    expected_args = [
+        "pandoc",
+        "-frst",
+        "-tmarkdown_strict",
+        "--markdown-headings=atx",
+        "--wrap=none",
+    ]
+    expected_text = "The converted text!\nis multi-line\n"
+
+    def fake_pandoc(argv):
+        # We got the arguments we expected, plus one more.
+        assert argv[: len(expected_args)] == expected_args
+        assert len(argv) == len(expected_args) + 1
+        return (True, expected_text)
+
+    fake_run_command.add_handler("pandoc", fake_pandoc)
+    assert RstTools().convert_to_markdown("Hello") == expected_text
+
+
+def test_fake_pandoc_failing(fake_run_command):
+    fake_run_command.patch_module("scriv.format_rst")
+    error_text = "There was a problem!!?!"
+
+    def fake_pandoc(argv):  # pylint: disable=unused-argument
+        return (False, error_text)
+
+    fake_run_command.add_handler("pandoc", fake_pandoc)
+    expected = f"Couldn't convert ReST to Markdown: {error_text!r}"
+    with pytest.raises(ScrivException, match=re.escape(expected)):
+        _ = RstTools().convert_to_markdown("Hello")
