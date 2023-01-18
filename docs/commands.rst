@@ -3,6 +3,10 @@ Commands
 ########
 
 .. [[[cog
+    # Force help text to be wrapped narrow enough to not trigger doc8 warnings.
+    import os
+    os.environ["COLUMNS"] = "78"
+
     import contextlib
     import io
     import textwrap
@@ -185,9 +189,11 @@ scriv github-release
     Options:
       --all                Use all of the changelog entries.
       --dry-run            Don't post to GitHub, just show what would be done.
+      --repo TEXT          The GitHub repo (owner/reponame) to create the
+                           release in.
       -v, --verbosity LVL  Either CRITICAL, ERROR, WARNING, INFO or DEBUG
       --help               Show this message and exit.
-.. [[[end]]] (checksum: 956bb66a5128e81e1e868fe14092f204)
+.. [[[end]]] (checksum: eaf0f9e06575bf06499354b22928696b)
 
 The ``github-release`` command reads the changelog file, parses it into
 entries, and then creates or updates GitHub releases to match.  Only the most
@@ -205,6 +211,11 @@ hand-edited changelog file that wasn't created with scriv.
 
 For writing to GitHub, you need a GitHub personal access token, either stored
 in your .netrc file, or in the GITHUB_TOKEN environment variable.
+
+The GitHub repo will be determined by examining the git remotes.  If there
+is just one GitHub repo in the remotes, it will be used to create the release.
+You can explicitly specify a repo in ``owner/reponame`` form with the
+``--repo=`` option if needed.
 
 If your changelog file is in reStructuredText format, you will need `pandoc`_
 2.11.2 or later installed for the command to work.

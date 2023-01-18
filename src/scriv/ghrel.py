@@ -1,7 +1,9 @@
 """Updating GitHub releases."""
 
 import logging
+import re
 import sys
+from typing import Optional
 
 import click
 import click_log
@@ -28,8 +30,16 @@ logger = logging.getLogger(__name__)
     is_flag=True,
     help="Don't post to GitHub, just show what would be done.",
 )
+@click.option(
+    "--repo",
+    help="The GitHub repo (owner/reponame) to create the release in.",
+)
 @click_log.simple_verbosity_option()
-def github_release(all_entries: bool, dry_run: bool) -> None:
+def github_release(
+    all_entries: bool,
+    dry_run: bool,
+    repo: Optional[str] = None,
+) -> None:
     """
     Create GitHub releases from the changelog.
 
@@ -40,14 +50,19 @@ def github_release(all_entries: bool, dry_run: bool) -> None:
     changelog = scriv.changelog()
     changelog.read()
 
-    repos = get_github_repos()
-    if len(repos) == 0:
-        sys.exit("Couldn't find a GitHub repo")
-    elif len(repos) > 1:
-        repo_list = ", ".join(sorted(repos))
-        sys.exit(f"More than one GitHub repo found: {repo_list}")
+    if repo is None:
+        repos = get_github_repos()
+        if len(repos) == 0:
+            sys.exit("Couldn't find a GitHub repo")
+        elif len(repos) > 1:
+            repo_list = ", ".join(sorted(repos))
+            sys.exit(f"More than one GitHub repo found: {repo_list}")
 
-    repo = repos.pop()
+        repo = repos.pop()
+
+    if not re.fullmatch(r"[^ /]+/[^ /]+", repo):
+        sys.exit(f"Repo must be owner/reponame: {repo!r}")
+
     tags = set(run_simple_command("git tag").split())
     releases = get_releases(repo)
 

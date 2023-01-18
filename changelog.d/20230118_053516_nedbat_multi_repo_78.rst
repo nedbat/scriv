@@ -1,0 +1,5 @@
+Added
+.....
+
+- ``scriv github-release`` now has a ``--repo=`` option to specify which GitHub
+  repo to use when you have multiple remotes.
