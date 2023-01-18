@@ -1,5 +1,0 @@
-Changed
-.......
-
-- Improved the error messages from ``scriv github-release`` when a GitHub repo
-  can't be identified among the git remotes.

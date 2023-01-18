@@ -21,6 +21,23 @@ See the fragment files in the `changelog.d directory`_.
 
 .. scriv-insert-here
 
+.. _changelog-1.2.0:
+
+1.2.0 — 2023-01-18
+------------------
+
+Added
+.....
+
+- ``scriv github-release`` now has a ``--repo=`` option to specify which GitHub
+  repo to use when you have multiple remotes.
+
+Changed
+.......
+
+- Improved the error messages from ``scriv github-release`` when a GitHub repo
+  can't be identified among the git remotes.
+
 .. _changelog-1.1.0:
 
 1.1.0 — 2023-01-16
