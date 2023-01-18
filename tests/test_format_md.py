@@ -279,3 +279,10 @@ def test_format_sections(sections, expected):
 def test_format_header(config_kwargs, text, fh_kwargs, result):
     actual = MdTools(Config(**config_kwargs)).format_header(text, **fh_kwargs)
     assert actual == result
+
+
+def test_convert_to_markdown():
+    # Markdown's convert_to_markdown is a no-op.
+    md = "# Nonsense\ndoesn't matter\n- whatever ``more ** junk---"
+    converted = MdTools().convert_to_markdown(md)
+    assert converted == md
