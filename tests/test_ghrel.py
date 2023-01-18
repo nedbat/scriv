@@ -118,6 +118,28 @@ def test_dash_all(cli_invoke, scenario1, mocker, caplog):
     ]
 
 
+def test_explicit_repo(cli_invoke, scenario1, fake_git, mocker):
+    # Add another GitHub remote, now there are two.
+    fake_git.add_remote("upstream", "git@github.com:psf/project.git")
+
+    mock_create_release = mocker.patch("scriv.ghrel.create_release")
+    mock_update_release = mocker.patch("scriv.ghrel.update_release")
+
+    cli_invoke(["github-release", "--repo=xyzzy/plugh"])
+
+    assert mock_create_release.mock_calls == [call("xyzzy/plugh", V123_REL)]
+    assert mock_update_release.mock_calls == []
+
+
+@pytest.mark.parametrize(
+    "repo", ["xyzzy", "https://github.com/xyzzy/plugh.git"]
+)
+def test_bad_explicit_repo(cli_invoke, repo):
+    result = cli_invoke(["github-release", f"--repo={repo}"], expect_ok=False)
+    assert result.exit_code == 1
+    assert str(result.exception) == f"Repo must be owner/reponame: {repo!r}"
+
+
 @pytest.fixture()
 def no_actions(mocker, responses):
     """Check that nothing really happened."""
@@ -174,8 +196,7 @@ def test_no_github_repo(cli_invoke, scenario1, fake_git):
     result = cli_invoke(["github-release"], expect_ok=False)
     assert result.exit_code == 1
     assert result.output == (
-        "Reading changelog CHANGELOG.rst\n"
-        + "Couldn't find a GitHub repo\n"
+        "Reading changelog CHANGELOG.rst\n" + "Couldn't find a GitHub repo\n"
     )
 
 
