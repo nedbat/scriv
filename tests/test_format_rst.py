@@ -200,6 +200,7 @@ from scriv.format_rst import RstTools
 
             (prelude)
 
+            ===========
             Section one
             ===========
 

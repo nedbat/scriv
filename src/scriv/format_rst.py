@@ -86,7 +86,7 @@ class RstTools(FormatTools):
                     # Section underline. Previous line was the heading.
                     # General RST can have overlines as well as underlines,
                     # which we detect because there are no previous paragraphs.
-                    if paragraphs is None:
+                    if paragraphs is None or paragraphs[-1] == "":
                         continue
                     # Heading was made a paragraph, undo that.
                     assert paragraphs[-1] == prev_line + "\n"
