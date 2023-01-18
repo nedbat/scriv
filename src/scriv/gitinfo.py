@@ -6,7 +6,7 @@ import re
 import subprocess
 import sys
 from pathlib import Path
-from typing import Optional
+from typing import Set
 
 import click
 
@@ -78,11 +78,11 @@ def git_rm(filename: Path) -> None:
         sys.exit(ret)
 
 
-def get_github_repo() -> Optional[str]:
+def get_github_repos() -> Set[str]:
     """
-    Find the GitHub name/repo for this project.
+    Find the GitHub name/repos for this project.
 
-    If there is no remote on GitHub, or more than one, return None.
+    Returns a set of "name/repo" addresses for GitHub repos.
     """
     urls = run_simple_command("git remote -v").splitlines()
     github_repos = set()
@@ -94,6 +94,4 @@ def get_github_repo() -> Optional[str]:
             if repo.endswith(".git"):
                 repo = repo[:-4]
             github_repos.add(repo)
-    if len(github_repos) == 1:
-        return github_repos.pop()
-    return None
+    return github_repos

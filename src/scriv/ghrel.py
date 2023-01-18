@@ -8,7 +8,7 @@ import click_log
 import jinja2
 
 from .github import create_release, get_releases, update_release
-from .gitinfo import get_github_repo
+from .gitinfo import get_github_repos
 from .scriv import Scriv
 from .shell import run_simple_command
 from .util import extract_version, is_prerelease_version
@@ -40,10 +40,14 @@ def github_release(all_entries: bool, dry_run: bool) -> None:
     changelog = scriv.changelog()
     changelog.read()
 
-    repo = get_github_repo()
-    if repo is None:
-        sys.exit("Couldn't determine GitHub repo.")
+    repos = get_github_repos()
+    if len(repos) == 0:
+        sys.exit("Couldn't find a GitHub repo")
+    elif len(repos) > 1:
+        repo_list = ", ".join(sorted(repos))
+        sys.exit(f"More than one GitHub repo found: {repo_list}")
 
+    repo = repos.pop()
     tags = set(run_simple_command("git tag").split())
     releases = get_releases(repo)
 
