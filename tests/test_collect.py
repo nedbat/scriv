@@ -1,5 +1,6 @@
 """Test collection logic."""
 
+import textwrap
 from unittest.mock import call
 
 import freezegun
@@ -470,6 +471,38 @@ def test_duplicate_version(cli_invoke, changelog_d, temp_dir):
     (changelog_d / "20170616_nedbat.rst").write_text(FRAG1)
     with freezegun.freeze_time("2022-09-18T15:18:19"):
         cli_invoke(["collect"])
+
+    # Make a new fragment, and collect again without changing the version.
+    (changelog_d / "20170617_nedbat.rst").write_text(FRAG2)
+    with freezegun.freeze_time("2022-09-18T16:18:19"):
+        result = cli_invoke(["collect"], expect_ok=False)
+    assert result.exit_code == 1
+    assert (
+        str(result.exception)
+        == "Entry '12.34.56 — 2022-09-18' already uses version '12.34.56'."
+    )
+
+
+def test_duplicate_version_2(cli_invoke, changelog_d, temp_dir):
+    (changelog_d / "scriv.ini").write_text("[scriv]\nversion = 12.34.56\n")
+    (temp_dir / "CHANGELOG.rst").write_text(
+        textwrap.dedent(
+            """\
+            Preamble that doesn't count
+
+            12.34.57 — 2022-09-19
+            =====================
+
+            A quick fix.
+
+            12.34.56 — 2022-09-18
+            =====================
+
+            Good stuff.
+            """
+        ),
+        encoding="utf-8",
+    )
 
     # Make a new fragment, and collect again without changing the version.
     (changelog_d / "20170617_nedbat.rst").write_text(FRAG2)
