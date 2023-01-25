@@ -54,6 +54,9 @@ def find_literal(file_name: str, literal_name: str) -> Optional[str]:
         with open(file_name, encoding="utf-8") as f:
             data = yaml.safe_load(f)
         return find_nested_value(data, literal_name)
+    elif ext == ".cabal":
+        with open(file_name, "r") as fp:
+            return [line for line in fp if line.startswith(literal_name + ":")][0].split()[1]
     else:
         raise ScrivException(
             f"Can't read literals from files like {file_name!r}"
