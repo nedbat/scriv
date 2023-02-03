@@ -22,7 +22,7 @@ importlib-metadata==6.0.0
     # via click
 jinja2==3.1.2
     # via -r requirements/base.in
-markupsafe==2.1.1
+markupsafe==2.1.2
     # via jinja2
 requests==2.28.2
     # via -r requirements/base.in
@@ -30,5 +30,5 @@ typing-extensions==4.4.0
     # via importlib-metadata
 urllib3==1.26.14
     # via requests
-zipp==3.11.0
+zipp==3.12.0
     # via importlib-metadata

@@ -28,7 +28,7 @@ click-log==0.4.0
     # via -r requirements/test.txt
 cogapp==3.3.0
     # via -r requirements/doc.in
-coverage==7.0.5
+coverage==7.1.0
     # via -r requirements/test.txt
 doc8==0.11.2
     # via -r requirements/doc.in
@@ -70,7 +70,7 @@ jinja2==3.1.2
     # via
     #   -r requirements/test.txt
     #   sphinx
-markupsafe==2.1.1
+markupsafe==2.1.2
     # via
     #   -r requirements/test.txt
     #   jinja2
@@ -155,7 +155,7 @@ tomli==2.0.1
     # via
     #   -r requirements/test.txt
     #   pytest
-types-toml==0.10.8.1
+types-toml==0.10.8.2
     # via
     #   -r requirements/test.txt
     #   responses
@@ -178,7 +178,7 @@ urwid-readline==0.13
     # via
     #   -r requirements/test.txt
     #   pudb
-zipp==3.11.0
+zipp==3.12.0
     # via
     #   -r requirements/test.txt
     #   importlib-metadata

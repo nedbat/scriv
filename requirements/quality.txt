@@ -8,7 +8,7 @@ alabaster==0.7.13
     # via
     #   -r requirements/doc.txt
     #   sphinx
-astroid==2.13.2
+astroid==2.14.1
     # via pylint
 attrs==22.2.0
     # via
@@ -19,9 +19,9 @@ babel==2.11.0
     # via
     #   -r requirements/doc.txt
     #   sphinx
-black==22.12.0
+black==23.1.0
     # via -r requirements/quality.in
-bleach==5.0.1
+bleach==6.0.0
     # via readme-renderer
 build==0.10.0
     # via check-manifest
@@ -49,9 +49,7 @@ click-log==0.4.0
     #   -r requirements/test.txt
 cogapp==3.3.0
     # via -r requirements/doc.txt
-commonmark==0.9.1
-    # via rich
-coverage==7.0.5
+coverage==7.1.0
     # via
     #   -r requirements/doc.txt
     #   -r requirements/test.txt
@@ -104,7 +102,7 @@ iniconfig==2.0.0
     #   -r requirements/doc.txt
     #   -r requirements/test.txt
     #   pytest
-isort==5.11.4
+isort==5.11.5
     # via
     #   -r requirements/quality.in
     #   pylint
@@ -124,13 +122,17 @@ keyring==23.13.1
     # via twine
 lazy-object-proxy==1.9.0
     # via astroid
-markupsafe==2.1.1
+markdown-it-py==2.1.0
+    # via rich
+markupsafe==2.1.2
     # via
     #   -r requirements/doc.txt
     #   -r requirements/test.txt
     #   jinja2
 mccabe==0.7.0
     # via pylint
+mdurl==0.1.2
+    # via markdown-it-py
 more-itertools==9.0.0
     # via jaraco-classes
 mypy==0.991
@@ -143,6 +145,7 @@ packaging==23.0
     # via
     #   -r requirements/doc.txt
     #   -r requirements/test.txt
+    #   black
     #   build
     #   pudb
     #   pytest
@@ -152,7 +155,7 @@ parso==0.8.3
     #   -r requirements/doc.txt
     #   -r requirements/test.txt
     #   jedi
-pathspec==0.10.3
+pathspec==0.11.0
     # via black
 pbr==5.11.1
     # via
@@ -186,7 +189,7 @@ pygments==2.14.0
     #   readme-renderer
     #   rich
     #   sphinx
-pylint==2.15.10
+pylint==2.16.1
     # via
     #   -r requirements/quality.in
     #   pylint-pytest
@@ -239,7 +242,7 @@ restructuredtext-lint==1.4.0
     #   doc8
 rfc3986==2.0.0
     # via twine
-rich==13.1.0
+rich==13.3.1
     # via twine
 six==1.16.0
     # via
@@ -313,11 +316,11 @@ typed-ast==1.5.4
     #   mypy
 types-freezegun==1.1.10
     # via -r requirements/quality.in
-types-pyyaml==6.0.12.2
+types-pyyaml==6.0.12.4
     # via -r requirements/quality.in
-types-requests==2.28.11.7
+types-requests==2.28.11.8
     # via -r requirements/quality.in
-types-toml==0.10.8.1
+types-toml==0.10.8.2
     # via
     #   -r requirements/quality.in
     #   -r requirements/test.txt
@@ -331,6 +334,7 @@ typing-extensions==4.4.0
     #   astroid
     #   black
     #   importlib-metadata
+    #   markdown-it-py
     #   mypy
     #   platformdirs
     #   pylint
@@ -358,7 +362,7 @@ webencodings==0.5.1
     # via bleach
 wrapt==1.14.1
     # via astroid
-zipp==3.11.0
+zipp==3.12.0
     # via
     #   -r requirements/doc.txt
     #   -r requirements/test.txt
