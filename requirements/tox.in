@@ -2,4 +2,3 @@
 -c constraints.txt
 
 tox                       # Virtualenv management for tests
-tox-gh                    # Run tox environment based on the GitHub action matrix
