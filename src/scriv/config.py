@@ -9,15 +9,9 @@ from typing import Any, List
 
 import attr
 
-try:
-    import tomllib
-except ModuleNotFoundError:  # pragma: no cover
-    import tomli as tomllib  # type: ignore
-except ImportError:  # pragma: no cover
-    tomllib = None  # type: ignore
-
 from .exceptions import ScrivException
 from .literals import find_literal
+from .optional import tomllib
 
 logger = logging.getLogger(__name__)
 

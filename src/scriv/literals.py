@@ -6,19 +6,8 @@ import ast
 import os.path
 from typing import Any, MutableMapping, Optional
 
-try:
-    import tomllib
-except ModuleNotFoundError:  # pragma: no cover
-    import tomli as tomllib  # type: ignore
-except ImportError:  # pragma: no cover
-    tomllib = None  # type: ignore
-
-try:
-    import yaml
-except ImportError:  # pragma: no cover
-    yaml = None  # type: ignore
-
 from .exceptions import ScrivException
+from .optional import tomllib, yaml
 
 
 def find_literal(file_name: str, literal_name: str) -> Optional[str]:

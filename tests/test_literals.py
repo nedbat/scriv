@@ -5,6 +5,7 @@ import pytest
 import scriv.literals
 from scriv.exceptions import ScrivException
 from scriv.literals import find_literal
+from scriv.optional import tomllib, yaml
 
 PYTHON_CODE = """\
 # A string we should get.
@@ -81,6 +82,7 @@ bad_type = nan
 """
 
 
+@pytest.mark.skipif(tomllib is None, reason="No TOML support installed")
 @pytest.mark.parametrize(
     "name, value",
     [
@@ -128,6 +130,7 @@ myproduct:
 """
 
 
+@pytest.mark.skipif(yaml is None, reason="No YAML support installed")
 @pytest.mark.parametrize(
     "name, value",
     [

@@ -7,6 +7,7 @@ import pytest
 import scriv.config
 from scriv.config import Config
 from scriv.exceptions import ScrivException
+from scriv.optional import tomllib
 
 from .helpers import without_module
 
@@ -251,6 +252,7 @@ class TestTomlConfig:
     Tests of the TOML configuration support.
     """
 
+    @pytest.mark.skipif(tomllib is None, reason="No TOML support installed")
     def test_reading_toml_file(self, temp_dir):
         (temp_dir / "pyproject.toml").write_text(TOML_CONFIG)
         config = Config.read()
