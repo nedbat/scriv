@@ -107,7 +107,7 @@ jobs:
         with:
           name: covdata
 
-      - name: "Combine"
+      - name: "Combine and report"
         run: |
           python -m tox -e coverage
           export TOTAL=$(python -c "import json;print(json.load(open('coverage.json'))['totals']['percent_covered_display'])")
