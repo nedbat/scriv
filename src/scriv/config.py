@@ -1,6 +1,7 @@
 """Scriv configuration."""
 
 import configparser
+import contextlib
 import logging
 import pkgutil
 import re
@@ -217,6 +218,21 @@ class _Options:
     )
 
 
+@contextlib.contextmanager
+def validator_exceptions():
+    """
+    Context manager for attrs operations that validate.
+
+    Attrs >= 22 says ValueError will have a bunch of arguments, and we only want
+    to see the first, and raised as ScrivException.
+
+    """
+    try:
+        yield
+    except ValueError as ve:
+        raise ScrivException(f"Invalid configuration: {ve.args[0]}") from ve
+
+
 class Config:
     """
     Configuration for Scriv.
@@ -228,7 +244,8 @@ class Config:
 
     def __init__(self, **kwargs):
         """All values in _Options can be set as keywords."""
-        self._options = _Options(**kwargs)
+        with validator_exceptions():
+            self._options = _Options(**kwargs)
 
     def __getattr__(self, name):
         """Proxy to self._options, and resolve the value."""
@@ -269,6 +286,8 @@ class Config:
         config.read_one_config(
             str(Path(config.fragment_directory) / "scriv.ini")
         )
+        with validator_exceptions():
+            attr.validate(config._options)
         return config
 
     def read_one_config(self, configfile: str) -> None:

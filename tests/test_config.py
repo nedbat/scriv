@@ -173,7 +173,8 @@ def test_missing_file_with_path(temp_dir, changelog_d):
 
 def test_unknown_format():
     with pytest.raises(
-        ValueError, match=r"'format' must be in \['rst', 'md'\] \(got 'xyzzy'\)"
+        ScrivException,
+        match=r"'format' must be in \['rst', 'md'\] \(got 'xyzzy'\)",
     ):
         Config(format="xyzzy")
 
@@ -267,7 +268,8 @@ def test_bad_literal_spec(bad_spec, msg_rx, temp_dir):
 @pytest.mark.parametrize("chars", ["", "#", "#=-", "# ", "  "])
 def test_rst_chars_is_two_chars(chars):
     # rst_header_chars must be exactly two non-space characters.
-    with pytest.raises(ValueError):
+    msg = rf"Invalid configuration: 'rst_header_chars' must match.*'{chars}'"
+    with pytest.raises(ScrivException, match=msg):
         Config(rst_header_chars=chars)
 
 

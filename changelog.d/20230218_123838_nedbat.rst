@@ -1,0 +1,5 @@
+Fixed
+.....
+
+- Error messages from settings validation are ScrivExceptions now, and report
+  configuration problems more clearly and earlier in some cases.
