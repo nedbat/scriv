@@ -241,7 +241,12 @@ class Config:
             if isinstance(value, str):
                 value = convert_list(value)
         else:
-            value = self.resolve_value(value)
+            try:
+                value = self.resolve_value(value)
+            except ScrivException as se:
+                raise ScrivException(
+                    f"Couldn't read {name!r} setting: {se}"
+                ) from se
         setattr(self, name, value)
         return value
 
@@ -347,10 +352,27 @@ class Config:
             file_name = value.partition(":")[2].strip()
             value = self.read_file_value(file_name)
         elif value.startswith("literal:"):
-            _, file_name, literal_name = value.split(":", maxsplit=2)
-            found = find_literal(file_name.strip(), literal_name.strip())
+            try:
+                _, file_name, literal_name = value.split(":", maxsplit=2)
+            except ValueError as ve:
+                raise ScrivException(f"Missing value name: {value!r}") from ve
+            file_name = file_name.strip()
+            if not file_name:
+                raise ScrivException(f"Missing file name: {value!r}")
+            literal_name = literal_name.strip()
+            if not literal_name:
+                raise ScrivException(f"Missing value name: {value!r}")
+            try:
+                found = find_literal(file_name, literal_name)
+            except Exception as exc:
+                raise ScrivException(
+                    f"Couldn't find literal {value!r}: {exc}"
+                ) from exc
             if found is None:
-                raise ScrivException(f"Couldn't find literal: {value!r}")
+                raise ScrivException(
+                    f"Couldn't find literal {literal_name!r} in {file_name}: "
+                    + f"{value!r}"
+                )
             value = found
         return value
 

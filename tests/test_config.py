@@ -209,26 +209,52 @@ def test_literal_reading(temp_dir):
     assert text == "12.34.56"
 
 
-def test_literal_no_file():
-    # What happens if the file for a literal doesn't exist?
-    with pytest.raises(
-        FileNotFoundError, match=r"No such file or directory: 'sub/foob.py'"
-    ):
-        config = Config(version="literal:sub/foob.py: __version__")
-        _ = config.version
-
-
-def test_literal_no_literal(temp_dir):
-    # What happens if the literal we're looking for isn't there?
-    (temp_dir / "sub").mkdir()
-    (temp_dir / "sub" / "foob.py").write_text(
-        """# comment\n__version__ = "12.34.56"\n"""
-    )
-    with pytest.raises(
-        ScrivException,
-        match=r"Couldn't find literal: 'literal:sub/foob.py: version'",
-    ):
-        config = Config(version="literal:sub/foob.py: version")
+@pytest.mark.parametrize(
+    "bad_spec, msg_rx",
+    [
+        (
+            "literal: myproj.py",
+            (
+                r"Couldn't read 'version' setting: "
+                + r"Missing value name: 'literal: myproj.py'"
+            ),
+        ),
+        (
+            "literal: myproj.py:",
+            (
+                r"Couldn't read 'version' setting: "
+                + r"Missing value name: 'literal: myproj.py:'"
+            ),
+        ),
+        (
+            "literal: myproj.py:  version",
+            (
+                r"Couldn't read 'version' setting: "
+                + r"Couldn't find literal 'version' in myproj.py: "
+                + r"'literal: myproj.py:  version'"
+            ),
+        ),
+        (
+            "literal: : version",
+            (
+                r"Couldn't read 'version' setting: "
+                + r"Missing file name: 'literal: : version'"
+            ),
+        ),
+        (
+            "literal: no_file.py: version",
+            (
+                r"Couldn't read 'version' setting: "
+                + r"Couldn't find literal 'literal: no_file.py: version': "
+                + r".* 'no_file.py'"
+            ),
+        ),
+    ],
+)
+def test_bad_literal_spec(bad_spec, msg_rx, temp_dir):
+    (temp_dir / "myproj.py").write_text("""nothing_to_see_here = 'hello'\n""")
+    with pytest.raises(ScrivException, match=msg_rx):
+        config = Config(version=bad_spec)
         _ = config.version
 
 
