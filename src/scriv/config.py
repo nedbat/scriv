@@ -399,32 +399,28 @@ class Config:
         """
         Find the value of a setting that has been specified as a file name.
         """
-        no_file = False
-        has_path = bool(re.search(r"[/\\]", file_name))
-        if has_path:
-            # It has path components: relative to current directory.
-            file_path = Path(".") / file_name
-        else:
-            # Plain file name: in fragdir, or built-in.
-            file_path = Path(self.fragment_directory) / file_name
+        value = None
+        possibilities = []
+        if not re.match(r"\.\.?[/\\]", file_name):
+            possibilities.append(Path(self.fragment_directory) / file_name)
+        possibilities.append(Path(".") / file_name)
 
-        if file_path.exists():
-            value = file_path.read_text()
-        elif has_path:
-            # With a path, it has to exist.
-            no_file = True
+        for file_path in possibilities:
+            if file_path.exists():
+                value = file_path.read_text()
+                break
         else:
             # No path, and doesn't exist: try it as a built-in.
             try:
                 file_bytes = pkgutil.get_data("scriv", "templates/" + file_name)
             except OSError:
-                no_file = True
+                pass
             else:
                 assert file_bytes
                 value = file_bytes.decode("utf-8")
 
-        if no_file:
-            raise ScrivException(f"No such file: {file_path}")
+        if value is None:
+            raise ScrivException(f"No such file: {file_name}")
 
         return value
 

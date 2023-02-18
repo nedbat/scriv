@@ -149,12 +149,36 @@ def test_custom_template(changelog_d):
     assert fmt == "Custom template."
 
 
-def test_file_with_path(temp_dir, changelog_d):
-    # A file: spec with path components is relative to the current directory.
+def test_file_with_dots(temp_dir, changelog_d):
+    # A file: spec with dot components is relative to the current directory.
     (changelog_d / "start_here.j2").write_text("The wrong one")
     (temp_dir / "start_here.j2").write_text("The right one")
     fmt = Config(
         new_fragment_template="file: ./start_here.j2"
+    ).new_fragment_template
+    assert fmt == "The right one"
+
+
+def test_file_with_path_search_order(temp_dir, changelog_d):
+    # A file: spec with path components is relative to the changelog directory
+    # and then the current directory.
+    (changelog_d / "files").mkdir()
+    (changelog_d / "files" / "start_here.j2").write_text("The right one")
+    (temp_dir / "files").mkdir()
+    (temp_dir / "files" / "start_here.j2").write_text("The wrong one")
+    fmt = Config(
+        new_fragment_template="file: files/start_here.j2"
+    ).new_fragment_template
+    assert fmt == "The right one"
+
+
+def test_file_with_path_only_current_dir(temp_dir, changelog_d):
+    # A file: spec with path components is relative to the changelog directory
+    # and then the current directory.
+    (temp_dir / "files").mkdir()
+    (temp_dir / "files" / "start_here.j2").write_text("The right one")
+    fmt = Config(
+        new_fragment_template="file: files/start_here.j2"
     ).new_fragment_template
     assert fmt == "The right one"
 
@@ -184,7 +208,7 @@ def test_no_such_template():
     # be raised.
     msg = (
         r"Couldn't read 'new_fragment_template' setting: "
-        + r"No such file: changelog\.d[/\\]foo\.j2"
+        + r"No such file: foo\.j2"
     )
     with pytest.raises(ScrivException, match=msg):
         config = Config(new_fragment_template="file: foo.j2")

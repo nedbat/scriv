@@ -45,11 +45,11 @@ Settings use the usual syntax, but with some extra features:
 File Prefix
 -----------
 
-A ``file:`` prefix means the setting value is a file name, and the actual
-setting value will be read from that file.  If the file name has path
-separators, it is relative to the current directory.  If it doesn't have path
-separators, then it is either in the fragment directory (changelog.d by
-default), or one of the built-in provided templates.
+A ``file:`` prefix means the setting is a file name or path, and the actual
+setting value will be read from that file.  The file name will be searched for
+in three places: the fragment directory (changelog.d by default), the current
+directory, or one of a few built-in templates.  If the first path component is
+``.`` or ``..``, then only the current directory is considered.
 
 Scriv provides two built-in templates:
 
