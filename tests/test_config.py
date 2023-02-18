@@ -162,7 +162,10 @@ def test_file_with_path(temp_dir, changelog_d):
 def test_missing_file_with_path(temp_dir, changelog_d):
     # A file: spec with path components is relative to the current directory.
     (changelog_d / "start_here.j2").write_text("The wrong one")
-    msg = r"No such file: there[/\\]start_here.j2"
+    msg = (
+        r"Couldn't read 'new_fragment_template' setting: "
+        + r"No such file: there[/\\]start_here.j2"
+    )
     with pytest.raises(ScrivException, match=msg):
         config = Config(new_fragment_template="file: there/start_here.j2")
         _ = config.new_fragment_template
@@ -178,7 +181,10 @@ def test_unknown_format():
 def test_no_such_template():
     # If you specify a template name, and it doesn't exist, an error will
     # be raised.
-    msg = r"No such file: changelog\.d[/\\]foo\.j2"
+    msg = (
+        r"Couldn't read 'new_fragment_template' setting: "
+        + r"No such file: changelog\.d[/\\]foo\.j2"
+    )
     with pytest.raises(ScrivException, match=msg):
         config = Config(new_fragment_template="file: foo.j2")
         _ = config.new_fragment_template
