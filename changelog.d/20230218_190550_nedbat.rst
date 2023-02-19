@@ -1,7 +1,0 @@
-Fixed
-.....
-
-- Python variables with type annotations can now be read with ``literal:``
-  settings, fixing `issue 85`_.
-
-.. _issue 85: https://github.com/nedbat/scriv/issues/85

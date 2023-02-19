@@ -21,6 +21,37 @@ See the fragment files in the `changelog.d directory`_.
 
 .. scriv-insert-here
 
+.. _changelog-1.2.1:
+
+1.2.1 — 2023-02-18
+------------------
+
+Fixed
+.....
+
+- Scriv would fail trying to import tomllib on Python <3.11 if installed
+  without the ``[toml]`` extra.  This is now fixed, closing `issue 80`_.
+
+- Settings specified as ``file:`` will now search in the changelog directory
+  and then the current directory for the file.  The only exception is if the
+  first component is ``.`` or ``..``, then only the current directory is
+  considered.  Fixes `issue 82`_.
+
+- Python variables with type annotations can now be read with ``literal:``
+  settings, fixing `issue 85`_.
+
+- Error messages for mis-formed ``literal:`` configuration values are more
+  precise, as requested in `issue 84`_.
+
+- Error messages from settings validation are ScrivExceptions now, and report
+  configuration problems more clearly and earlier in some cases.
+
+.. _issue 80: https://github.com/nedbat/scriv/issues/80
+.. _issue 82: https://github.com/nedbat/scriv/issues/82
+.. _issue 84: https://github.com/nedbat/scriv/issues/84
+.. _issue 85: https://github.com/nedbat/scriv/issues/85
+
+
 .. _changelog-1.2.0:
 
 1.2.0 — 2023-01-18
