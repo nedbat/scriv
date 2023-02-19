@@ -78,6 +78,11 @@ class PythonLiteralFinder(ast.NodeVisitor):
                 if target.id == self.name:
                     self.check_value(node.value)
 
+    def visit_AnnAssign(self, node) -> None:  # noqa: D102 (inherited docstring)
+        if isinstance(node.target, ast.Name):
+            if node.target.id == self.name:
+                self.check_value(node.value)
+
     def check_value(self, value):
         """
         Check a value node to see if it's a string constant.

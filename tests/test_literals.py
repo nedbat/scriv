@@ -11,6 +11,8 @@ PYTHON_CODE = """\
 # A string we should get.
 version = "1.2.3"
 
+typed_version: Final[str] = "2.3.4"
+
 # Numbers don't count.
 how_many = 123
 
@@ -38,6 +40,7 @@ def foo():
     "name, value",
     [
         ("version", "1.2.3"),
+        ("typed_version", "2.3.4"),
         ("also", "xyzzy"),
         ("but", "hello there"),
         ("somewhere_else", "this would be an odd place to get the string"),
