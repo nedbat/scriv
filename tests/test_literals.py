@@ -155,3 +155,47 @@ def test_find_yaml_literal_fail_if_unavailable(monkeypatch):
         ScrivException, match="Can't read .+ without YAML support"
     ):
         find_literal("foo.yml", "fail")
+
+
+CFG_LITERAL = """\
+
+[metadata]
+name = myproduct
+version = 1.2.3
+url = https://github.com/nedbat/scriv
+description = A nice description
+long_description = file: README.md
+long_description_content_type = text/markdown
+license = MIT
+
+[options]
+zip_safe = false
+include_package_data = true
+
+[bdist_wheel]
+universal = true
+
+[coverage:report]
+show_missing = true
+
+[flake8]
+max-line-length = 99
+doctests = True
+exclude =  .git, .eggs, __pycache__, tests/, docs/, build/, dist/
+"""
+
+
+@pytest.mark.parametrize(
+    "name, value",
+    [
+        ("metadata.version", "1.2.3"),
+        ("options.zip_safe", "false"),
+        ("coverage:report", None),  # find_literal only supports string values
+        ("metadata.myVersion", None),
+        ("unexisting", None),
+    ],
+)
+def test_find_cfg_literal(name, value, temp_dir):
+    with open("foo.cfg", "w", encoding="utf-8") as f:
+        f.write(CFG_LITERAL)
+    assert find_literal("foo.cfg", name) == value
