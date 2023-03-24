@@ -1,6 +1,7 @@
 """Fixture definitions."""
 
 import os
+import sys
 import traceback
 from pathlib import Path
 from typing import Iterable
@@ -8,6 +9,16 @@ from typing import Iterable
 import pytest
 import responses
 from click.testing import CliRunner
+
+# We want to be able to test scriv without any extras installed.  But responses
+# installs PyYaml.  If we are testing the no-extras scenario, then: after we've
+# imported responses above, and before we import any scriv modules below,
+# clobber the yaml module so that scriv's import will fail, simulating PyYaml
+# not being available.
+if os.getenv("SCRIV_TEST_NO_EXTRAS", ""):
+    sys.modules["yaml"] = None  # type: ignore[assignment]
+
+# pylint: disable=wrong-import-position
 
 from scriv.cli import cli as scriv_cli
 

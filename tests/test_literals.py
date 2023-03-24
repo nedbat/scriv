@@ -1,11 +1,27 @@
 """Tests of literals.py"""
 
+import os
+import sys
+
 import pytest
 
 import scriv.literals
 from scriv.exceptions import ScrivException
 from scriv.literals import find_literal
 from scriv.optional import tomllib, yaml
+
+
+def test_no_extras_craziness():
+    # Check that if we're testing no-extras we didn't get the modules, and if we
+    # aren't, then we did get the modules.
+    if os.getenv("SCRIV_TEST_NO_EXTRAS", ""):
+        if sys.version_info < (3, 11):
+            assert tomllib is None
+        assert yaml is None
+    else:
+        assert tomllib is not None
+        assert yaml is not None
+
 
 PYTHON_CODE = """\
 # A string we should get.
