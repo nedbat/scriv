@@ -18,7 +18,7 @@ click-log==0.4.0
     # via -r requirements/base.in
 idna==3.4
     # via requests
-importlib-metadata==6.1.0
+importlib-metadata==6.4.1
     # via click
 jinja2==3.1.2
     # via -r requirements/base.in

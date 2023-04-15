@@ -8,19 +8,17 @@ alabaster==0.7.13
     # via
     #   -r requirements/quality.txt
     #   sphinx
-astroid==2.15.0
+astroid==2.15.2
     # via
     #   -r requirements/quality.txt
     #   pylint
 attrs==22.2.0
-    # via
-    #   -r requirements/quality.txt
-    #   pytest
+    # via -r requirements/quality.txt
 babel==2.12.1
     # via
     #   -r requirements/quality.txt
     #   sphinx
-black==23.1.0
+black==23.3.0
     # via -r requirements/quality.txt
 bleach==6.0.0
     # via
@@ -65,7 +63,7 @@ colorama==0.4.6
     # via
     #   -r requirements/tox.txt
     #   tox
-coverage==7.2.2
+coverage==7.2.3
     # via -r requirements/quality.txt
 dill==0.3.6
     # via
@@ -89,7 +87,7 @@ exceptiongroup==1.1.1
     # via
     #   -r requirements/quality.txt
     #   pytest
-filelock==3.10.3
+filelock==3.11.0
     # via
     #   -r requirements/tox.txt
     #   tox
@@ -104,7 +102,7 @@ imagesize==1.4.1
     # via
     #   -r requirements/quality.txt
     #   sphinx
-importlib-metadata==6.1.0
+importlib-metadata==6.4.1
     # via
     #   -r requirements/pip-tools.txt
     #   -r requirements/tox.txt
@@ -170,14 +168,14 @@ more-itertools==9.1.0
     # via
     #   -r requirements/quality.txt
     #   jaraco-classes
-mypy==1.1.1
+mypy==1.2.0
     # via -r requirements/quality.txt
 mypy-extensions==1.0.0
     # via
     #   -r requirements/quality.txt
     #   black
     #   mypy
-packaging==23.0
+packaging==23.1
     # via
     #   -r requirements/pip-tools.txt
     #   -r requirements/tox.txt
@@ -200,13 +198,13 @@ pbr==5.11.1
     # via
     #   -r requirements/quality.txt
     #   stevedore
-pip-tools==6.12.3
+pip-tools==6.13.0
     # via -r requirements/pip-tools.txt
 pkginfo==1.9.6
     # via
     #   -r requirements/quality.txt
     #   twine
-platformdirs==3.1.1
+platformdirs==3.2.0
     # via
     #   -r requirements/quality.txt
     #   -r requirements/tox.txt
@@ -226,7 +224,7 @@ pycodestyle==2.10.0
     # via -r requirements/quality.txt
 pydocstyle==6.1.1
     # via -r requirements/quality.txt
-pygments==2.14.0
+pygments==2.15.0
     # via
     #   -r requirements/quality.txt
     #   doc8
@@ -234,7 +232,7 @@ pygments==2.14.0
     #   readme-renderer
     #   rich
     #   sphinx
-pylint==2.17.1
+pylint==2.17.2
     # via
     #   -r requirements/quality.txt
     #   pylint-pytest
@@ -249,7 +247,7 @@ pyproject-hooks==1.0.0
     #   -r requirements/pip-tools.txt
     #   -r requirements/quality.txt
     #   build
-pytest==7.2.2
+pytest==7.3.1
     # via
     #   -r requirements/quality.txt
     #   pylint-pytest
@@ -260,7 +258,7 @@ python-dateutil==2.8.2
     # via
     #   -r requirements/quality.txt
     #   freezegun
-pytz==2022.7.1
+pytz==2023.3
     # via
     #   -r requirements/quality.txt
     #   babel
@@ -293,7 +291,7 @@ rfc3986==2.0.0
     # via
     #   -r requirements/quality.txt
     #   twine
-rich==13.3.2
+rich==13.3.4
     # via
     #   -r requirements/quality.txt
     #   twine
@@ -359,11 +357,11 @@ tomli==2.0.1
     #   pyproject-hooks
     #   pytest
     #   tox
-tomlkit==0.11.6
+tomlkit==0.11.7
     # via
     #   -r requirements/quality.txt
     #   pylint
-tox==4.4.7
+tox==4.4.12
     # via
     #   -r requirements/tox.txt
     #   tox-gh
@@ -379,15 +377,15 @@ typed-ast==1.5.4
     #   mypy
 types-freezegun==1.1.10
     # via -r requirements/quality.txt
-types-pyyaml==6.0.12.8
+types-pyyaml==6.0.12.9
     # via
     #   -r requirements/quality.txt
     #   responses
-types-requests==2.28.11.16
+types-requests==2.28.11.17
     # via -r requirements/quality.txt
-types-toml==0.10.8.5
+types-toml==0.10.8.6
     # via -r requirements/quality.txt
-types-urllib3==1.26.25.8
+types-urllib3==1.26.25.10
     # via
     #   -r requirements/quality.txt
     #   types-requests
