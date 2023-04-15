@@ -74,49 +74,50 @@ def github_release(
             logger.warning(f"Entry {title!r} has no version, skipping.")
             continue
 
-        if version in tags:
-            section_text = "\n\n".join(sections)
-            md = changelog.format_tools().convert_to_markdown(section_text)
-
-            release_data = {
-                "body": md,
-                "name": version,
-                "tag_name": version,
-                "draft": False,
-                "prerelease": is_prerelease_version(version),
-            }
-
-            ghrel_template = jinja2.Template(scriv.config.ghrel_template)
-            md = ghrel_template.render(
-                body=md,
-                version=version,
-                release=release_data,
-                config=scriv.config,
-            )
-            release_data["body"] = md
-
-            if version in releases:
-                release = releases[version]
-                if release["body"] != md:
-                    logger.debug(
-                        f"Updating release {version}, data = {release_data}"
-                    )
-                    if dry_run:
-                        logger.info(f"Would update release {version}")
-                        logger.info(f"Body:\n{md}")
-                    else:
-                        update_release(release, release_data)
-            else:
-                logger.debug(f"Creating release, data = {release_data}")
-                if dry_run:
-                    logger.info(f"Would create release {version}")
-                    logger.info(f"Body:\n{md}")
-                else:
-                    create_release(repo, release_data)
-        else:
+        if version not in tags:
             logger.warning(
                 f"Version {version} has no tag. No release will be made."
             )
+            continue
+
+        section_text = "\n\n".join(sections)
+        md = changelog.format_tools().convert_to_markdown(section_text)
+
+        release_data = {
+            "body": md,
+            "name": version,
+            "tag_name": version,
+            "draft": False,
+            "prerelease": is_prerelease_version(version),
+        }
+
+        ghrel_template = jinja2.Template(scriv.config.ghrel_template)
+        md = ghrel_template.render(
+            body=md,
+            version=version,
+            release=release_data,
+            config=scriv.config,
+        )
+        release_data["body"] = md
+
+        if version in releases:
+            release = releases[version]
+            if release["body"] != md:
+                logger.debug(
+                    f"Updating release {version}, data = {release_data}"
+                )
+                if dry_run:
+                    logger.info(f"Would update release {version}")
+                    logger.info(f"Body:\n{md}")
+                else:
+                    update_release(release, release_data)
+        else:
+            logger.debug(f"Creating release, data = {release_data}")
+            if dry_run:
+                logger.info(f"Would create release {version}")
+                logger.info(f"Body:\n{md}")
+            else:
+                create_release(repo, release_data)
 
         if not all_entries:
             break
