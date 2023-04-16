@@ -1,5 +1,7 @@
 """Miscellanous helpers."""
 
+from __future__ import annotations
+
 import collections
 import re
 from typing import Dict, Optional, Sequence, Tuple, TypeVar
@@ -64,16 +66,41 @@ VERSION_REGEX = r"""(?ix)   # based on https://peps.python.org/pep-0440/
     """
 
 
-def extract_version(text: str) -> Optional[str]:
-    """Find a version number in a text string."""
-    m = re.search(VERSION_REGEX, text)
-    if m:
-        return m[0]
-    return None
+class Version:
+    """A version string that compares correctly."""
 
+    def __init__(self, vtext: str) -> None:
+        """Create a smart version from a string version number."""
+        self.vtext = vtext
 
-def is_prerelease_version(version: str) -> bool:  # noqa: D400
-    """Is this version number a pre-release?"""
-    m = re.fullmatch(VERSION_REGEX, version)
-    assert m  # the version must be a valid version
-    return bool(m["pre"])
+    def __repr__(self):
+        return f"<Version {self.vtext!r}>"
+
+    def __str__(self):
+        return self.vtext
+
+    def __bool__(self):
+        return bool(self.vtext)
+
+    def __eq__(self, other):
+        if hasattr(other, "vtext"):
+            return self.vtext == other.vtext
+        else:
+            return self.vtext == other
+
+    def __hash__(self):
+        return hash(self.vtext)
+
+    @classmethod
+    def from_text(cls, text: str) -> Optional[Version]:
+        """Find a version number in a text string."""
+        m = re.search(VERSION_REGEX, text)
+        if m:
+            return cls(m[0])
+        return None
+
+    def is_prerelease(self) -> bool:  # noqa: D400
+        """Is this version number a pre-release?"""
+        m = re.fullmatch(VERSION_REGEX, self.vtext)
+        assert m  # the version must be a valid version
+        return bool(m["pre"])

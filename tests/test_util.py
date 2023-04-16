@@ -2,7 +2,7 @@
 
 import pytest
 
-from scriv.util import extract_version, is_prerelease_version, partition_lines
+from scriv.util import Version, partition_lines
 
 
 @pytest.mark.parametrize(
@@ -14,8 +14,10 @@ from scriv.util import extract_version, is_prerelease_version, partition_lines
         ("2.7.19beta1, 2022-04-08", "2.7.19beta1"),
     ],
 )
-def test_extract_version(text, ver):
-    assert extract_version(text) == ver
+def test_version_from_text(text, ver):
+    if ver is not None:
+        ver = Version(ver)
+    assert Version.from_text(text) == ver
 
 
 @pytest.mark.parametrize(
@@ -26,7 +28,7 @@ def test_extract_version(text, ver):
     ],
 )
 def test_is_not_prerelease_version(version):
-    assert not is_prerelease_version(version)
+    assert not Version(version).is_prerelease()
 
 
 @pytest.mark.parametrize(
@@ -37,7 +39,7 @@ def test_is_not_prerelease_version(version):
     ],
 )
 def test_is_prerelease_version(version):
-    assert is_prerelease_version(version)
+    assert Version(version).is_prerelease()
 
 
 @pytest.mark.parametrize(

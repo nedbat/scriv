@@ -13,7 +13,7 @@ from .github import create_release, get_releases, update_release
 from .gitinfo import get_github_repos
 from .scriv import Scriv
 from .shell import run_simple_command
-from .util import extract_version, is_prerelease_version
+from .util import Version
 
 logger = logging.getLogger(__name__)
 
@@ -63,13 +63,13 @@ def github_release(
     if not re.fullmatch(r"[^ /]+/[^ /]+", repo):
         sys.exit(f"Repo must be owner/reponame: {repo!r}")
 
-    tags = set(run_simple_command("git tag").split())
-    releases = get_releases(repo)
+    tags = set(map(Version, run_simple_command("git tag").split()))
+    releases = {Version(k): v for k, v in get_releases(repo).items()}
 
     for title, sections in changelog.entries().items():
         if title is None:
             continue
-        version = extract_version(title)
+        version = Version.from_text(title)
         if version is None:
             logger.warning(f"Entry {title!r} has no version, skipping.")
             continue
@@ -88,7 +88,7 @@ def github_release(
             "name": version,
             "tag_name": version,
             "draft": False,
-            "prerelease": is_prerelease_version(version),
+            "prerelease": version.is_prerelease(),
         }
 
         ghrel_template = jinja2.Template(scriv.config.ghrel_template)
