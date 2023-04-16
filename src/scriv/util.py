@@ -67,7 +67,12 @@ VERSION_REGEX = r"""(?ix)   # based on https://peps.python.org/pep-0440/
 
 
 class Version:
-    """A version string that compares correctly."""
+    """
+    A version string that compares correctly.
+
+    For example, "v1.2.3" and "1.2.3" are considered the same.
+
+    """
 
     def __init__(self, vtext: str) -> None:
         """Create a smart version from a string version number."""
@@ -83,13 +88,15 @@ class Version:
         return bool(self.vtext)
 
     def __eq__(self, other):
+        this = self.vtext
         if hasattr(other, "vtext"):
-            return self.vtext == other.vtext
+            that = other.vtext
         else:
-            return self.vtext == other
+            that = other
+        return this.lstrip("v") == that.lstrip("v")
 
     def __hash__(self):
-        return hash(self.vtext)
+        return hash(self.vtext.lstrip("v"))
 
     @classmethod
     def from_text(cls, text: str) -> Optional[Version]:

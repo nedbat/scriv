@@ -42,6 +42,28 @@ def test_is_prerelease_version(version):
     assert Version(version).is_prerelease()
 
 
+VERSION_EQUALITIES = [
+    ("v1.2.3a1", "v1.2.3a1", True),
+    ("1.2.3a1", "v1.2.3a1", True),
+    ("v1.2.3a1", "1.2.3a1", True),
+    ("1.2.3a1", "1.2.3a1", True),
+    ("1.2", "1.2.0", False),
+    ("1.2.3", "1.2.3a1", False),
+    ("1.2.3a1", "1.2.3b1", False),
+    ("v1.2.3", "1.2.3a1", False),
+]
+
+
+@pytest.mark.parametrize("ver1, ver2, equal", VERSION_EQUALITIES)
+def test_version_equality(ver1, ver2, equal):
+    assert (Version(ver1) == Version(ver2)) is equal
+
+
+@pytest.mark.parametrize("ver1, ver2, equal", VERSION_EQUALITIES)
+def test_version_hashing(ver1, ver2, equal):
+    assert len({Version(ver1), Version(ver2)}) == (1 if equal else 2)
+
+
 @pytest.mark.parametrize(
     "text, result",
     [
