@@ -1,6 +1,8 @@
 """Tests of scriv/ghrel.py."""
 
+import json
 import logging
+from typing import Any, Dict
 from unittest.mock import call
 
 import pytest
@@ -72,10 +74,39 @@ def scenario1(temp_dir, fake_git, mocker):
     mock_get_releases.return_value = RELEASES1
 
 
-def test_default(cli_invoke, scenario1, mocker, caplog):
-    mock_create_release = mocker.patch("scriv.ghrel.create_release")
-    mock_update_release = mocker.patch("scriv.ghrel.update_release")
+@pytest.fixture()
+def mock_create_release(mocker):
+    """Create a mock create_release that checks arguments."""
 
+    def _create_release(repo: str, release_data: Dict[str, Any]) -> None:
+        assert repo
+        assert release_data["name"]
+        assert json.dumps(release_data)[0] == "{"
+
+    return mocker.patch(
+        "scriv.ghrel.create_release", side_effect=_create_release
+    )
+
+
+@pytest.fixture()
+def mock_update_release(mocker):
+    """Create a mock update_release that checks arguments."""
+
+    def _update_release(
+        release: Dict[str, Any], release_data: Dict[str, Any]
+    ) -> None:
+        assert release_data["name"]
+        assert release["url"]
+        assert json.dumps(release_data)[0] == "{"
+
+    return mocker.patch(
+        "scriv.ghrel.update_release", side_effect=_update_release
+    )
+
+
+def test_default(
+    cli_invoke, scenario1, mock_create_release, mock_update_release, caplog
+):
     cli_invoke(["github-release"])
 
     assert mock_create_release.mock_calls == [call("joe/project", V123_REL)]
@@ -89,10 +120,9 @@ def test_default(cli_invoke, scenario1, mocker, caplog):
     ]
 
 
-def test_dash_all(cli_invoke, scenario1, mocker, caplog):
-    mock_create_release = mocker.patch("scriv.ghrel.create_release")
-    mock_update_release = mocker.patch("scriv.ghrel.update_release")
-
+def test_dash_all(
+    cli_invoke, scenario1, mock_create_release, mock_update_release, caplog
+):
     cli_invoke(["github-release", "--all"])
 
     assert mock_create_release.mock_calls == [call("joe/project", V123_REL)]
@@ -118,12 +148,11 @@ def test_dash_all(cli_invoke, scenario1, mocker, caplog):
     ]
 
 
-def test_explicit_repo(cli_invoke, scenario1, fake_git, mocker):
+def test_explicit_repo(
+    cli_invoke, scenario1, fake_git, mock_create_release, mock_update_release
+):
     # Add another GitHub remote, now there are two.
     fake_git.add_remote("upstream", "git@github.com:psf/project.git")
-
-    mock_create_release = mocker.patch("scriv.ghrel.create_release")
-    mock_update_release = mocker.patch("scriv.ghrel.update_release")
 
     cli_invoke(["github-release", "--repo=xyzzy/plugh"])
 
@@ -141,10 +170,8 @@ def test_bad_explicit_repo(cli_invoke, repo):
 
 
 @pytest.fixture()
-def no_actions(mocker, responses):
+def no_actions(mock_create_release, mock_update_release, responses):
     """Check that nothing really happened."""
-    mock_create_release = mocker.patch("scriv.ghrel.create_release")
-    mock_update_release = mocker.patch("scriv.ghrel.update_release")
 
     yield
 
@@ -211,15 +238,13 @@ def test_no_clear_github_repo(cli_invoke, scenario1, fake_git):
     )
 
 
-def test_with_template(cli_invoke, temp_dir, scenario1, mocker):
+def test_with_template(cli_invoke, temp_dir, scenario1, mock_create_release):
     (temp_dir / "setup.cfg").write_text(
         """
         [scriv]
         ghrel_template = |{{body}}|{{config.format}}|{{version}}
         """
     )
-    mock_create_release = mocker.patch("scriv.ghrel.create_release")
-
     cli_invoke(["github-release"])
 
     expected = dict(V123_REL)

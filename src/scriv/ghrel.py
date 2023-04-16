@@ -85,8 +85,8 @@ def github_release(
 
         release_data = {
             "body": md,
-            "name": version,
-            "tag_name": version,
+            "name": str(version),
+            "tag_name": str(version),
             "draft": False,
             "prerelease": version.is_prerelease(),
         }
