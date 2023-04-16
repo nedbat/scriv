@@ -1,5 +1,0 @@
-Fixed
-.....
-
-- The Version class introduced in 1.3.0 broke the ``scriv github-release``
-  command.  This is now fixed.

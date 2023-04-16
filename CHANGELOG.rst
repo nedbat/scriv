@@ -21,6 +21,17 @@ See the fragment files in the `changelog.d directory`_.
 
 .. scriv-insert-here
 
+.. _changelog-1.3.1:
+
+1.3.1 — 2023-04-16
+------------------
+
+Fixed
+.....
+
+- The Version class introduced in 1.3.0 broke the ``scriv github-release``
+  command.  This is now fixed.
+
 .. _changelog-1.3.0:
 
 1.3.0 — 2023-04-16
