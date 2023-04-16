@@ -21,6 +21,30 @@ See the fragment files in the `changelog.d directory`_.
 
 .. scriv-insert-here
 
+.. _changelog-1.3.0:
+
+1.3.0 — 2023-04-16
+------------------
+
+Added
+.....
+
+- ``.cfg`` files can now be read with ``literal:`` settings, thanks to `Matias
+  Guijarro <pull 88_>`_.
+
+.. _pull 88: https://github.com/nedbat/scriv/pull/88
+
+Fixed
+.....
+
+- In compliance with `PEP 440`_, comparing version numbers now ignores a
+  leading "v" character.  This makes scriv more flexible about how you present
+  version numbers in various places (code literals, changelog entries, git
+  tags, and so on).  Fixes `issue 89`_.
+
+.. _PEP 440: https://peps.python.org/pep-0440/
+.. _issue 89: https://github.com/nedbat/scriv/issues/89
+
 .. _changelog-1.2.1:
 
 1.2.1 — 2023-02-18

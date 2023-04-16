@@ -1,7 +1,0 @@
-Added
-.....
-
-- ``.cfg`` files can now be read with ``literal:`` settings, thanks to `Matias
-  Guijarro <pull 88_>`_.
-
-.. _pull 88: https://github.com/nedbat/scriv/pull/88
