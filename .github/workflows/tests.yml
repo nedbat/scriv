@@ -21,16 +21,16 @@ env:
 
 jobs:
   tests:
-    name: "Python ${{ matrix.python-version }} tests on ${{ matrix.os }}"
-    runs-on: "${{ matrix.os }}"
+    name: "${{ matrix.python-version }} on ${{ matrix.os }}"
+    runs-on: "${{ matrix.os }}-latest"
 
     strategy:
       fail-fast: false
       matrix:
         os:
-          - ubuntu-latest
-          - macos-latest
-          - windows-latest
+          - ubuntu
+          - macos
+          - windows
         python-version:
           - "3.7"
           - "3.8"
@@ -107,7 +107,7 @@ jobs:
         with:
           name: covdata
 
-      - name: "Combine"
+      - name: "Combine and report"
         run: |
           python -m tox -e coverage
           export TOTAL=$(python -c "import json;print(json.load(open('coverage.json'))['totals']['percent_covered_display'])")
@@ -120,6 +120,7 @@ jobs:
         uses: schneegans/dynamic-badges-action@v1.6.0
         with:
           # GIST_TOKEN is a GitHub personal access token with scope "gist".
+          # https://github.com/settings/tokens/969369418
           auth: ${{ secrets.GIST_TOKEN }}
           gistID: 5a304c1c779d4bcc57be95f847e9327f
           filename: covbadge.json

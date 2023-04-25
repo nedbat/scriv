@@ -3,22 +3,12 @@ Find literals in various kinds of files.
 """
 
 import ast
+import configparser
 import os.path
 from typing import Any, MutableMapping, Optional
 
-try:
-    import tomllib
-except ModuleNotFoundError:  # pragma: no cover
-    import tomli as tomllib  # type: ignore
-except ImportError:  # pragma: no cover
-    tomllib = None  # type: ignore
-
-try:
-    import yaml
-except ImportError:  # pragma: no cover
-    yaml = None  # type: ignore
-
 from .exceptions import ScrivException
+from .optional import tomllib, yaml
 
 
 def find_literal(file_name: str, literal_name: str) -> Optional[str]:
@@ -57,6 +47,10 @@ def find_literal(file_name: str, literal_name: str) -> Optional[str]:
     elif ext == ".cabal":
         with open(file_name, "r") as fp:
             return [line for line in fp if line.startswith(literal_name + ":")][0].split()[1]
+    elif ext == ".cfg":
+        cfg_parser = configparser.ConfigParser()
+        cfg_parser.read(file_name)
+        return find_nested_value(cfg_parser, literal_name)
     else:
         raise ScrivException(
             f"Can't read literals from files like {file_name!r}"
@@ -91,6 +85,11 @@ class PythonLiteralFinder(ast.NodeVisitor):
             if isinstance(target, ast.Name):
                 if target.id == self.name:
                     self.check_value(node.value)
+
+    def visit_AnnAssign(self, node) -> None:  # noqa: D102 (inherited docstring)
+        if isinstance(node.target, ast.Name):
+            if node.target.id == self.name:
+                self.check_value(node.value)
 
     def check_value(self, value):
         """

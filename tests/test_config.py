@@ -7,6 +7,7 @@ import pytest
 import scriv.config
 from scriv.config import Config
 from scriv.exceptions import ScrivException
+from scriv.optional import tomllib
 
 from .helpers import without_module
 
@@ -148,8 +149,8 @@ def test_custom_template(changelog_d):
     assert fmt == "Custom template."
 
 
-def test_file_with_path(temp_dir, changelog_d):
-    # A file: spec with path components is relative to the current directory.
+def test_file_with_dots(temp_dir, changelog_d):
+    # A file: spec with dot components is relative to the current directory.
     (changelog_d / "start_here.j2").write_text("The wrong one")
     (temp_dir / "start_here.j2").write_text("The right one")
     fmt = Config(
@@ -158,10 +159,37 @@ def test_file_with_path(temp_dir, changelog_d):
     assert fmt == "The right one"
 
 
+def test_file_with_path_search_order(temp_dir, changelog_d):
+    # A file: spec with path components is relative to the changelog directory
+    # and then the current directory.
+    (changelog_d / "files").mkdir()
+    (changelog_d / "files" / "start_here.j2").write_text("The right one")
+    (temp_dir / "files").mkdir()
+    (temp_dir / "files" / "start_here.j2").write_text("The wrong one")
+    fmt = Config(
+        new_fragment_template="file: files/start_here.j2"
+    ).new_fragment_template
+    assert fmt == "The right one"
+
+
+def test_file_with_path_only_current_dir(temp_dir, changelog_d):
+    # A file: spec with path components is relative to the changelog directory
+    # and then the current directory.
+    (temp_dir / "files").mkdir()
+    (temp_dir / "files" / "start_here.j2").write_text("The right one")
+    fmt = Config(
+        new_fragment_template="file: files/start_here.j2"
+    ).new_fragment_template
+    assert fmt == "The right one"
+
+
 def test_missing_file_with_path(temp_dir, changelog_d):
     # A file: spec with path components is relative to the current directory.
     (changelog_d / "start_here.j2").write_text("The wrong one")
-    msg = r"No such file: there[/\\]start_here.j2"
+    msg = (
+        r"Couldn't read 'new_fragment_template' setting: "
+        + r"No such file: there[/\\]start_here.j2"
+    )
     with pytest.raises(ScrivException, match=msg):
         config = Config(new_fragment_template="file: there/start_here.j2")
         _ = config.new_fragment_template
@@ -169,7 +197,8 @@ def test_missing_file_with_path(temp_dir, changelog_d):
 
 def test_unknown_format():
     with pytest.raises(
-        ValueError, match=r"'format' must be in \['rst', 'md'\] \(got 'xyzzy'\)"
+        ScrivException,
+        match=r"'format' must be in \['rst', 'md'\] \(got 'xyzzy'\)",
     ):
         Config(format="xyzzy")
 
@@ -177,7 +206,10 @@ def test_unknown_format():
 def test_no_such_template():
     # If you specify a template name, and it doesn't exist, an error will
     # be raised.
-    msg = r"No such file: changelog\.d[/\\]foo\.j2"
+    msg = (
+        r"Couldn't read 'new_fragment_template' setting: "
+        + r"No such file: foo\.j2"
+    )
     with pytest.raises(ScrivException, match=msg):
         config = Config(new_fragment_template="file: foo.j2")
         _ = config.new_fragment_template
@@ -208,33 +240,60 @@ def test_literal_reading(temp_dir):
     assert text == "12.34.56"
 
 
-def test_literal_no_file():
-    # What happens if the file for a literal doesn't exist?
-    with pytest.raises(
-        FileNotFoundError, match=r"No such file or directory: 'sub/foob.py'"
-    ):
-        config = Config(version="literal:sub/foob.py: __version__")
-        _ = config.version
-
-
-def test_literal_no_literal(temp_dir):
-    # What happens if the literal we're looking for isn't there?
-    (temp_dir / "sub").mkdir()
-    (temp_dir / "sub" / "foob.py").write_text(
-        """# comment\n__version__ = "12.34.56"\n"""
-    )
-    with pytest.raises(
-        ScrivException,
-        match=r"Couldn't find literal: 'literal:sub/foob.py: version'",
-    ):
-        config = Config(version="literal:sub/foob.py: version")
+@pytest.mark.parametrize(
+    "bad_spec, msg_rx",
+    [
+        (
+            "literal: myproj.py",
+            (
+                r"Couldn't read 'version' setting: "
+                + r"Missing value name: 'literal: myproj.py'"
+            ),
+        ),
+        (
+            "literal: myproj.py:",
+            (
+                r"Couldn't read 'version' setting: "
+                + r"Missing value name: 'literal: myproj.py:'"
+            ),
+        ),
+        (
+            "literal: myproj.py:  version",
+            (
+                r"Couldn't read 'version' setting: "
+                + r"Couldn't find literal 'version' in myproj.py: "
+                + r"'literal: myproj.py:  version'"
+            ),
+        ),
+        (
+            "literal: : version",
+            (
+                r"Couldn't read 'version' setting: "
+                + r"Missing file name: 'literal: : version'"
+            ),
+        ),
+        (
+            "literal: no_file.py: version",
+            (
+                r"Couldn't read 'version' setting: "
+                + r"Couldn't find literal 'literal: no_file.py: version': "
+                + r".* 'no_file.py'"
+            ),
+        ),
+    ],
+)
+def test_bad_literal_spec(bad_spec, msg_rx, temp_dir):
+    (temp_dir / "myproj.py").write_text("""nothing_to_see_here = 'hello'\n""")
+    with pytest.raises(ScrivException, match=msg_rx):
+        config = Config(version=bad_spec)
         _ = config.version
 
 
 @pytest.mark.parametrize("chars", ["", "#", "#=-", "# ", "  "])
 def test_rst_chars_is_two_chars(chars):
     # rst_header_chars must be exactly two non-space characters.
-    with pytest.raises(ValueError):
+    msg = rf"Invalid configuration: 'rst_header_chars' must match.*'{chars}'"
+    with pytest.raises(ScrivException, match=msg):
         Config(rst_header_chars=chars)
 
 
@@ -251,6 +310,7 @@ class TestTomlConfig:
     Tests of the TOML configuration support.
     """
 
+    @pytest.mark.skipif(tomllib is None, reason="No TOML support installed")
     def test_reading_toml_file(self, temp_dir):
         (temp_dir / "pyproject.toml").write_text(TOML_CONFIG)
         config = Config.read()

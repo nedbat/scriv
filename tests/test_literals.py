@@ -1,14 +1,33 @@
 """Tests of literals.py"""
 
+import os
+import sys
+
 import pytest
 
 import scriv.literals
 from scriv.exceptions import ScrivException
 from scriv.literals import find_literal
+from scriv.optional import tomllib, yaml
+
+
+def test_no_extras_craziness():
+    # Check that if we're testing no-extras we didn't get the modules, and if we
+    # aren't, then we did get the modules.
+    if os.getenv("SCRIV_TEST_NO_EXTRAS", ""):
+        if sys.version_info < (3, 11):
+            assert tomllib is None
+        assert yaml is None
+    else:
+        assert tomllib is not None
+        assert yaml is not None
+
 
 PYTHON_CODE = """\
 # A string we should get.
 version = "1.2.3"
+
+typed_version: Final[str] = "2.3.4"
 
 # Numbers don't count.
 how_many = 123
@@ -37,6 +56,7 @@ def foo():
     "name, value",
     [
         ("version", "1.2.3"),
+        ("typed_version", "2.3.4"),
         ("also", "xyzzy"),
         ("but", "hello there"),
         ("somewhere_else", "this would be an odd place to get the string"),
@@ -81,6 +101,7 @@ bad_type = nan
 """
 
 
+@pytest.mark.skipif(tomllib is None, reason="No TOML support installed")
 @pytest.mark.parametrize(
     "name, value",
     [
@@ -128,6 +149,7 @@ myproduct:
 """
 
 
+@pytest.mark.skipif(yaml is None, reason="No YAML support installed")
 @pytest.mark.parametrize(
     "name, value",
     [
@@ -149,3 +171,47 @@ def test_find_yaml_literal_fail_if_unavailable(monkeypatch):
         ScrivException, match="Can't read .+ without YAML support"
     ):
         find_literal("foo.yml", "fail")
+
+
+CFG_LITERAL = """\
+
+[metadata]
+name = myproduct
+version = 1.2.3
+url = https://github.com/nedbat/scriv
+description = A nice description
+long_description = file: README.md
+long_description_content_type = text/markdown
+license = MIT
+
+[options]
+zip_safe = false
+include_package_data = true
+
+[bdist_wheel]
+universal = true
+
+[coverage:report]
+show_missing = true
+
+[flake8]
+max-line-length = 99
+doctests = True
+exclude =  .git, .eggs, __pycache__, tests/, docs/, build/, dist/
+"""
+
+
+@pytest.mark.parametrize(
+    "name, value",
+    [
+        ("metadata.version", "1.2.3"),
+        ("options.zip_safe", "false"),
+        ("coverage:report", None),  # find_literal only supports string values
+        ("metadata.myVersion", None),
+        ("unexisting", None),
+    ],
+)
+def test_find_cfg_literal(name, value, temp_dir):
+    with open("foo.cfg", "w", encoding="utf-8") as f:
+        f.write(CFG_LITERAL)
+    assert find_literal("foo.cfg", name) == value

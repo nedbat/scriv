@@ -45,11 +45,11 @@ Settings use the usual syntax, but with some extra features:
 File Prefix
 -----------
 
-A ``file:`` prefix means the setting value is a file name, and the actual
-setting value will be read from that file.  If the file name has path
-separators, it is relative to the current directory.  If it doesn't have path
-separators, then it is either in the fragment directory (changelog.d by
-default), or one of the built-in provided templates.
+A ``file:`` prefix means the setting is a file name or path, and the actual
+setting value will be read from that file.  The file name will be searched for
+in three places: the fragment directory (changelog.d by default), the current
+directory, or one of a few built-in templates.  If the first path component is
+``.`` or ``..``, then only the current directory is considered.
 
 Scriv provides two built-in templates:
 
@@ -127,8 +127,8 @@ by colons::
 In this case, the file ``myproj/__init__.py`` will be read, and the
 ``__version__`` value will be found and used as the version setting.
 
-Currently Python, TOML and YAML files are supported for literals, but other
-syntaxes can be supported in the future.
+Currently Python, .cfg, TOML and YAML files are supported for literals, but
+other syntaxes can be supported in the future.
 
 When using a TOML file, the value is specified using periods to separate the
 sections and key names::

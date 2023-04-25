@@ -21,6 +21,72 @@ See the fragment files in the `changelog.d directory`_.
 
 .. scriv-insert-here
 
+.. _changelog-1.3.1:
+
+1.3.1 — 2023-04-16
+------------------
+
+Fixed
+.....
+
+- The Version class introduced in 1.3.0 broke the ``scriv github-release``
+  command.  This is now fixed.
+
+.. _changelog-1.3.0:
+
+1.3.0 — 2023-04-16
+------------------
+
+Added
+.....
+
+- ``.cfg`` files can now be read with ``literal:`` settings, thanks to `Matias
+  Guijarro <pull 88_>`_.
+
+.. _pull 88: https://github.com/nedbat/scriv/pull/88
+
+Fixed
+.....
+
+- In compliance with `PEP 440`_, comparing version numbers now ignores a
+  leading "v" character.  This makes scriv more flexible about how you present
+  version numbers in various places (code literals, changelog entries, git
+  tags, and so on).  Fixes `issue 89`_.
+
+.. _PEP 440: https://peps.python.org/pep-0440/
+.. _issue 89: https://github.com/nedbat/scriv/issues/89
+
+.. _changelog-1.2.1:
+
+1.2.1 — 2023-02-18
+------------------
+
+Fixed
+.....
+
+- Scriv would fail trying to import tomllib on Python <3.11 if installed
+  without the ``[toml]`` extra.  This is now fixed, closing `issue 80`_.
+
+- Settings specified as ``file:`` will now search in the changelog directory
+  and then the current directory for the file.  The only exception is if the
+  first component is ``.`` or ``..``, then only the current directory is
+  considered.  Fixes `issue 82`_.
+
+- Python variables with type annotations can now be read with ``literal:``
+  settings, fixing `issue 85`_.
+
+- Error messages for mis-formed ``literal:`` configuration values are more
+  precise, as requested in `issue 84`_.
+
+- Error messages from settings validation are ScrivExceptions now, and report
+  configuration problems more clearly and earlier in some cases.
+
+.. _issue 80: https://github.com/nedbat/scriv/issues/80
+.. _issue 82: https://github.com/nedbat/scriv/issues/82
+.. _issue 84: https://github.com/nedbat/scriv/issues/84
+.. _issue 85: https://github.com/nedbat/scriv/issues/85
+
+
 .. _changelog-1.2.0:
 
 1.2.0 — 2023-01-18

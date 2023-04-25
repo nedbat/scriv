@@ -1,6 +1,7 @@
 """Scriv configuration."""
 
 import configparser
+import contextlib
 import logging
 import pkgutil
 import re
@@ -9,15 +10,9 @@ from typing import Any, List
 
 import attr
 
-try:
-    import tomllib
-except ModuleNotFoundError:  # pragma: no cover
-    import tomli as tomllib  # type: ignore
-except ImportError:  # pragma: no cover
-    tomllib = None  # type: ignore
-
 from .exceptions import ScrivException
 from .literals import find_literal
+from .optional import tomllib
 
 logger = logging.getLogger(__name__)
 
@@ -223,6 +218,21 @@ class _Options:
     )
 
 
+@contextlib.contextmanager
+def validator_exceptions():
+    """
+    Context manager for attrs operations that validate.
+
+    Attrs >= 22 says ValueError will have a bunch of arguments, and we only want
+    to see the first, and raised as ScrivException.
+
+    """
+    try:
+        yield
+    except ValueError as ve:
+        raise ScrivException(f"Invalid configuration: {ve.args[0]}") from ve
+
+
 class Config:
     """
     Configuration for Scriv.
@@ -234,7 +244,8 @@ class Config:
 
     def __init__(self, **kwargs):
         """All values in _Options can be set as keywords."""
-        self._options = _Options(**kwargs)
+        with validator_exceptions():
+            self._options = _Options(**kwargs)
 
     def __getattr__(self, name):
         """Proxy to self._options, and resolve the value."""
@@ -247,7 +258,12 @@ class Config:
             if isinstance(value, str):
                 value = convert_list(value)
         else:
-            value = self.resolve_value(value)
+            try:
+                value = self.resolve_value(value)
+            except ScrivException as se:
+                raise ScrivException(
+                    f"Couldn't read {name!r} setting: {se}"
+                ) from se
         setattr(self, name, value)
         return value
 
@@ -270,6 +286,8 @@ class Config:
         config.read_one_config(
             str(Path(config.fragment_directory) / "scriv.ini")
         )
+        with validator_exceptions():
+            attr.validate(config._options)
         return config
 
     def read_one_config(self, configfile: str) -> None:
@@ -353,10 +371,27 @@ class Config:
             file_name = value.partition(":")[2].strip()
             value = self.read_file_value(file_name)
         elif value.startswith("literal:"):
-            _, file_name, literal_name = value.split(":", maxsplit=2)
-            found = find_literal(file_name.strip(), literal_name.strip())
+            try:
+                _, file_name, literal_name = value.split(":", maxsplit=2)
+            except ValueError as ve:
+                raise ScrivException(f"Missing value name: {value!r}") from ve
+            file_name = file_name.strip()
+            if not file_name:
+                raise ScrivException(f"Missing file name: {value!r}")
+            literal_name = literal_name.strip()
+            if not literal_name:
+                raise ScrivException(f"Missing value name: {value!r}")
+            try:
+                found = find_literal(file_name, literal_name)
+            except Exception as exc:
+                raise ScrivException(
+                    f"Couldn't find literal {value!r}: {exc}"
+                ) from exc
             if found is None:
-                raise ScrivException(f"Couldn't find literal: {value!r}")
+                raise ScrivException(
+                    f"Couldn't find literal {literal_name!r} in {file_name}: "
+                    + f"{value!r}"
+                )
             value = found
         return value
 
@@ -364,32 +399,28 @@ class Config:
         """
         Find the value of a setting that has been specified as a file name.
         """
-        no_file = False
-        has_path = bool(re.search(r"[/\\]", file_name))
-        if has_path:
-            # It has path components: relative to current directory.
-            file_path = Path(".") / file_name
-        else:
-            # Plain file name: in fragdir, or built-in.
-            file_path = Path(self.fragment_directory) / file_name
+        value = None
+        possibilities = []
+        if not re.match(r"\.\.?[/\\]", file_name):
+            possibilities.append(Path(self.fragment_directory) / file_name)
+        possibilities.append(Path(".") / file_name)
 
-        if file_path.exists():
-            value = file_path.read_text()
-        elif has_path:
-            # With a path, it has to exist.
-            no_file = True
+        for file_path in possibilities:
+            if file_path.exists():
+                value = file_path.read_text()
+                break
         else:
             # No path, and doesn't exist: try it as a built-in.
             try:
                 file_bytes = pkgutil.get_data("scriv", "templates/" + file_name)
             except OSError:
-                no_file = True
+                pass
             else:
                 assert file_bytes
                 value = file_bytes.decode("utf-8")
 
-        if no_file:
-            raise ScrivException(f"No such file: {file_path}")
+        if value is None:
+            raise ScrivException(f"No such file: {file_name}")
 
         return value
 
