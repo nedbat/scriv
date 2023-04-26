@@ -215,3 +215,22 @@ def test_find_cfg_literal(name, value, temp_dir):
     with open("foo.cfg", "w", encoding="utf-8") as f:
         f.write(CFG_LITERAL)
     assert find_literal("foo.cfg", name) == value
+
+
+CABAL_LITERAL = """\
+cabal-version:      3.0
+name:               pkg
+version:            1.2.3
+"""
+
+
+@pytest.mark.parametrize(
+    "name, value",
+    [
+        ("version", "1.2.3"),
+    ],
+)
+def test_find_cabal_literal(name, value, temp_dir):
+    with open("foo.cabal", "w", encoding="utf-8") as f:
+        f.write(CABAL_LITERAL)
+    assert find_literal("foo.cabal", name) == value
