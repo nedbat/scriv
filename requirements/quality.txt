@@ -8,9 +8,9 @@ alabaster==0.7.13
     # via
     #   -r requirements/doc.txt
     #   sphinx
-astroid==2.15.2
+astroid==2.15.4
     # via pylint
-attrs==22.2.0
+attrs==23.1.0
     # via
     #   -r requirements/doc.txt
     #   -r requirements/test.txt
@@ -48,7 +48,7 @@ click-log==0.4.0
     #   -r requirements/test.txt
 cogapp==3.3.0
     # via -r requirements/doc.txt
-coverage==7.2.3
+coverage==7.2.4
     # via
     #   -r requirements/doc.txt
     #   -r requirements/test.txt
@@ -82,10 +82,11 @@ imagesize==1.4.1
     # via
     #   -r requirements/doc.txt
     #   sphinx
-importlib-metadata==6.4.1
+importlib-metadata==6.6.0
     # via
     #   -r requirements/doc.txt
     #   -r requirements/test.txt
+    #   attrs
     #   build
     #   click
     #   keyring
@@ -162,7 +163,7 @@ pbr==5.11.1
     #   stevedore
 pkginfo==1.9.6
     # via twine
-platformdirs==3.2.0
+platformdirs==3.5.0
     # via
     #   black
     #   pylint
@@ -179,7 +180,7 @@ pycodestyle==2.10.0
     # via -r requirements/quality.in
 pydocstyle==6.1.1
     # via -r requirements/quality.in
-pygments==2.15.0
+pygments==2.15.1
     # via
     #   -r requirements/doc.txt
     #   -r requirements/test.txt
@@ -188,7 +189,7 @@ pygments==2.15.0
     #   readme-renderer
     #   rich
     #   sphinx
-pylint==2.17.2
+pylint==2.17.3
     # via
     #   -r requirements/quality.in
     #   pylint-pytest
@@ -222,7 +223,7 @@ pyyaml==6.0
     #   responses
 readme-renderer==37.3
     # via twine
-requests==2.28.2
+requests==2.29.0
     # via
     #   -r requirements/doc.txt
     #   -r requirements/test.txt
@@ -242,7 +243,7 @@ restructuredtext-lint==1.4.0
     #   doc8
 rfc3986==2.0.0
     # via twine
-rich==13.3.4
+rich==13.3.5
     # via twine
 six==1.16.0
     # via
@@ -305,7 +306,7 @@ tomli==2.0.1
     #   pylint
     #   pyproject-hooks
     #   pytest
-tomlkit==0.11.7
+tomlkit==0.11.8
     # via pylint
 twine==4.0.2
     # via -r requirements/quality.in
@@ -325,7 +326,7 @@ types-requests==2.28.11.17
     # via -r requirements/quality.in
 types-toml==0.10.8.6
     # via -r requirements/quality.in
-types-urllib3==1.26.25.10
+types-urllib3==1.26.25.11
     # via types-requests
 typing-extensions==4.5.0
     # via
