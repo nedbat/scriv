@@ -29,6 +29,9 @@ version = "1.2.3"
 
 typed_version: Final[str] = "2.3.4"
 
+thing1.attr = "3.4.5"
+thing2.attr: str = "4.5.6"
+
 # Numbers don't count.
 how_many = 123
 
