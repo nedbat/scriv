@@ -30,10 +30,16 @@ v0.9a7 -- 2017-06-16
 
 A beginning
 
+v0.1 -- 2010-01-01
+------------------
+
+Didn't bother to tag this one.
+
 v0.0.1 -- 2001-01-01
 --------------------
 
-Didn't bother to tag this one.
+Very first.
+
 """
 
 RELEASES1 = {
@@ -42,6 +48,10 @@ RELEASES1 = {
         "body": "Nothing to say.\n",
     },
     "v0.9a7": {
+        "url": "https://api.github.com/repos/joe/project/releases/123",
+        "body": "original body",
+    },
+    "v0.0.1": {
         "url": "https://api.github.com/repos/joe/project/releases/123",
         "body": "original body",
     },
@@ -63,12 +73,20 @@ V097_REL = {
     "prerelease": True,
 }
 
+V001_REL = {
+    "body": "Very first.\n",
+    "name": "v0.0.1",
+    "tag_name": "v0.0.1",
+    "draft": False,
+    "prerelease": False,
+}
+
 
 @pytest.fixture()
 def scenario1(temp_dir, fake_git, mocker):
     """A common scenario for the tests."""
     fake_git.add_remote("origin", "git@github.com:joe/project.git")
-    fake_git.add_tags(["v1.2.3", "v1.0", "v0.9a7"])
+    fake_git.add_tags(["v1.2.3", "v1.0", "v0.9a7", "v0.0.1"])
     (temp_dir / "CHANGELOG.rst").write_text(CHANGELOG1)
     mock_get_releases = mocker.patch("scriv.ghrel.get_releases")
     mock_get_releases.return_value = RELEASES1
@@ -128,6 +146,7 @@ def test_dash_all(
     assert mock_create_release.mock_calls == [call("joe/project", V123_REL)]
     assert mock_update_release.mock_calls == [
         call(RELEASES1["v0.9a7"], V097_REL),
+        call(RELEASES1["v0.0.1"], V001_REL),
     ]
     assert caplog.record_tuples == [
         (
@@ -143,7 +162,7 @@ def test_dash_all(
         (
             "scriv.ghrel",
             logging.WARNING,
-            "Version v0.0.1 has no tag. No release will be made.",
+            "Version v0.1 has no tag. No release will be made.",
         ),
     ]
 
@@ -213,8 +232,10 @@ def test_dash_all_dry_run(cli_invoke, scenario1, no_actions, caplog):
         (
             "scriv.ghrel",
             logging.WARNING,
-            "Version v0.0.1 has no tag. No release will be made.",
+            "Version v0.1 has no tag. No release will be made.",
         ),
+        ("scriv.ghrel", 20, "Would update release v0.0.1"),
+        ("scriv.ghrel", 20, "Body:\nVery first.\n"),
     ]
 
 
