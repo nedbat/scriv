@@ -88,12 +88,8 @@ class Version:
         return bool(self.vtext)
 
     def __eq__(self, other):
-        this = self.vtext
-        if hasattr(other, "vtext"):
-            that = other.vtext
-        else:
-            that = other
-        return this.lstrip("v") == that.lstrip("v")
+        assert isinstance(other, Version)
+        return self.vtext.lstrip("v") == other.vtext.lstrip("v")
 
     def __hash__(self):
         return hash(self.vtext.lstrip("v"))
