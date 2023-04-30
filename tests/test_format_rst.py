@@ -154,6 +154,12 @@ from scriv.format_rst import RstTools
                 This thing doesn't work yet.
                 Not sure it ever will... :(
 
+            .. [cite] A citation
+
+            .. |subst| image:: substitution.png
+
+            ..
+
             """,
             {
                 "Added": [
@@ -163,6 +169,8 @@ from scriv.format_rst import RstTools
                         + "    This thing doesn't work yet.\n"
                         + "    Not sure it ever will... :("
                     ),
+                    ".. [cite] A citation",
+                    ".. |subst| image:: substitution.png",
                 ],
                 "Fixed": [
                     "- This thing was fixed: `issue 42`_.",

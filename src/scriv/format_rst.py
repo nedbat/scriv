@@ -33,9 +33,7 @@ class RstTools(FormatTools):
         lines that are not comments.
         """
         if line.startswith(".."):
-            if line == "..":
-                return True
-            elif line.startswith(("...", ".. _", ".. [", ".. |")):
+            if line.startswith(("...", ".. _", ".. [", ".. |")):
                 # It's an underline, hyperlink, citation, or substitution, so
                 # not a comment.
                 return False
