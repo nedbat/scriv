@@ -1,0 +1,7 @@
+Added
+.....
+
+- Literals can be extracted from .cabal files.  Thanks `Javier Sagredo <pull
+  91_>`_.
+
+.. _pull 91: https://github.com/nedbat/scriv/pull/91
