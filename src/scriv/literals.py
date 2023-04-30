@@ -44,6 +44,11 @@ def find_literal(file_name: str, literal_name: str) -> Optional[str]:
         with open(file_name, encoding="utf-8") as f:
             data = yaml.safe_load(f)
         return find_nested_value(data, literal_name)
+    elif ext == ".cabal":
+        with open(file_name, encoding="utf-8") as fp:
+            return [line for line in fp if line.startswith(literal_name + ":")][
+                0
+            ].split()[1]
     elif ext == ".cfg":
         cfg_parser = configparser.ConfigParser()
         cfg_parser.read(file_name)

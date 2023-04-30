@@ -127,8 +127,8 @@ by colons::
 In this case, the file ``myproj/__init__.py`` will be read, and the
 ``__version__`` value will be found and used as the version setting.
 
-Currently Python, .cfg, TOML and YAML files are supported for literals, but
-other syntaxes can be supported in the future.
+Currently Python, .cfg, TOML, YAML and Cabal files are supported for literals,
+but other syntaxes can be supported in the future.
 
 When using a TOML file, the value is specified using periods to separate the
 sections and key names::
@@ -141,6 +141,10 @@ In a YAML file, use periods in the value name to access dictionary keys::
     [scriv]
     version = literal: galaxy.yaml: myproduct.versionString
 
+When using a Cabal file, the version of the package can be accessed using::
+
+    [scriv]
+    version = literal: my-package.cabal: version
 
 Value Substitution
 ------------------
