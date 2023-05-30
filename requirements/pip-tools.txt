@@ -22,7 +22,7 @@ tomli==2.0.1
     # via
     #   build
     #   pyproject-hooks
-typing-extensions==4.5.0
+typing-extensions==4.6.2
     # via importlib-metadata
 wheel==0.40.0
     # via pip-tools

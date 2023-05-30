@@ -10,7 +10,7 @@ attrs==23.1.0
     # via -r requirements/test.txt
 babel==2.12.1
     # via sphinx
-certifi==2022.12.7
+certifi==2023.5.7
     # via
     #   -r requirements/test.txt
     #   requests
@@ -26,7 +26,7 @@ click-log==0.4.0
     # via -r requirements/test.txt
 cogapp==3.3.0
     # via -r requirements/doc.in
-coverage==7.2.4
+coverage==7.2.7
     # via -r requirements/test.txt
 doc8==0.11.2
     # via -r requirements/doc.in
@@ -113,7 +113,7 @@ pyyaml==6.0
     # via
     #   -r requirements/test.txt
     #   responses
-requests==2.29.0
+requests==2.31.0
     # via
     #   -r requirements/test.txt
     #   responses
@@ -133,7 +133,7 @@ sphinx==5.3.0
     #   -r requirements/doc.in
     #   sphinx-rtd-theme
     #   sphinxcontrib-jquery
-sphinx-rtd-theme==1.2.0
+sphinx-rtd-theme==1.2.1
     # via -r requirements/doc.in
 sphinxcontrib-applehelp==1.0.2
     # via sphinx
@@ -155,16 +155,16 @@ tomli==2.0.1
     # via
     #   -r requirements/test.txt
     #   pytest
-types-pyyaml==6.0.12.9
+types-pyyaml==6.0.12.10
     # via
     #   -r requirements/test.txt
     #   responses
-typing-extensions==4.5.0
+typing-extensions==4.6.2
     # via
     #   -r requirements/test.txt
     #   importlib-metadata
     #   responses
-urllib3==1.26.15
+urllib3==2.0.2
     # via
     #   -r requirements/test.txt
     #   requests
