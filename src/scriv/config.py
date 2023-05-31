@@ -195,7 +195,7 @@ class _Options:
     # Template for GitHub releases
     ghrel_template = attr.ib(
         type=str,
-        default="{{body}}",
+        default="file: ghrel_template.${config:format}.j2",
         metadata={
             "doc": """\
                 The template to use for GitHub releases created by the
@@ -258,9 +258,7 @@ class Config:
             try:
                 value = self.resolve_value(value)
             except ScrivException as se:
-                raise ScrivException(
-                    f"Couldn't read {name!r} setting: {se}"
-                ) from se
+                raise ScrivException(f"Couldn't read {name!r} setting: {se}") from se
         setattr(self, name, value)
         return value
 
@@ -280,9 +278,7 @@ class Config:
         config.read_one_config("setup.cfg")
         config.read_one_config("tox.ini")
         config.read_one_toml("pyproject.toml")
-        config.read_one_config(
-            str(Path(config.fragment_directory) / "scriv.ini")
-        )
+        config.read_one_config(str(Path(config.fragment_directory) / "scriv.ini"))
         with validator_exceptions():
             attr.validate(config._options)
         return config
@@ -381,9 +377,7 @@ class Config:
             try:
                 found = find_literal(file_name, literal_name)
             except Exception as exc:
-                raise ScrivException(
-                    f"Couldn't find literal {value!r}: {exc}"
-                ) from exc
+                raise ScrivException(f"Couldn't find literal {value!r}: {exc}") from exc
             if found is None:
                 raise ScrivException(
                     f"Couldn't find literal {literal_name!r} in {file_name}: "
