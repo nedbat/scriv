@@ -143,10 +143,7 @@ class _Options:
     # The template for the title of the changelog entry.
     entry_title_template = attr.ib(
         type=str,
-        default=(
-            "{% if version %}{{ version }} — {% endif %}"
-            + "{{ date.strftime('%Y-%m-%d') }}"
-        ),
+        default="file: entry_title_template.${config:format}.j2",
         metadata={
             "doc": """\
                 The `Jinja`_ template to use for the entry heading text for
