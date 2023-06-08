@@ -14,6 +14,43 @@ Scriv is a command-line tool for helping developers maintain useful changelogs.
 It manages a directory of changelog fragments. It aggregates them into entries
 in a CHANGELOG file.
 
+Installation
+============
+
+To install scriv, you can use the following command::
+
+  python3 -m pip install scriv
+
+Install via `pipx <https://pypi.org/project/pipx/>`_ (recommended)
+-----------------------------------------------------------------
+
+``pipx`` is an alternative package manager for Python applications.
+It allows you to install and run Python applications in isolated environments,
+preventing conflicts between dependencies and ensuring that each application
+uses its own set of packages.
+
+**1.** First, install ``pipx`` if you haven't already:
+
+**On macOS and Linux:**
+
+::
+
+  python3 -m pip install --user pipx
+  python3 -m pipx ensurepath
+
+Alternatively, you can use your package manager (``brew``, ``apt``, etc.).
+
+**On Windows:**
+
+::
+
+  py -m pip install --user pipx
+  py -m pipx ensurepath
+
+**2.** Once ``pipx`` is installed, you can install scriv using the following command::
+
+  pipx install scriv
+
 Getting Started
 ===============
 
