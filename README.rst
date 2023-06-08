@@ -31,17 +31,17 @@ uses its own set of packages.
 
 1. First, install ``pipx`` if you haven't already:
 
-  * On macOS and Linux::
+* On macOS and Linux::
 
-    python3 -m pip install --user pipx
-    python3 -m pipx ensurepath
+  python3 -m pip install --user pipx
+  python3 -m pipx ensurepath
 
 Alternatively, you can use your package manager (``brew``, ``apt``, etc.).
 
-  * On Windows::
+* On Windows::
 
-    py -m pip install --user pipx
-    py -m pipx ensurepath
+  py -m pip install --user pipx
+  py -m pipx ensurepath
 
 2. Once ``pipx`` is installed, you can install scriv using the following command::
 
