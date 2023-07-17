@@ -71,6 +71,11 @@ def collect(
                 if etitle is None:
                     continue
                 eversion = Version.from_text(etitle)
+                if eversion is None:
+                    sys.exit(
+                        f"Entry {etitle!r} is not a valid version! "
+                         + "If scriv should ignore this heading, add 'scriv-end-here' somewhere before it"
+                    )
                 if eversion == version:
                     sys.exit(
                         f"Entry {etitle!r} already uses "
