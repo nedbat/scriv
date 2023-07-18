@@ -74,7 +74,8 @@ def collect(
                 if eversion is None:
                     sys.exit(
                         f"Entry {etitle!r} is not a valid version! "
-                         + "If scriv should ignore this heading, add 'scriv-end-here' somewhere before it"
+                        + "If scriv should ignore this heading, add "
+                        + "'scriv-end-here' somewhere before it."
                     )
                 if eversion == version:
                     sys.exit(
