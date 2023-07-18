@@ -26,6 +26,8 @@ def cli() -> None:  # noqa: D401
     """The main entry point for the scriv command."""
 
 
-cli.add_command(create)
-cli.add_command(collect)
-cli.add_command(github_release)
+# These type: pragmas can be removed when click 8.1.6 is out, to fix
+# https://github.com/pallets/click/issues/2558.
+cli.add_command(create)  # type: ignore[attr-defined]
+cli.add_command(collect)  # type: ignore[attr-defined]
+cli.add_command(github_release)  # type: ignore[attr-defined]
