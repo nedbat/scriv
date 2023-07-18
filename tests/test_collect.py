@@ -545,3 +545,36 @@ def test_duplicate_version_with_v(cli_invoke, changelog_d, temp_dir):
         str(result.exception)
         == "Entry 'v12.34.56 — 2022-09-18' already uses version '12.34.56'."
     )
+
+
+def test_unparsable_version(cli_invoke, changelog_d, temp_dir):
+    (changelog_d / "scriv.ini").write_text("[scriv]\nversion = 12.34.56\n")
+    (temp_dir / "CHANGELOG.rst").write_text(
+        textwrap.dedent(
+            """\
+            Preamble that doesn't count
+
+            v12.34.57 — 2022-09-19
+            ======================
+
+            A quick fix.
+
+            Not a version at all.
+            =====================
+
+            Good stuff.
+            """
+        ),
+        encoding="utf-8",
+    )
+
+    # Make a new fragment, and collect again without changing the version.
+    (changelog_d / "20170617_nedbat.rst").write_text(FRAG2)
+    with freezegun.freeze_time("2022-09-18T16:18:19"):
+        result = cli_invoke(["collect"], expect_ok=False)
+    assert result.exit_code == 1
+    assert str(result.exception) == (
+        "Entry 'Not a version at all.' is not a valid version! "
+        + "If scriv should ignore this heading, add "
+        + "'scriv-end-here' somewhere before it."
+    )
