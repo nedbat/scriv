@@ -2,6 +2,8 @@
 Configuration
 #############
 
+.. highlight:: ini
+
 Scriv tries hard to be adaptable to your project's needs.  Many aspects of its
 behavior can be customized with a settings file.
 
@@ -30,6 +32,20 @@ All of the possible files will be read, and settings will cascade.  So for
 example, setup.cfg can set the fragment directory to "scriv.d", then
 "scriv.d/scriv.ini" will be read.
 
+The settings examples here show .ini syntax.  If you are using a pyproject.toml
+file for settings, you will need to adjust for TOML syntax.  This .ini
+example::
+
+    [scriv]
+    version = literal: pyproject.toml: project.version
+
+would become:
+
+.. code-block:: toml
+
+    [tool.scriv]
+    version = "literal: pyproject.toml: project.version"
+
 
 Settings Syntax
 ===============
@@ -57,7 +73,7 @@ Scriv provides two built-in templates:
     import textwrap
     def include_file(fname):
         """Include a source file into the docs as a code block."""
-        print(".. code::\n")
+        print(".. code-block:: jinja\n")
         with open(fname) as f:
             print(textwrap.indent(f.read(), prefix="    "))
 .. ]]]
@@ -69,7 +85,7 @@ Scriv provides two built-in templates:
   .. [[[cog
       include_file("src/scriv/templates/new_fragment.md.j2")
   .. ]]]
-  .. code::
+  .. code-block:: jinja
 
       <!--
       A new scriv changelog fragment.
@@ -86,7 +102,7 @@ Scriv provides two built-in templates:
       -->
       {% endfor -%}
 
-  .. [[[end]]] (checksum: 98c2fb99a14f6a1fe327cde5eb00e9a5)
+  .. [[[end]]] (checksum: 522af8fd44433254fa64c58f89733d4d)
 
 - ``new_fragment.rst.j2``: The default Jinja template for new reStructuredText
   fragments:
@@ -94,7 +110,7 @@ Scriv provides two built-in templates:
   .. [[[cog
       include_file("src/scriv/templates/new_fragment.rst.j2")
   .. ]]]
-  .. code::
+  .. code-block:: jinja
 
       .. A new scriv changelog fragment.
       {% if config.categories -%}
@@ -112,7 +128,7 @@ Scriv provides two built-in templates:
       - A bullet item for this fragment. EDIT ME!
       {% endif -%}
 
-  .. [[[end]]] (checksum: f1e1949e1f93a7963671861f6fb20189)
+  .. [[[end]]] (checksum: bdc8c8a24aa1aed2a40d07d08e8a939c)
 
 Literal Prefix
 --------------
@@ -130,13 +146,14 @@ In this case, the file ``myproj/__init__.py`` will be read, and the
 Currently Python, .cfg, TOML, YAML and Cabal files are supported for literals,
 but other syntaxes can be supported in the future.
 
-When using a TOML file, the value is specified using periods to separate the
-sections and key names::
+When reading a literal from a TOML file, the value is specified using periods
+to separate the sections and key names::
 
     [scriv]
     version = literal: pyproject.toml: project.version
 
-In a YAML file, use periods in the value name to access dictionary keys::
+For data from a YAML file, use periods in the value name to access dictionary
+keys::
 
     [scriv]
     version = literal: galaxy.yaml: myproduct.versionString
