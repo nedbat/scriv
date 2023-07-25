@@ -40,9 +40,6 @@ tomli==2.0.1
 tox==4.6.4
     # via
     #   -r requirements/tox.in
-    #   tox-gh
-tox-gh==1.2.0
-    # via -r requirements/tox.in
 typing-extensions==4.7.1
     # via
     #   importlib-metadata

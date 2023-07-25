@@ -21,7 +21,7 @@ env:
 
 jobs:
   tests:
-    name: "${{ matrix.python-version }} on ${{ matrix.os }}"
+    name: "Test on ${{ matrix.os }}"
     runs-on: "${{ matrix.os }}-latest"
 
     strategy:
@@ -31,29 +31,43 @@ jobs:
           - ubuntu
           - macos
           - windows
-        python-version:
-          - "3.7"
-          - "3.8"
-          - "3.9"
-          - "3.10"
-          - "3.11"
-          - "pypy-3.9"
 
     steps:
       - name: "Check out the repo"
         uses: "actions/checkout@v3"
 
       - name: "Set up Python"
+        id: "setup-python"
         uses: "actions/setup-python@v4"
         with:
-          python-version: "${{ matrix.python-version }}"
-          cache: pip
-          cache-dependency-path: 'requirements/*.txt'
+          # The last listed Python version is the default.
+          python-version: |
+            pypy-3.9
+            3.7
+            3.8
+            3.9
+            3.10
+            3.11
+
+      - name: "Restore cache"
+        id: "restore-cache"
+        uses: "actions/cache@v3"
+        with:
+          path: |
+            .tox/
+            .venv/
+          key: "cache-python-${{ steps.setup-python.outputs.python-version }}-os-${{ runner.os }}-hash-${{ hashFiles('tox.ini', 'requirements/*.txt') }}"
+
+      - name: "Identify venv path"
+        shell: "bash"
+        run: "echo 'venv-path=${{ runner.os == 'Windows' && '.venv/Scripts' || '.venv/bin' }}' >> $GITHUB_ENV"
 
       - name: "Install dependencies"
+        if: "steps.restore-cache.outputs.cache-hit == false"
         run: |
-          python -m pip install -U setuptools
-          python -m pip install -r requirements/tox.txt
+          python -m venv .venv
+          ${{ env.venv-path }}/python -m pip install -U setuptools
+          ${{ env.venv-path }}/python -m pip install -r requirements/tox.txt
 
       - name: "Install pandoc on Linux"
         # sudo apt-get pandoc: will install a version from 2018!
@@ -72,9 +86,9 @@ jobs:
         run: |
           choco install -y -r --no-progress pandoc
 
-      - name: "Run tox for ${{ matrix.python-version }}"
+      - name: "Run tox"
         run: |
-          python -m tox
+          ${{ env.venv-path }}/python -m tox -m ci-tests
 
       - name: "Upload coverage data"
         uses: actions/upload-artifact@v3
