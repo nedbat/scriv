@@ -34,7 +34,7 @@ cachetools==5.3.1
     # via
     #   -r requirements/tox.txt
     #   tox
-certifi==2023.5.7
+certifi==2023.7.22
     # via
     #   -r requirements/quality.txt
     #   requests
@@ -65,7 +65,7 @@ colorama==0.4.6
     #   tox
 coverage==7.2.7
     # via -r requirements/quality.txt
-dill==0.3.6
+dill==0.3.7
     # via
     #   -r requirements/quality.txt
     #   pylint
@@ -233,7 +233,7 @@ pygments==2.15.1
     #   readme-renderer
     #   rich
     #   sphinx
-pylint==2.17.4
+pylint==2.17.5
     # via
     #   -r requirements/quality.txt
     #   pylint-pytest
@@ -282,7 +282,7 @@ requests-toolbelt==1.0.0
     # via
     #   -r requirements/quality.txt
     #   twine
-responses==0.23.1
+responses==0.23.2
     # via -r requirements/quality.txt
 restructuredtext-lint==1.4.0
     # via
@@ -364,8 +364,7 @@ tomlkit==0.11.8
     #   -r requirements/quality.txt
     #   pylint
 tox==4.6.4
-    # via
-    #   -r requirements/tox.txt
+    # via -r requirements/tox.txt
 twine==4.0.2
     # via -r requirements/quality.txt
 typed-ast==1.5.5
@@ -376,15 +375,15 @@ typed-ast==1.5.5
     #   mypy
 types-freezegun==1.1.10
     # via -r requirements/quality.txt
-types-pyyaml==6.0.12.10
+types-pyyaml==6.0.12.11
     # via
     #   -r requirements/quality.txt
     #   responses
-types-requests==2.31.0.1
+types-requests==2.31.0.2
     # via -r requirements/quality.txt
-types-toml==0.10.8.6
+types-toml==0.10.8.7
     # via -r requirements/quality.txt
-types-urllib3==1.26.25.13
+types-urllib3==1.26.25.14
     # via
     #   -r requirements/quality.txt
     #   types-requests
@@ -402,7 +401,7 @@ typing-extensions==4.7.1
     #   responses
     #   rich
     #   tox
-urllib3==2.0.3
+urllib3==2.0.4
     # via
     #   -r requirements/quality.txt
     #   requests
@@ -417,7 +416,7 @@ urwid-readline==0.13
     # via
     #   -r requirements/quality.txt
     #   pudb
-virtualenv==20.24.0
+virtualenv==20.24.2
     # via
     #   -r requirements/tox.txt
     #   tox
@@ -425,7 +424,7 @@ webencodings==0.5.1
     # via
     #   -r requirements/quality.txt
     #   bleach
-wheel==0.40.0
+wheel==0.41.0
     # via
     #   -r requirements/pip-tools.txt
     #   pip-tools

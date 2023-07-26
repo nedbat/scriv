@@ -38,14 +38,13 @@ tomli==2.0.1
     #   pyproject-api
     #   tox
 tox==4.6.4
-    # via
-    #   -r requirements/tox.in
+    # via -r requirements/tox.in
 typing-extensions==4.7.1
     # via
     #   importlib-metadata
     #   platformdirs
     #   tox
-virtualenv==20.24.0
+virtualenv==20.24.2
     # via tox
 zipp==3.15.0
     # via importlib-metadata
