@@ -19,6 +19,10 @@ def user_nick() -> str:
     """
     Get a short name for the current user.
     """
+    ok, out = run_command("git config --get scriv.user_nick")
+    if ok:
+        return out.strip()
+
     ok, out = run_command("git config --get github.user")
     if ok:
         return out.strip()
