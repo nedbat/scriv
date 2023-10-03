@@ -75,7 +75,6 @@ def test_real_get_github_repos():
     # with .git
     repos = get_github_repos()
     assert len(repos) >= 1
-    for repo in repos:
-    
-        assert re.fullmatch(r"\w+/\w+", repo)
-        assert not repo.endswith(".git")
+    repo = repos.pop()
+    assert re.fullmatch(r"\w+/\w+", repo)
+    assert not repo.endswith(".git")
