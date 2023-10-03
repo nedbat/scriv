@@ -48,6 +48,7 @@ jobs:
             3.9
             3.10
             3.11
+            3.12
 
       - name: "Restore cache"
         id: "restore-cache"
@@ -107,7 +108,7 @@ jobs:
       - name: "Set up Python"
         uses: "actions/setup-python@v4"
         with:
-          python-version: "3.11"
+          python-version: "3.12"
           cache: pip
           cache-dependency-path: 'requirements/*.txt'
 
