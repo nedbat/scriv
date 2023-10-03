@@ -8,9 +8,9 @@ attrs==23.1.0
     # via -r requirements/base.in
 certifi==2023.7.22
     # via requests
-charset-normalizer==3.2.0
+charset-normalizer==3.3.0
     # via requests
-click==8.1.6
+click==8.1.7
     # via
     #   -r requirements/base.in
     #   click-log
@@ -30,7 +30,7 @@ requests==2.31.0
     # via -r requirements/base.in
 typing-extensions==4.7.1
     # via importlib-metadata
-urllib3==2.0.4
+urllib3==2.0.6
     # via requests
 zipp==3.15.0
     # via importlib-metadata

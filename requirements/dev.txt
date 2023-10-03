@@ -8,13 +8,13 @@ alabaster==0.7.13
     # via
     #   -r requirements/quality.txt
     #   sphinx
-astroid==2.15.6
+astroid==2.15.8
     # via
     #   -r requirements/quality.txt
     #   pylint
 attrs==23.1.0
     # via -r requirements/quality.txt
-babel==2.12.1
+babel==2.13.0
     # via
     #   -r requirements/quality.txt
     #   sphinx
@@ -24,7 +24,7 @@ bleach==6.0.0
     # via
     #   -r requirements/quality.txt
     #   readme-renderer
-build==0.10.0
+build==1.0.3
     # via
     #   -r requirements/dev.in
     #   -r requirements/pip-tools.txt
@@ -38,17 +38,17 @@ certifi==2023.7.22
     # via
     #   -r requirements/quality.txt
     #   requests
-chardet==5.1.0
+chardet==5.2.0
     # via
     #   -r requirements/tox.txt
     #   tox
-charset-normalizer==3.2.0
+charset-normalizer==3.3.0
     # via
     #   -r requirements/quality.txt
     #   requests
 check-manifest==0.49
     # via -r requirements/quality.txt
-click==8.1.6
+click==8.1.7
     # via
     #   -r requirements/pip-tools.txt
     #   -r requirements/quality.txt
@@ -83,7 +83,7 @@ docutils==0.18.1
     #   restructuredtext-lint
     #   sphinx
     #   sphinx-rtd-theme
-exceptiongroup==1.1.2
+exceptiongroup==1.1.3
     # via
     #   -r requirements/quality.txt
     #   pytest
@@ -133,7 +133,7 @@ jaraco-classes==3.2.3
     # via
     #   -r requirements/quality.txt
     #   keyring
-jedi==0.18.2
+jedi==0.19.1
     # via
     #   -r requirements/quality.txt
     #   pudb
@@ -176,7 +176,7 @@ mypy-extensions==1.0.0
     #   -r requirements/quality.txt
     #   black
     #   mypy
-packaging==23.1
+packaging==23.2
     # via
     #   -r requirements/pip-tools.txt
     #   -r requirements/tox.txt
@@ -191,7 +191,7 @@ parso==0.8.3
     # via
     #   -r requirements/quality.txt
     #   jedi
-pathspec==0.11.1
+pathspec==0.11.2
     # via
     #   -r requirements/quality.txt
     #   black
@@ -205,7 +205,7 @@ pkginfo==1.9.6
     # via
     #   -r requirements/quality.txt
     #   twine
-platformdirs==3.9.1
+platformdirs==3.11.0
     # via
     #   -r requirements/quality.txt
     #   -r requirements/tox.txt
@@ -225,7 +225,7 @@ pycodestyle==2.10.0
     # via -r requirements/quality.txt
 pydocstyle==6.1.1
     # via -r requirements/quality.txt
-pygments==2.15.1
+pygments==2.16.1
     # via
     #   -r requirements/quality.txt
     #   doc8
@@ -233,7 +233,7 @@ pygments==2.15.1
     #   readme-renderer
     #   rich
     #   sphinx
-pylint==2.17.5
+pylint==2.17.7
     # via
     #   -r requirements/quality.txt
     #   pylint-pytest
@@ -248,7 +248,7 @@ pyproject-hooks==1.0.0
     #   -r requirements/pip-tools.txt
     #   -r requirements/quality.txt
     #   build
-pytest==7.4.0
+pytest==7.4.2
     # via
     #   -r requirements/quality.txt
     #   pylint-pytest
@@ -259,7 +259,7 @@ python-dateutil==2.8.2
     # via
     #   -r requirements/quality.txt
     #   freezegun
-pytz==2023.3
+pytz==2023.3.post1
     # via
     #   -r requirements/quality.txt
     #   babel
@@ -282,7 +282,7 @@ requests-toolbelt==1.0.0
     # via
     #   -r requirements/quality.txt
     #   twine
-responses==0.23.2
+responses==0.23.3
     # via -r requirements/quality.txt
 restructuredtext-lint==1.4.0
     # via
@@ -292,7 +292,7 @@ rfc3986==2.0.0
     # via
     #   -r requirements/quality.txt
     #   twine
-rich==13.4.2
+rich==13.6.0
     # via
     #   -r requirements/quality.txt
     #   twine
@@ -311,7 +311,7 @@ sphinx==5.3.0
     #   -r requirements/quality.txt
     #   sphinx-rtd-theme
     #   sphinxcontrib-jquery
-sphinx-rtd-theme==1.2.2
+sphinx-rtd-theme==1.3.0
     # via -r requirements/quality.txt
 sphinxcontrib-applehelp==1.0.2
     # via
@@ -359,11 +359,11 @@ tomli==2.0.1
     #   pyproject-hooks
     #   pytest
     #   tox
-tomlkit==0.11.8
+tomlkit==0.12.1
     # via
     #   -r requirements/quality.txt
     #   pylint
-tox==4.6.4
+tox==4.8.0
     # via -r requirements/tox.txt
 twine==4.0.2
     # via -r requirements/quality.txt
@@ -375,18 +375,14 @@ typed-ast==1.5.5
     #   mypy
 types-freezegun==1.1.10
     # via -r requirements/quality.txt
-types-pyyaml==6.0.12.11
+types-pyyaml==6.0.12.12
     # via
     #   -r requirements/quality.txt
     #   responses
-types-requests==2.31.0.2
+types-requests==2.31.0.7
     # via -r requirements/quality.txt
 types-toml==0.10.8.7
     # via -r requirements/quality.txt
-types-urllib3==1.26.25.14
-    # via
-    #   -r requirements/quality.txt
-    #   types-requests
 typing-extensions==4.7.1
     # via
     #   -r requirements/pip-tools.txt
@@ -401,13 +397,14 @@ typing-extensions==4.7.1
     #   responses
     #   rich
     #   tox
-urllib3==2.0.4
+urllib3==2.0.6
     # via
     #   -r requirements/quality.txt
     #   requests
     #   responses
     #   twine
-urwid==2.1.2
+    #   types-requests
+urwid==2.2.2
     # via
     #   -r requirements/quality.txt
     #   pudb
@@ -416,7 +413,7 @@ urwid-readline==0.13
     # via
     #   -r requirements/quality.txt
     #   pudb
-virtualenv==20.24.2
+virtualenv==20.24.5
     # via
     #   -r requirements/tox.txt
     #   tox
@@ -424,7 +421,7 @@ webencodings==0.5.1
     # via
     #   -r requirements/quality.txt
     #   bleach
-wheel==0.41.0
+wheel==0.41.2
     # via
     #   -r requirements/pip-tools.txt
     #   pip-tools

@@ -6,7 +6,7 @@
 #
 cachetools==5.3.1
     # via tox
-chardet==5.1.0
+chardet==5.2.0
     # via tox
 colorama==0.4.6
     # via tox
@@ -21,11 +21,11 @@ importlib-metadata==6.7.0
     #   pluggy
     #   tox
     #   virtualenv
-packaging==23.1
+packaging==23.2
     # via
     #   pyproject-api
     #   tox
-platformdirs==3.9.1
+platformdirs==3.11.0
     # via
     #   tox
     #   virtualenv
@@ -37,14 +37,14 @@ tomli==2.0.1
     # via
     #   pyproject-api
     #   tox
-tox==4.6.4
+tox==4.8.0
     # via -r requirements/tox.in
 typing-extensions==4.7.1
     # via
     #   importlib-metadata
     #   platformdirs
     #   tox
-virtualenv==20.24.2
+virtualenv==20.24.5
     # via tox
 zipp==3.15.0
     # via importlib-metadata

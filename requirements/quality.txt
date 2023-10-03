@@ -8,13 +8,13 @@ alabaster==0.7.13
     # via
     #   -r requirements/doc.txt
     #   sphinx
-astroid==2.15.6
+astroid==2.15.8
     # via pylint
 attrs==23.1.0
     # via
     #   -r requirements/doc.txt
     #   -r requirements/test.txt
-babel==2.12.1
+babel==2.13.0
     # via
     #   -r requirements/doc.txt
     #   sphinx
@@ -22,21 +22,21 @@ black==23.3.0
     # via -r requirements/quality.in
 bleach==6.0.0
     # via readme-renderer
-build==0.10.0
+build==1.0.3
     # via check-manifest
 certifi==2023.7.22
     # via
     #   -r requirements/doc.txt
     #   -r requirements/test.txt
     #   requests
-charset-normalizer==3.2.0
+charset-normalizer==3.3.0
     # via
     #   -r requirements/doc.txt
     #   -r requirements/test.txt
     #   requests
 check-manifest==0.49
     # via -r requirements/quality.in
-click==8.1.6
+click==8.1.7
     # via
     #   -r requirements/doc.txt
     #   -r requirements/test.txt
@@ -64,7 +64,7 @@ docutils==0.18.1
     #   restructuredtext-lint
     #   sphinx
     #   sphinx-rtd-theme
-exceptiongroup==1.1.2
+exceptiongroup==1.1.3
     # via
     #   -r requirements/doc.txt
     #   -r requirements/test.txt
@@ -108,7 +108,7 @@ isort==5.11.5
     #   pylint
 jaraco-classes==3.2.3
     # via keyring
-jedi==0.18.2
+jedi==0.19.1
     # via
     #   -r requirements/doc.txt
     #   -r requirements/test.txt
@@ -141,7 +141,7 @@ mypy-extensions==1.0.0
     # via
     #   black
     #   mypy
-packaging==23.1
+packaging==23.2
     # via
     #   -r requirements/doc.txt
     #   -r requirements/test.txt
@@ -155,7 +155,7 @@ parso==0.8.3
     #   -r requirements/doc.txt
     #   -r requirements/test.txt
     #   jedi
-pathspec==0.11.1
+pathspec==0.11.2
     # via black
 pbr==5.11.1
     # via
@@ -163,7 +163,7 @@ pbr==5.11.1
     #   stevedore
 pkginfo==1.9.6
     # via twine
-platformdirs==3.9.1
+platformdirs==3.11.0
     # via
     #   black
     #   pylint
@@ -180,7 +180,7 @@ pycodestyle==2.10.0
     # via -r requirements/quality.in
 pydocstyle==6.1.1
     # via -r requirements/quality.in
-pygments==2.15.1
+pygments==2.16.1
     # via
     #   -r requirements/doc.txt
     #   -r requirements/test.txt
@@ -189,7 +189,7 @@ pygments==2.15.1
     #   readme-renderer
     #   rich
     #   sphinx
-pylint==2.17.5
+pylint==2.17.7
     # via
     #   -r requirements/quality.in
     #   pylint-pytest
@@ -197,7 +197,7 @@ pylint-pytest==1.0.3
     # via -r requirements/quality.in
 pyproject-hooks==1.0.0
     # via build
-pytest==7.4.0
+pytest==7.4.2
     # via
     #   -r requirements/doc.txt
     #   -r requirements/test.txt
@@ -212,7 +212,7 @@ python-dateutil==2.8.2
     #   -r requirements/doc.txt
     #   -r requirements/test.txt
     #   freezegun
-pytz==2023.3
+pytz==2023.3.post1
     # via
     #   -r requirements/doc.txt
     #   babel
@@ -233,7 +233,7 @@ requests==2.31.0
     #   twine
 requests-toolbelt==1.0.0
     # via twine
-responses==0.23.2
+responses==0.23.3
     # via
     #   -r requirements/doc.txt
     #   -r requirements/test.txt
@@ -243,7 +243,7 @@ restructuredtext-lint==1.4.0
     #   doc8
 rfc3986==2.0.0
     # via twine
-rich==13.4.2
+rich==13.6.0
     # via twine
 six==1.16.0
     # via
@@ -261,7 +261,7 @@ sphinx==5.3.0
     #   -r requirements/doc.txt
     #   sphinx-rtd-theme
     #   sphinxcontrib-jquery
-sphinx-rtd-theme==1.2.2
+sphinx-rtd-theme==1.3.0
     # via -r requirements/doc.txt
 sphinxcontrib-applehelp==1.0.2
     # via
@@ -306,7 +306,7 @@ tomli==2.0.1
     #   pylint
     #   pyproject-hooks
     #   pytest
-tomlkit==0.11.8
+tomlkit==0.12.1
     # via pylint
 twine==4.0.2
     # via -r requirements/quality.in
@@ -317,17 +317,15 @@ typed-ast==1.5.5
     #   mypy
 types-freezegun==1.1.10
     # via -r requirements/quality.in
-types-pyyaml==6.0.12.11
+types-pyyaml==6.0.12.12
     # via
     #   -r requirements/quality.in
     #   -r requirements/test.txt
     #   responses
-types-requests==2.31.0.2
+types-requests==2.31.0.7
     # via -r requirements/quality.in
 types-toml==0.10.8.7
     # via -r requirements/quality.in
-types-urllib3==1.26.25.14
-    # via types-requests
 typing-extensions==4.7.1
     # via
     #   -r requirements/doc.txt
@@ -341,14 +339,15 @@ typing-extensions==4.7.1
     #   pylint
     #   responses
     #   rich
-urllib3==2.0.4
+urllib3==2.0.6
     # via
     #   -r requirements/doc.txt
     #   -r requirements/test.txt
     #   requests
     #   responses
     #   twine
-urwid==2.1.2
+    #   types-requests
+urwid==2.2.2
     # via
     #   -r requirements/doc.txt
     #   -r requirements/test.txt
