@@ -5,6 +5,11 @@ import re
 from scriv.gitinfo import current_branch_name, get_github_repos, user_nick
 
 
+def test_user_nick_from_scriv_user_nick(fake_git):
+    fake_git.set_config("scriv.user_nick", "joedev")
+    assert user_nick() == "joedev"
+
+
 def test_user_nick_from_github(fake_git):
     fake_git.set_config("github.user", "joedev")
     assert user_nick() == "joedev"
@@ -69,7 +74,8 @@ def test_real_get_github_repos():
     # we can't be sure what we get, except it should be word/word, and not end
     # with .git
     repos = get_github_repos()
-    assert len(repos) == 1
-    repo = repos.pop()
-    assert re.fullmatch(r"\w+/\w+", repo)
-    assert not repo.endswith(".git")
+    assert len(repos) >= 1
+    for repo in repos:
+    
+        assert re.fullmatch(r"\w+/\w+", repo)
+        assert not repo.endswith(".git")
