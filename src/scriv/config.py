@@ -152,7 +152,6 @@ class _Options:
                 The `Jinja`_ template to use for the entry heading text for
                 changelog entries created by ":ref:`cmd_collect`".
                 """,
-            "doc_default": "A combination of version (if specified) and date.",
         },
     )
 

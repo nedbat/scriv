@@ -200,7 +200,7 @@ file.
             if isinstance(default, list):
                 default = ", ".join(default)
             default = f"``{default}``"
-        print(f"Default: {default}")
+        print("\n".join(textwrap.wrap(f"Default: {default}")))
     print()
 .. ]]]
 
@@ -235,7 +235,8 @@ entry_title_template
 The `Jinja`_ template to use for the entry heading text for
 changelog entries created by ":ref:`cmd_collect`".
 
-Default: A combination of version (if specified) and date.
+Default: ``{% if version %}{{ version }} — {% endif %}{{
+date.strftime('%Y-%m-%d') }}``
 
 
 .. _config_format:
@@ -370,7 +371,7 @@ source file.
 
 Default: (empty)
 
-.. [[[end]]] (checksum: b0f7694ada9dcecd8e7e14387ee7cd88)
+.. [[[end]]] (checksum: 675df32fb207262bd0c69a94a99c2fb7)
 
 
 .. _git_settings:
