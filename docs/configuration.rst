@@ -7,7 +7,7 @@ Configuration
 Scriv tries hard to be adaptable to your project's needs.  Many aspects of its
 behavior can be customized with a settings file.
 
-Files read
+Files Read
 ==========
 
 Scriv will read settings from any of these files:
@@ -398,7 +398,7 @@ or globally for all of your repos::
 
     $ git config --global scriv.create.edit true
 
-User nickname
+User Nickname
 -------------
 
 Scriv includes your git or GitHub username in the file names of changelog

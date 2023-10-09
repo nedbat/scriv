@@ -28,7 +28,7 @@ Scriv's design is guided by a few principles:
 
 .. _other_tools:
 
-Other tools
+Other Tools
 ===========
 
 Scriv is not the first tool to help manage changelogs, there have been many.
