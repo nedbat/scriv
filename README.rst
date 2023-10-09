@@ -4,8 +4,12 @@ Scriv
 
 Scriv changelog management tool
 
+.. begin-badges
+
 | |pypi-badge| |ci-badge| |coverage-badge| |doc-badge|
 | |pyversions-badge| |license-badge| |sponsor-badge| |mastodon-nedbat|
+
+.. end
 
 Overview
 ========
@@ -52,6 +56,8 @@ How To Contribute
 
 Contributions are very welcome.  Thanks to all the contributors so far:
 
+.. begin-contributors
+
 | Ned Batchelder
 | Abhilash Raj
 | Agustín Piqueres
@@ -62,6 +68,10 @@ Contributions are very welcome.  Thanks to all the contributors so far:
 | Matias Guijarro
 | Rodrigo Girão Serrão
 | Ronny Pfannschmidt
+
+.. end
+
+.. begin-badge-links
 
 .. |pypi-badge| image:: https://img.shields.io/pypi/v/scriv.svg
     :target: https://pypi.python.org/pypi/scriv/
@@ -94,3 +104,5 @@ Contributions are very welcome.  Thanks to all the contributors so far:
 .. |sponsor-badge| image:: https://img.shields.io/badge/%E2%9D%A4-Sponsor%20me-brightgreen?style=flat&logo=GitHub
     :target: https://github.com/sponsors/nedbat
     :alt: Sponsor me on GitHub
+
+.. end
