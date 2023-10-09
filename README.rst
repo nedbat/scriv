@@ -29,6 +29,10 @@ along with all the other changes on your branch.
 When it is time to release your project, the ``scriv collect`` command
 aggregates all the fragments into a new entry in your changelog file.
 
+You can also choose to publish your changelog entries as GitHub releases with
+the ``scriv github-release`` command.  It parses the changelog file and
+creates or updates GitHub releases to match.  It can be used even with
+changelog files that were not created by scriv.
 
 Documentation
 =============
@@ -46,8 +50,18 @@ Please see ``LICENSE.txt`` for details.
 How To Contribute
 =================
 
-Contributions are very welcome.
+Contributions are very welcome.  Thanks to all the contributors so far:
 
+| Ned Batchelder
+| Abhilash Raj
+| Agustín Piqueres
+| Flo Kuepper
+| James Gerity
+| Javier Sagredo
+| Kurt McKee
+| Matias Guijarro
+| Rodrigo Girão Serrão
+| Ronny Pfannschmidt
 
 .. |pypi-badge| image:: https://img.shields.io/pypi/v/scriv.svg
     :target: https://pypi.python.org/pypi/scriv/
