@@ -13,6 +13,7 @@ import attr
 from .exceptions import ScrivException
 from .literals import find_literal
 from .optional import tomllib
+from .shell import run_shell_command
 
 logger = logging.getLogger(__name__)
 
@@ -363,6 +364,7 @@ class Config:
         Prefixes:
             "file:" read the content from a file.
             "literal:" read a literal string from a file.
+            "command:" read the output of a shell command.
 
         """
         value = value.replace("${config:format}", self._options.format)
@@ -392,6 +394,14 @@ class Config:
                     + f"{value!r}"
                 )
             value = found
+        elif value.startswith("command:"):
+            cmd = value.partition(":")[2].strip()
+            ok, out = run_shell_command(cmd)
+            if not ok:
+                raise ScrivException(f"Command {cmd!r} failed:\n{out}")
+            if out.count("\n") == 1:
+                out = out.rstrip("\r\n")
+            value = out
         return value
 
     def read_file_value(self, file_name: str) -> str:

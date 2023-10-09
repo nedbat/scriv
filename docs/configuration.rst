@@ -56,7 +56,12 @@ Settings use the usual syntax, but with some extra features:
 
 - A prefix of ``literal:`` reads a literal data from a source file.
 
+- A prefix of ``command:`` runs the command and uses the output as the setting.
+
 - Value substitutions can make a setting depend on another setting.
+
+These are each explained below:
+
 
 File Prefix
 -----------
@@ -158,6 +163,15 @@ When using a Cabal file, the version of the package can be accessed using::
 
     [scriv]
     version = literal: my-package.cabal: version
+
+Commands
+--------
+
+A ``command:`` prefix indicates that the setting is a shell command to run.
+The output will be used as the setting::
+
+    [scriv]
+    version = command: my_version_tool --next
 
 Value Substitution
 ------------------

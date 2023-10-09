@@ -46,3 +46,22 @@ def run_simple_command(cmd: Union[str, List[str]]) -> str:
     if not ok:
         return ""
     return out.strip()
+
+
+def run_shell_command(cmd: str) -> CmdResult:
+    """
+    Run a command line with a shell.
+    """
+    logger.debug(f"Running shell command {cmd!r}")
+    proc = subprocess.run(
+        cmd,
+        shell=True,
+        check=False,
+        stdout=subprocess.PIPE,
+        stderr=subprocess.STDOUT,
+    )
+    output = proc.stdout.decode("utf-8")
+    logger.debug(
+        f"Command exited with {proc.returncode} status. Output: {output!r}"
+    )
+    return proc.returncode == 0, output

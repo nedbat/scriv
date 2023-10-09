@@ -344,3 +344,43 @@ class TestTomlConfig:
         with without_module(scriv.config, "tomllib"):
             config = Config.read()
         assert config.categories[0] == "Removed"
+
+
+@pytest.mark.parametrize(
+    "cmd_output, result",
+    [
+        ("Xyzzy 2 3\n", "Xyzzy 2 3"),
+        ("Xyzzy 2 3\nAnother line\n", "Xyzzy 2 3\nAnother line\n"),
+    ],
+)
+def test_command_running(mocker, cmd_output, result):
+    # Any setting can be the output of a command.
+    mocker.patch(
+        "scriv.config.run_shell_command", lambda cmd: (True, cmd_output)
+    )
+    text = Config(output_file="command: doesnt-matter").output_file
+    assert text == result
+
+
+def test_real_command_running():
+    text = Config(output_file="command: echo Xyzzy 2 3").output_file
+    assert text == "Xyzzy 2 3"
+
+
+@pytest.mark.parametrize(
+    "bad_cmd, msg_rx",
+    [
+        (
+            "xyzzyplugh",
+            "Couldn't read 'output_file' setting: Command 'xyzzyplugh' failed:",
+        ),
+        (
+            "'hi!2><",
+            "Couldn't read 'output_file' setting: Command \"'hi!2><\" failed:",
+        ),
+    ],
+)
+def test_bad_command(fake_run_command, bad_cmd, msg_rx):
+    # Any setting can be the output of a command.
+    with pytest.raises(ScrivException, match=msg_rx):
+        _ = Config(output_file=f"command: {bad_cmd}").output_file
