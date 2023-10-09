@@ -10,7 +10,7 @@ from typing import Set
 
 import click
 
-from .shell import run_command, run_simple_command
+from .shell import run_simple_command
 
 logger = logging.getLogger(__name__)
 
@@ -19,17 +19,17 @@ def user_nick() -> str:
     """
     Get a short name for the current user.
     """
-    ok, out = run_command("git config --get scriv.user_nick")
-    if ok:
-        return out.strip()
+    nick = git_config("scriv.user_nick")
+    if nick:
+        return nick
 
-    ok, out = run_command("git config --get github.user")
-    if ok:
-        return out.strip()
+    nick = git_config("github.user")
+    if nick:
+        return nick
 
-    ok, out = run_command("git config --get user.email")
-    if ok:
-        nick = out.partition("@")[0]
+    email = git_config("user.email")
+    if email:
+        nick = email.partition("@")[0]
         return nick
 
     return os.getenv("USER", "somebody")
