@@ -82,9 +82,7 @@ Scriv provides two built-in templates:
 - ``new_fragment.md.j2``: The default Jinja template for new Markdown
   fragments:
 
-  .. [[[cog
-      include_file("src/scriv/templates/new_fragment.md.j2")
-  .. ]]]
+  .. [[[cog include_file("src/scriv/templates/new_fragment.md.j2") ]]]
   .. code-block:: jinja
 
       <!--
@@ -107,9 +105,7 @@ Scriv provides two built-in templates:
 - ``new_fragment.rst.j2``: The default Jinja template for new reStructuredText
   fragments:
 
-  .. [[[cog
-      include_file("src/scriv/templates/new_fragment.rst.j2")
-  .. ]]]
+  .. [[[cog include_file("src/scriv/templates/new_fragment.rst.j2") ]]]
   .. code-block:: jinja
 
       .. A new scriv changelog fragment.
