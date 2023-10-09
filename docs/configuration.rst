@@ -378,6 +378,9 @@ Per-User Git Settings
 Some aspects of scriv's behavior are configurable for each user rather than for
 the project as a whole.  These settings are read from git.
 
+Editing and Adding
+------------------
+
 These settings determine whether the ":ref:`cmd_create`" and
 ":ref:`cmd_collect`" commands will launch an editor, and "git add" the result:
 
@@ -394,6 +397,13 @@ these settings with `git config`_ commands, either in the current repo::
 or globally for all of your repos::
 
     $ git config --global scriv.create.edit true
+
+User nickname
+-------------
+
+Scriv includes your git or GitHub username in the file names of changelog
+fragments you create.  If you don't like the name it finds for you, you can set
+a name as the ``scriv.user_nick`` git setting.
 
 
 .. _git config: https://git-scm.com/book/en/v2/Customizing-Git-Git-Configuration
