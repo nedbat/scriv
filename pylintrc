@@ -6,7 +6,6 @@ load-plugins = pylint_pytest
 [MESSAGES CONTROL]
 enable =
 	blacklisted-name,
-	line-too-long,
 
 	syntax-error,
 	init-is-generator,
@@ -183,6 +182,7 @@ enable =
 	deprecated-pragma,
 disable =
 	invalid-name,
+	line-too-long,
 	file-ignored,
 	bad-indentation,
 	unused-wildcard-import,
