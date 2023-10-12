@@ -29,11 +29,11 @@ See the fragment files in the `changelog.d directory`_.
 Added
 .....
 
-- Literals can be extracted from .cabal files.  Thanks `Javier Sagredo <pull
-  91_>`_.
+- Literals can be extracted from .cabal files.
+  Thanks `Javier Sagredo <pull 91_>`_.
 
 - Use the git config ``scriv.user_nick`` for the user nick part
-  of the fragment file. Thanks to `Ronny Pfannschmidt <pull 106>`_,
+  of the fragment file. Thanks to `Ronny Pfannschmidt <pull 106_>`_,
   fixing `issue 103`_.
 
 - Settings can now be prefixed with ``command:`` to execute the rest of the
