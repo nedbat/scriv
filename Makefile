@@ -113,12 +113,18 @@ comment_text:
 	@export V=$$(python setup.py --version); \
 		echo "This is now released as part of [scriv $$V](https://pypi.org/project/scriv/$$V)."
 
-.PHONY: release check_release _check_manifest _check_version _check_scriv
+.PHONY: release check_release _check_credentials _check_manifest _check_version _check_scriv
 
-release: clean check_release dist pypi tag gh_release comment_text ## do all the steps for a release
+release: _check_credentials clean check_release dist pypi tag gh_release comment_text ## do all the steps for a release
 
 check_release: _check_manifest _check_tree _check_version _check_scriv ## check that we are ready for a release
 	@echo "Release checks passed"
+
+_check_credentials:
+	@if [[ -z "$$TWINE_PASSWORD" ]]; then \
+		echo 'Missing TWINE_PASSWORD: opvars'; \
+		exit 1; \
+	fi
 
 _check_manifest:
 	python -m check_manifest
