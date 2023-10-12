@@ -21,6 +21,43 @@ See the fragment files in the `changelog.d directory`_.
 
 .. scriv-insert-here
 
+.. _changelog-1.4.0:
+
+1.4.0 — 2023-10-12
+------------------
+
+Added
+.....
+
+- Literals can be extracted from .cabal files.  Thanks `Javier Sagredo <pull
+  91_>`_.
+
+- Use the git config ``scriv.user_nick`` for the user nick part
+  of the fragment file. Thanks to `Ronny Pfannschmidt <pull 106>`_,
+  fixing `issue 103`_.
+
+- Settings can now be prefixed with ``command:`` to execute the rest of the
+  setting as a shell command.  The output of the command will be used as the
+  value of the setting.
+
+Fixed
+.....
+
+- If there are no changelog fragments, ``scriv collect`` now exits with status
+  code of 2, fixing `issue 110`_.
+
+- Changelogs with non-version headings now produce an understandable error
+  message from ``scriv collect``, thanks to `James Gerity <pull 101_>`_, fixing
+  `issue 100`_.
+
+.. _pull 91: https://github.com/nedbat/scriv/pull/91
+.. _issue 100: https://github.com/nedbat/scriv/issues/100
+.. _pull 101: https://github.com/nedbat/scriv/pull/101
+.. _issue 103: https://github.com/nedbat/scriv/pull/103
+.. _pull 106: https://github.com/nedbat/scriv/pull/106
+.. _issue 110: https://github.com/nedbat/scriv/issues/110
+
+
 .. _changelog-1.3.1:
 
 1.3.1 — 2023-04-16

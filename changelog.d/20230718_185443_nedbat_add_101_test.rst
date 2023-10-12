@@ -1,9 +1,0 @@
-Fixed
-.....
-
-- Changelogs with non-version headings now produce an understandable error
-  message from ``scriv collect``, thanks to `James Gerity <pull 101_>`_, fixing
-  `issue 100`_.
-
-.. _issue 100: https://github.com/nedbat/scriv/issues/100
-.. _pull 101: https://github.com/nedbat/scriv/pull/101

@@ -1,7 +1,0 @@
-Changed
-.......
-
-- If there are no changelog fragments, ``scriv collect`` now exits with status
-  code of 2, fixing `issue 110`_.
-
-.. _issue 110: https://github.com/nedbat/scriv/issues/110
