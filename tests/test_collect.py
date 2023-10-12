@@ -434,7 +434,8 @@ def test_no_fragments(cli_invoke, changelog_d, temp_dir, caplog):
     (changelog_d / "README.rst").write_text("This directory has fragments")
     (temp_dir / "CHANGELOG.rst").write_text("Not much\n")
     with freezegun.freeze_time("2020-02-25T15:18:19"):
-        cli_invoke(["collect"])
+        result = cli_invoke(["collect"], expect_ok=False)
+    assert result.exit_code == 2
     changelog_text = (temp_dir / "CHANGELOG.rst").read_text()
     assert changelog_text == "Not much\n"
     assert "No changelog fragments to collect" in caplog.text

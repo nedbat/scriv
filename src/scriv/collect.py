@@ -58,7 +58,7 @@ def collect(
     frags = scriv.fragments_to_combine()
     if not frags:
         logger.info("No changelog fragments to collect")
-        return
+        sys.exit(2)
 
     changelog = scriv.changelog()
     changelog.read()
