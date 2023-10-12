@@ -155,6 +155,7 @@ class RstTools(FormatTools):
                 ok, output = run_command(
                     "pandoc -frst -tmarkdown_strict "
                     + "--markdown-headings=atx --wrap=none "
+                    + "--fail-if-warnings "
                     + rst_file.name
                 )
                 if not ok:

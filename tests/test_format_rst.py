@@ -353,6 +353,7 @@ def test_fake_pandoc(fake_run_command):
         "-tmarkdown_strict",
         "--markdown-headings=atx",
         "--wrap=none",
+        "--fail-if-warnings",
     ]
     expected_text = "The converted text!\nis multi-line\n"
 
@@ -377,3 +378,71 @@ def test_fake_pandoc_failing(fake_run_command):
     expected = f"Couldn't convert ReST to Markdown: {error_text!r}"
     with pytest.raises(ScrivException, match=re.escape(expected)):
         _ = RstTools().convert_to_markdown("Hello")
+
+
+@pytest.mark.parametrize(
+    "rst_text, md_text",
+    [
+        (
+            """\
+            - One issue fixed: `issue 123`_.
+
+            - One change merged: `Big change <pull 234_>`_.
+
+            - Improved the `home page <https://example.com/homepage>`_.
+
+            - One more `small change`__.
+
+            .. _issue 123: https://github.com/joe/project/issues/123
+            .. _pull 234: https://github.com/joe/project/pull/234
+            __ https://github.com/joe/project/issues/999
+            """,
+            """\
+            -   One issue fixed: [issue 123](https://github.com/joe/project/issues/123).
+            -   One change merged: [Big change](https://github.com/joe/project/pull/234).
+            -   Improved the [home page](https://example.com/homepage).
+            -   One more [small change](https://github.com/joe/project/issues/999).
+            """,
+        ),
+    ],
+)
+def test_convert_to_markdown(rst_text, md_text):
+    converted = RstTools().convert_to_markdown(textwrap.dedent(rst_text))
+    expected = textwrap.dedent(md_text)
+    assert expected == converted
+
+
+@pytest.mark.parametrize(
+    "rst_text, msg",
+    [
+        # Various styles of broken links:
+        (
+            "One issue fixed: `issue 123`_.",
+            "Reference not found for 'issue 123'",
+        ),
+        (
+            "One change merged: `Big change <pull 234>_`_.",
+            "Reference not found for 'big change <",
+        ),
+        (
+            "Improved the `home page <https://example.com/homepage`_.",
+            "Reference not found for 'home page <",
+        ),
+        # ("One more `small change`__.", "xxx"),     # Hmm, this doesn't error!
+        (
+            # Not a mistake in RST, but pandoc can't handle it:
+            """\
+            A big change, thanks to `Jane Contributor <pull
+            91_>`_.
+
+            .. _pull 91: https://github.com/joe/project/91
+            """,
+            "Reference not found for 'jane contributor <",
+        ),
+    ],
+)
+def test_bad_convert_to_markdown(rst_text, msg):
+    with pytest.raises(ScrivException, match=re.escape(msg)):
+        converted = RstTools().convert_to_markdown(textwrap.dedent(rst_text))
+        # if we don't get the exception, we can debug the test:
+        print(converted)
