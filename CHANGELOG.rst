@@ -426,7 +426,7 @@ Fixed
   This allows the unit tests to run in Windows environments. Thanks, Kurt
   McKee.
 
-- Explicitly specify the directories and files that Black should scan. (`#15`_)
+- Explicitly specify the directories and files that Black should scan. (`#16`_)
   This prevents Black from scanning every file in a virtual environment.
   Thanks, Kurt McKee.
 
@@ -434,6 +434,7 @@ Fixed
   or 3.7, as reported in `issue 18`_.  This is now fixed.
 
 .. _#15: https://github.com/nedbat/scriv/issues/15
+.. _#16: https://github.com/nedbat/scriv/issues/16
 .. _issue 18: https://github.com/nedbat/scriv/issues/18
 
 0.9.2 — 2020-08-29
