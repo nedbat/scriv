@@ -33,7 +33,7 @@ Added
   Thanks `Javier Sagredo <pull 91_>`_.
 
 - Use the git config ``scriv.user_nick`` for the user nick part
-  of the fragment file. Thanks to `Ronny Pfannschmidt <pull 106_>`_,
+  of the fragment file. Thanks to `Ronny Pfannschmidt <pull 106>`_,
   fixing `issue 103`_.
 
 - Settings can now be prefixed with ``command:`` to execute the rest of the
