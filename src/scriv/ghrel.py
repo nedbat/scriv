@@ -9,6 +9,7 @@ import click
 import click_log
 import jinja2
 
+from .exceptions import scriv_command
 from .github import create_release, get_releases, update_release
 from .gitinfo import get_github_repos
 from .scriv import Scriv
@@ -35,6 +36,7 @@ logger = logging.getLogger(__name__)
     help="The GitHub repo (owner/reponame) to create the release in.",
 )
 @click_log.simple_verbosity_option()
+@scriv_command
 def github_release(
     all_entries: bool,
     dry_run: bool,
