@@ -345,7 +345,8 @@ def test_format_header(config_kwargs, text, fh_kwargs, result):
     assert actual == result
 
 
-def test_fake_pandoc(fake_run_command):
+@pytest.mark.parametrize("fail_if_warn", [False, True])
+def test_fake_pandoc(fake_run_command, fail_if_warn):
     fake_run_command.patch_module("scriv.format_rst")
     expected_args = [
         "pandoc",
@@ -353,18 +354,21 @@ def test_fake_pandoc(fake_run_command):
         "-tmarkdown_strict",
         "--markdown-headings=atx",
         "--wrap=none",
-        "--fail-if-warnings",
     ]
+    if fail_if_warn:
+        expected_args.append("--fail-if-warnings")
     expected_text = "The converted text!\nis multi-line\n"
 
     def fake_pandoc(argv):
         # We got the arguments we expected, plus one more.
-        assert argv[: len(expected_args)] == expected_args
-        assert len(argv) == len(expected_args) + 1
+        assert argv[:-1] == expected_args
         return (True, expected_text)
 
     fake_run_command.add_handler("pandoc", fake_pandoc)
-    assert RstTools().convert_to_markdown("Hello") == expected_text
+    assert (
+        RstTools().convert_to_markdown("Hello", fail_if_warn=fail_if_warn)
+        == expected_text
+    )
 
 
 def test_fake_pandoc_failing(fake_run_command):
@@ -375,7 +379,7 @@ def test_fake_pandoc_failing(fake_run_command):
         return (False, error_text)
 
     fake_run_command.add_handler("pandoc", fake_pandoc)
-    expected = f"Couldn't convert ReST to Markdown: {error_text!r}"
+    expected = f"Couldn't convert ReST to Markdown in '':\n{error_text}"
     with pytest.raises(ScrivException, match=re.escape(expected)):
         _ = RstTools().convert_to_markdown("Hello")
 
@@ -443,6 +447,8 @@ def test_convert_to_markdown(rst_text, md_text):
 )
 def test_bad_convert_to_markdown(rst_text, msg):
     with pytest.raises(ScrivException, match=re.escape(msg)):
-        converted = RstTools().convert_to_markdown(textwrap.dedent(rst_text))
+        converted = RstTools().convert_to_markdown(
+            textwrap.dedent(rst_text), fail_if_warn=True
+        )
         # if we don't get the exception, we can debug the test:
         print(converted)

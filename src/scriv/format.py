@@ -44,7 +44,9 @@ class FormatTools(abc.ABC):
         """
 
     @abc.abstractmethod
-    def convert_to_markdown(self, text: str) -> str:
+    def convert_to_markdown(
+        self, text: str, name: str = "", fail_if_warn: bool = False
+    ) -> str:
         """
         Convert this format to Markdown.
         """

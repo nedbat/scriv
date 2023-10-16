@@ -32,6 +32,11 @@ logger = logging.getLogger(__name__)
     help="Don't post to GitHub, just show what would be done.",
 )
 @click.option(
+    "--fail-if-warn",
+    is_flag=True,
+    help="Fail if a conversion generates warnings.",
+)
+@click.option(
     "--repo",
     help="The GitHub repo (owner/reponame) to create the release in.",
 )
@@ -40,6 +45,7 @@ logger = logging.getLogger(__name__)
 def github_release(
     all_entries: bool,
     dry_run: bool,
+    fail_if_warn: bool,
     repo: Optional[str] = None,
 ) -> None:
     """
@@ -83,7 +89,9 @@ def github_release(
             continue
 
         section_text = "\n\n".join(sections)
-        md = changelog.format_tools().convert_to_markdown(section_text)
+        md = changelog.format_tools().convert_to_markdown(
+            section_text, name=title, fail_if_warn=fail_if_warn
+        )
 
         release_data = {
             "body": md,

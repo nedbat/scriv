@@ -143,7 +143,7 @@ class RstTools(FormatTools):
         return "\n".join(lines) + "\n"
 
     def convert_to_markdown(
-        self, text: str
+        self, text: str, name: str = "", fail_if_warn: bool = False
     ) -> str:  # noqa: D102 (inherited docstring)
         rst_file = None
         try:
@@ -155,12 +155,12 @@ class RstTools(FormatTools):
                 ok, output = run_command(
                     "pandoc -frst -tmarkdown_strict "
                     + "--markdown-headings=atx --wrap=none "
-                    + "--fail-if-warnings "
+                    + ("--fail-if-warnings " if fail_if_warn else "")
                     + rst_file.name
                 )
                 if not ok:
                     raise ScrivException(
-                        f"Couldn't convert ReST to Markdown: {output!r}"
+                        f"Couldn't convert ReST to Markdown in {name!r}:\n{output}"
                     )
                 return output.replace("\r\n", "\n")
         finally:
