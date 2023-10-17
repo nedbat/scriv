@@ -2,14 +2,13 @@
 
 import logging
 import re
-import sys
 from typing import Optional
 
 import click
 import click_log
 import jinja2
 
-from .exceptions import scriv_command
+from .exceptions import ScrivException, scriv_command
 from .github import create_release, get_releases, update_release
 from .gitinfo import get_github_repos
 from .scriv import Scriv
@@ -54,25 +53,14 @@ def github_release(
     Only the most recent changelog entry is used, unless --all is provided.
 
     """
-    scriv = Scriv()
-    changelog = scriv.changelog()
-    changelog.read()
-
-    if repo is None:
-        repos = get_github_repos()
-        if len(repos) == 0:
-            sys.exit("Couldn't find a GitHub repo")
-        elif len(repos) > 1:
-            repo_list = ", ".join(sorted(repos))
-            sys.exit(f"More than one GitHub repo found: {repo_list}")
-
-        repo = repos.pop()
-
-    if not re.fullmatch(r"[^ /]+/[^ /]+", repo):
-        sys.exit(f"Repo must be owner/reponame: {repo!r}")
+    repo = resolve_repo(repo)
 
     tags = set(map(Version, run_simple_command("git tag").split()))
     releases = {Version(k): v for k, v in get_releases(repo).items()}
+
+    scriv = Scriv()
+    changelog = scriv.changelog()
+    changelog.read()
 
     for title, sections in changelog.entries().items():
         if title is None:
@@ -131,3 +119,25 @@ def github_release(
 
         if not all_entries:
             break
+
+
+def resolve_repo(repo: Optional[str]) -> str:
+    """
+    Resolve a repo argument to an owner/repo GitHub repo name.
+    """
+    if repo is None:
+        repos = get_github_repos()
+        if len(repos) == 0:
+            raise ScrivException("Couldn't find a GitHub repo")
+        elif len(repos) > 1:
+            repo_list = ", ".join(sorted(repos))
+            raise ScrivException(
+                f"More than one GitHub repo found: {repo_list}"
+            )
+
+        repo = repos.pop()
+
+    if not re.fullmatch(r"[^ /]+/[^ /]+", repo):
+        raise ScrivException(f"Repo must be owner/reponame: {repo!r}")
+
+    return repo

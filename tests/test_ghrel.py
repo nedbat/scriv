@@ -243,9 +243,7 @@ def test_no_github_repo(cli_invoke, scenario1, fake_git):
     fake_git.remove_remote("origin")
     result = cli_invoke(["github-release"], expect_ok=False)
     assert result.exit_code == 1
-    assert result.output == (
-        "Reading changelog CHANGELOG.rst\n" + "Couldn't find a GitHub repo\n"
-    )
+    assert result.output == "Couldn't find a GitHub repo\n"
 
 
 def test_no_clear_github_repo(cli_invoke, scenario1, fake_git):
@@ -254,8 +252,7 @@ def test_no_clear_github_repo(cli_invoke, scenario1, fake_git):
     result = cli_invoke(["github-release"], expect_ok=False)
     assert result.exit_code == 1
     assert result.output == (
-        "Reading changelog CHANGELOG.rst\n"
-        + "More than one GitHub repo found: joe/project, psf/project\n"
+        "More than one GitHub repo found: joe/project, psf/project\n"
     )
 
 

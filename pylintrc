@@ -188,6 +188,7 @@ disable =
 	unused-wildcard-import,
 	global-statement,
 	no-else-return,
+    no-else-raise,
 
 	duplicate-code,
 	fixme,
