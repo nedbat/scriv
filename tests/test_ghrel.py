@@ -7,6 +7,8 @@ from unittest.mock import call
 
 import pytest
 
+from .helpers import check_logs
+
 CHANGELOG1 = """\
 Some text before
 
@@ -201,42 +203,92 @@ def no_actions(mock_create_release, mock_update_release, responses):
 
 def test_default_dry_run(cli_invoke, scenario1, no_actions, caplog):
     cli_invoke(["github-release", "--dry-run"])
-    assert caplog.record_tuples == [
-        (
-            "scriv.changelog",
-            logging.INFO,
-            "Reading changelog CHANGELOG.rst",
-        ),
-        ("scriv.ghrel", logging.INFO, "Would create release v1.2.3"),
-        ("scriv.ghrel", logging.INFO, "Body:\nA good release\n"),
-    ]
+    check_logs(
+        caplog,
+        [
+            (
+                "scriv.changelog",
+                logging.INFO,
+                "Reading changelog CHANGELOG.rst",
+            ),
+            ("scriv.ghrel", logging.INFO, "Would create release v1.2.3"),
+        ],
+    )
 
 
 def test_dash_all_dry_run(cli_invoke, scenario1, no_actions, caplog):
     cli_invoke(["github-release", "--all", "--dry-run"])
-    assert caplog.record_tuples == [
-        (
-            "scriv.changelog",
-            logging.INFO,
-            "Reading changelog CHANGELOG.rst",
-        ),
-        ("scriv.ghrel", logging.INFO, "Would create release v1.2.3"),
-        ("scriv.ghrel", logging.INFO, "Body:\nA good release\n"),
-        (
-            "scriv.ghrel",
-            logging.WARNING,
-            "Entry 'Some fixes' has no version, skipping.",
-        ),
-        ("scriv.ghrel", logging.INFO, "Would update release v0.9a7"),
-        ("scriv.ghrel", logging.INFO, "Body:\nA beginning\n"),
-        (
-            "scriv.ghrel",
-            logging.WARNING,
-            "Version v0.1 has no tag. No release will be made.",
-        ),
-        ("scriv.ghrel", 20, "Would update release v0.0.1"),
-        ("scriv.ghrel", 20, "Body:\nVery first.\n"),
-    ]
+    check_logs(
+        caplog,
+        [
+            (
+                "scriv.changelog",
+                logging.INFO,
+                "Reading changelog CHANGELOG.rst",
+            ),
+            ("scriv.ghrel", logging.INFO, "Would create release v1.2.3"),
+            (
+                "scriv.ghrel",
+                logging.WARNING,
+                "Entry 'Some fixes' has no version, skipping.",
+            ),
+            ("scriv.ghrel", logging.INFO, "Would update release v0.9a7"),
+            (
+                "scriv.ghrel",
+                logging.WARNING,
+                "Version v0.1 has no tag. No release will be made.",
+            ),
+            ("scriv.ghrel", 20, "Would update release v0.0.1"),
+        ],
+    )
+
+
+def test_dash_all_dry_run_debug(cli_invoke, scenario1, no_actions, caplog):
+    cli_invoke(["github-release", "--all", "--dry-run", "--verbosity=debug"])
+    check_logs(
+        caplog,
+        [
+            (
+                "scriv.changelog",
+                logging.INFO,
+                "Reading changelog CHANGELOG.rst",
+            ),
+            (
+                "scriv.ghrel",
+                logging.DEBUG,
+                "Creating release, data = {'body': 'A good release\\n', 'name': 'v1.2.3', "
+                + "'tag_name': 'v1.2.3', 'draft': False, 'prerelease': False}",
+            ),
+            ("scriv.ghrel", logging.INFO, "Would create release v1.2.3"),
+            ("scriv.ghrel", logging.DEBUG, "Body:\nA good release\n"),
+            (
+                "scriv.ghrel",
+                logging.WARNING,
+                "Entry 'Some fixes' has no version, skipping.",
+            ),
+            (
+                "scriv.ghrel",
+                logging.DEBUG,
+                "Updating release v0.9a7, data = {'body': 'A beginning\\n', 'name': "
+                + "'v0.9a7', 'tag_name': 'v0.9a7', 'draft': False, 'prerelease': True}",
+            ),
+            ("scriv.ghrel", logging.INFO, "Would update release v0.9a7"),
+            ("scriv.ghrel", logging.DEBUG, "Body:\nA beginning\n"),
+            (
+                "scriv.ghrel",
+                logging.WARNING,
+                "Version v0.1 has no tag. No release will be made.",
+            ),
+            (
+                "scriv.ghrel",
+                logging.DEBUG,
+                "Updating release v0.0.1, data = {'body': 'Very first.\\n', 'name': "
+                + "'v0.0.1', 'tag_name': 'v0.0.1', 'draft': False, 'prerelease': False}",
+            ),
+            ("scriv.ghrel", logging.INFO, "Would update release v0.0.1"),
+            ("scriv.ghrel", logging.DEBUG, "Body:\nVery first.\n"),
+        ],
+    )
 
 
 def test_no_github_repo(cli_invoke, scenario1, fake_git):

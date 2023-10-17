@@ -116,14 +116,14 @@ def github_release(
                 )
                 if dry_run:
                     logger.info(f"Would update release {version}")
-                    logger.info(f"Body:\n{md}")
+                    logger.debug(f"Body:\n{md}")
                 else:
                     update_release(release, release_data)
         else:
             logger.debug(f"Creating release, data = {release_data}")
             if dry_run:
                 logger.info(f"Would create release {version}")
-                logger.info(f"Body:\n{md}")
+                logger.debug(f"Body:\n{md}")
             else:
                 create_release(repo, release_data)
 
