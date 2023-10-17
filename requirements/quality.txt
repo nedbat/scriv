@@ -123,7 +123,10 @@ keyring==24.1.1
 lazy-object-proxy==1.9.0
     # via astroid
 markdown-it-py==2.2.0
-    # via rich
+    # via
+    #   -r requirements/doc.txt
+    #   -r requirements/test.txt
+    #   rich
 markupsafe==2.1.3
     # via
     #   -r requirements/doc.txt
@@ -132,7 +135,10 @@ markupsafe==2.1.3
 mccabe==0.7.0
     # via pylint
 mdurl==0.1.2
-    # via markdown-it-py
+    # via
+    #   -r requirements/doc.txt
+    #   -r requirements/test.txt
+    #   markdown-it-py
 more-itertools==9.1.0
     # via jaraco-classes
 mypy==1.4.1
@@ -322,7 +328,7 @@ types-pyyaml==6.0.12.12
     #   -r requirements/quality.in
     #   -r requirements/test.txt
     #   responses
-types-requests==2.31.0.7
+types-requests==2.31.0.9
     # via -r requirements/quality.in
 types-toml==0.10.8.7
     # via -r requirements/quality.in
