@@ -5,16 +5,15 @@ import re
 from typing import Optional
 
 import click
-import click_log
 import jinja2
 
-from .exceptions import ScrivException, scriv_command
+from .exceptions import ScrivException
 from .github import create_release, get_releases, update_release
 from .gitinfo import get_github_repos
 from .linkcheck import check_markdown_links
 from .scriv import Scriv
 from .shell import run_simple_command
-from .util import Version
+from .util import Version, scriv_command
 
 logger = logging.getLogger(__name__)
 
@@ -45,7 +44,6 @@ logger = logging.getLogger(__name__)
     "--repo",
     help="The GitHub repo (owner/reponame) to create the release in.",
 )
-@click_log.simple_verbosity_option()
 @scriv_command
 def github_release(
     all_entries: bool,

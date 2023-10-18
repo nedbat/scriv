@@ -3,8 +3,15 @@
 from __future__ import annotations
 
 import collections
+import functools
+import logging
 import re
+import sys
 from typing import Dict, Optional, Sequence, Tuple, TypeVar
+
+import click_log
+
+from .exceptions import ScrivException
 
 T = TypeVar("T")
 K = TypeVar("K")
@@ -107,3 +114,24 @@ class Version:
         m = re.fullmatch(VERSION_REGEX, self.vtext)
         assert m  # the version must be a valid version
         return bool(m["pre"])
+
+
+def scriv_command(func):
+    """
+    Decorate scriv commands to provide scriv-specific behavior.
+
+    - ScrivExceptions don't show tracebacks
+
+    - Set the log level from the command line for all of scriv.
+
+    """
+
+    @functools.wraps(func)
+    @click_log.simple_verbosity_option(logging.getLogger("scriv"))
+    def _wrapped(*args, **kwargs):
+        try:
+            func(*args, **kwargs)
+        except ScrivException as exc:
+            sys.exit(str(exc))
+
+    return _wrapped

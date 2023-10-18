@@ -24,7 +24,6 @@ from scriv.cli import cli as scriv_cli
 
 from .faker import FakeGit, FakeRunCommand
 
-
 # Pytest will rewrite assertions in test modules, but not elsewhere.
 # This tells pytest to also rewrite assertions in these files:
 pytest.register_assert_rewrite("tests.helpers")
