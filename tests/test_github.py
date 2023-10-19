@@ -17,7 +17,7 @@ from scriv.github import (
 def test_one_page(responses):
     url = "https://api.github.com/repos/user/small_project/tags"
     data = [{"tag": word} for word in ["one", "two", "three", "four"]]
-    responses.add(responses.GET, url, json=data)
+    responses.get(url, json=data)
     res = list(github_paginated(url))
     assert res == data
 
@@ -31,8 +31,7 @@ def test_three_pages(responses):
         [{"tag": f"{word}{num}"} for word in ["one", "two", "three", "four"]]
         for num in range(3)
     ]
-    responses.add(
-        responses.GET,
+    responses.get(
         url,
         json=data[0],
         headers={
@@ -40,8 +39,7 @@ def test_three_pages(responses):
             + f'<{next_urls[2]}>; rel="last", ',
         },
     )
-    responses.add(
-        responses.GET,
+    responses.get(
         next_urls[1],
         json=data[1],
         headers={
@@ -51,8 +49,7 @@ def test_three_pages(responses):
             + f'<{next_urls[0]}>; rel="first"',
         },
     )
-    responses.add(
-        responses.GET,
+    responses.get(
         next_urls[2],
         json=data[2],
         headers={
@@ -66,15 +63,14 @@ def test_three_pages(responses):
 
 def test_bad_page(responses):
     url = "https://api.github.com/repos/user/small_project/secretstuff"
-    responses.add(responses.GET, url, json=[], status=403)
+    responses.get(url, json=[], status=403)
     with pytest.raises(requests.HTTPError, match="403 Client Error"):
         list(github_paginated(url))
 
 
 def test_get_releases(responses):
     url = "https://api.github.com/repos/user/small/releases"
-    responses.add(
-        responses.GET,
+    responses.get(
         url,
         json=[
             {"tag_name": "a", "name": "a", "prerelease": False},
@@ -98,10 +94,7 @@ RELEASE_DATA = {
 
 
 def test_create_release(responses, caplog):
-    responses.add(
-        responses.POST,
-        "https://api.github.com/repos/someone/something/releases",
-    )
+    responses.post("https://api.github.com/repos/someone/something/releases")
     create_release("someone/something", RELEASE_DATA)
     assert json.loads(responses.calls[0].request.body) == RELEASE_DATA
     assert caplog.record_tuples == [
@@ -110,8 +103,7 @@ def test_create_release(responses, caplog):
 
 
 def test_create_release_fails(responses):
-    responses.add(
-        responses.POST,
+    responses.post(
         "https://api.github.com/repos/someone/something/releases",
         status=500,
     )
@@ -121,7 +113,7 @@ def test_create_release_fails(responses):
 
 def test_update_release(responses, caplog):
     url = "https://api.github.com/repos/someone/something/releases/60006815"
-    responses.add(responses.PATCH, url)
+    responses.patch(url)
     release = {"url": url}
     update_release(release, RELEASE_DATA)
     assert json.loads(responses.calls[0].request.body) == RELEASE_DATA
@@ -132,7 +124,7 @@ def test_update_release(responses, caplog):
 
 def test_update_release_fails(responses):
     url = "https://api.github.com/repos/someone/something/releases/60006815"
-    responses.add(responses.PATCH, url, status=500)
+    responses.patch(url, status=500)
     release = {"url": url}
     with pytest.raises(requests.HTTPError, match="500 Server Error"):
         update_release(release, RELEASE_DATA)
