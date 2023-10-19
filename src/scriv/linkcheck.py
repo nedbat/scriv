@@ -38,7 +38,7 @@ def check_one_link(url: str) -> None:
     """Check if a URL is reachable. Logs a warning if not."""
     try:
         resp = requests.head(url, timeout=60, allow_redirects=True)
-    except Exception as exc:    # pylint: disable=broad-exception-caught
+    except Exception as exc:  # pylint: disable=broad-exception-caught
         logger.warning(f"Failed check for {url!r}: {exc}")
         return
 

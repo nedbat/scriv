@@ -190,6 +190,17 @@ def test_bad_explicit_repo(cli_invoke, repo):
     assert str(result.exception) == f"Repo must be owner/reponame: {repo!r}"
 
 
+def test_check_links(cli_invoke, scenario1, mocker):
+    mock_check_links = mocker.patch("scriv.ghrel.check_markdown_links")
+    cli_invoke(["github-release", "--all", "--dry-run", "--check-links"])
+    assert mock_check_links.mock_calls == [
+        call("A good release\n"),
+        call("Nothing to say.\n"),
+        call("A beginning\n"),
+        call("Very first.\n"),
+    ]
+
+
 @pytest.fixture()
 def no_actions(mock_create_release, mock_update_release, responses):
     """Check that nothing really happened."""
