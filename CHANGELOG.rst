@@ -21,6 +21,30 @@ See the fragment files in the `changelog.d directory`_.
 
 .. scriv-insert-here
 
+.. _changelog-1.5.0:
+
+1.5.0 — 2023-10-18
+------------------
+
+Added
+.....
+
+- RST to Markdown conversion can now be stricter.  Using the ``--fail-if-warn``
+  option on the ``scriv github-releases`` command will fail the command if your
+  RST conversion generates warnings, for example due to malformed link
+  references.
+
+- The ``scriv github-release`` command now has a ``--check-links`` option to
+  check URLs.  Each is fetched, and if an error occurs, warnings will show the
+  URLs that didn't succeed.
+
+Fixed
+.....
+
+- Commands no longer display full tracebacks for exceptions raised by scriv
+  code.
+
+
 .. _changelog-1.4.0:
 
 1.4.0 — 2023-10-12
