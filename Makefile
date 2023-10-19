@@ -106,7 +106,7 @@ tag: ## Make a git tag with the version number
 	git push --all
 
 gh_release: ## Make a GitHub release
-	python -m scriv github-release --all
+	python -m scriv github-release --all --fail-if-warn --check-links
 
 comment_text:
 	@echo "Use this to comment on issues and pull requests:"
@@ -117,7 +117,7 @@ comment_text:
 
 release: _check_credentials clean check_release dist pypi tag gh_release comment_text ## do all the steps for a release
 
-check_release: _check_manifest _check_tree _check_version _check_scriv ## check that we are ready for a release
+check_release: _check_manifest _check_tree _check_version _check_scriv _check_links ## check that we are ready for a release
 	@echo "Release checks passed"
 
 _check_credentials:
@@ -146,3 +146,6 @@ _check_scriv:
 		echo 'There are scriv fragments! Did you forget `scriv collect`?'; \
 		exit 1; \
 	fi
+
+_check_links:
+	python -m scriv github-release --dry-run --fail-if-warn --check-links
