@@ -208,6 +208,12 @@ correspond to a git tag.  For example, this changelog entry with the title
 If there's no detectable version number in the header, or there isn't a git
 tag with the same number, then the entry can't be created as a GitHub release.
 
+The ``--fail-if-warn`` option will end the command if a format conversion
+generates a warning, usually because of a missing reference.  The
+``--check-links`` option will find the URLs in the release description, and
+check if they are valid.  Warnings are displayed for invalid URLs, but the
+command still creates the release.
+
 This command is independent of the other commands.  It can be used with a
 hand-edited changelog file that wasn't created with scriv.
 
