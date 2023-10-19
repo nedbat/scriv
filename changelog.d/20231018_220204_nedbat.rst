@@ -1,0 +1,6 @@
+Added
+.....
+
+- The ``github-release`` command now has a ``--check-links`` option to check
+  URLs.  Each is fetched, and if an error occurs, a warning will show the URLs
+  that didn't succeed.
