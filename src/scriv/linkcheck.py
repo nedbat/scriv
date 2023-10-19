@@ -2,7 +2,6 @@
 
 import concurrent.futures
 import logging
-import time
 from typing import Iterable
 
 import markdown_it
@@ -37,17 +36,11 @@ def check_markdown_links(markdown_text: str) -> None:
 
 def check_one_link(url: str) -> None:
     """Check if a URL is reachable. Logs a warning if not."""
-    while True:
-        try:
-            resp = requests.head(url, timeout=60, allow_redirects=True)
-        except requests.RequestException as exc:
-            logger.warning(f"Failed check for {url!r}: {exc}")
-            return
-        if resp.status_code == 429:
-            wait = int(resp.headers.get("Retry-After", 10))
-            time.sleep(wait + 1)
-        else:
-            break
+    try:
+        resp = requests.head(url, timeout=60, allow_redirects=True)
+    except Exception as exc:    # pylint: disable=broad-exception-caught
+        logger.warning(f"Failed check for {url!r}: {exc}")
+        return
 
     if resp.status_code == 200:
         logger.debug(f"OK link: {url!r}")
