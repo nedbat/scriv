@@ -328,7 +328,7 @@ types-pyyaml==6.0.12.12
     #   -r requirements/quality.in
     #   -r requirements/test.txt
     #   responses
-types-requests==2.31.0.9
+types-requests==2.31.0.10
     # via -r requirements/quality.in
 types-toml==0.10.8.7
     # via -r requirements/quality.in
@@ -345,7 +345,7 @@ typing-extensions==4.7.1
     #   pylint
     #   responses
     #   rich
-urllib3==2.0.6
+urllib3==2.0.7
     # via
     #   -r requirements/doc.txt
     #   -r requirements/test.txt
@@ -353,7 +353,7 @@ urllib3==2.0.6
     #   responses
     #   twine
     #   types-requests
-urwid==2.2.2
+urwid==2.2.3
     # via
     #   -r requirements/doc.txt
     #   -r requirements/test.txt
