@@ -132,7 +132,7 @@ jobs:
       - name: "Make badge"
         if: (github.repository == 'nedbat/scriv') && (github.ref == 'refs/heads/main')
         # https://gist.github.com/nedbat/5a304c1c779d4bcc57be95f847e9327f
-        uses: schneegans/dynamic-badges-action@v1.6.0
+        uses: schneegans/dynamic-badges-action@v1.7.0
         with:
           # GIST_TOKEN is a GitHub personal access token with scope "gist".
           # https://github.com/settings/tokens/969369418
