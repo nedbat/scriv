@@ -85,6 +85,14 @@ class TestNewFragmentContent:
         assert "### Added\n" in content
         assert all(cat in content for cat in scriv.config.categories)
 
+    def test_final_newline_in_template_preserved(self, changelog_d):
+        (changelog_d / "new_fragment.j2").write_text("Custom template.\n")
+        scriv = Scriv(
+            config=Config(new_fragment_template="file: new_fragment.j2")
+        )
+        content = scriv.new_fragment().content
+        assert content == "Custom template.\n"
+
 
 class TestCreate:
     """
