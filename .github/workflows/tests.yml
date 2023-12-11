@@ -38,7 +38,7 @@ jobs:
 
       - name: "Set up Python"
         id: "setup-python"
-        uses: "actions/setup-python@v4"
+        uses: "actions/setup-python@v5"
         with:
           # The last listed Python version is the default.
           python-version: |
@@ -106,7 +106,7 @@ jobs:
         uses: "actions/checkout@v4"
 
       - name: "Set up Python"
-        uses: "actions/setup-python@v4"
+        uses: "actions/setup-python@v5"
         with:
           python-version: "3.12"
           cache: pip
@@ -154,7 +154,7 @@ jobs:
         uses: "actions/checkout@v4"
 
       - name: "Set up Python"
-        uses: "actions/setup-python@v4"
+        uses: "actions/setup-python@v5"
         with:
           python-version: "3.7"
           cache: pip
@@ -178,7 +178,7 @@ jobs:
         uses: "actions/checkout@v4"
 
       - name: "Set up Python"
-        uses: "actions/setup-python@v4"
+        uses: "actions/setup-python@v5"
         with:
           python-version: "3.7"
           cache: pip
