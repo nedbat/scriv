@@ -6,9 +6,9 @@
 #
 attrs==23.1.0
     # via -r requirements/base.in
-certifi==2023.7.22
+certifi==2023.11.17
     # via requests
-charset-normalizer==3.3.0
+charset-normalizer==3.3.2
     # via requests
 click==8.1.7
     # via
@@ -16,7 +16,7 @@ click==8.1.7
     #   click-log
 click-log==0.4.0
     # via -r requirements/base.in
-idna==3.4
+idna==3.6
     # via requests
 importlib-metadata==6.7.0
     # via

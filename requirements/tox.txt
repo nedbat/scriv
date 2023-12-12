@@ -4,13 +4,13 @@
 #
 #    make upgrade
 #
-cachetools==5.3.1
+cachetools==5.3.2
     # via tox
 chardet==5.2.0
     # via tox
 colorama==0.4.6
     # via tox
-distlib==0.3.7
+distlib==0.3.8
     # via virtualenv
 filelock==3.12.2
     # via
@@ -25,7 +25,7 @@ packaging==23.2
     # via
     #   pyproject-api
     #   tox
-platformdirs==3.11.0
+platformdirs==4.0.0
     # via
     #   tox
     #   virtualenv
@@ -44,7 +44,7 @@ typing-extensions==4.7.1
     #   importlib-metadata
     #   platformdirs
     #   tox
-virtualenv==20.24.5
+virtualenv==20.25.0
     # via tox
 zipp==3.15.0
     # via importlib-metadata

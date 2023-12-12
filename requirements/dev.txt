@@ -14,7 +14,7 @@ astroid==2.15.8
     #   pylint
 attrs==23.1.0
     # via -r requirements/quality.txt
-babel==2.13.0
+babel==2.14.0
     # via
     #   -r requirements/quality.txt
     #   sphinx
@@ -30,11 +30,11 @@ build==1.0.3
     #   -r requirements/pip-tools.txt
     #   check-manifest
     #   pip-tools
-cachetools==5.3.1
+cachetools==5.3.2
     # via
     #   -r requirements/tox.txt
     #   tox
-certifi==2023.7.22
+certifi==2023.11.17
     # via
     #   -r requirements/quality.txt
     #   requests
@@ -42,7 +42,7 @@ chardet==5.2.0
     # via
     #   -r requirements/tox.txt
     #   tox
-charset-normalizer==3.3.0
+charset-normalizer==3.3.2
     # via
     #   -r requirements/quality.txt
     #   requests
@@ -69,13 +69,13 @@ dill==0.3.7
     # via
     #   -r requirements/quality.txt
     #   pylint
-distlib==0.3.7
+distlib==0.3.8
     # via
     #   -r requirements/tox.txt
     #   virtualenv
 doc8==0.11.2
     # via -r requirements/quality.txt
-docutils==0.18.1
+docutils==0.19
     # via
     #   -r requirements/quality.txt
     #   doc8
@@ -83,7 +83,7 @@ docutils==0.18.1
     #   restructuredtext-lint
     #   sphinx
     #   sphinx-rtd-theme
-exceptiongroup==1.1.3
+exceptiongroup==1.2.0
     # via
     #   -r requirements/quality.txt
     #   pytest
@@ -92,9 +92,9 @@ filelock==3.12.2
     #   -r requirements/tox.txt
     #   tox
     #   virtualenv
-freezegun==1.2.2
+freezegun==1.3.1
     # via -r requirements/quality.txt
-idna==3.4
+idna==3.6
     # via
     #   -r requirements/quality.txt
     #   requests
@@ -195,7 +195,7 @@ pathspec==0.11.2
     # via
     #   -r requirements/quality.txt
     #   black
-pbr==5.11.1
+pbr==6.0.0
     # via
     #   -r requirements/quality.txt
     #   stevedore
@@ -205,7 +205,7 @@ pkginfo==1.9.6
     # via
     #   -r requirements/quality.txt
     #   twine
-platformdirs==3.11.0
+platformdirs==4.0.0
     # via
     #   -r requirements/quality.txt
     #   -r requirements/tox.txt
@@ -225,7 +225,7 @@ pycodestyle==2.10.0
     # via -r requirements/quality.txt
 pydocstyle==6.1.1
     # via -r requirements/quality.txt
-pygments==2.16.1
+pygments==2.17.2
     # via
     #   -r requirements/quality.txt
     #   doc8
@@ -248,7 +248,7 @@ pyproject-hooks==1.0.0
     #   -r requirements/pip-tools.txt
     #   -r requirements/quality.txt
     #   build
-pytest==7.4.2
+pytest==7.4.3
     # via
     #   -r requirements/quality.txt
     #   pylint-pytest
@@ -292,7 +292,7 @@ rfc3986==2.0.0
     # via
     #   -r requirements/quality.txt
     #   twine
-rich==13.6.0
+rich==13.7.0
     # via
     #   -r requirements/quality.txt
     #   twine
@@ -311,7 +311,7 @@ sphinx==5.3.0
     #   -r requirements/quality.txt
     #   sphinx-rtd-theme
     #   sphinxcontrib-jquery
-sphinx-rtd-theme==1.3.0
+sphinx-rtd-theme==2.0.0
     # via -r requirements/quality.txt
 sphinxcontrib-applehelp==1.0.2
     # via
@@ -359,7 +359,7 @@ tomli==2.0.1
     #   pyproject-hooks
     #   pytest
     #   tox
-tomlkit==0.12.1
+tomlkit==0.12.3
     # via
     #   -r requirements/quality.txt
     #   pylint
@@ -404,7 +404,7 @@ urllib3==2.0.7
     #   responses
     #   twine
     #   types-requests
-urwid==2.2.3
+urwid==2.3.4
     # via
     #   -r requirements/quality.txt
     #   pudb
@@ -413,7 +413,7 @@ urwid-readline==0.13
     # via
     #   -r requirements/quality.txt
     #   pudb
-virtualenv==20.24.5
+virtualenv==20.25.0
     # via
     #   -r requirements/tox.txt
     #   tox
@@ -421,11 +421,11 @@ webencodings==0.5.1
     # via
     #   -r requirements/quality.txt
     #   bleach
-wheel==0.41.2
+wheel==0.42.0
     # via
     #   -r requirements/pip-tools.txt
     #   pip-tools
-wrapt==1.15.0
+wrapt==1.16.0
     # via
     #   -r requirements/quality.txt
     #   astroid
