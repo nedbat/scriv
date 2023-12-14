@@ -21,6 +21,19 @@ See the fragment files in the `changelog.d directory`_.
 
 .. scriv-insert-here
 
+.. _changelog-1.5.1:
+
+1.5.1 — 2023-12-14
+------------------
+
+Fixed
+.....
+
+- Fixed the documentation build on ReadTheDocs. Fixes `issue 118`_.
+
+.. _issue 118: https://github.com/nedbat/scriv/issues/118
+
+
 .. _changelog-1.5.0:
 
 1.5.0 — 2023-10-18
