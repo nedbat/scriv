@@ -102,7 +102,7 @@ testpypi: ## Upload the distrubutions to PyPI's testing server.
 	python -m twine upload --verbose --repository testpypi dist/*
 
 tag: ## Make a git tag with the version number
-	git tag -a -m "Version $$(python setup.py --version)" $$(python setup.py --version)
+	git tag -s -m "Version $$(python setup.py --version)" $$(python setup.py --version)
 	git push --all
 
 gh_release: ## Make a GitHub release
