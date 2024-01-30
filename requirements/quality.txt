@@ -10,7 +10,7 @@ alabaster==0.7.13
     #   sphinx
 astroid==2.15.8
     # via pylint
-attrs==23.1.0
+attrs==23.2.0
     # via
     #   -r requirements/doc.txt
     #   -r requirements/test.txt
@@ -69,7 +69,7 @@ exceptiongroup==1.2.0
     #   -r requirements/doc.txt
     #   -r requirements/test.txt
     #   pytest
-freezegun==1.3.1
+freezegun==1.4.0
     # via
     #   -r requirements/doc.txt
     #   -r requirements/test.txt
@@ -113,7 +113,7 @@ jedi==0.19.1
     #   -r requirements/doc.txt
     #   -r requirements/test.txt
     #   pudb
-jinja2==3.1.2
+jinja2==3.1.3
     # via
     #   -r requirements/doc.txt
     #   -r requirements/test.txt
@@ -127,7 +127,7 @@ markdown-it-py==2.2.0
     #   -r requirements/doc.txt
     #   -r requirements/test.txt
     #   rich
-markupsafe==2.1.3
+markupsafe==2.1.4
     # via
     #   -r requirements/doc.txt
     #   -r requirements/test.txt
@@ -203,7 +203,7 @@ pylint-pytest==1.0.3
     # via -r requirements/quality.in
 pyproject-hooks==1.0.0
     # via build
-pytest==7.4.3
+pytest==7.4.4
     # via
     #   -r requirements/doc.txt
     #   -r requirements/test.txt
@@ -218,7 +218,7 @@ python-dateutil==2.8.2
     #   -r requirements/doc.txt
     #   -r requirements/test.txt
     #   freezegun
-pytz==2023.3.post1
+pytz==2023.4
     # via
     #   -r requirements/doc.txt
     #   babel
@@ -328,7 +328,7 @@ types-pyyaml==6.0.12.12
     #   -r requirements/quality.in
     #   -r requirements/test.txt
     #   responses
-types-requests==2.31.0.10
+types-requests==2.31.0.20231231
     # via -r requirements/quality.in
 types-toml==0.10.8.7
     # via -r requirements/quality.in
@@ -345,6 +345,7 @@ typing-extensions==4.7.1
     #   pylint
     #   responses
     #   rich
+    #   urwid
 urllib3==2.0.7
     # via
     #   -r requirements/doc.txt
@@ -353,7 +354,7 @@ urllib3==2.0.7
     #   responses
     #   twine
     #   types-requests
-urwid==2.3.4
+urwid==2.5.0
     # via
     #   -r requirements/doc.txt
     #   -r requirements/test.txt
