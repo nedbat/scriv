@@ -37,7 +37,9 @@ None fully embodied scriv's philopsophy.
 Tools most similar to scriv:
 
 - `towncrier`_: built for Twisted, with some unusual specifics: fragment type
-  is the file extension, issue numbers in the file name.  Only .rst files.
+  is the file extension, issue numbers in the file name.  Defaults to using
+  ``.rst`` files, but can be configured to produce Markdown or any other
+  output format, provided enough configuration.
 
 - `blurb`_: built for CPython development, specific to their workflow: issue
   numbers from bugs.python.org, only .rst files.
