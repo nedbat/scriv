@@ -24,17 +24,17 @@ bleach==6.0.0
     # via
     #   -r requirements/quality.txt
     #   readme-renderer
-build==1.0.3
+build==1.1.1
     # via
     #   -r requirements/dev.in
     #   -r requirements/pip-tools.txt
     #   check-manifest
     #   pip-tools
-cachetools==5.3.2
+cachetools==5.3.3
     # via
     #   -r requirements/tox.txt
     #   tox
-certifi==2023.11.17
+certifi==2024.2.2
     # via
     #   -r requirements/quality.txt
     #   requests
@@ -153,7 +153,7 @@ markdown-it-py==2.2.0
     # via
     #   -r requirements/quality.txt
     #   rich
-markupsafe==2.1.4
+markupsafe==2.1.5
     # via
     #   -r requirements/quality.txt
     #   jinja2
@@ -201,7 +201,7 @@ pbr==6.0.0
     #   stevedore
 pip-tools==6.14.0
     # via -r requirements/pip-tools.txt
-pkginfo==1.9.6
+pkginfo==1.10.0
     # via
     #   -r requirements/quality.txt
     #   twine
@@ -255,11 +255,11 @@ pytest==7.4.4
     #   pytest-mock
 pytest-mock==3.11.1
     # via -r requirements/quality.txt
-python-dateutil==2.8.2
+python-dateutil==2.9.0.post0
     # via
     #   -r requirements/quality.txt
     #   freezegun
-pytz==2023.4
+pytz==2024.1
     # via
     #   -r requirements/quality.txt
     #   babel
@@ -292,7 +292,7 @@ rfc3986==2.0.0
     # via
     #   -r requirements/quality.txt
     #   twine
-rich==13.7.0
+rich==13.7.1
     # via
     #   -r requirements/quality.txt
     #   twine
@@ -359,7 +359,7 @@ tomli==2.0.1
     #   pyproject-hooks
     #   pytest
     #   tox
-tomlkit==0.12.3
+tomlkit==0.12.4
     # via
     #   -r requirements/quality.txt
     #   pylint
@@ -405,19 +405,23 @@ urllib3==2.0.7
     #   responses
     #   twine
     #   types-requests
-urwid==2.5.0
+urwid==2.6.7
     # via
     #   -r requirements/quality.txt
     #   pudb
     #   urwid-readline
-urwid-readline==0.13
+urwid-readline==0.14
     # via
     #   -r requirements/quality.txt
     #   pudb
-virtualenv==20.25.0
+virtualenv==20.25.1
     # via
     #   -r requirements/tox.txt
     #   tox
+wcwidth==0.2.13
+    # via
+    #   -r requirements/quality.txt
+    #   urwid
 webencodings==0.5.1
     # via
     #   -r requirements/quality.txt

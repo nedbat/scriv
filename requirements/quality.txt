@@ -22,9 +22,9 @@ black==23.3.0
     # via -r requirements/quality.in
 bleach==6.0.0
     # via readme-renderer
-build==1.0.3
+build==1.1.1
     # via check-manifest
-certifi==2023.11.17
+certifi==2024.2.2
     # via
     #   -r requirements/doc.txt
     #   -r requirements/test.txt
@@ -127,7 +127,7 @@ markdown-it-py==2.2.0
     #   -r requirements/doc.txt
     #   -r requirements/test.txt
     #   rich
-markupsafe==2.1.4
+markupsafe==2.1.5
     # via
     #   -r requirements/doc.txt
     #   -r requirements/test.txt
@@ -167,7 +167,7 @@ pbr==6.0.0
     # via
     #   -r requirements/doc.txt
     #   stevedore
-pkginfo==1.9.6
+pkginfo==1.10.0
     # via twine
 platformdirs==4.0.0
     # via
@@ -213,12 +213,12 @@ pytest-mock==3.11.1
     # via
     #   -r requirements/doc.txt
     #   -r requirements/test.txt
-python-dateutil==2.8.2
+python-dateutil==2.9.0.post0
     # via
     #   -r requirements/doc.txt
     #   -r requirements/test.txt
     #   freezegun
-pytz==2023.4
+pytz==2024.1
     # via
     #   -r requirements/doc.txt
     #   babel
@@ -249,7 +249,7 @@ restructuredtext-lint==1.4.0
     #   doc8
 rfc3986==2.0.0
     # via twine
-rich==13.7.0
+rich==13.7.1
     # via twine
 six==1.16.0
     # via
@@ -312,7 +312,7 @@ tomli==2.0.1
     #   pylint
     #   pyproject-hooks
     #   pytest
-tomlkit==0.12.3
+tomlkit==0.12.4
     # via pylint
 twine==4.0.2
     # via -r requirements/quality.in
@@ -354,17 +354,22 @@ urllib3==2.0.7
     #   responses
     #   twine
     #   types-requests
-urwid==2.5.0
+urwid==2.6.7
     # via
     #   -r requirements/doc.txt
     #   -r requirements/test.txt
     #   pudb
     #   urwid-readline
-urwid-readline==0.13
+urwid-readline==0.14
     # via
     #   -r requirements/doc.txt
     #   -r requirements/test.txt
     #   pudb
+wcwidth==0.2.13
+    # via
+    #   -r requirements/doc.txt
+    #   -r requirements/test.txt
+    #   urwid
 webencodings==0.5.1
     # via bleach
 wrapt==1.16.0
