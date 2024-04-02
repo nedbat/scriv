@@ -46,7 +46,7 @@ click-log==0.4.0
     # via
     #   -r requirements/doc.txt
     #   -r requirements/test.txt
-cogapp==3.3.0
+cogapp==3.4.1
     # via -r requirements/doc.txt
 coverage==7.2.7
     # via
@@ -147,7 +147,7 @@ mypy-extensions==1.0.0
     # via
     #   black
     #   mypy
-packaging==23.2
+packaging==24.0
     # via
     #   -r requirements/doc.txt
     #   -r requirements/test.txt
@@ -354,7 +354,7 @@ urllib3==2.0.7
     #   responses
     #   twine
     #   types-requests
-urwid==2.6.7
+urwid==2.6.10
     # via
     #   -r requirements/doc.txt
     #   -r requirements/test.txt
