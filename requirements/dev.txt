@@ -28,6 +28,7 @@ build==1.1.1
     # via
     #   -r requirements/dev.in
     #   -r requirements/pip-tools.txt
+    #   -r requirements/quality.txt
     #   check-manifest
     #   pip-tools
 cachetools==5.3.3
@@ -74,8 +75,10 @@ distlib==0.3.8
     #   -r requirements/tox.txt
     #   virtualenv
 doc8==0.11.2
-    # via -r requirements/quality.txt
-docutils==0.19
+    # via
+    #   -c requirements/constraints.txt
+    #   -r requirements/quality.txt
+docutils==0.20.1
     # via
     #   -r requirements/quality.txt
     #   doc8
@@ -179,6 +182,7 @@ mypy-extensions==1.0.0
 packaging==24.0
     # via
     #   -r requirements/pip-tools.txt
+    #   -r requirements/quality.txt
     #   -r requirements/tox.txt
     #   black
     #   build
@@ -238,8 +242,10 @@ pylint==2.17.7
     #   -r requirements/quality.txt
     #   pylint-pytest
 pylint-pytest==1.0.3
-    # via -r requirements/quality.txt
-pyproject-api==1.5.3
+    # via
+    #   -c requirements/constraints.txt
+    #   -r requirements/quality.txt
+pyproject-api==1.6.1
     # via
     #   -r requirements/tox.txt
     #   tox
@@ -348,6 +354,7 @@ stevedore==3.5.2
 tomli==2.0.1
     # via
     #   -r requirements/pip-tools.txt
+    #   -r requirements/quality.txt
     #   -r requirements/tox.txt
     #   black
     #   build
