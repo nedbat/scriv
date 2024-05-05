@@ -37,7 +37,7 @@ sterile: clean ## remove absolutely all built artifacts
 	rm -fr .tox
 
 coverage: clean ## generate and view HTML coverage report
-	tox -e py37,py312,coverage
+	tox -e py38,py312,coverage
 	$(BROWSER)htmlcov/index.html
 
 docs: botedits ## generate Sphinx HTML documentation, including API docs
