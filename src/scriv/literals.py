@@ -99,12 +99,9 @@ class PythonLiteralFinder(ast.NodeVisitor):
 
         If it is, save the string value as `self.value`.
         """
-        ast_Constant = getattr(ast, "Constant", None)
-        if ast_Constant and isinstance(value, ast_Constant):
+        if isinstance(value, ast.Constant):
             if isinstance(value.value, str):
                 self.value = value.value
-        elif isinstance(value, ast.Str):
-            self.value = value.s
 
 
 def find_nested_value(
