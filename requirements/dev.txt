@@ -75,7 +75,9 @@ distlib==0.3.8
     #   -r requirements/tox.txt
     #   virtualenv
 doc8==0.11.2
-    # via -r requirements/quality.txt
+    # via
+    #   -c requirements/constraints.txt
+    #   -r requirements/quality.txt
 docutils==0.20.1
     # via
     #   -r requirements/quality.txt
@@ -241,7 +243,7 @@ pylint==3.1.0
     # via
     #   -r requirements/quality.txt
     #   pylint-pytest
-pylint-pytest==1.0.3
+pylint-pytest==1.1.7
     # via -r requirements/quality.txt
 pyproject-api==1.6.1
     # via

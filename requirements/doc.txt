@@ -29,7 +29,9 @@ cogapp==3.4.1
 coverage==7.5.1
     # via -r requirements/test.txt
 doc8==0.11.2
-    # via -r requirements/doc.in
+    # via
+    #   -c requirements/constraints.txt
+    #   -r requirements/doc.in
 docutils==0.20.1
     # via
     #   doc8
