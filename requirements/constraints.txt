@@ -7,8 +7,3 @@
 # link to other information that will help people in the future to remove the
 # pin when possible.  Writing an issue against the offending project and
 # linking to it here is good.
-
-# docutils is causing problems for sphinx_rtd_theme, but doc8 wants to force it
-# forward. Hold back doc8 while everyone resolves their issues.
-# https://github.com/readthedocs/sphinx_rtd_theme/issues/1323
-doc8 < 1.0

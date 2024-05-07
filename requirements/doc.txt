@@ -28,10 +28,8 @@ cogapp==3.4.1
     # via -r requirements/doc.in
 coverage==7.5.1
     # via -r requirements/test.txt
-doc8==0.11.2
-    # via
-    #   -c requirements/constraints.txt
-    #   -r requirements/doc.in
+doc8==1.1.1
+    # via -r requirements/doc.in
 docutils==0.20.1
     # via
     #   doc8
@@ -155,6 +153,7 @@ stevedore==5.2.0
 tomli==2.0.1
     # via
     #   -r requirements/test.txt
+    #   doc8
     #   pytest
 typing-extensions==4.11.0
     # via
