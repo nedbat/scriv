@@ -8,7 +8,7 @@ alabaster==0.7.13
     # via sphinx
 attrs==23.2.0
     # via -r requirements/test.txt
-babel==2.14.0
+babel==2.15.0
     # via sphinx
 certifi==2024.2.2
     # via
@@ -60,7 +60,7 @@ jedi==0.19.1
     # via
     #   -r requirements/test.txt
     #   pudb
-jinja2==3.1.3
+jinja2==3.1.4
     # via
     #   -r requirements/test.txt
     #   sphinx

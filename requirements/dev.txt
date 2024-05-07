@@ -14,7 +14,7 @@ astroid==3.1.0
     #   pylint
 attrs==23.2.0
     # via -r requirements/quality.txt
-babel==2.14.0
+babel==2.15.0
     # via
     #   -r requirements/quality.txt
     #   sphinx
@@ -141,7 +141,7 @@ jedi==0.19.1
     # via
     #   -r requirements/quality.txt
     #   pudb
-jinja2==3.1.3
+jinja2==3.1.4
     # via
     #   -r requirements/quality.txt
     #   sphinx
