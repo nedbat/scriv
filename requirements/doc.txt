@@ -7,29 +7,29 @@
 alabaster==0.7.13
     # via sphinx
 attrs==23.2.0
-    # via -r requirements/test.txt
+    # via -r test.txt
 babel==2.15.0
     # via sphinx
 certifi==2024.2.2
     # via
-    #   -r requirements/test.txt
+    #   -r test.txt
     #   requests
 charset-normalizer==3.3.2
     # via
-    #   -r requirements/test.txt
+    #   -r test.txt
     #   requests
 click==8.1.7
     # via
-    #   -r requirements/test.txt
+    #   -r test.txt
     #   click-log
 click-log==0.4.0
-    # via -r requirements/test.txt
+    # via -r test.txt
 cogapp==3.4.1
-    # via -r requirements/doc.in
+    # via -r doc.in
 coverage==7.5.1
-    # via -r requirements/test.txt
+    # via -r test.txt
 doc8==1.1.1
-    # via -r requirements/doc.in
+    # via -r doc.in
 docutils==0.20.1
     # via
     #   doc8
@@ -38,13 +38,13 @@ docutils==0.20.1
     #   sphinx-rtd-theme
 exceptiongroup==1.2.1
     # via
-    #   -r requirements/test.txt
+    #   -r test.txt
     #   pytest
 freezegun==1.5.0
-    # via -r requirements/test.txt
+    # via -r test.txt
 idna==3.7
     # via
-    #   -r requirements/test.txt
+    #   -r test.txt
     #   requests
 imagesize==1.4.1
     # via sphinx
@@ -52,88 +52,88 @@ importlib-metadata==7.1.0
     # via sphinx
 iniconfig==2.0.0
     # via
-    #   -r requirements/test.txt
+    #   -r test.txt
     #   pytest
 jedi==0.19.1
     # via
-    #   -r requirements/test.txt
+    #   -r test.txt
     #   pudb
 jinja2==3.1.4
     # via
-    #   -r requirements/test.txt
+    #   -r test.txt
     #   sphinx
 markdown-it-py==3.0.0
-    # via -r requirements/test.txt
+    # via -r test.txt
 markupsafe==2.1.5
     # via
-    #   -r requirements/test.txt
+    #   -r test.txt
     #   jinja2
 mdurl==0.1.2
     # via
-    #   -r requirements/test.txt
+    #   -r test.txt
     #   markdown-it-py
 packaging==24.0
     # via
-    #   -r requirements/test.txt
+    #   -r test.txt
     #   pudb
     #   pytest
     #   sphinx
 parso==0.8.4
     # via
-    #   -r requirements/test.txt
+    #   -r test.txt
     #   jedi
 pbr==6.0.0
     # via stevedore
 pluggy==1.5.0
     # via
-    #   -r requirements/test.txt
+    #   -r test.txt
     #   pytest
 pudb==2024.1
-    # via -r requirements/test.txt
+    # via -r test.txt
 pygments==2.18.0
     # via
-    #   -r requirements/test.txt
+    #   -r test.txt
     #   doc8
     #   pudb
     #   sphinx
 pytest==8.2.0
     # via
-    #   -r requirements/test.txt
+    #   -r test.txt
     #   pytest-mock
 pytest-mock==3.14.0
-    # via -r requirements/test.txt
+    # via -r test.txt
 python-dateutil==2.9.0.post0
     # via
-    #   -r requirements/test.txt
+    #   -r test.txt
     #   freezegun
 pytz==2024.1
     # via babel
 pyyaml==6.0.1
     # via
-    #   -r requirements/test.txt
+    #   -r test.txt
     #   responses
-requests==2.31.0
+requests==2.32.0
     # via
-    #   -r requirements/test.txt
+    #   -r test.txt
     #   responses
     #   sphinx
 responses==0.25.0
-    # via -r requirements/test.txt
+    # via -r test.txt
 restructuredtext-lint==1.4.0
     # via doc8
 six==1.16.0
     # via
-    #   -r requirements/test.txt
+    #   -r test.txt
     #   python-dateutil
 snowballstemmer==2.2.0
     # via sphinx
 sphinx==7.1.2
     # via
-    #   -r requirements/doc.in
+    #   -r doc.in
     #   sphinx-rtd-theme
     #   sphinxcontrib-jquery
 sphinx-rtd-theme==2.0.0
-    # via -r requirements/doc.in
+    # via -r doc.in
 sphinxcontrib-applehelp==1.0.4
     # via sphinx
 sphinxcontrib-devhelp==1.0.2
@@ -152,30 +152,30 @@ stevedore==5.2.0
     # via doc8
 tomli==2.0.1
     # via
-    #   -r requirements/test.txt
+    #   -r test.txt
     #   doc8
     #   pytest
 typing-extensions==4.11.0
     # via
-    #   -r requirements/test.txt
+    #   -r test.txt
     #   urwid
 urllib3==2.2.1
     # via
-    #   -r requirements/test.txt
+    #   -r test.txt
     #   requests
     #   responses
 urwid==2.6.11
     # via
-    #   -r requirements/test.txt
+    #   -r test.txt
     #   pudb
     #   urwid-readline
 urwid-readline==0.14
     # via
-    #   -r requirements/test.txt
+    #   -r test.txt
     #   pudb
 wcwidth==0.2.13
     # via
-    #   -r requirements/test.txt
+    #   -r test.txt
     #   urwid
 zipp==3.18.1
     # via importlib-metadata
