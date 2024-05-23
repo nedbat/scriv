@@ -6,6 +6,8 @@
 coverage                  # for measuring coverage
 freezegun                 # for mocking datetime
 pudb                      # for when we need to debug
+pylint-pytest             # Understanding of pytest fixtures.
+pytest
 pytest-mock               # pytest wrapper around mock
 responses                 # mock requests
 pyyaml

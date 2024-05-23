@@ -26,7 +26,7 @@ markupsafe==2.1.5
     # via jinja2
 mdurl==0.1.2
     # via markdown-it-py
-requests==2.31.0
+requests==2.32.2
     # via -r requirements/base.in
 urllib3==2.2.1
     # via requests

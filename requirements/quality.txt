@@ -8,8 +8,11 @@ alabaster==0.7.13
     # via
     #   -r requirements/doc.txt
     #   sphinx
-astroid==3.1.0
-    # via pylint
+astroid==3.2.2
+    # via
+    #   -r requirements/doc.txt
+    #   -r requirements/test.txt
+    #   pylint
 attrs==23.2.0
     # via
     #   -r requirements/doc.txt
@@ -53,7 +56,10 @@ coverage==7.5.1
     #   -r requirements/doc.txt
     #   -r requirements/test.txt
 dill==0.3.8
-    # via pylint
+    # via
+    #   -r requirements/doc.txt
+    #   -r requirements/test.txt
+    #   pylint
 doc8==1.1.1
     # via -r requirements/doc.txt
 docutils==0.20.1
@@ -69,7 +75,7 @@ exceptiongroup==1.2.1
     #   -r requirements/doc.txt
     #   -r requirements/test.txt
     #   pytest
-freezegun==1.5.0
+freezegun==1.5.1
     # via
     #   -r requirements/doc.txt
     #   -r requirements/test.txt
@@ -98,7 +104,9 @@ iniconfig==2.0.0
     #   pytest
 isort==5.13.2
     # via
+    #   -r requirements/doc.txt
     #   -r requirements/quality.in
+    #   -r requirements/test.txt
     #   pylint
 jaraco-classes==3.4.0
     # via keyring
@@ -116,7 +124,7 @@ jinja2==3.1.4
     #   -r requirements/doc.txt
     #   -r requirements/test.txt
     #   sphinx
-keyring==25.2.0
+keyring==25.2.1
     # via twine
 markdown-it-py==3.0.0
     # via
@@ -129,7 +137,10 @@ markupsafe==2.1.5
     #   -r requirements/test.txt
     #   jinja2
 mccabe==0.7.0
-    # via pylint
+    # via
+    #   -r requirements/doc.txt
+    #   -r requirements/test.txt
+    #   pylint
 mdurl==0.1.2
     # via
     #   -r requirements/doc.txt
@@ -169,8 +180,10 @@ pbr==6.0.0
     #   stevedore
 pkginfo==1.10.0
     # via twine
-platformdirs==4.2.1
+platformdirs==4.2.2
     # via
+    #   -r requirements/doc.txt
+    #   -r requirements/test.txt
     #   black
     #   pylint
 pluggy==1.5.0
@@ -195,12 +208,16 @@ pygments==2.18.0
     #   readme-renderer
     #   rich
     #   sphinx
-pylint==3.1.0
+pylint==3.2.2
     # via
+    #   -r requirements/doc.txt
     #   -r requirements/quality.in
+    #   -r requirements/test.txt
     #   pylint-pytest
-pylint-pytest==1.1.7
-    # via -r requirements/quality.in
+pylint-pytest==1.1.8
+    # via
+    #   -r requirements/doc.txt
+    #   -r requirements/test.txt
 pyproject-hooks==1.1.0
     # via build
 pytest==8.2.0
@@ -229,7 +246,7 @@ pyyaml==6.0.1
     #   responses
 readme-renderer==43.0
     # via twine
-requests==2.31.0
+requests==2.32.2
     # via
     #   -r requirements/doc.txt
     #   -r requirements/test.txt
@@ -311,15 +328,18 @@ tomli==2.0.1
     #   mypy
     #   pylint
     #   pytest
-tomlkit==0.12.4
-    # via pylint
-twine==5.0.0
+tomlkit==0.12.5
+    # via
+    #   -r requirements/doc.txt
+    #   -r requirements/test.txt
+    #   pylint
+twine==5.1.0
     # via -r requirements/quality.in
 types-freezegun==1.1.10
     # via -r requirements/quality.in
 types-pyyaml==6.0.12.20240311
     # via -r requirements/quality.in
-types-requests==2.31.0.20240406
+types-requests==2.32.0.20240523
     # via -r requirements/quality.in
 types-toml==0.10.8.20240310
     # via -r requirements/quality.in
@@ -341,7 +361,7 @@ urllib3==2.2.1
     #   responses
     #   twine
     #   types-requests
-urwid==2.6.11
+urwid==2.6.12
     # via
     #   -r requirements/doc.txt
     #   -r requirements/test.txt
@@ -357,7 +377,7 @@ wcwidth==0.2.13
     #   -r requirements/doc.txt
     #   -r requirements/test.txt
     #   urwid
-zipp==3.18.1
+zipp==3.18.2
     # via
     #   -r requirements/doc.txt
     #   importlib-metadata

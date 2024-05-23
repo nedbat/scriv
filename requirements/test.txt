@@ -4,6 +4,8 @@
 #
 #    make upgrade
 #
+astroid==3.2.2
+    # via pylint
 attrs==23.2.0
     # via -r requirements/base.txt
 certifi==2024.2.2
@@ -22,9 +24,11 @@ click-log==0.4.0
     # via -r requirements/base.txt
 coverage==7.5.1
     # via -r requirements/test.in
+dill==0.3.8
+    # via pylint
 exceptiongroup==1.2.1
     # via pytest
-freezegun==1.5.0
+freezegun==1.5.1
     # via -r requirements/test.in
 idna==3.7
     # via
@@ -32,6 +36,8 @@ idna==3.7
     #   requests
 iniconfig==2.0.0
     # via pytest
+isort==5.13.2
+    # via pylint
 jedi==0.19.1
     # via pudb
 jinja2==3.1.4
@@ -42,6 +48,8 @@ markupsafe==2.1.5
     # via
     #   -r requirements/base.txt
     #   jinja2
+mccabe==0.7.0
+    # via pylint
 mdurl==0.1.2
     # via
     #   -r requirements/base.txt
@@ -52,14 +60,23 @@ packaging==24.0
     #   pytest
 parso==0.8.4
     # via jedi
+platformdirs==4.2.2
+    # via pylint
 pluggy==1.5.0
     # via pytest
 pudb==2024.1
     # via -r requirements/test.in
 pygments==2.18.0
     # via pudb
+pylint==3.2.2
+    # via pylint-pytest
+pylint-pytest==1.1.8
+    # via -r requirements/test.in
 pytest==8.2.0
-    # via pytest-mock
+    # via
+    #   -r requirements/test.in
+    #   pylint-pytest
+    #   pytest-mock
 pytest-mock==3.14.0
     # via -r requirements/test.in
 python-dateutil==2.9.0.post0
@@ -68,7 +85,7 @@ pyyaml==6.0.1
     # via
     #   -r requirements/test.in
     #   responses
-requests==2.31.0
+requests==2.32.2
     # via
     #   -r requirements/base.txt
     #   responses
@@ -77,15 +94,22 @@ responses==0.25.0
 six==1.16.0
     # via python-dateutil
 tomli==2.0.1
-    # via pytest
+    # via
+    #   pylint
+    #   pytest
+tomlkit==0.12.5
+    # via pylint
 typing-extensions==4.11.0
-    # via urwid
+    # via
+    #   astroid
+    #   pylint
+    #   urwid
 urllib3==2.2.1
     # via
     #   -r requirements/base.txt
     #   requests
     #   responses
-urwid==2.6.11
+urwid==2.6.12
     # via
     #   pudb
     #   urwid-readline

@@ -8,7 +8,7 @@ alabaster==0.7.13
     # via
     #   -r requirements/quality.txt
     #   sphinx
-astroid==3.1.0
+astroid==3.2.2
     # via
     #   -r requirements/quality.txt
     #   pylint
@@ -93,7 +93,7 @@ filelock==3.14.0
     #   -r requirements/tox.txt
     #   tox
     #   virtualenv
-freezegun==1.5.0
+freezegun==1.5.1
     # via -r requirements/quality.txt
 idna==3.7
     # via
@@ -143,7 +143,7 @@ jinja2==3.1.4
     # via
     #   -r requirements/quality.txt
     #   sphinx
-keyring==25.2.0
+keyring==25.2.1
     # via
     #   -r requirements/quality.txt
     #   twine
@@ -209,7 +209,7 @@ pkginfo==1.10.0
     # via
     #   -r requirements/quality.txt
     #   twine
-platformdirs==4.2.1
+platformdirs==4.2.2
     # via
     #   -r requirements/quality.txt
     #   -r requirements/tox.txt
@@ -237,11 +237,11 @@ pygments==2.18.0
     #   readme-renderer
     #   rich
     #   sphinx
-pylint==3.1.0
+pylint==3.2.2
     # via
     #   -r requirements/quality.txt
     #   pylint-pytest
-pylint-pytest==1.1.7
+pylint-pytest==1.1.8
     # via -r requirements/quality.txt
 pyproject-api==1.6.1
     # via
@@ -276,7 +276,7 @@ readme-renderer==43.0
     # via
     #   -r requirements/quality.txt
     #   twine
-requests==2.31.0
+requests==2.32.2
     # via
     #   -r requirements/quality.txt
     #   requests-toolbelt
@@ -364,19 +364,19 @@ tomli==2.0.1
     #   pyproject-api
     #   pytest
     #   tox
-tomlkit==0.12.4
+tomlkit==0.12.5
     # via
     #   -r requirements/quality.txt
     #   pylint
 tox==4.15.0
     # via -r requirements/tox.txt
-twine==5.0.0
+twine==5.1.0
     # via -r requirements/quality.txt
 types-freezegun==1.1.10
     # via -r requirements/quality.txt
 types-pyyaml==6.0.12.20240311
     # via -r requirements/quality.txt
-types-requests==2.31.0.20240406
+types-requests==2.32.0.20240523
     # via -r requirements/quality.txt
 types-toml==0.10.8.20240310
     # via -r requirements/quality.txt
@@ -396,7 +396,7 @@ urllib3==2.2.1
     #   responses
     #   twine
     #   types-requests
-urwid==2.6.11
+urwid==2.6.12
     # via
     #   -r requirements/quality.txt
     #   pudb
@@ -405,7 +405,7 @@ urwid-readline==0.14
     # via
     #   -r requirements/quality.txt
     #   pudb
-virtualenv==20.26.1
+virtualenv==20.26.2
     # via
     #   -r requirements/tox.txt
     #   tox
@@ -417,7 +417,7 @@ wheel==0.43.0
     # via
     #   -r requirements/pip-tools.txt
     #   pip-tools
-zipp==3.18.1
+zipp==3.18.2
     # via
     #   -r requirements/pip-tools.txt
     #   -r requirements/quality.txt
