@@ -5,28 +5,28 @@
 #    make upgrade
 #
 attrs==23.2.0
-    # via -r requirements/base.in
+    # via -r base.in
 certifi==2024.2.2
     # via requests
 charset-normalizer==3.3.2
     # via requests
 click==8.1.7
     # via
-    #   -r requirements/base.in
+    #   -r base.in
     #   click-log
 click-log==0.4.0
-    # via -r requirements/base.in
+    # via -r base.in
 idna==3.7
     # via requests
 jinja2==3.1.4
-    # via -r requirements/base.in
+    # via -r base.in
 markdown-it-py==3.0.0
-    # via -r requirements/base.in
+    # via -r base.in
 markupsafe==2.1.5
     # via jinja2
 mdurl==0.1.2
     # via markdown-it-py
 requests==2.32.2
-    # via -r requirements/base.in
-urllib3==2.2.1
+    # via -r base.in
+urllib3==2.2.2
     # via requests
