@@ -6,7 +6,7 @@ from scriv.gitinfo import current_branch_name, get_github_repos, user_nick
 
 
 def test_user_nick_from_scriv_user_nick(fake_git):
-    fake_git.set_config("scriv.user_nick", "joedev")
+    fake_git.set_config("scriv.userNick", "joedev")
     assert user_nick() == "joedev"
 
 
