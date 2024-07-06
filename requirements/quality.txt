@@ -27,7 +27,7 @@ black==24.4.2
     # via -r quality.in
 build==1.2.1
     # via check-manifest
-certifi==2024.2.2
+certifi==2024.7.4
     # via
     #   -r doc.txt
     #   -r test.txt

@@ -8,7 +8,7 @@ astroid==3.2.2
     # via pylint
 attrs==23.2.0
     # via -r base.txt
-certifi==2024.2.2
+certifi==2024.7.4
     # via
     #   -r base.txt
     #   requests
