@@ -6,161 +6,161 @@
 #
 alabaster==0.7.13
     # via sphinx
-astroid==3.2.2
+astroid==3.2.4
     # via
-    #   -r test.txt
+    #   -r requirements/test.txt
     #   pylint
 attrs==23.2.0
-    # via -r test.txt
+    # via -r requirements/test.txt
 babel==2.15.0
     # via sphinx
-certifi==2024.2.2
+certifi==2024.7.4
     # via
-    #   -r test.txt
+    #   -r requirements/test.txt
     #   requests
 charset-normalizer==3.3.2
     # via
-    #   -r test.txt
+    #   -r requirements/test.txt
     #   requests
 click==8.1.7
     # via
-    #   -r test.txt
+    #   -r requirements/test.txt
     #   click-log
 click-log==0.4.0
-    # via -r test.txt
+    # via -r requirements/test.txt
 cogapp==3.4.1
-    # via -r doc.in
-coverage==7.5.1
-    # via -r test.txt
+    # via -r requirements/doc.in
+coverage==7.6.0
+    # via -r requirements/test.txt
 dill==0.3.8
     # via
-    #   -r test.txt
+    #   -r requirements/test.txt
     #   pylint
 doc8==1.1.1
-    # via -r doc.in
+    # via -r requirements/doc.in
 docutils==0.20.1
     # via
     #   doc8
     #   restructuredtext-lint
     #   sphinx
     #   sphinx-rtd-theme
-exceptiongroup==1.2.1
+exceptiongroup==1.2.2
     # via
-    #   -r test.txt
+    #   -r requirements/test.txt
     #   pytest
 freezegun==1.5.1
-    # via -r test.txt
+    # via -r requirements/test.txt
 idna==3.7
     # via
-    #   -r test.txt
+    #   -r requirements/test.txt
     #   requests
 imagesize==1.4.1
     # via sphinx
-importlib-metadata==7.1.0
+importlib-metadata==8.1.0
     # via sphinx
 iniconfig==2.0.0
     # via
-    #   -r test.txt
+    #   -r requirements/test.txt
     #   pytest
 isort==5.13.2
     # via
-    #   -r test.txt
+    #   -r requirements/test.txt
     #   pylint
 jedi==0.19.1
     # via
-    #   -r test.txt
+    #   -r requirements/test.txt
     #   pudb
 jinja2==3.1.4
     # via
-    #   -r test.txt
+    #   -r requirements/test.txt
     #   sphinx
 markdown-it-py==3.0.0
-    # via -r test.txt
+    # via -r requirements/test.txt
 markupsafe==2.1.5
     # via
-    #   -r test.txt
+    #   -r requirements/test.txt
     #   jinja2
 mccabe==0.7.0
     # via
-    #   -r test.txt
+    #   -r requirements/test.txt
     #   pylint
 mdurl==0.1.2
     # via
-    #   -r test.txt
+    #   -r requirements/test.txt
     #   markdown-it-py
-packaging==24.0
+packaging==24.1
     # via
-    #   -r test.txt
+    #   -r requirements/test.txt
     #   pudb
     #   pytest
     #   sphinx
 parso==0.8.4
     # via
-    #   -r test.txt
+    #   -r requirements/test.txt
     #   jedi
 pbr==6.0.0
     # via stevedore
 platformdirs==4.2.2
     # via
-    #   -r test.txt
+    #   -r requirements/test.txt
     #   pylint
 pluggy==1.5.0
     # via
-    #   -r test.txt
+    #   -r requirements/test.txt
     #   pytest
-pudb==2024.1
-    # via -r test.txt
+pudb==2024.1.2
+    # via -r requirements/test.txt
 pygments==2.18.0
     # via
-    #   -r test.txt
+    #   -r requirements/test.txt
     #   doc8
     #   pudb
     #   sphinx
-pylint==3.2.2
+pylint==3.2.6
     # via
-    #   -r test.txt
+    #   -r requirements/test.txt
     #   pylint-pytest
 pylint-pytest==1.1.8
-    # via -r test.txt
+    # via -r requirements/test.txt
 pytest==8.2.0
     # via
-    #   -r test.txt
+    #   -r requirements/test.txt
     #   pylint-pytest
     #   pytest-mock
 pytest-mock==3.14.0
-    # via -r test.txt
+    # via -r requirements/test.txt
 python-dateutil==2.9.0.post0
     # via
-    #   -r test.txt
+    #   -r requirements/test.txt
     #   freezegun
 pytz==2024.1
     # via babel
 pyyaml==6.0.1
     # via
-    #   -r test.txt
+    #   -r requirements/test.txt
     #   responses
-requests==2.32.2
+requests==2.32.3
     # via
-    #   -r test.txt
+    #   -r requirements/test.txt
     #   responses
     #   sphinx
-responses==0.25.0
-    # via -r test.txt
+responses==0.25.3
+    # via -r requirements/test.txt
 restructuredtext-lint==1.4.0
     # via doc8
 six==1.16.0
     # via
-    #   -r test.txt
+    #   -r requirements/test.txt
     #   python-dateutil
 snowballstemmer==2.2.0
     # via sphinx
 sphinx==7.1.2
     # via
-    #   -r doc.in
+    #   -r requirements/doc.in
     #   sphinx-rtd-theme
     #   sphinxcontrib-jquery
 sphinx-rtd-theme==2.0.0
-    # via -r doc.in
+    # via -r requirements/doc.in
 sphinxcontrib-applehelp==1.0.4
     # via sphinx
 sphinxcontrib-devhelp==1.0.2
@@ -179,37 +179,37 @@ stevedore==5.2.0
     # via doc8
 tomli==2.0.1
     # via
-    #   -r test.txt
+    #   -r requirements/test.txt
     #   doc8
     #   pylint
     #   pytest
-tomlkit==0.12.5
+tomlkit==0.13.0
     # via
-    #   -r test.txt
+    #   -r requirements/test.txt
     #   pylint
-typing-extensions==4.11.0
+typing-extensions==4.12.2
     # via
-    #   -r test.txt
+    #   -r requirements/test.txt
     #   astroid
     #   pylint
     #   urwid
 urllib3==2.2.2
     # via
-    #   -r test.txt
+    #   -r requirements/test.txt
     #   requests
     #   responses
-urwid==2.6.12
+urwid==2.6.15
     # via
-    #   -r test.txt
+    #   -r requirements/test.txt
     #   pudb
     #   urwid-readline
 urwid-readline==0.14
     # via
-    #   -r test.txt
+    #   -r requirements/test.txt
     #   pudb
 wcwidth==0.2.13
     # via
-    #   -r test.txt
+    #   -r requirements/test.txt
     #   urwid
-zipp==3.18.2
+zipp==3.19.2
     # via importlib-metadata
