@@ -1,5 +1,6 @@
 """Fake implementations of some of our external information sources."""
 
+import re
 import shlex
 from typing import Callable, Dict, Iterable, List, Optional, Set, Tuple
 
@@ -7,6 +8,9 @@ from scriv.shell import CmdResult
 
 # A function that simulates run_command.
 CmdHandler = Callable[[List[str]], CmdResult]
+
+# A regex to help with catching some (but not all) invalid Git config keys.
+GIT_CONFIG_KEY = re.compile(r".*\.[a-zA-Z][a-zA-Z0-9-]*")
 
 
 class FakeRunCommand:
@@ -87,6 +91,8 @@ class FakeGit:
 
     def set_config(self, name: str, value: str) -> None:
         """Set a fake Git configuration value."""
+        if GIT_CONFIG_KEY.fullmatch(name) is None:
+            raise ValueError(f"error: invalid key: {name}")
         self.config[name] = value
 
     def set_branch(self, branch_name: str) -> None:
