@@ -35,6 +35,8 @@ jobs:
     steps:
       - name: "Check out the repo"
         uses: "actions/checkout@v4"
+        with:
+          persist-credentials: false
 
       - name: "Set up Python"
         id: "setup-python"
@@ -60,14 +62,17 @@ jobs:
 
       - name: "Identify venv path"
         shell: "bash"
-        run: "echo 'venv-path=${{ runner.os == 'Windows' && '.venv/Scripts' || '.venv/bin' }}' >> $GITHUB_ENV"
+        env:
+          VENV_PATH: ${{ runner.os == 'Windows' && '.venv/Scripts' || '.venv/bin' }}
+        run: |
+          echo "venv_path=${VENV_PATH}" >> $GITHUB_ENV
 
       - name: "Install dependencies"
         if: "steps.restore-cache.outputs.cache-hit == false"
         run: |
           python -m venv .venv
-          ${{ env.venv-path }}/python -m pip install -U setuptools
-          ${{ env.venv-path }}/python -m pip install -r requirements/tox.txt
+          ${venv_path}/python -m pip install -U setuptools
+          ${venv_path}/python -m pip install -r requirements/tox.txt
 
       - name: "Install pandoc on Linux"
         # sudo apt-get pandoc: will install a version from 2018!
@@ -88,7 +93,7 @@ jobs:
 
       - name: "Run tox"
         run: |
-          ${{ env.venv-path }}/python -m tox -m ci-tests
+          ${venv_path}/python -m tox -m ci-tests
 
       - name: "Upload coverage data"
         uses: actions/upload-artifact@v4
@@ -103,6 +108,8 @@ jobs:
     steps:
       - name: "Check out the repo"
         uses: "actions/checkout@v4"
+        with:
+          persist-credentials: false
 
       - name: "Set up Python"
         uses: "actions/setup-python@v5"
@@ -152,6 +159,8 @@ jobs:
     steps:
       - name: "Check out the repo"
         uses: "actions/checkout@v4"
+        with:
+          persist-credentials: false
 
       - name: "Set up Python"
         uses: "actions/setup-python@v5"
@@ -176,6 +185,8 @@ jobs:
     steps:
       - name: "Check out the repo"
         uses: "actions/checkout@v4"
+        with:
+          persist-credentials: false
 
       - name: "Set up Python"
         uses: "actions/setup-python@v5"
