@@ -100,6 +100,7 @@ jobs:
         with:
           name: covdata-${{ matrix.os }}
           path: .coverage.*
+          include-hidden-files: true
 
   coverage:
     name: Coverage
