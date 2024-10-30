@@ -29,8 +29,11 @@ fragment, you provide your change information in the appropriate category.
 When the fragments are collected, they are grouped by category into a single
 changelog entry.
 
+Any fragments that do not specify a category are included as top-level
+release notes directly under the release heading.
+
 You can choose not to use categories by setting the :ref:`config_categories`
-setting to empty.
+setting to empty (all notes will appear as top-level release notes).
 
 
 .. _entries:
