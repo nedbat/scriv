@@ -45,11 +45,11 @@ jobs:
           # The last listed Python version is the default.
           python-version: |
             pypy-3.9
-            3.8
             3.9
             3.10
             3.11
             3.12
+            3.13
 
       - name: "Restore cache"
         id: "restore-cache"
@@ -166,7 +166,7 @@ jobs:
       - name: "Set up Python"
         uses: "actions/setup-python@v5"
         with:
-          python-version: "3.8"
+          python-version: "3.9"
           cache: pip
           cache-dependency-path: 'requirements/*.txt'
 
@@ -192,7 +192,7 @@ jobs:
       - name: "Set up Python"
         uses: "actions/setup-python@v5"
         with:
-          python-version: "3.8"
+          python-version: "3.9"
           cache: pip
           cache-dependency-path: 'requirements/*.txt'
 
