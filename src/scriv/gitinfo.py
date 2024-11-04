@@ -82,7 +82,7 @@ def git_rm(filename: Path) -> None:
         sys.exit(ret)
 
 
-def get_github_repos() -> Set[str]:
+def get_github_repos() -> set[str]:
     """
     Find the GitHub name/repos for this project.
 

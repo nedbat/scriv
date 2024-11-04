@@ -4,7 +4,7 @@ import os
 import sys
 import traceback
 from pathlib import Path
-from typing import Iterable
+from collections.abc import Iterable
 
 import pytest
 import responses

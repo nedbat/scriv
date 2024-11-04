@@ -6,12 +6,12 @@ import subprocess
 from typing import List, Tuple, Union
 
 # The return value of run_command.
-CmdResult = Tuple[bool, str]
+CmdResult = tuple[bool, str]
 
 logger = logging.getLogger(__name__)
 
 
-def run_command(cmd: Union[str, List[str]]) -> CmdResult:
+def run_command(cmd: Union[str, list[str]]) -> CmdResult:
     """
     Run a command line (with no shell).
 
@@ -38,7 +38,7 @@ def run_command(cmd: Union[str, List[str]]) -> CmdResult:
     return proc.returncode == 0, output
 
 
-def run_simple_command(cmd: Union[str, List[str]]) -> str:
+def run_simple_command(cmd: Union[str, list[str]]) -> str:
     """
     Run a command and return its output, or "" if it fails.
     """

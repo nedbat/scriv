@@ -6,7 +6,8 @@ import itertools
 import re
 import textwrap
 from pathlib import Path
-from typing import Iterable, List, Optional
+from typing import List, Optional
+from collections.abc import Iterable
 
 import jinja2
 
@@ -37,7 +38,7 @@ class Scriv:
             content=_new_fragment_content(self.config),
         )
 
-    def fragments_to_combine(self) -> List[Fragment]:
+    def fragments_to_combine(self) -> list[Fragment]:
         """Get the list of fragments to combine."""
         return [Fragment(path=path) for path in _files_to_combine(self.config)]
 
@@ -94,7 +95,7 @@ def _new_fragment_content(config: Config) -> str:
     ).render(config=config)
 
 
-def _files_to_combine(config: Config) -> List[Path]:
+def _files_to_combine(config: Config) -> list[Path]:
     """
     Find all the fragment file paths to be combined.
 
