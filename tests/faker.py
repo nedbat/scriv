@@ -1,8 +1,8 @@
 """Fake implementations of some of our external information sources."""
 
 import shlex
-from typing import Callable, Dict, List, Optional, Set, Tuple
 from collections.abc import Iterable
+from typing import Callable, Optional
 
 from scriv.shell import CmdResult
 

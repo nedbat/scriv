@@ -6,7 +6,6 @@ import re
 import subprocess
 import sys
 from pathlib import Path
-from typing import Set
 
 import click
 

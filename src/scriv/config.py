@@ -6,7 +6,7 @@ import logging
 import pkgutil
 import re
 from pathlib import Path
-from typing import Any, List
+from typing import Any
 
 import attr
 

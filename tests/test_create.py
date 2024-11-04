@@ -226,7 +226,7 @@ class TestCreateAdd:
     Tests of auto-adding created fragments.
     """
 
-    def test_create_add(
+    def test_create_add(  # pylint: disable=too-many-positional-arguments
         self, caplog, mocker, fake_git, cli_invoke, changelog_d
     ):
         # "scriv create --add" will invoke "git add" on the file.
@@ -261,7 +261,7 @@ class TestCreateAdd:
         )
         mock_call.assert_called_once_with(["git", "add", file_path])
 
-    def test_create_add_preference_no_add(
+    def test_create_add_preference_no_add(  # pylint: disable=too-many-positional-arguments
         self, caplog, mocker, fake_git, cli_invoke, changelog_d
     ):
         # The user can set a git configuration to default to --add, but --no-add
@@ -274,7 +274,7 @@ class TestCreateAdd:
         mock_call.assert_not_called()
         assert "Added" not in caplog.text
 
-    def test_create_add_fail(
+    def test_create_add_fail(  # pylint: disable=too-many-positional-arguments
         self, caplog, mocker, fake_git, cli_invoke, changelog_d
     ):
         # We properly handle failure to add.

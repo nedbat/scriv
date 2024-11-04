@@ -2,8 +2,8 @@
 
 import logging
 import os
-from typing import Any, Dict
 from collections.abc import Iterable
+from typing import Any
 
 import requests
 

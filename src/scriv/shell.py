@@ -3,7 +3,7 @@
 import logging
 import shlex
 import subprocess
-from typing import List, Tuple, Union
+from typing import Union
 
 # The return value of run_command.
 CmdResult = tuple[bool, str]

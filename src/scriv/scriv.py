@@ -5,9 +5,9 @@ import datetime
 import itertools
 import re
 import textwrap
-from pathlib import Path
-from typing import List, Optional
 from collections.abc import Iterable
+from pathlib import Path
+from typing import Optional
 
 import jinja2
 

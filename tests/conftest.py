@@ -3,8 +3,8 @@
 import os
 import sys
 import traceback
-from pathlib import Path
 from collections.abc import Iterable
+from pathlib import Path
 
 import pytest
 import responses

@@ -1,7 +1,7 @@
 """Dispatcher for format-based knowledge."""
 
 import abc
-from typing import Dict, List, Optional
+from typing import Optional
 
 from .config import Config
 

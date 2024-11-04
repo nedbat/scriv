@@ -5,8 +5,8 @@ Find literals in various kinds of files.
 import ast
 import configparser
 import os.path
-from typing import Any, Optional
 from collections.abc import MutableMapping
+from typing import Any, Optional
 
 from .exceptions import ScrivException
 from .optional import tomllib, yaml

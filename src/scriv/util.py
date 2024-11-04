@@ -7,8 +7,8 @@ import functools
 import logging
 import re
 import sys
-from typing import Dict, Optional, Tuple, TypeVar
 from collections.abc import Sequence
+from typing import TypeVar
 
 import click_log
 
