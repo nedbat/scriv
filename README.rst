@@ -61,6 +61,7 @@ Contributions are very welcome.  Thanks to all the contributors so far:
 | Ned Batchelder
 | Abhilash Raj
 | Agustín Piqueres
+| Alyssa Coughlan
 | Flo Kuepper
 | James Gerity
 | Javier Sagredo
