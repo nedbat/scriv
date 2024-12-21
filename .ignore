@@ -1,0 +1,11 @@
+# .ignore: control what files get searched.
+build
+htmlcov
+.tox*
+.coverage*
+_build
+_spell
+*.egg
+*.egg-info
+.mypy_cache
+.pytest_cache
