@@ -2,7 +2,7 @@
 
 import concurrent.futures
 import logging
-from typing import Iterable
+from collections.abc import Iterable
 
 import markdown_it
 import requests

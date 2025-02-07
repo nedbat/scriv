@@ -83,6 +83,7 @@ Thanks to all the contributors so far:
 | Ned Batchelder
 | Abhilash Raj
 | Agustín Piqueres
+| Alyssa Coughlan
 | Flo Kuepper
 | James Gerity
 | Javier Sagredo
@@ -91,7 +92,7 @@ Thanks to all the contributors so far:
 | Rodrigo Girão Serrão
 | Ronny Pfannschmidt
 
-.. [[[end]]] (checksum: a0df9318cc05969b40b61c5540f9a1b5)
+.. [[[end]]] (checksum: c6fce4df156c712ca4398e3f62e62c5a)
 
 .. _repo: https://github.com/nedbat/scriv
 

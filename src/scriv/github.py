@@ -2,7 +2,8 @@
 
 import logging
 import os
-from typing import Any, Dict, Iterable
+from collections.abc import Iterable
+from typing import Any
 
 import requests
 
@@ -24,7 +25,7 @@ def check_ok(resp):
         resp.raise_for_status()
 
 
-def auth_headers() -> Dict[str, str]:
+def auth_headers() -> dict[str, str]:
     """
     Get the authorization headers needed for GitHub.
 
@@ -37,7 +38,7 @@ def auth_headers() -> Dict[str, str]:
     return headers
 
 
-def github_paginated(url: str) -> Iterable[Dict[str, Any]]:
+def github_paginated(url: str) -> Iterable[dict[str, Any]]:
     """
     Get all the results from a paginated GitHub url.
     """
@@ -54,7 +55,7 @@ def github_paginated(url: str) -> Iterable[Dict[str, Any]]:
 RELEASES_URL = "https://api.github.com/repos/{repo}/releases"
 
 
-def get_releases(repo: str) -> Dict[str, Dict[str, Any]]:
+def get_releases(repo: str) -> dict[str, dict[str, Any]]:
     """
     Get all the releases from a name/project repo.
 
@@ -66,7 +67,7 @@ def get_releases(repo: str) -> Dict[str, Dict[str, Any]]:
     return releases
 
 
-def create_release(repo: str, release_data: Dict[str, Any]) -> None:
+def create_release(repo: str, release_data: dict[str, Any]) -> None:
     """
     Create a GitHub release.
 
@@ -89,7 +90,7 @@ def create_release(repo: str, release_data: Dict[str, Any]) -> None:
 
 
 def update_release(
-    release: Dict[str, Any], release_data: Dict[str, Any]
+    release: dict[str, Any], release_data: dict[str, Any]
 ) -> None:
     """
     Update a GitHub release.

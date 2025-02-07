@@ -27,6 +27,6 @@ def check_logs(caplog, expected):
 
     Only caplog records from a logger mentioned in expected are considered.
     """
-    logger_names = set(r[0] for r in expected)
+    logger_names = {r[0] for r in expected}
     records = [r for r in caplog.record_tuples if r[0] in logger_names]
     assert records == expected

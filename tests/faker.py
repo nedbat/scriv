@@ -2,12 +2,13 @@
 
 import re
 import shlex
-from typing import Callable, Dict, Iterable, List, Optional, Set, Tuple
+from collections.abc import Iterable
+from typing import Callable, Optional
 
 from scriv.shell import CmdResult
 
 # A function that simulates run_command.
-CmdHandler = Callable[[List[str]], CmdResult]
+CmdHandler = Callable[[list[str]], CmdResult]
 
 # A regex to help with catching some (but not all) invalid Git config keys.
 GIT_CONFIG_KEY = re.compile(r".*\.[a-zA-Z][a-zA-Z0-9-]*")
@@ -22,7 +23,7 @@ class FakeRunCommand:
 
     def __init__(self, mocker):
         """Make the faker."""
-        self.handlers: Dict[str, CmdHandler] = {}
+        self.handlers: dict[str, CmdHandler] = {}
         self.mocker = mocker
         self.patch_module("scriv.shell")
 
@@ -54,19 +55,19 @@ class FakeGit:
     def __init__(self, frc: FakeRunCommand) -> None:
         """Make a FakeGit from a FakeRunCommand."""
         # Initialize with basic defaults.
-        self.config: Dict[str, str] = {
+        self.config: dict[str, str] = {
             "core.bare": "false",
             "core.repositoryformatversion": "0",
         }
         self.branch = "main"
         self.editor = "vi"
-        self.tags: Set[str] = set()
-        self.remotes: Dict[str, Tuple[str, str]] = {}
+        self.tags: set[str] = set()
+        self.remotes: dict[str, tuple[str, str]] = {}
 
         # Hook up our run_command handler.
         frc.add_handler("git", self.run_command)
 
-    def run_command(self, argv: List[str]) -> CmdResult:
+    def run_command(self, argv: list[str]) -> CmdResult:
         """Simulate git commands."""
         # todo: match/case someday
         if argv[1] == "config":

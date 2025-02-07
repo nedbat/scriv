@@ -2,7 +2,7 @@
 
 import json
 import logging
-from typing import Any, Dict
+from typing import Any
 from unittest.mock import call
 
 import pytest
@@ -98,7 +98,7 @@ def scenario1(temp_dir, fake_git, mocker):
 def mock_create_release(mocker):
     """Create a mock create_release that checks arguments."""
 
-    def _create_release(repo: str, release_data: Dict[str, Any]) -> None:
+    def _create_release(repo: str, release_data: dict[str, Any]) -> None:
         assert repo
         assert release_data["name"]
         assert json.dumps(release_data)[0] == "{"
@@ -113,7 +113,7 @@ def mock_update_release(mocker):
     """Create a mock update_release that checks arguments."""
 
     def _update_release(
-        release: Dict[str, Any], release_data: Dict[str, Any]
+        release: dict[str, Any], release_data: dict[str, Any]
     ) -> None:
         assert release_data["name"]
         assert release["url"]

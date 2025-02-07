@@ -94,6 +94,7 @@ Scriv provides two built-in templates:
       A new scriv changelog fragment.
 
       Uncomment the section that is right (remove the HTML comment wrapper).
+      For top level release notes, leave all the headers commented out.
       -->
 
       {% for cat in config.categories -%}
@@ -105,7 +106,7 @@ Scriv provides two built-in templates:
       -->
       {% endfor -%}
 
-  .. [[[end]]] (checksum: 522af8fd44433254fa64c58f89733d4d)
+  .. [[[end]]] (checksum: 5ea187a050bfc23014591238b22520ff)
 
 - ``new_fragment.rst.j2``: The default Jinja template for new reStructuredText
   fragments:
@@ -116,7 +117,8 @@ Scriv provides two built-in templates:
       .. A new scriv changelog fragment.
       {% if config.categories -%}
       ..
-      .. Uncomment the header that is right (remove the leading dots).
+      .. Uncomment the section that is right (remove the leading dots).
+      .. For top level release notes, leave all the headers commented out.
       ..
       {% for cat in config.categories -%}
       .. {{ cat }}
@@ -129,7 +131,7 @@ Scriv provides two built-in templates:
       - A bullet item for this fragment. EDIT ME!
       {% endif -%}
 
-  .. [[[end]]] (checksum: bdc8c8a24aa1aed2a40d07d08e8a939c)
+  .. [[[end]]] (checksum: 307b2d307df5eb3a5d316dc850c68011)
 
 Literal Prefix
 --------------

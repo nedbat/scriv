@@ -1,14 +1,14 @@
 """Dispatcher for format-based knowledge."""
 
 import abc
-from typing import Dict, List, Optional
+from typing import Optional
 
 from .config import Config
 
 # When collecting changelog fragments, we group them by their category into
 # Sections.  A SectionDict maps category names to a list of the paragraphs in
 # that section.  For projects not using categories, the key will be None.
-SectionDict = Dict[Optional[str], List[str]]
+SectionDict = dict[Optional[str], list[str]]
 
 
 class FormatTools(abc.ABC):

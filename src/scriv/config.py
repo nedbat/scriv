@@ -6,7 +6,7 @@ import logging
 import pkgutil
 import re
 from pathlib import Path
-from typing import Any, List
+from typing import Any
 
 import attr
 
@@ -434,7 +434,7 @@ class Config:
         return value
 
 
-def convert_list(val: str) -> List[str]:
+def convert_list(val: str) -> list[str]:
     """
     Convert a string value from a config into a list of strings.
 

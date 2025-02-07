@@ -6,7 +6,6 @@ import re
 import subprocess
 import sys
 from pathlib import Path
-from typing import Set
 
 import click
 
@@ -82,7 +81,7 @@ def git_rm(filename: Path) -> None:
         sys.exit(ret)
 
 
-def get_github_repos() -> Set[str]:
+def get_github_repos() -> set[str]:
     """
     Find the GitHub name/repos for this project.
 

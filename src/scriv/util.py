@@ -7,7 +7,8 @@ import functools
 import logging
 import re
 import sys
-from typing import Dict, Optional, Sequence, Tuple, TypeVar
+from collections.abc import Sequence
+from typing import TypeVar
 
 import click_log
 
@@ -18,8 +19,8 @@ K = TypeVar("K")
 
 
 def order_dict(
-    d: Dict[Optional[K], T], keys: Sequence[Optional[K]]
-) -> Dict[Optional[K], T]:
+    d: dict[K | None, T], keys: Sequence[K | None]
+) -> dict[K | None, T]:
     """
     Produce an OrderedDict of `d`, but with the keys in `keys` order.
 
@@ -40,7 +41,7 @@ def order_dict(
     return with_order
 
 
-def partition_lines(text: str, marker: str) -> Tuple[str, str, str]:
+def partition_lines(text: str, marker: str) -> tuple[str, str, str]:
     """
     Split `text` by lines, similar to str.partition.
 
@@ -102,7 +103,7 @@ class Version:
         return hash(self.vtext.lstrip("v"))
 
     @classmethod
-    def from_text(cls, text: str) -> Optional[Version]:
+    def from_text(cls, text: str) -> Version | None:
         """Find a version number in a text string."""
         m = re.search(VERSION_REGEX, text)
         if m:
