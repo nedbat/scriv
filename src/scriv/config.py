@@ -121,7 +121,8 @@ class _Options:
     md_header_level = attr.ib(
         type=str,
         default="1",
-        validator=attr.validators.matches_re(r"[123456]"),
+        validator=attr.validators.in_((*"123456", 1, 2, 3, 4, 5, 6)),
+        converter=str,
         metadata={
             "doc": """\
                 A number: for Markdown changelog files, this is the heading
@@ -352,6 +353,8 @@ class Config:
                 except KeyError:
                     pass
                 else:
+                    if attrdef.converter is not None:
+                        val = attrdef.converter(val)
                     setattr(self._options, attrdef.name, val)
 
     def resolve_value(self, value: str) -> str:
