@@ -441,7 +441,7 @@ def test_convert_to_markdown(rst_text, md_text):
 
             .. _pull 91: https://github.com/joe/project/91
             """,
-            "Reference not found for 'jane contributor <",
+            "[WARNING] Reference not found for 'pull91'",
         ),
     ],
 )
