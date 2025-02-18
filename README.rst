@@ -67,6 +67,7 @@ Contributions are very welcome.  Thanks to all the contributors so far:
 | Javier Sagredo
 | Kurt McKee
 | Matias Guijarro
+| Michael Makukha
 | Rodrigo Girão Serrão
 | Ronny Pfannschmidt
 
