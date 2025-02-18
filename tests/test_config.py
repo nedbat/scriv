@@ -346,6 +346,7 @@ class TestTomlConfig:
             config = Config.read()
         assert config.categories[0] == "Removed"
 
+    @pytest.mark.skipif(tomllib is None, reason="No TOML support installed")
     def test_nonstring_options(self, temp_dir):
         # Some config options are allowed to be e.g. TOML integers; for these,
         # both string and non-string values are valid.
