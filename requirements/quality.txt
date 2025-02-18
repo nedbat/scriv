@@ -8,38 +8,38 @@ alabaster==0.7.16
     # via
     #   -r requirements/doc.txt
     #   sphinx
-astroid==3.3.5
+astroid==3.3.8
     # via
     #   -r requirements/doc.txt
     #   -r requirements/test.txt
     #   pylint
-attrs==24.2.0
+attrs==25.1.0
     # via
     #   -r requirements/doc.txt
     #   -r requirements/test.txt
-babel==2.16.0
+babel==2.17.0
     # via
     #   -r requirements/doc.txt
     #   sphinx
 backports-tarfile==1.2.0
     # via jaraco-context
-black==24.10.0
+black==25.1.0
     # via -r requirements/quality.in
 build==1.2.2.post1
     # via check-manifest
-certifi==2024.8.30
+certifi==2025.1.31
     # via
     #   -r requirements/doc.txt
     #   -r requirements/test.txt
     #   requests
-charset-normalizer==3.4.0
+charset-normalizer==3.4.1
     # via
     #   -r requirements/doc.txt
     #   -r requirements/test.txt
     #   requests
 check-manifest==0.50
     # via -r requirements/quality.in
-click==8.1.7
+click==8.1.8
     # via
     #   -r requirements/doc.txt
     #   -r requirements/test.txt
@@ -51,7 +51,7 @@ click-log==0.4.0
     #   -r requirements/test.txt
 cogapp==3.4.1
     # via -r requirements/doc.txt
-coverage==7.6.4
+coverage==7.6.12
     # via
     #   -r requirements/doc.txt
     #   -r requirements/test.txt
@@ -79,6 +79,8 @@ freezegun==1.5.1
     # via
     #   -r requirements/doc.txt
     #   -r requirements/test.txt
+id==1.5.0
+    # via twine
 idna==3.10
     # via
     #   -r requirements/doc.txt
@@ -88,7 +90,7 @@ imagesize==1.4.1
     # via
     #   -r requirements/doc.txt
     #   sphinx
-importlib-metadata==8.5.0
+importlib-metadata==8.6.1
     # via
     #   -r requirements/doc.txt
     #   build
@@ -100,7 +102,7 @@ iniconfig==2.0.0
     #   -r requirements/doc.txt
     #   -r requirements/test.txt
     #   pytest
-isort==5.13.2
+isort==6.0.0
     # via
     #   -r requirements/doc.txt
     #   -r requirements/quality.in
@@ -112,17 +114,17 @@ jaraco-context==6.0.1
     # via keyring
 jaraco-functools==4.1.0
     # via keyring
-jedi==0.19.1
+jedi==0.19.2
     # via
     #   -r requirements/doc.txt
     #   -r requirements/test.txt
     #   pudb
-jinja2==3.1.4
+jinja2==3.1.5
     # via
     #   -r requirements/doc.txt
     #   -r requirements/test.txt
     #   sphinx
-keyring==25.5.0
+keyring==25.6.0
     # via twine
 markdown-it-py==3.0.0
     # via
@@ -144,19 +146,19 @@ mdurl==0.1.2
     #   -r requirements/doc.txt
     #   -r requirements/test.txt
     #   markdown-it-py
-more-itertools==10.5.0
+more-itertools==10.6.0
     # via
     #   jaraco-classes
     #   jaraco-functools
-mypy==1.13.0
+mypy==1.15.0
     # via -r requirements/quality.in
 mypy-extensions==1.0.0
     # via
     #   black
     #   mypy
-nh3==0.2.18
+nh3==0.2.20
     # via readme-renderer
-packaging==24.1
+packaging==24.2
     # via
     #   -r requirements/doc.txt
     #   -r requirements/test.txt
@@ -165,6 +167,7 @@ packaging==24.1
     #   pudb
     #   pytest
     #   sphinx
+    #   twine
 parso==0.8.4
     # via
     #   -r requirements/doc.txt
@@ -172,12 +175,10 @@ parso==0.8.4
     #   jedi
 pathspec==0.12.1
     # via black
-pbr==6.1.0
+pbr==6.1.1
     # via
     #   -r requirements/doc.txt
     #   stevedore
-pkginfo==1.10.0
-    # via twine
 platformdirs==4.3.6
     # via
     #   -r requirements/doc.txt
@@ -197,7 +198,7 @@ pycodestyle==2.12.1
     # via -r requirements/quality.in
 pydocstyle==6.3.0
     # via -r requirements/quality.in
-pygments==2.18.0
+pygments==2.19.1
     # via
     #   -r requirements/doc.txt
     #   -r requirements/test.txt
@@ -206,7 +207,7 @@ pygments==2.18.0
     #   readme-renderer
     #   rich
     #   sphinx
-pylint==3.3.1
+pylint==3.3.4
     # via
     #   -r requirements/doc.txt
     #   -r requirements/quality.in
@@ -244,13 +245,14 @@ requests==2.32.3
     # via
     #   -r requirements/doc.txt
     #   -r requirements/test.txt
+    #   id
     #   requests-toolbelt
     #   responses
     #   sphinx
     #   twine
 requests-toolbelt==1.0.0
     # via twine
-responses==0.25.3
+responses==0.25.6
     # via
     #   -r requirements/doc.txt
     #   -r requirements/test.txt
@@ -262,7 +264,7 @@ rfc3986==2.0.0
     # via twine
 rich==13.9.4
     # via twine
-six==1.16.0
+six==1.17.0
     # via
     #   -r requirements/doc.txt
     #   -r requirements/test.txt
@@ -277,7 +279,7 @@ sphinx==7.4.7
     #   -r requirements/doc.txt
     #   sphinx-rtd-theme
     #   sphinxcontrib-jquery
-sphinx-rtd-theme==3.0.1
+sphinx-rtd-theme==3.0.2
     # via -r requirements/doc.txt
 sphinxcontrib-applehelp==2.0.0
     # via
@@ -307,11 +309,11 @@ sphinxcontrib-serializinghtml==2.0.0
     # via
     #   -r requirements/doc.txt
     #   sphinx
-stevedore==5.3.0
+stevedore==5.4.0
     # via
     #   -r requirements/doc.txt
     #   doc8
-tomli==2.0.2
+tomli==2.2.1
     # via
     #   -r requirements/doc.txt
     #   -r requirements/test.txt
@@ -328,11 +330,11 @@ tomlkit==0.13.2
     #   -r requirements/doc.txt
     #   -r requirements/test.txt
     #   pylint
-twine==5.1.1
+twine==6.1.0
     # via -r requirements/quality.in
 types-freezegun==1.1.10
     # via -r requirements/quality.in
-types-pyyaml==6.0.12.20240917
+types-pyyaml==6.0.12.20241230
     # via -r requirements/quality.in
 types-requests==2.32.0.20241016
     # via -r requirements/quality.in
@@ -348,7 +350,7 @@ typing-extensions==4.12.2
     #   pylint
     #   rich
     #   urwid
-urllib3==2.2.3
+urllib3==2.3.0
     # via
     #   -r requirements/doc.txt
     #   -r requirements/test.txt
@@ -372,7 +374,7 @@ wcwidth==0.2.13
     #   -r requirements/doc.txt
     #   -r requirements/test.txt
     #   urwid
-zipp==3.20.2
+zipp==3.21.0
     # via
     #   -r requirements/doc.txt
     #   importlib-metadata
