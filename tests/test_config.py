@@ -66,6 +66,7 @@ categories = [
     "Gone",
     "Bad",
 ]
+# other scriv options
 
 ["more stuff"]
 value = 17
@@ -344,6 +345,17 @@ class TestTomlConfig:
         with without_module(scriv.config, "tomllib"):
             config = Config.read()
         assert config.categories[0] == "Removed"
+
+    def test_nonstring_options(self, temp_dir):
+        # Some config options are allowed to be e.g. TOML integers; for these,
+        # both string and non-string values are valid.
+        marker = "# other scriv options"
+        for value in ('"6"', "6"):
+            custom = f"{marker}\nmd_header_level = {value}"
+            CUSTOM_TOML = TOML_CONFIG.replace(marker, custom)
+            (temp_dir / "pyproject.toml").write_text(CUSTOM_TOML)
+            config = Config.read()
+            assert config.md_header_level == "6"
 
 
 @pytest.mark.parametrize(
