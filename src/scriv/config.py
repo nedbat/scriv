@@ -122,6 +122,7 @@ class _Options:
         type=str,
         default="1",
         validator=attr.validators.matches_re(r"[123456]"),
+        converter=attr.converters.optional(str),
         metadata={
             "doc": """\
                 A number: for Markdown changelog files, this is the heading
@@ -352,6 +353,8 @@ class Config:
                 except KeyError:
                     pass
                 else:
+                    if callable(attrdef.converter):
+                        val = attrdef.converter(val)
                     setattr(self._options, attrdef.name, val)
 
     def resolve_value(self, value: str) -> str:
