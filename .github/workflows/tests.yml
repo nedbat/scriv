@@ -20,7 +20,7 @@ concurrency:
 
 env:
   PIP_DISABLE_PIP_VERSION_CHECK: 1
-  PANDOC_VER: 2.18
+  PANDOC_VER: 3.6.3
 
 jobs:
   tests:
