@@ -7,7 +7,7 @@ from scriv.shell import run_command
 
 
 def test_dashm():
-    ok, output = run_command([sys.executable, "-m", "scriv"])
+    ok, output = run_command([sys.executable, "-m", "scriv", "--help"])
     print(output)
     assert ok
     assert "Usage: scriv [OPTIONS] COMMAND [ARGS]..." in output
