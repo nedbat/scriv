@@ -91,7 +91,8 @@ def _new_fragment_path(config: Config) -> Path:
 def _new_fragment_content(config: Config) -> str:
     """Produce the initial content of a scriv fragment."""
     return jinja2.Template(
-        textwrap.dedent(config.new_fragment_template)
+        textwrap.dedent(config.new_fragment_template),
+        keep_trailing_newline=True,
     ).render(config=config)
 
 
