@@ -230,7 +230,7 @@ If your changelog file is in reStructuredText format, you will need `pandoc`_
 
 .. _pandoc: https://pandoc.org/
 
-scriv github-release
+scriv print
 ====================
 
 .. [[[cog show_help("print") ]]]
@@ -249,11 +249,11 @@ scriv github-release
       --help               Show this message and exit.
 .. [[[end]]] (checksum: f652a3470da5f726b13ba076471b2444)
 
-The ``print`` command writes a changelog entry to STDOUT.
+The ``print`` command writes a changelog entry to standard out.
 
 If ``--output`` is provided, the changelog entry is written to the given file.
 
-If ``--version`` is given, the changelog entry is extracted from the CHANGELOG;
-if not, then the changelog entry is generated from fragment files.
+If ``--version`` is given, the requested changelog entry is extracted from the CHANGELOG.
+If not, then the changelog entry is generated from uncollected fragment files.
 
 .. include:: include/links.rst
