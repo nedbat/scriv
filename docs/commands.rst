@@ -253,7 +253,8 @@ The ``print`` command writes a changelog entry to standard out.
 
 If ``--output`` is provided, the changelog entry is written to the given file.
 
-If ``--version`` is given, the requested changelog entry is extracted from the CHANGELOG.
+If ``--version`` is given, the requested changelog entry is extracted
+from the CHANGELOG.
 If not, then the changelog entry is generated from uncollected fragment files.
 
 .. include:: include/links.rst
