@@ -231,7 +231,7 @@ If your changelog file is in reStructuredText format, you will need `pandoc`_
 .. _pandoc: https://pandoc.org/
 
 scriv print
-====================
+===========
 
 .. [[[cog show_help("print") ]]]
 
