@@ -44,7 +44,7 @@ docs: botedits ## generate Sphinx HTML documentation, including API docs
 	tox -e docs
 	$(BROWSER)docs/_build/html/index.html
 
-PIP_COMPILE = pip-compile --upgrade --resolver=backtracking
+PIP_COMPILE = pip-compile --upgrade --resolver=backtracking --no-strip-extras
 upgrade: export CUSTOM_COMPILE_COMMAND=make upgrade
 upgrade: ## update the requirements/*.txt files with the latest packages satisfying requirements/*.in
 	pip install -qr requirements/pip-tools.txt
