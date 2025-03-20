@@ -56,11 +56,6 @@ upgrade: ## update the requirements/*.txt files with the latest packages satisfy
 	$(PIP_COMPILE) -o requirements/quality.txt requirements/quality.in
 	$(PIP_COMPILE) -o requirements/tox.txt requirements/tox.in
 	$(PIP_COMPILE) -o requirements/dev.txt requirements/dev.in
-	# Splice requirements/base.in into setup.cfg
-	sed -n -e '1,/begin_install_requires/p' < setup.cfg > setup.tmp
-	sed -n -e '/^[a-zA-Z]/s/^/    /p' < requirements/base.in >> setup.tmp
-	sed -n -e '/end_install_requires/,$$p' < setup.cfg >> setup.tmp
-	mv setup.tmp setup.cfg
 
 diff_upgrade: ## summarize the last `make upgrade`
 	@# The sort flags sort by the package name first, then by the -/+, and
@@ -72,7 +67,7 @@ diff_upgrade: ## summarize the last `make upgrade`
 	@git diff -U0 | grep -v '^@' | grep == | sort -k1.2,1.99 -k1.1,1.1r -u -V
 
 botedits: ## make source edits by tools
-	python -m black --line-length=80 src/scriv tests docs setup.py
+	python -m black --line-length=80 src/scriv tests docs
 	python -m cogapp -crP docs/*.rst
 
 quality: ## check coding style with pycodestyle and pylint
