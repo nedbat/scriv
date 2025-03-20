@@ -5,6 +5,6 @@
 attrs
 click
 click-log
-jinja2
+jinja2>=2.7
 markdown-it-py
 requests
