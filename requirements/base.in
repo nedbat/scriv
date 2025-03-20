@@ -1,10 +1,4 @@
 # Core requirements for using this application
 
 -c constraints.txt
-
-attrs
-click
-click-log
-jinja2>=2.7
-markdown-it-py
-requests
+-r core.txt
