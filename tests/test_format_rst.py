@@ -402,10 +402,10 @@ def test_fake_pandoc_failing(fake_run_command):
             __ https://github.com/joe/project/issues/999
             """,
             """\
-            -   One issue fixed: [issue 123](https://github.com/joe/project/issues/123).
-            -   One change merged: [Big change](https://github.com/joe/project/pull/234).
-            -   Improved the [home page](https://example.com/homepage).
-            -   One more [small change](https://github.com/joe/project/issues/999).
+            - One issue fixed: [issue 123](https://github.com/joe/project/issues/123).
+            - One change merged: [Big change](https://github.com/joe/project/pull/234).
+            - Improved the [home page](https://example.com/homepage).
+            - One more [small change](https://github.com/joe/project/issues/999).
             """,
         ),
     ],
