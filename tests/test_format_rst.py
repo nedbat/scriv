@@ -389,6 +389,8 @@ def test_fake_pandoc_failing(fake_run_command):
     [
         (
             """\
+            Look at this list:
+
             - One issue fixed: `issue 123`_.
 
             - One change merged: `Big change <pull 234_>`_.
@@ -402,6 +404,8 @@ def test_fake_pandoc_failing(fake_run_command):
             __ https://github.com/joe/project/issues/999
             """,
             """\
+            Look at this list:
+
             - One issue fixed: [issue 123](https://github.com/joe/project/issues/123).
             - One change merged: [Big change](https://github.com/joe/project/pull/234).
             - Improved the [home page](https://example.com/homepage).
@@ -412,6 +416,10 @@ def test_fake_pandoc_failing(fake_run_command):
 )
 def test_convert_to_markdown(rst_text, md_text):
     converted = RstTools().convert_to_markdown(textwrap.dedent(rst_text))
+    # Different versions of pandoc produce slightly different results.  But the
+    # markdown is rendered the same regardless of spaces after the
+    # bullet-hyphens, so fix them.
+    converted = re.sub(r"(?m)^-\s+", "- ", converted)
     expected = textwrap.dedent(md_text)
     assert expected == converted
 
