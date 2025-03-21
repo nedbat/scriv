@@ -14,7 +14,7 @@ BROWSER := python -m webbrowser file://$(CURDIR)/
 
 # This runs a Python command for every make invocation, but it's fast enough.
 # Is there a way to do it only when needed?
-VERSION := $(shell python -c "from setuptools import setup; setup()" --version)
+VERSION := $(shell python -c "import build.util as bu; print(bu.project_wheel_metadata('.')['Version'])")
 export VERSION
 
 .PHONY: help clean sterile
