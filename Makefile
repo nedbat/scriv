@@ -12,10 +12,8 @@
 # For opening files in a browser. Use like: $(BROWSER)relative/path/to/file.html
 BROWSER := python -m webbrowser file://$(CURDIR)/
 
-# This runs a Python command for every make invocation, but it's fast enough.
-# Is there a way to do it only when needed?
-VERSION := $(shell python -c "import build.util as bu; print(bu.project_wheel_metadata('.')['Version'])")
-export VERSION
+# A command to get the current version.  A little slow, but only run when needed.
+VERSION := $$(python -c "import build.util as bu; print(bu.project_wheel_metadata('.')['Version'])")
 
 .PHONY: help clean sterile
 
@@ -108,7 +106,7 @@ testpypi: ## upload the distrubutions to PyPI's testing server.
 	python -m twine upload --verbose --repository testpypi dist/*
 
 tag: ## make a git tag with the version number
-	git tag -s -m "Version $$VERSION" $$VERSION
+	git tag -s -m "Version $(VERSION)" $(VERSION)
 	git push --all
 
 gh_release: ## make a GitHub release
@@ -116,7 +114,7 @@ gh_release: ## make a GitHub release
 
 comment_text:
 	@echo "Use this to comment on issues and pull requests:"
-	@echo "This is now released as part of [scriv $$VERSION](https://pypi.org/project/scriv/$$VERSION)."
+	@echo "This is now released as part of [scriv $(VERSION)](https://pypi.org/project/scriv/$(VERSION))."
 
 
 .PHONY: release check_release _check_credentials _check_manifest _check_tree _check_version _check_scriv _check_links
@@ -142,7 +140,7 @@ _check_tree:
 	fi
 
 _check_version:
-	@if [[ $$(git tags | grep -q -w $$VERSION && echo "x") == "x" ]]; then \
+	@if [[ $$(git tags | grep -q -w $(VERSION) && echo "x") == "x" ]]; then \
 		echo 'A git tag for this version exists! Did you forget to bump the version in src/scriv/__init__.py?'; \
 		exit 1; \
 	fi
