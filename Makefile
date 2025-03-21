@@ -15,6 +15,11 @@
 # For opening files in a browser. Use like: $(BROWSER)relative/path/to/file.html
 BROWSER := python -m webbrowser file://$(CURDIR)/
 
+# This runs a Python command for every make invocation, but it's fast enough.
+# Is there a way to do it only when needed?
+VERSION := $(shell python -c "from setuptools import setup; setup()" --version)
+export VERSION
+
 help: ## display this help message
 	@echo "Please use \`make <target>' where <target> is one of"
 	@awk -F ':.*?## ' '/^[a-zA-Z]/ && NF==2 {printf "\033[36m  %-25s\033[0m %s\n", $$1, $$2}' $(MAKEFILE_LIST) | sort
@@ -97,7 +102,7 @@ testpypi: ## Upload the distrubutions to PyPI's testing server.
 	python -m twine upload --verbose --repository testpypi dist/*
 
 tag: ## Make a git tag with the version number
-	git tag -s -m "Version $$(python setup.py --version)" $$(python setup.py --version)
+	git tag -s -m "Version $$VERSION" $$VERSION
 	git push --all
 
 gh_release: ## Make a GitHub release
@@ -105,8 +110,7 @@ gh_release: ## Make a GitHub release
 
 comment_text:
 	@echo "Use this to comment on issues and pull requests:"
-	@export V=$$(python setup.py --version); \
-		echo "This is now released as part of [scriv $$V](https://pypi.org/project/scriv/$$V)."
+	@echo "This is now released as part of [scriv $$VERSION](https://pypi.org/project/scriv/$$VERSION)."
 
 .PHONY: release check_release _check_credentials _check_manifest _check_version _check_scriv
 
@@ -131,7 +135,7 @@ _check_tree:
 	fi
 
 _check_version:
-	@if [[ $$(git tags | grep -q -w $$(python setup.py --version) && echo "x") == "x" ]]; then \
+	@if [[ $$(git tags | grep -q -w $$VERSION && echo "x") == "x" ]]; then \
 		echo 'A git tag for this version exists! Did you forget to bump the version in src/scriv/__init__.py?'; \
 		exit 1; \
 	fi
