@@ -6,7 +6,7 @@ description = "Scriv changlog management tool"
 authors = [
     {name = "Ned Batchelder", email = "ned@nedbatchelder.com"},
 ]
-license.text = "Apache-2.0"
+license = "Apache-2.0"
 classifiers = [
     "Development Status :: 5 - Production/Stable",
     "Intended Audience :: Developers",
