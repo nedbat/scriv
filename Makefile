@@ -98,20 +98,20 @@ validate: clean botedits quality test ## run tests and quality checks
 
 .PHONY: dist pypi testpypi tag gh_release comment_text
 
-dist: ## Build the distributions
+dist: ## build the distributions
 	python -m build --sdist --wheel
 
-pypi: ## Upload the built distributions to PyPI.
+pypi: ## upload the built distributions to PyPI.
 	python -m twine upload --verbose dist/*
 
-testpypi: ## Upload the distrubutions to PyPI's testing server.
+testpypi: ## upload the distrubutions to PyPI's testing server.
 	python -m twine upload --verbose --repository testpypi dist/*
 
-tag: ## Make a git tag with the version number
+tag: ## make a git tag with the version number
 	git tag -s -m "Version $$VERSION" $$VERSION
 	git push --all
 
-gh_release: ## Make a GitHub release
+gh_release: ## make a GitHub release
 	python -m scriv github-release --all --fail-if-warn --check-links
 
 comment_text:
