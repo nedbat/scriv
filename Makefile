@@ -81,6 +81,7 @@ quality: ## check coding style with pycodestyle and pylint
 requirements: ## install development environment requirements
 	pip install -qr requirements/pip-tools.txt
 	pip-sync requirements/dev.txt
+	pip install -e .
 
 test: ## run tests in the current virtualenv
 	tox -e py39
