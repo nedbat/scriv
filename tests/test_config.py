@@ -134,7 +134,7 @@ def test_reading_config_from_other_directory(temp_dir):
     assert config.categories == ["New", "Different", "Gone", "Bad"]
 
 
-def test_unknown_option():
+def test_unknown_option(temp_dir):
     config = Config.read()
     expected = "Scriv configuration has no 'foo' option"
     with pytest.raises(AttributeError, match=expected):

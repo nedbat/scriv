@@ -70,37 +70,6 @@ line_length = 80
 multi_line_output = 3
 include_trailing_comma = true
 
-[tool.pytest]
-addopts = "-rfe"
-norecursedirs = [".*", "docs", "requirements"]
-
-[tool.coverage.run]
-branch = true
-source = [
-    "scriv",
-    "tests",
-]
-omit = [
-    "*/__main__.py",
-]
-
-[tool.coverage.report]
-precision = 2
-exclude_also = [
-    "def __repr__",
-]
-
-[tool.coverage.paths]
-source = [
-    "src",
-    "*/site-packages",
-]
-
-others = [
-    ".",
-    "*/scriv",
-]
-
 [tool.mypy]
 python_version = "3.9"
 show_column_numbers = true
