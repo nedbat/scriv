@@ -1,5 +1,6 @@
 include .editorconfig
 include .ignore
+include .mailmap
 include .readthedocs.yaml
 include CHANGELOG.rst
 include LICENSE.txt
