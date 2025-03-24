@@ -419,7 +419,7 @@ User Nickname
 
 Scriv includes your git or GitHub username in the file names of changelog
 fragments you create.  If you don't like the name it finds for you, you can set
-a name as the ``scriv.user_nick`` git setting.
+customize the name using the ``scriv.user-nick`` git setting.
 
 
 .. _git config: https://git-scm.com/book/en/v2/Customizing-Git-Git-Configuration
