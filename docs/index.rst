@@ -123,7 +123,7 @@ Thanks to all the contributors so far:
     :target: https://github.com/nedbat/scriv/blob/master/LICENSE.txt
     :alt: License
 
-.. |mastodon-nedbat| image:: https://img.shields.io/badge/dynamic/json?style=flat&labelColor=450657&logo=mastodon&logoColor=ffffff&link=https%3A%2F%2Fhachyderm.io%2F%40nedbat&url=https%3A%2F%2Fhachyderm.io%2Fusers%2Fnedbat%2Ffollowers.json&query=totalItems&label=Mastodon
+.. |mastodon-nedbat| image:: https://img.shields.io/badge/dynamic/json?style=flat&labelColor=450657&logo=mastodon&logoColor=ffffff&label=@nedbat&query=followers_count&url=https%3A%2F%2Fhachyderm.io%2Fapi%2Fv1%2Faccounts%2Flookup%3Facct=nedbat
     :target: https://hachyderm.io/@nedbat
     :alt: nedbat on Mastodon
 
@@ -131,4 +131,4 @@ Thanks to all the contributors so far:
     :target: https://github.com/sponsors/nedbat
     :alt: Sponsor me on GitHub
 
-.. [[[end]]] (checksum: 352ff7e93ca0b80b402cbc07179c225f)
+.. [[[end]]] (checksum: 3a958798766e0a796f8054904e9005c2)
