@@ -2,7 +2,7 @@
 
 [project]
 name = "scriv"
-description = "Scriv changlog management tool"
+description = "Scriv changelog management tool"
 authors = [
     {name = "Ned Batchelder", email = "ned@nedbatchelder.com"},
 ]
