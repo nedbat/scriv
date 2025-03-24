@@ -129,6 +129,10 @@ _check_credentials:
 		echo 'Missing TWINE_PASSWORD: opvars'; \
 		exit 1; \
 	fi
+	@if [[ -z "$$GITHUB_TOKEN" ]]; then \
+		echo 'Missing GITHUB_TOKEN: opvars github'; \
+		exit 1; \
+	fi
 
 _check_manifest:
 	python -m check_manifest
