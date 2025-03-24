@@ -128,3 +128,33 @@ def test_update_release_fails(responses):
     release = {"url": url}
     with pytest.raises(requests.HTTPError, match="500 Server Error"):
         update_release(release, RELEASE_DATA)
+
+
+def test_authentication(responses, monkeypatch):
+    # Neuter any .netrc file lying around.
+    monkeypatch.setenv("NETRC", "no-such-file")
+
+    url = "https://api.github.com/repos/user/project/something"
+
+    responses.get(
+        url,
+        json=["logged in"],
+        match=[
+            responses.matchers.header_matcher(
+                {"Authorization": "Bearer jabberwocky"}
+            )
+        ],
+    )
+    responses.get(
+        url,
+        json=["anonymous"],
+        match=[responses.matchers.header_matcher({})],
+    )
+
+    res = list(github_paginated(url))
+    assert res == ["anonymous"]
+
+    with monkeypatch.context() as m:
+        m.setenv("GITHUB_TOKEN", "jabberwocky")
+        res = list(github_paginated(url))
+        assert res == ["logged in"]
