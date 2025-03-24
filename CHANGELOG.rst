@@ -21,6 +21,17 @@ See the fragment files in the `changelog.d directory`_.
 
 .. scriv-insert-here
 
+.. _changelog-1.6.1:
+
+1.6.1 — 2025-03-24
+------------------
+
+Fixed
+.....
+
+- Corrected two minor packaging errors: the Mastodon badge and a typo in the
+  short description.
+
 .. _changelog-1.6.0:
 
 1.6.0 — 2025-03-24
