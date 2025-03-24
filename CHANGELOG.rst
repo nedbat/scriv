@@ -21,6 +21,38 @@ See the fragment files in the `changelog.d directory`_.
 
 .. scriv-insert-here
 
+.. _changelog-1.6.0:
+
+1.6.0 — 2025-03-24
+------------------
+
+Added
+.....
+
+- Add a ``print`` command that can write changelog entries to standard out
+  or to a file, closing `issue 115`_. Thanks, `Kurt McKee <pull 140_>`_
+
+Changed
+.......
+
+- Dropped support for Python 3.7 and 3.8, and added 3.13.
+
+Fixed
+.....
+
+- A final newline is no longer stripped when rendering the new fragment
+  template, fixing `issue 108`_.
+
+- Configuration setting ``md_header_level`` is allowed to be an integer in
+  TOML files, closing `issue 90`_.  Thanks, `Michael Makukha <pull 137_>`_.
+
+.. _issue 90: https://github.com/nedbat/scriv/issues/90
+.. _issue 108: https://github.com/nedbat/scriv/issues/108
+.. _issue 115: https://github.com/nedbat/scriv/issues/115
+.. _pull 137: https://github.com/nedbat/scriv/pull/137
+.. _pull 140: https://github.com/nedbat/scriv/pull/140
+
+
 .. _changelog-1.5.1:
 
 1.5.1 — 2023-12-14

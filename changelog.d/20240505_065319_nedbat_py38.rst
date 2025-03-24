@@ -1,4 +1,0 @@
-Changed
-.......
-
-- Dropped support for Python 3.7 and 3.8, and added 3.13.
