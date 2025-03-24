@@ -64,7 +64,7 @@ colorama==0.4.6
     # via
     #   -r requirements/tox.txt
     #   tox
-coverage==7.7.0
+coverage==7.7.1
     # via -r requirements/quality.txt
 dill==0.3.9
     # via

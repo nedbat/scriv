@@ -30,7 +30,7 @@ click-log==0.4.0
     # via -r requirements/test.txt
 cogapp==3.4.1
     # via -r requirements/doc.in
-coverage==7.7.0
+coverage==7.7.1
     # via -r requirements/test.txt
 dill==0.3.9
     # via

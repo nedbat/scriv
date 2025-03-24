@@ -22,7 +22,7 @@ click==8.1.8
     #   click-log
 click-log==0.4.0
     # via -r requirements/base.txt
-coverage==7.7.0
+coverage==7.7.1
     # via -r requirements/test.in
 dill==0.3.9
     # via pylint
