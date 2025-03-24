@@ -1,4 +1,3 @@
 # Tox and related requirements.
--c constraints.txt
 
 tox                       # Virtualenv management for tests

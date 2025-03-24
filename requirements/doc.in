@@ -1,5 +1,4 @@
 # Requirements for documentation validation
--c constraints.txt
 
 -r test.txt               # Core and testing dependencies for this package
 
