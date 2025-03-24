@@ -9,6 +9,7 @@ from . import __version__
 from .collect import collect
 from .create import create
 from .ghrel import github_release
+from .print import print_
 
 click_log.basic_config(logging.getLogger())
 
@@ -28,3 +29,4 @@ def cli() -> None:  # noqa: D401
 cli.add_command(create)
 cli.add_command(collect)
 cli.add_command(github_release)
+cli.add_command(print_)

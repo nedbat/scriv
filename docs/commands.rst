@@ -230,4 +230,31 @@ If your changelog file is in reStructuredText format, you will need `pandoc`_
 
 .. _pandoc: https://pandoc.org/
 
+scriv print
+===========
+
+.. [[[cog show_help("print") ]]]
+
+.. code::
+
+    $ scriv print --help
+    Usage: scriv print [OPTIONS]
+
+      Print collected fragments, or print an entry from the changelog.
+
+    Options:
+      --version TEXT       The version of the changelog entry to extract.
+      --output PATH        The path to a file to write the output to.
+      -v, --verbosity LVL  Either CRITICAL, ERROR, WARNING, INFO or DEBUG
+      --help               Show this message and exit.
+.. [[[end]]] (checksum: f652a3470da5f726b13ba076471b2444)
+
+The ``print`` command writes a changelog entry to standard out.
+
+If ``--output`` is provided, the changelog entry is written to the given file.
+
+If ``--version`` is given, the requested changelog entry is extracted
+from the CHANGELOG.
+If not, then the changelog entry is generated from uncollected fragment files.
+
 .. include:: include/links.rst
