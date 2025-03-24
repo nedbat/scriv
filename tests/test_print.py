@@ -74,3 +74,19 @@ def test_print_changelog_output(
     assert output_file.read_bytes().decode() == FRAG.strip().replace(
         "\n", newline
     )
+
+
+def test_print_no_fragments(cli_invoke):
+    result = cli_invoke(["print"], expect_ok=False)
+
+    assert result.exit_code == 2
+    assert "No changelog fragments to collect" in result.stderr
+
+
+def test_print_version_not_in_changelog(cli_invoke, changelog_d, temp_dir):
+    (temp_dir / "CHANGELOG.rst").write_bytes(b"BOGUS\n=====\n\n1.0\n===")
+
+    result = cli_invoke(["print", "--version", "123.456"], expect_ok=False)
+
+    assert result.exit_code == 2
+    assert "Unable to find version 123.456 in the changelog" in result.stderr

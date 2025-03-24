@@ -52,9 +52,9 @@ def print_(
         newline = changelog.newline
         target_version = Version(version)
         for etitle, sections in changelog.entries().items():
-            if etitle is None:
+            eversion = Version.from_text(str(etitle))
+            if eversion is None:
                 continue
-            eversion = Version.from_text(etitle)
             if eversion == target_version:
                 contents = f"{changelog.newline * 2}".join(sections).strip()
                 break
