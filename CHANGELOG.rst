@@ -21,6 +21,21 @@ See the fragment files in the `changelog.d directory`_.
 
 .. scriv-insert-here
 
+.. _changelog-1.6.2:
+
+1.6.2 — 2025-03-30
+------------------
+
+Fixed
+.....
+
+- Replaced the invalid GitHub config key ``scriv.user_nick`` with
+  ``scriv.user-nick``.  Fixes `issue 130`_.
+  Thanks, `Mark Dickinson <pull 131_>`_.
+
+.. _issue 130: https://github.com/nedbat/scriv/issues/130
+.. _pull 131: https://github.com/nedbat/scriv/pull/131/files
+
 .. _changelog-1.6.1:
 
 1.6.1 — 2025-03-24
