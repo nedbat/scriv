@@ -18,7 +18,7 @@ def user_nick() -> str:
     """
     Get a short name for the current user.
     """
-    nick = git_config("scriv.user_nick")
+    nick = git_config("scriv.user-nick")
     if nick:
         return nick
 

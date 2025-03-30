@@ -88,12 +88,13 @@ Thanks to all the contributors so far:
 | James Gerity
 | Javier Sagredo
 | Kurt McKee
+| Mark Dickinson
 | Matias Guijarro
 | Michael Makukha
 | Rodrigo Girão Serrão
 | Ronny Pfannschmidt
 
-.. [[[end]]] (checksum: 69c390284832f0854ceb4ef0a1f1042c)
+.. [[[end]]] (checksum: 38a9f227f719032ff5b67bcc50bb7276)
 
 .. _repo: https://github.com/nedbat/scriv
 

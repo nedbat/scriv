@@ -1,0 +1,9 @@
+Fixed
+.....
+
+- Replaced the invalid GitHub config key ``scriv.user_nick`` with
+  ``scriv.user-nick``.  Fixes `issue 130`_.
+  Thanks, `Mark Dickinson <pull 131_>`_.
+
+.. _issue 130: https://github.com/nedbat/scriv/issues/130
+.. _pull 131: https://github.com/nedbat/scriv/pull/131/files

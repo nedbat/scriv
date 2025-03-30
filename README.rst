@@ -66,6 +66,7 @@ Contributions are very welcome.  Thanks to all the contributors so far:
 | James Gerity
 | Javier Sagredo
 | Kurt McKee
+| Mark Dickinson
 | Matias Guijarro
 | Michael Makukha
 | Rodrigo Girão Serrão
