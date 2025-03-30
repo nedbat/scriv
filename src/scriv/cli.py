@@ -16,7 +16,7 @@ click_log.basic_config(logging.getLogger())
 
 @click.group(
     help=f"""\
-        Manage changelogs.
+        Manage changelogs.  https://scriv.readthedocs.io/
 
         Version {__version__}
     """
