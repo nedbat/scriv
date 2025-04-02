@@ -7,7 +7,8 @@ Scriv changelog management tool
 .. begin-badges
 
 | |pypi-badge| |ci-badge| |coverage-badge| |doc-badge|
-| |pyversions-badge| |license-badge| |sponsor-badge| |mastodon-nedbat|
+| |pyversions-badge| |license-badge|
+| |sponsor-badge| |bluesky-nedbat| |mastodon-nedbat|
 
 .. end
 
@@ -99,6 +100,10 @@ Contributions are very welcome.  Thanks to all the contributors so far:
 .. |license-badge| image:: https://img.shields.io/github/license/nedbat/scriv.svg
     :target: https://github.com/nedbat/scriv/blob/master/LICENSE.txt
     :alt: License
+
+.. |bluesky-nedbat| image:: https://img.shields.io/badge/dynamic/json?style=flat&color=96a3b0&labelColor=3686f7&logo=icloud&logoColor=white&label=@nedbat&url=https%3A%2F%2Fpublic.api.bsky.app%2Fxrpc%2Fapp.bsky.actor.getProfile%3Factor=nedbat.com&query=followersCount
+    :target: https://bsky.app/profile/nedbat.com
+    :alt: nedbat on Bluesky
 
 .. |mastodon-nedbat| image:: https://img.shields.io/badge/dynamic/json?style=flat&labelColor=450657&logo=mastodon&logoColor=ffffff&label=@nedbat&query=followers_count&url=https%3A%2F%2Fhachyderm.io%2Fapi%2Fv1%2Faccounts%2Flookup%3Facct=nedbat
     :target: https://hachyderm.io/@nedbat

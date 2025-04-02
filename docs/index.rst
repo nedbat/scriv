@@ -22,9 +22,10 @@ Scriv changelog management tool
 .. [[[cog include_readme_section("badges") ]]]
 
 | |pypi-badge| |ci-badge| |coverage-badge| |doc-badge|
-| |pyversions-badge| |license-badge| |sponsor-badge| |mastodon-nedbat|
+| |pyversions-badge| |license-badge|
+| |sponsor-badge| |bluesky-nedbat| |mastodon-nedbat|
 
-.. [[[end]]] (checksum: 8f16614e7d2eb8fa4e13bacbec12cb24)
+.. [[[end]]] (checksum: 7fdcea0e3dde536381ddf121907d2b69)
 
 Overview
 ========
@@ -124,6 +125,10 @@ Thanks to all the contributors so far:
     :target: https://github.com/nedbat/scriv/blob/master/LICENSE.txt
     :alt: License
 
+.. |bluesky-nedbat| image:: https://img.shields.io/badge/dynamic/json?style=flat&color=96a3b0&labelColor=3686f7&logo=icloud&logoColor=white&label=@nedbat&url=https%3A%2F%2Fpublic.api.bsky.app%2Fxrpc%2Fapp.bsky.actor.getProfile%3Factor=nedbat.com&query=followersCount
+    :target: https://bsky.app/profile/nedbat.com
+    :alt: nedbat on Bluesky
+
 .. |mastodon-nedbat| image:: https://img.shields.io/badge/dynamic/json?style=flat&labelColor=450657&logo=mastodon&logoColor=ffffff&label=@nedbat&query=followers_count&url=https%3A%2F%2Fhachyderm.io%2Fapi%2Fv1%2Faccounts%2Flookup%3Facct=nedbat
     :target: https://hachyderm.io/@nedbat
     :alt: nedbat on Mastodon
@@ -132,4 +137,4 @@ Thanks to all the contributors so far:
     :target: https://github.com/sponsors/nedbat
     :alt: Sponsor me on GitHub
 
-.. [[[end]]] (checksum: 3a958798766e0a796f8054904e9005c2)
+.. [[[end]]] (checksum: 8b12edabfa17d670355a58c750b0a648)
