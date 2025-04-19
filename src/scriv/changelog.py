@@ -60,7 +60,7 @@ class Changelog:
                     else:
                         self.newline = f.newlines[0]
             before, marker, after = partition_lines(
-                changelog_text, self.config.insert_marker
+                changelog_text, self.config.start_marker
             )
             if marker:
                 self.text_before = before + marker

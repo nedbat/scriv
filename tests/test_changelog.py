@@ -70,7 +70,7 @@ BODY_SECTIONS = {
 )
 def test_round_trip(text, temp_dir):
     path = temp_dir / "foo.rst"
-    config = Config(insert_marker="INSERT", end_marker="END")
+    config = Config(start_marker="INSERT", end_marker="END")
     path.write_text(text)
     changelog = Changelog(path, config)
     changelog.read()

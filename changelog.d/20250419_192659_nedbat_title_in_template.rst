@@ -16,9 +16,10 @@
 Changed
 .......
 
-- The ``output_file`` setting is now called ``changelog`` since some uses of
-  scriv only read the file.  An ``output_file`` entry in the config file will
-  still work to set the name.  Closes `issue 77`_.
+- Two settings have new names to better reflect what scriv does.
+  The ``output_file`` setting is now called ``changelog`` and the
+  ``insert_marker`` setting is now called ``start_marker``.
+  The old names will continue to work.  Closes `issue 77`_.
 
 .. _issue 77: https://github.com/nedbat/scriv/issues/77
 

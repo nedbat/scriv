@@ -59,7 +59,7 @@ class RstTools(FormatTools):
 
         # If there's an insert marker, start there.
         for lineno, line in enumerate(lines):
-            if self.config.insert_marker in line:
+            if self.config.start_marker in line:
                 lines = lines[lineno + 1 :]
                 break
         lines.append("")

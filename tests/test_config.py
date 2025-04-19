@@ -15,9 +15,12 @@ CONFIG1 = """\
 [scriv]
 changelog = README.md
 categories = New, Different, Gone, Bad
+start_marker = FIRST!
 """
 
-OLD_CONFIG1 = CONFIG1.replace("changelog = ", "output_file = ")
+OLD_CONFIG1 = CONFIG1.replace("changelog = ", "output_file = ").replace(
+    "start_marker = ", "insert_marker = "
+)
 
 CONFIG2 = """\
 [someotherthing]
@@ -68,6 +71,7 @@ categories = [
     "Gone",
     "Bad",
 ]
+start_marker = "FIRST!"
 # other scriv options
 
 ["more stuff"]
@@ -75,7 +79,9 @@ value = 17
 """
 )
 
-OLD_TOML_CONFIG = TOML_CONFIG.replace("changelog = ", "output_file = ")
+OLD_TOML_CONFIG = TOML_CONFIG.replace("changelog = ", "output_file = ").replace(
+    "start_marker = ", "insert_marker = "
+)
 
 
 def test_defaults(temp_dir):
@@ -95,7 +101,7 @@ def test_defaults(temp_dir):
         "Security",
     ]
     assert config.changelog == "CHANGELOG.rst"
-    assert config.insert_marker == "scriv-insert-here"
+    assert config.start_marker == "scriv-insert-here"
     assert config.rst_header_chars == "=-"
     assert config.md_header_level == "1"
     assert "{{ date.strftime('%Y-%m-%d') }}" in config.entry_title_template
@@ -111,6 +117,7 @@ def test_reading_config(config_text, temp_dir):
     assert config.fragment_directory == "changelog.d"
     assert config.changelog == "README.md"
     assert config.categories == ["New", "Different", "Gone", "Bad"]
+    assert config.start_marker == "FIRST!"
 
 
 def test_reading_config_list(temp_dir):
@@ -323,6 +330,7 @@ class TestTomlConfig:
         config = Config.read()
         assert config.changelog == "README.md"
         assert config.categories == ["New", "Different", "Gone", "Bad"]
+        assert config.start_marker == "FIRST!"
 
     def test_toml_without_us(self, temp_dir):
         (temp_dir / "pyproject.toml").write_text(GENERIC_TOML_CONFIG)

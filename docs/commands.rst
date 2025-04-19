@@ -139,7 +139,7 @@ the new entry with the ``--title`` option.
 The output file is specified by the :ref:`config_changelog` setting.  Scriv
 looks in the file for a special marker (usually in a comment) to determine
 where to insert the new entry.  The marker is "scriv-insert-here", but can be
-changed with the :ref:`config_insert_marker` setting.  Using a marker like
+changed with the :ref:`config_start_marker` setting.  Using a marker like
 this, you can have your changelog be just part of a larger README file.  If
 there is no marker in the file, the new entry is inserted at the top of the
 file.

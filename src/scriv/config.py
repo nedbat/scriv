@@ -83,13 +83,14 @@ class _Options:
         },
     )
 
-    insert_marker = attr.ib(
+    start_marker = attr.ib(
         type=str,
         default="scriv-insert-here",
         metadata={
             "doc": """\
                 A marker string indicating where in the changelog file new
-                entries should be inserted.
+                entries should be inserted.  The old name for this setting is
+                :ref:`insert_marker <deprecated_config>`.
                 """,
         },
     )
@@ -223,6 +224,13 @@ class _Options:
     )
 
 
+# Map of old config names to new config names.
+REPLACED_NAMES = [
+    ("output_file", "changelog"),
+    ("insert_marker", "start_marker"),
+]
+
+
 @contextlib.contextmanager
 def validator_exceptions():
     """
@@ -333,7 +341,8 @@ class Config:
             scriv_data = parser[section_name]
             for attrdef in attr.fields(_Options):
                 self.get_set_option(scriv_data, attrdef.name, attrdef.name)
-            self.get_set_option(scriv_data, "output_file", "changelog")
+            for old, new in REPLACED_NAMES:
+                self.get_set_option(scriv_data, old, new)
 
     def read_one_toml(self, tomlfile: str) -> None:
         """
@@ -368,7 +377,8 @@ class Config:
                 return
             for attrdef in attr.fields(_Options):
                 self.get_set_option(scriv_data, attrdef.name, attrdef.name)
-            self.get_set_option(scriv_data, "output_file", "changelog")
+            for old, new in REPLACED_NAMES:
+                self.get_set_option(scriv_data, old, new)
 
     def resolve_value(self, value: str) -> str:
         """

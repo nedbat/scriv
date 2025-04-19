@@ -306,17 +306,6 @@ The scriv configuration is available in a ``{{config}}`` object.
 Default: ``{{body}}``
 
 
-.. _config_insert_marker:
-
-insert_marker
--------------
-
-A marker string indicating where in the changelog file new
-entries should be inserted.
-
-Default: ``scriv-insert-here``
-
-
 .. _config_main_branches:
 
 main_branches
@@ -373,6 +362,18 @@ not be collected.
 Default: ``README.*``
 
 
+.. _config_start_marker:
+
+start_marker
+------------
+
+A marker string indicating where in the changelog file new
+entries should be inserted.  The old name for this setting is
+:ref:`insert_marker <deprecated_config>`.
+
+Default: ``scriv-insert-here``
+
+
 .. _config_version:
 
 version
@@ -385,7 +386,7 @@ source file.
 
 Default: (empty)
 
-.. [[[end]]] (checksum: acce6a163b5e8567a695069a8b5146e3)
+.. [[[end]]] (checksum: 1b528f5aa913cecca1337c5dda4aa206)
 
 
 .. _deprecated_config:
@@ -397,6 +398,7 @@ Some names in the config file have been updated. The old names will continue to
 work, but the new names are preferred:
 
 - ``output_file`` is now ``changelog``.
+- ``insert_marker`` is now ``start_marker``.
 
 
 .. _git_settings:
