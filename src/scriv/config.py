@@ -207,10 +207,11 @@ class _Options:
 
                 The extracted Markdown text is available as ``{{body}}``.  You
                 must include this to use the text from the changelog file.  The
-                version is available as ``{{version}}``.
+                version is available as ``{{version}}`` and the title of the
+                entry is available as ``{{title}}``.
 
                 The data for the release is available in a ``{{release}}``
-                object, including ``{{release.prerelease}}``.  It's  a boolean,
+                object, including ``{{release.prerelease}}``.  It's a boolean,
                 true if this is a pre-release version.
 
                 The scriv configuration is available in a ``{{config}}`` object.

@@ -283,10 +283,11 @@ The template to use for GitHub releases created by the
 
 The extracted Markdown text is available as ``{{body}}``.  You
 must include this to use the text from the changelog file.  The
-version is available as ``{{version}}``.
+version is available as ``{{version}}`` and the title of the
+entry is available as ``{{title}}``.
 
 The data for the release is available in a ``{{release}}``
-object, including ``{{release.prerelease}}``.  It's  a boolean,
+object, including ``{{release.prerelease}}``.  It's a boolean,
 true if this is a pre-release version.
 
 The scriv configuration is available in a ``{{config}}`` object.
@@ -383,7 +384,7 @@ source file.
 
 Default: (empty)
 
-.. [[[end]]] (checksum: 675df32fb207262bd0c69a94a99c2fb7)
+.. [[[end]]] (checksum: ac66a08483626b8550ebec22bbc3af04)
 
 
 .. _git_settings:

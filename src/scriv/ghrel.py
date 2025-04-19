@@ -98,6 +98,7 @@ def github_release(
         md = ghrel_template.render(
             body=md,
             version=version,
+            title=title,
             release=release_data,
             config=scriv.config,
         )

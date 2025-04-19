@@ -323,12 +323,12 @@ def test_with_template(cli_invoke, temp_dir, scenario1, mock_create_release):
     (temp_dir / "setup.cfg").write_text(
         """
         [scriv]
-        ghrel_template = |{{body}}|{{config.format}}|{{version}}
+        ghrel_template = |{{title}}|{{body}}|{{config.format}}|{{version}}|
         """
     )
     cli_invoke(["github-release"])
 
     expected = dict(V123_REL)
-    expected["body"] = "|A good release\n|rst|v1.2.3"
+    expected["body"] = "|v1.2.3 -- 2022-04-21|A good release\n|rst|v1.2.3|"
 
     assert mock_create_release.mock_calls == [call("joe/project", expected)]
