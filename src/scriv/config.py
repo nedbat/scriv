@@ -1,5 +1,7 @@
 """Scriv configuration."""
 
+from __future__ import annotations
+
 import configparser
 import contextlib
 import logging
@@ -270,7 +272,7 @@ class Config:
         return value
 
     @classmethod
-    def read(cls) -> "Config":
+    def read(cls) -> Config:
         """
         Read the configuration to use.
 
