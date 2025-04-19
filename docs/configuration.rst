@@ -228,6 +228,17 @@ See :ref:`categories`.
 Default: ``Removed, Added, Changed, Deprecated, Fixed, Security``
 
 
+.. _config_changelog:
+
+changelog
+---------
+
+The changelog file managed and read by scriv.  The old name
+for this setting is :ref:`output_file <deprecated_config>`.
+
+Default: ``CHANGELOG.${config:format}``
+
+
 .. _config_end_marker:
 
 end_marker
@@ -338,16 +349,6 @@ The `Jinja`_ template to use for new fragments.
 Default: ``file: new_fragment.${config:format}.j2``
 
 
-.. _config_output_file:
-
-output_file
------------
-
-The changelog file updated by ":ref:`cmd_collect`".
-
-Default: ``CHANGELOG.${config:format}``
-
-
 .. _config_rst_header_chars:
 
 rst_header_chars
@@ -384,7 +385,18 @@ source file.
 
 Default: (empty)
 
-.. [[[end]]] (checksum: ac66a08483626b8550ebec22bbc3af04)
+.. [[[end]]] (checksum: acce6a163b5e8567a695069a8b5146e3)
+
+
+.. _deprecated_config:
+
+Deprecated Settings
+===================
+
+Some names in the config file have been updated. The old names will continue to
+work, but the new names are preferred:
+
+- ``output_file`` is now ``changelog``.
 
 
 .. _git_settings:

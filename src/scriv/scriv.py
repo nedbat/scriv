@@ -67,7 +67,7 @@ class Scriv:
     def changelog(self) -> Changelog:
         """Get the Changelog object."""
         return Changelog(
-            path=Path(self.config.output_file),
+            path=Path(self.config.changelog),
             config=self.config,
         )
 

@@ -72,12 +72,13 @@ class _Options:
         },
     )
 
-    output_file = attr.ib(
+    changelog = attr.ib(
         type=str,
         default="CHANGELOG.${config:format}",
         metadata={
             "doc": """\
-                The changelog file updated by ":ref:`cmd_collect`".
+                The changelog file managed and read by scriv.  The old name
+                for this setting is :ref:`output_file <deprecated_config>`.
                 """,
         },
     )
@@ -294,6 +295,20 @@ class Config:
             attr.validate(config._options)
         return config
 
+    def get_set_option(self, scriv_data, config_name, opt_name):
+        """
+        Set one option from a config file setting.
+        """
+        try:
+            val: Any = scriv_data[config_name]
+        except KeyError:
+            pass
+        else:
+            attrdef = attr.fields_dict(_Options)[opt_name]
+            if callable(attrdef.converter):
+                val = attrdef.converter(val)
+            setattr(self._options, opt_name, val)
+
     def read_one_config(self, configfile: str) -> None:
         """
         Read one configuration file, adding values to `self`.
@@ -306,18 +321,19 @@ class Config:
             return
         logger.debug(f"{configfile} was read")
 
-        section_names = ["scriv", "tool.scriv"]
         section_name = next(
-            (name for name in section_names if parser.has_section(name)), None
+            (
+                name
+                for name in ["scriv", "tool.scriv"]
+                if parser.has_section(name)
+            ),
+            None,
         )
         if section_name:
+            scriv_data = parser[section_name]
             for attrdef in attr.fields(_Options):
-                try:
-                    val: Any = parser[section_name][attrdef.name]
-                except KeyError:
-                    pass
-                else:
-                    setattr(self._options, attrdef.name, val)
+                self.get_set_option(scriv_data, attrdef.name, attrdef.name)
+            self.get_set_option(scriv_data, "output_file", "changelog")
 
     def read_one_toml(self, tomlfile: str) -> None:
         """
@@ -351,14 +367,8 @@ class Config:
                 # No settings for us
                 return
             for attrdef in attr.fields(_Options):
-                try:
-                    val = scriv_data[attrdef.name]
-                except KeyError:
-                    pass
-                else:
-                    if callable(attrdef.converter):
-                        val = attrdef.converter(val)
-                    setattr(self._options, attrdef.name, val)
+                self.get_set_option(scriv_data, attrdef.name, attrdef.name)
+            self.get_set_option(scriv_data, "output_file", "changelog")
 
     def resolve_value(self, value: str) -> str:
         """

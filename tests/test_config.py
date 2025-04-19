@@ -13,16 +13,18 @@ from .helpers import without_module
 
 CONFIG1 = """\
 [scriv]
-output_file = README.md
+changelog = README.md
 categories = New, Different, Gone, Bad
 """
+
+OLD_CONFIG1 = CONFIG1.replace("changelog = ", "output_file = ")
 
 CONFIG2 = """\
 [someotherthing]
 no_idea = what this is
 
 [tool.scriv]
-output_file = README.md
+changelog = README.md
 categories =
     New
     Different
@@ -59,7 +61,7 @@ TOML_CONFIG = (
     GENERIC_TOML_CONFIG
     + """
 [tool.scriv]
-output_file = "README.md"
+changelog = "README.md"
 categories = [
     "New",
     "Different",
@@ -72,6 +74,8 @@ categories = [
 value = 17
 """
 )
+
+OLD_TOML_CONFIG = TOML_CONFIG.replace("changelog = ", "output_file = ")
 
 
 def test_defaults(temp_dir):
@@ -90,7 +94,7 @@ def test_defaults(temp_dir):
         "Fixed",
         "Security",
     ]
-    assert config.output_file == "CHANGELOG.rst"
+    assert config.changelog == "CHANGELOG.rst"
     assert config.insert_marker == "scriv-insert-here"
     assert config.rst_header_chars == "=-"
     assert config.md_header_level == "1"
@@ -100,11 +104,12 @@ def test_defaults(temp_dir):
     assert config.version == ""
 
 
-def test_reading_config(temp_dir):
-    (temp_dir / "setup.cfg").write_text(CONFIG1)
+@pytest.mark.parametrize("config_text", [CONFIG1, OLD_CONFIG1])
+def test_reading_config(config_text, temp_dir):
+    (temp_dir / "setup.cfg").write_text(config_text)
     config = Config.read()
     assert config.fragment_directory == "changelog.d"
-    assert config.output_file == "README.md"
+    assert config.changelog == "README.md"
     assert config.categories == ["New", "Different", "Gone", "Bad"]
 
 
@@ -227,7 +232,7 @@ def test_override_default_name(changelog_d):
 def test_file_reading(changelog_d):
     # Any setting can be read from a file, even where it doesn't make sense.
     (changelog_d / "hello.txt").write_text("Xyzzy")
-    text = Config(output_file="file:hello.txt").output_file
+    text = Config(changelog="file:hello.txt").changelog
     assert text == "Xyzzy"
 
 
@@ -301,7 +306,7 @@ def test_rst_chars_is_two_chars(chars):
 def test_md_format(changelog_d):
     (changelog_d / "scriv.ini").write_text("[scriv]\nformat = md\n")
     config = Config.read()
-    assert config.output_file == "CHANGELOG.md"
+    assert config.changelog == "CHANGELOG.md"
     template = re.sub(r"\s+", " ", config.new_fragment_template)
     assert template.startswith("<!-- A new scriv changelog fragment.")
 
@@ -312,9 +317,11 @@ class TestTomlConfig:
     """
 
     @pytest.mark.skipif(tomllib is None, reason="No TOML support installed")
-    def test_reading_toml_file(self, temp_dir):
-        (temp_dir / "pyproject.toml").write_text(TOML_CONFIG)
+    @pytest.mark.parametrize("config_text", [TOML_CONFIG, OLD_TOML_CONFIG])
+    def test_reading_toml_file(self, config_text, temp_dir):
+        (temp_dir / "pyproject.toml").write_text(config_text)
         config = Config.read()
+        assert config.changelog == "README.md"
         assert config.categories == ["New", "Different", "Gone", "Bad"]
 
     def test_toml_without_us(self, temp_dir):
@@ -371,12 +378,12 @@ def test_command_running(mocker, cmd_output, result):
     mocker.patch(
         "scriv.config.run_shell_command", lambda cmd: (True, cmd_output)
     )
-    text = Config(output_file="command: doesnt-matter").output_file
+    text = Config(changelog="command: doesnt-matter").changelog
     assert text == result
 
 
 def test_real_command_running():
-    text = Config(output_file="command: echo Xyzzy 2 3").output_file
+    text = Config(changelog="command: echo Xyzzy 2 3").changelog
     assert text == "Xyzzy 2 3"
 
 
@@ -385,15 +392,15 @@ def test_real_command_running():
     [
         (
             "xyzzyplugh",
-            "Couldn't read 'output_file' setting: Command 'xyzzyplugh' failed:",
+            "Couldn't read 'changelog' setting: Command 'xyzzyplugh' failed:",
         ),
         (
             "'hi!2><",
-            "Couldn't read 'output_file' setting: Command \"'hi!2><\" failed:",
+            "Couldn't read 'changelog' setting: Command \"'hi!2><\" failed:",
         ),
     ],
 )
 def test_bad_command(fake_run_command, bad_cmd, msg_rx):
     # Any setting can be the output of a command.
     with pytest.raises(ScrivException, match=msg_rx):
-        _ = Config(output_file=f"command: {bad_cmd}").output_file
+        _ = Config(changelog=f"command: {bad_cmd}").changelog
