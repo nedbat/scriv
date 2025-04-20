@@ -116,6 +116,7 @@ def test_reading_config(config_text, temp_dir):
     config = Config.read()
     assert config.fragment_directory == "changelog.d"
     assert config.changelog == "README.md"
+    assert config.format == "md"
     assert config.categories == ["New", "Different", "Gone", "Bad"]
     assert config.start_marker == "FIRST!"
 
@@ -329,6 +330,7 @@ class TestTomlConfig:
         (temp_dir / "pyproject.toml").write_text(config_text)
         config = Config.read()
         assert config.changelog == "README.md"
+        assert config.format == "md"
         assert config.categories == ["New", "Different", "Gone", "Bad"]
         assert config.start_marker == "FIRST!"
 

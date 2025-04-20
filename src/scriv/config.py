@@ -20,6 +20,10 @@ from .shell import run_shell_command
 logger = logging.getLogger(__name__)
 
 
+DEFAULT_FORMAT = "rst"
+DEFAULT_CHANGELOG = "CHANGELOG.${config:format}"
+
+
 @attr.s
 class _Options:
     """
@@ -40,14 +44,18 @@ class _Options:
     )
 
     # What format for fragments? reStructuredText ("rst") or Markdown ("md").
-    format = attr.ib(
+    format = attr.ib(  # type: ignore[assignment]
         type=str,
-        default="rst",
-        validator=attr.validators.in_(["rst", "md"]),
+        default=None,
+        validator=attr.validators.optional(attr.validators.in_(["rst", "md"])),
         metadata={
             "doc": """\
                 The format to use for fragments and for the output changelog
                 file.  Can be either "rst" or "md".
+                """,
+            "doc_default": f"""\
+                Derived from the changelog file name if provided,
+                otherwise "{DEFAULT_FORMAT}".
                 """,
         },
     )
@@ -74,12 +82,13 @@ class _Options:
 
     changelog = attr.ib(
         type=str,
-        default="CHANGELOG.${config:format}",
+        default=None,
         metadata={
             "doc": """\
                 The changelog file managed and read by scriv.  The old name
                 for this setting is :ref:`output_file <deprecated_config>`.
                 """,
+            "doc_default": f"``{DEFAULT_CHANGELOG}``",
         },
     )
 
@@ -223,6 +232,18 @@ class _Options:
         },
     )
 
+    def post_create(self):
+        """
+        Reconcile some interdependent settings after creating the object.
+        """
+        if self.format is None:
+            if self.changelog is not None and "${" not in self.changelog:
+                self.format = Path(self.changelog).suffix[1:]
+            else:
+                self.format = DEFAULT_FORMAT
+        if self.changelog is None:
+            self.changelog = DEFAULT_CHANGELOG
+
 
 # Map of old config names to new config names.
 DEPRECATED_NAMES = [
@@ -255,10 +276,12 @@ class Config:
 
     """
 
-    def __init__(self, **kwargs):
+    def __init__(self, post_create_=True, **kwargs):
         """All values in _Options can be set as keywords."""
         with validator_exceptions():
             self._options = _Options(**kwargs)
+        if post_create_:
+            self._options.post_create()
 
     def __getattr__(self, name):
         """Proxy to self._options, and resolve the value."""
@@ -292,7 +315,7 @@ class Config:
         The section can be named ``[scriv]`` or ``[tool.scriv]``.
 
         """
-        config = cls()
+        config = cls(post_create_=False)
         config.read_one_config("setup.cfg")
         config.read_one_config("tox.ini")
         config.read_one_toml("pyproject.toml")
@@ -301,6 +324,7 @@ class Config:
         )
         with validator_exceptions():
             attr.validate(config._options)
+        config._options.post_create()
         return config
 
     def get_set_option(self, scriv_data, config_name, opt_name):
@@ -393,7 +417,8 @@ class Config:
             "command:" read the output of a shell command.
 
         """
-        value = value.replace("${config:format}", self._options.format)
+        if self._options.format is not None:
+            value = value.replace("${config:format}", self._options.format)
         if value.startswith("file:"):
             file_name = value.partition(":")[2].strip()
             value = self.read_file_value(file_name)

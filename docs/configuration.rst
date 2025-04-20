@@ -270,7 +270,8 @@ format
 The format to use for fragments and for the output changelog
 file.  Can be either "rst" or "md".
 
-Default: ``rst``
+Default:                 Derived from the changelog file name if
+provided,                 otherwise "rst".
 
 
 .. _config_fragment_directory:
@@ -386,7 +387,7 @@ source file.
 
 Default: (empty)
 
-.. [[[end]]] (checksum: 1b528f5aa913cecca1337c5dda4aa206)
+.. [[[end]]] (checksum: 6b03fa55831395ac304313bd43e01ff2)
 
 
 .. _deprecated_config:
