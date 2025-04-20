@@ -115,7 +115,8 @@ def github_release(
                 )
                 if dry_run:
                     logger.info(f"Would update release {version}")
-                    logger.debug(f"Body:\n{md}")
+                    logger.debug(f"Old body:\n{release['body']}")
+                    logger.debug(f"New body:\n{md}")
                 else:
                     update_release(release, release_data)
         else:

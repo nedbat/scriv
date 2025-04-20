@@ -284,7 +284,8 @@ def test_dash_all_dry_run_debug(cli_invoke, scenario1, no_actions, caplog):
                 + "'v0.9a7', 'tag_name': 'v0.9a7', 'draft': False, 'prerelease': True}",
             ),
             ("scriv.ghrel", logging.INFO, "Would update release v0.9a7"),
-            ("scriv.ghrel", logging.DEBUG, "Body:\nA beginning\n"),
+            ("scriv.ghrel", logging.DEBUG, "Old body:\noriginal body"),
+            ("scriv.ghrel", logging.DEBUG, "New body:\nA beginning\n"),
             (
                 "scriv.ghrel",
                 logging.WARNING,
@@ -297,7 +298,8 @@ def test_dash_all_dry_run_debug(cli_invoke, scenario1, no_actions, caplog):
                 + "'v0.0.1', 'tag_name': 'v0.0.1', 'draft': False, 'prerelease': False}",
             ),
             ("scriv.ghrel", logging.INFO, "Would update release v0.0.1"),
-            ("scriv.ghrel", logging.DEBUG, "Body:\nVery first.\n"),
+            ("scriv.ghrel", logging.DEBUG, "Old body:\noriginal body"),
+            ("scriv.ghrel", logging.DEBUG, "New body:\nVery first.\n"),
         ],
     )
 
