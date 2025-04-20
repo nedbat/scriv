@@ -225,7 +225,7 @@ class _Options:
 
 
 # Map of old config names to new config names.
-REPLACED_NAMES = [
+DEPRECATED_NAMES = [
     ("output_file", "changelog"),
     ("insert_marker", "start_marker"),
 ]
@@ -341,7 +341,7 @@ class Config:
             scriv_data = parser[section_name]
             for attrdef in attr.fields(_Options):
                 self.get_set_option(scriv_data, attrdef.name, attrdef.name)
-            for old, new in REPLACED_NAMES:
+            for old, new in DEPRECATED_NAMES:
                 self.get_set_option(scriv_data, old, new)
 
     def read_one_toml(self, tomlfile: str) -> None:
@@ -377,7 +377,7 @@ class Config:
                 return
             for attrdef in attr.fields(_Options):
                 self.get_set_option(scriv_data, attrdef.name, attrdef.name)
-            for old, new in REPLACED_NAMES:
+            for old, new in DEPRECATED_NAMES:
                 self.get_set_option(scriv_data, old, new)
 
     def resolve_value(self, value: str) -> str:

@@ -397,8 +397,19 @@ Deprecated Settings
 Some names in the config file have been updated. The old names will continue to
 work, but the new names are preferred:
 
+.. [[[cog
+    from scriv.config import DEPRECATED_NAMES
+
+    print()
+    for old, new in DEPRECATED_NAMES:
+        print(f"- ``{old}`` is now ``{new}``.")
+    print()
+.. ]]]
+
 - ``output_file`` is now ``changelog``.
 - ``insert_marker`` is now ``start_marker``.
+
+.. [[[end]]] (checksum: c0c4c703b20146d23fe0cba53a324d3b)
 
 
 .. _git_settings:
