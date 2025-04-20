@@ -363,10 +363,10 @@ class Config:
         )
         if section_name:
             scriv_data = parser[section_name]
-            for attrdef in attr.fields(_Options):
-                self.get_set_option(scriv_data, attrdef.name, attrdef.name)
             for old, new in DEPRECATED_NAMES:
                 self.get_set_option(scriv_data, old, new)
+            for attrdef in attr.fields(_Options):
+                self.get_set_option(scriv_data, attrdef.name, attrdef.name)
 
     def read_one_toml(self, tomlfile: str) -> None:
         """
@@ -399,10 +399,10 @@ class Config:
             except KeyError:
                 # No settings for us
                 return
-            for attrdef in attr.fields(_Options):
-                self.get_set_option(scriv_data, attrdef.name, attrdef.name)
             for old, new in DEPRECATED_NAMES:
                 self.get_set_option(scriv_data, old, new)
+            for attrdef in attr.fields(_Options):
+                self.get_set_option(scriv_data, attrdef.name, attrdef.name)
 
     def resolve_value(self, value: str) -> str:
         """

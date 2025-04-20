@@ -88,7 +88,7 @@ master_doc = "index"
 
 # General information about the project.
 project = "Scriv"
-copyright = "2019\N{EN DASH}2023, Ned Batchelder"
+copyright = "2019\N{EN DASH}2025, Ned Batchelder"
 author = "Ned Batchelder"
 project_title = "scriv"
 documentation_title = f"{project_title}"

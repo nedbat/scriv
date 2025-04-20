@@ -1,6 +1,7 @@
 """Tests of scriv/config.py"""
 
 import re
+import textwrap
 
 import pytest
 
@@ -414,3 +415,32 @@ def test_bad_command(fake_run_command, bad_cmd, msg_rx):
     # Any setting can be the output of a command.
     with pytest.raises(ScrivException, match=msg_rx):
         _ = Config(changelog=f"command: {bad_cmd}").changelog
+
+
+def test_old_and_new(temp_dir):
+    (temp_dir / "tox.ini").write_text(
+        textwrap.dedent(
+            """\
+            [scriv]
+            changelog = README.md
+            output_file = OUTPUT
+            """
+        )
+    )
+    config = Config.read()
+    assert config.changelog == "README.md"
+
+
+@pytest.mark.skipif(tomllib is None, reason="No TOML support installed")
+def test_old_and_new_toml(temp_dir):
+    (temp_dir / "pyproject.toml").write_text(
+        textwrap.dedent(
+            """\
+            [tool.scriv]
+            changelog = "README.md"
+            output_file = "OUTPUT"
+            """
+        )
+    )
+    config = Config.read()
+    assert config.changelog == "README.md"
