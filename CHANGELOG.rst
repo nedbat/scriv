@@ -21,6 +21,31 @@ See the fragment files in the `changelog.d directory`_.
 
 .. scriv-insert-here
 
+.. _changelog-1.7.0:
+
+1.7.0 — 2025-04-20
+------------------
+
+Added
+.....
+
+- The GitHub release template now can use ``{{title}}`` to get the title of
+  the changelog entry.
+
+- The ``format`` setting is now defaulted based on the ``changelog`` setting.
+  Previously, ``changelog=README.md`` would still use .rst formatting.  Now it
+  will use Markdown.
+
+Changed
+.......
+
+- Two settings have new names to better reflect what scriv does.
+  The ``output_file`` setting is now called ``changelog`` and the
+  ``insert_marker`` setting is now called ``start_marker``.
+  The old names will continue to work.  Closes `issue 77`_.
+
+.. _issue 77: https://github.com/nedbat/scriv/issues/77
+
 .. _changelog-1.6.2:
 
 1.6.2 — 2025-03-30
