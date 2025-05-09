@@ -304,6 +304,20 @@ class Config:
         return value
 
     @classmethod
+    def read_config_file(cls, config_file: str) -> Config:
+        """
+        Read a configuration file.
+
+        Configuration will be read from the given configuration file.
+        """
+        config = cls(post_create_=False)
+        config.read_one_config(config_file)
+        with validator_exceptions():
+            attr.validate(config._options)
+        config._options.post_create()
+        return config
+
+    @classmethod
     def read(cls) -> Config:
         """
         Read the configuration to use.
