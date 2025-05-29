@@ -347,7 +347,7 @@ class Config:
         """
         logger.debug(f"Looking for config file {configfile}")
         parser = configparser.ConfigParser()
-        files_read = parser.read(configfile)
+        files_read = parser.read(configfile, encoding="utf-8")
         if not files_read:
             logger.debug(f"{configfile} doesn't exist")
             return
