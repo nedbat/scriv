@@ -125,7 +125,7 @@ class RstTools(FormatTools):
         header += (
             text + "\n" + self.config.rst_header_chars[0] * len(text) + "\n"
         )
-        return header
+        return header  # type: ignore[no-any-return]
 
     def format_sections(
         self, sections: SectionDict

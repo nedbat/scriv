@@ -6,9 +6,9 @@
 #
 attrs==25.3.0
     # via -r requirements/core.txt
-certifi==2025.1.31
+certifi==2025.4.26
     # via requests
-charset-normalizer==3.4.1
+charset-normalizer==3.4.2
     # via requests
 click==8.1.8
     # via
@@ -26,7 +26,7 @@ markupsafe==3.0.2
     # via jinja2
 mdurl==0.1.2
     # via markdown-it-py
-requests==2.32.3
+requests==2.32.4
     # via -r requirements/core.txt
-urllib3==2.3.0
+urllib3==2.4.0
     # via requests
