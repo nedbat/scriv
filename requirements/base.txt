@@ -5,28 +5,28 @@
 #    make upgrade
 #
 attrs==25.3.0
-    # via -r requirements/core.txt
+    # via -r core.txt
 certifi==2025.4.26
     # via requests
 charset-normalizer==3.4.2
     # via requests
 click==8.1.8
     # via
-    #   -r requirements/core.txt
+    #   -r core.txt
     #   click-log
 click-log==0.4.0
-    # via -r requirements/core.txt
+    # via -r core.txt
 idna==3.10
     # via requests
 jinja2==3.1.6
-    # via -r requirements/core.txt
+    # via -r core.txt
 markdown-it-py==3.0.0
-    # via -r requirements/core.txt
+    # via -r core.txt
 markupsafe==3.0.2
     # via jinja2
 mdurl==0.1.2
     # via markdown-it-py
 requests==2.32.4
-    # via -r requirements/core.txt
-urllib3==2.4.0
+    # via -r core.txt
+urllib3==2.5.0
     # via requests
