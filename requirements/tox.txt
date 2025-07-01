@@ -4,7 +4,7 @@
 #
 #    make upgrade
 #
-cachetools==6.0.0
+cachetools==6.1.0
     # via tox
 chardet==5.2.0
     # via tox
@@ -32,7 +32,7 @@ tomli==2.2.1
     # via
     #   pyproject-api
     #   tox
-tox==4.26.0
+tox==4.27.0
     # via -r requirements/tox.in
 typing-extensions==4.14.0
     # via tox

@@ -8,7 +8,7 @@ astroid==3.3.10
     # via pylint
 attrs==25.3.0
     # via -r requirements/base.txt
-certifi==2025.4.26
+certifi==2025.6.15
     # via
     #   -r requirements/base.txt
     #   requests
@@ -22,7 +22,7 @@ click==8.1.8
     #   click-log
 click-log==0.4.0
     # via -r requirements/base.txt
-coverage==7.8.2
+coverage==7.9.1
     # via -r requirements/test.in
 dill==0.4.0
     # via pylint
@@ -66,7 +66,7 @@ pluggy==1.6.0
     # via pytest
 pudb==2025.1
     # via -r requirements/test.in
-pygments==2.19.1
+pygments==2.19.2
     # via pudb
 pylint==3.3.7
     # via pylint-pytest
@@ -104,7 +104,7 @@ typing-extensions==4.14.0
     #   astroid
     #   exceptiongroup
     #   pylint
-urllib3==2.4.0
+urllib3==2.5.0
     # via
     #   -r requirements/base.txt
     #   requests
