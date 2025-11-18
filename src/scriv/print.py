@@ -37,7 +37,7 @@ def print_(
     """
     scriv = Scriv()
     changelog = scriv.changelog()
-    newline = os.linesep
+    newline: str = os.linesep
 
     if version is None:
         logger.info(f"Generating entry from {scriv.config.fragment_directory}")
