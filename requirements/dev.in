@@ -1,6 +1,5 @@
 # Additional requirements for development of this application
 
--r pip-tools.txt          # pip-tools and its dependencies, for managing requirements files
 -r quality.txt            # Core and quality check dependencies
 -r tox.txt                # tox and related dependencies
 
