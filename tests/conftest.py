@@ -61,7 +61,7 @@ def cli_invoke(temp_dir: Path):
     """
 
     def invoke(command, expect_ok=True):
-        runner = CliRunner(mix_stderr=False)
+        runner = CliRunner()
         result = runner.invoke(scriv_cli, command)
         print(result.stdout, end="")
         print(result.stderr, end="", file=sys.stderr)
