@@ -45,7 +45,7 @@ name = "spam"
 version = "2020.0.0"
 description = "Lovely Spam! Wonderful Spam!"
 readme = "README.rst"
-requires-python = ">=3.9"
+requires-python = ">=3.10"
 license = {file = "LICENSE.txt"}
 keywords = ["egg", "bacon", "sausage", "tomatoes", "Lobster Thermidor"]
 authors = [

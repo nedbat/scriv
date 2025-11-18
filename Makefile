@@ -41,7 +41,7 @@ sterile: clean ## remove absolutely all built artifacts
 .PHONY: coverage docs upgrade diff_upgrade
 
 coverage: clean ## generate and view HTML coverage report
-	tox -e py39,py313,coverage
+	tox -e py310,py314,coverage
 	$(BROWSER)htmlcov/index.html
 
 docs: botedits ## generate Sphinx HTML documentation, including API docs
@@ -86,7 +86,7 @@ requirements: ## install development environment requirements
 	pip install -e .
 
 test: ## run tests in the current virtualenv
-	tox -e py39
+	tox -e py310
 
 test-all: ## run tests on every supported Python combination
 	tox

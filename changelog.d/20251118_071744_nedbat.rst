@@ -1,0 +1,4 @@
+Changed
+.......
+
+- Dropped support for Python 3.9 and declared support for Python 3.14.
