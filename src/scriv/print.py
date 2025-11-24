@@ -6,11 +6,13 @@ import logging
 import os
 import pathlib
 import sys
+from typing import Optional
 
 import click
 
+from .config import Config
 from .scriv import Scriv
-from .util import Version, scriv_command
+from .util import Version, scriv_command, config_option
 
 logger = logging.getLogger(__name__)
 
@@ -27,15 +29,21 @@ logger = logging.getLogger(__name__)
     default=None,
     help="The path to a file to write the output to.",
 )
+@config_option
 @scriv_command
 def print_(
     version: str | None,
     output: pathlib.Path | None,
+    config_file: Optional[str] = None,
 ) -> None:
     """
     Print collected fragments, or print an entry from the changelog.
     """
-    scriv = Scriv()
+    if config_file:
+        config = Config.read_config_file(config_file)
+        scriv = Scriv(config=config)
+    else:
+        scriv = Scriv()
     changelog = scriv.changelog()
     newline: str = os.linesep
 
