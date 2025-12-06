@@ -48,7 +48,7 @@ docs: botedits ## generate Sphinx HTML documentation, including API docs
 	tox -e docs
 	$(BROWSER)docs/_build/html/index.html
 
-PIP_COMPILE = uv pip compile -q --universal -c requirements/constraints.txt --upgrade
+PIP_COMPILE = uv pip compile -q --universal -c requirements/constraints.in --upgrade
 upgrade: export UV_CUSTOM_COMPILE_COMMAND=make upgrade
 upgrade: ## update the requirements/*.txt files with the latest packages satisfying requirements/*.in
 	# Make sure to compile files after any other files they include!

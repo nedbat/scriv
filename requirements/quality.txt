@@ -78,6 +78,7 @@ docutils==0.21.2
     #   readme-renderer
     #   restructuredtext-lint
     #   sphinx
+    #   sphinx-rtd-theme
 exceptiongroup==1.3.1 ; python_full_version < '3.11'
     # via
     #   -r requirements/doc.txt
@@ -279,7 +280,7 @@ rfc3986==2.0.0
     # via twine
 rich==14.2.0
     # via twine
-roman-numerals==3.1.0 ; python_full_version >= '3.11'
+roman-numerals-py==3.1.0 ; python_full_version >= '3.11'
     # via
     #   -r requirements/doc.txt
     #   sphinx
@@ -301,12 +302,16 @@ sphinx==8.1.3 ; python_full_version < '3.11'
     # via
     #   -r requirements/doc.txt
     #   sphinx-rtd-theme
-sphinx==9.0.4 ; python_full_version >= '3.11'
+    #   sphinxcontrib-jquery
+sphinx==8.2.3 ; python_full_version >= '3.11'
     # via
     #   -r requirements/doc.txt
     #   sphinx-rtd-theme
-sphinx-rtd-theme==0.5.1
-    # via -r requirements/doc.txt
+    #   sphinxcontrib-jquery
+sphinx-rtd-theme==3.0.2
+    # via
+    #   -c requirements/constraints.in
+    #   -r requirements/doc.txt
 sphinxcontrib-applehelp==2.0.0
     # via
     #   -r requirements/doc.txt
@@ -319,6 +324,10 @@ sphinxcontrib-htmlhelp==2.1.0
     # via
     #   -r requirements/doc.txt
     #   sphinx
+sphinxcontrib-jquery==4.1
+    # via
+    #   -r requirements/doc.txt
+    #   sphinx-rtd-theme
 sphinxcontrib-jsmath==1.0.1
     # via
     #   -r requirements/doc.txt

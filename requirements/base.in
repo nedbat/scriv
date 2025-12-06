@@ -1,3 +1,8 @@
 # Core requirements for using this application
 
--r core.txt
+attrs
+click
+click-log
+jinja2>=2.7
+markdown-it-py
+requests
