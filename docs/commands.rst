@@ -22,7 +22,7 @@ Commands
         print(f"    $ scriv {cmd} --help")
         print(textwrap.indent(help_text, "    ").rstrip())
 .. ]]]
-.. [[[end]]] (checksum: d41d8cd98f00b204e9800998ecf8427e)
+.. [[[end]]] (sum: 1B2M2Y8Asg)
 
 .. _cmd_create:
 
@@ -43,7 +43,7 @@ scriv create
       --edit / --no-edit   Open the created file in your text editor.
       -v, --verbosity LVL  Either CRITICAL, ERROR, WARNING, INFO or DEBUG
       --help               Show this message and exit.
-.. [[[end]]] (checksum: 45edec1fd1ebc343358cbf774ba5a49c)
+.. [[[end]]] (sum: Re3sH9Hrw0)
 
 The create command creates new :ref:`fragments <fragments>`.
 
@@ -119,7 +119,7 @@ scriv collect
       --version TEXT       The version name to use for this entry.
       -v, --verbosity LVL  Either CRITICAL, ERROR, WARNING, INFO or DEBUG
       --help               Show this message and exit.
-.. [[[end]]] (checksum: e93ca778396310ce406f1cc439cefdd4)
+.. [[[end]]] (sum: 6TyneDljEM)
 
 The collect command aggregates all the current fragments into the changelog
 file.
@@ -189,13 +189,14 @@ scriv github-release
     Options:
       --all                Use all of the changelog entries.
       --check-links        Check that links are valid (EXPERIMENTAL).
+      --draft              Publish a draft release.
       --dry-run            Don't post to GitHub, just show what would be done.
       --fail-if-warn       Fail if a conversion generates warnings.
       --repo TEXT          The GitHub repo (owner/reponame) to create the
                            release in.
       -v, --verbosity LVL  Either CRITICAL, ERROR, WARNING, INFO or DEBUG
       --help               Show this message and exit.
-.. [[[end]]] (checksum: ec63a3f79902b40a74e633cdeb1bf3dc)
+.. [[[end]]] (sum: up0wQsS8Lh)
 
 The ``github-release`` command reads the changelog file, parses it into
 entries, and then creates or updates GitHub releases to match.  Only the most
@@ -219,6 +220,13 @@ hand-edited changelog file that wasn't created with scriv.
 
 For writing to GitHub, you need a GitHub personal access token, either stored
 in your .netrc file, or in the GITHUB_TOKEN environment variable.
+
+By default, full releases are published. The ``--draft`` option specifies that
+a draft release should be created instead, allowing the published release notes
+to be reviewed (and potentially edited) prior to the actual release. This two
+step process is helpful if the release is itself being prepared in a GitHub
+workflow, as publishing a release from a workflow may not activate release
+triggered GitHub workflows (such as publishing to PyPI).
 
 The GitHub repo will be determined by examining the git remotes.  If there
 is just one GitHub repo in the remotes, it will be used to create the release.
@@ -247,7 +255,7 @@ scriv print
       --output PATH        The path to a file to write the output to.
       -v, --verbosity LVL  Either CRITICAL, ERROR, WARNING, INFO or DEBUG
       --help               Show this message and exit.
-.. [[[end]]] (checksum: f652a3470da5f726b13ba076471b2444)
+.. [[[end]]] (sum: 9lKjRw2l9y)
 
 The ``print`` command writes a changelog entry to standard out.
 
