@@ -18,14 +18,14 @@ backports-tarfile==1.2.0 ; python_full_version < '3.12' and platform_machine != 
     # via
     #   -r requirements/quality.txt
     #   jaraco-context
-black==25.11.0
+black==25.12.0
     # via -r requirements/quality.txt
 build==1.3.0
     # via
     #   -r requirements/dev.in
     #   -r requirements/quality.txt
     #   check-manifest
-cachetools==6.2.2
+cachetools==6.2.4
     # via
     #   -r requirements/tox.txt
     #   tox
@@ -66,7 +66,7 @@ colorama==0.4.6
     #   pytest
     #   sphinx
     #   tox
-coverage==7.12.0
+coverage==7.13.0
     # via -r requirements/quality.txt
 cryptography==46.0.3 ; os_name != 'nt' and platform_machine != 'ppc64le' and platform_machine != 's390x' and sys_platform == 'linux'
     # via
@@ -94,7 +94,7 @@ exceptiongroup==1.3.1 ; python_full_version < '3.11'
     # via
     #   -r requirements/quality.txt
     #   pytest
-filelock==3.20.0
+filelock==3.20.1
     # via
     #   -r requirements/tox.txt
     #   tox
@@ -155,7 +155,7 @@ keyring==25.7.0 ; platform_machine != 'ppc64le' and platform_machine != 's390x'
     # via
     #   -r requirements/quality.txt
     #   twine
-librt==0.7.2
+librt==0.7.4 ; platform_python_implementation != 'PyPy'
     # via
     #   -r requirements/quality.txt
     #   mypy
@@ -180,7 +180,7 @@ more-itertools==10.8.0 ; platform_machine != 'ppc64le' and platform_machine != '
     #   -r requirements/quality.txt
     #   jaraco-classes
     #   jaraco-functools
-mypy==1.19.0
+mypy==1.19.1
     # via -r requirements/quality.txt
 mypy-extensions==1.1.0
     # via
@@ -226,7 +226,7 @@ pluggy==1.6.0
     #   -r requirements/tox.txt
     #   pytest
     #   tox
-pudb==2025.1.4
+pudb==2025.1.5
     # via -r requirements/quality.txt
 pycodestyle==2.14.0
     # via -r requirements/quality.txt
@@ -311,7 +311,11 @@ rich==14.2.0
     # via
     #   -r requirements/quality.txt
     #   twine
-roman-numerals-py==3.1.0 ; python_full_version >= '3.11'
+roman-numerals==4.0.0 ; python_full_version >= '3.11'
+    # via
+    #   -r requirements/quality.txt
+    #   roman-numerals-py
+roman-numerals-py==4.0.0 ; python_full_version >= '3.11'
     # via
     #   -r requirements/quality.txt
     #   sphinx
@@ -420,7 +424,7 @@ typing-extensions==4.15.0
     #   pudb
     #   tox
     #   virtualenv
-urllib3==2.6.0
+urllib3==2.6.2
     # via
     #   -r requirements/quality.txt
     #   requests
