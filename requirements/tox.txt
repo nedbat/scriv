@@ -8,7 +8,7 @@ colorama==0.4.6
     # via tox
 distlib==0.4.0
     # via virtualenv
-filelock==3.20.0
+filelock==3.20.1
     # via
     #   tox
     #   virtualenv
@@ -24,15 +24,7 @@ pluggy==1.6.0
     # via tox
 pyproject-api==1.10.0
     # via tox
-tomli==2.3.0 ; python_full_version < '3.11'
-    # via
-    #   pyproject-api
-    #   tox
 tox==4.32.0
-    # via -r requirements/tox.in
-typing-extensions==4.15.0 ; python_full_version < '3.11'
-    # via
-    #   tox
-    #   virtualenv
+    # via -r tox.in
 virtualenv==20.35.4
     # via tox
