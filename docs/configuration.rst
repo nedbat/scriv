@@ -82,7 +82,7 @@ Scriv provides two built-in templates:
         with open(fname) as f:
             print(textwrap.indent(f.read(), prefix="    "))
 .. ]]]
-.. [[[end]]] (checksum: d41d8cd98f00b204e9800998ecf8427e)
+.. [[[end]]] (sum: 1B2M2Y8Asg)
 
 - ``new_fragment.md.j2``: The default Jinja template for new Markdown
   fragments:
@@ -106,7 +106,7 @@ Scriv provides two built-in templates:
       -->
       {% endfor -%}
 
-  .. [[[end]]] (checksum: 5ea187a050bfc23014591238b22520ff)
+  .. [[[end]]] (sum: XqGHoFC/wj)
 
 - ``new_fragment.rst.j2``: The default Jinja template for new reStructuredText
   fragments:
@@ -131,7 +131,7 @@ Scriv provides two built-in templates:
       - A bullet item for this fragment. EDIT ME!
       {% endif -%}
 
-  .. [[[end]]] (checksum: 307b2d307df5eb3a5d316dc850c68011)
+  .. [[[end]]] (sum: MHstMH316z)
 
 Literal Prefix
 --------------
@@ -387,7 +387,7 @@ source file.
 
 Default: (empty)
 
-.. [[[end]]] (checksum: 6b03fa55831395ac304313bd43e01ff2)
+.. [[[end]]] (sum: awP6VYMTla)
 
 
 .. _deprecated_config:
@@ -410,7 +410,7 @@ work, but the new names are preferred:
 - ``output_file`` is now ``changelog``.
 - ``insert_marker`` is now ``start_marker``.
 
-.. [[[end]]] (checksum: c0c4c703b20146d23fe0cba53a324d3b)
+.. [[[end]]] (sum: wMTHA7IBRt)
 
 
 .. _git_settings:
