@@ -57,7 +57,7 @@ scriv = [
 [tool.setuptools.dynamic]
 version.attr = "scriv.__version__"
 readme.file = ["README.rst", "CHANGELOG.rst"]
-dependencies.file = ["requirements/core.txt"]
+dependencies.file = ["requirements/base.in"]
 
 [tool.scriv]
 ghrel_template = "file: ghrel_template.md.j2"
