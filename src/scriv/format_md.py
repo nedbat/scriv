@@ -73,11 +73,15 @@ class MdTools(FormatTools):
         text: str,
         anchor: Optional[str] = None,
     ) -> str:  # noqa: D102 (inherited docstring)
-        num = int(self.config.md_header_level)
         header = "\n"
         if anchor:
             header += f"<a id='{anchor}'></a>\n"
-        header += "#" * num + " " + text + "\n"
+        if self.config.md_setext_chars:
+            header += text + "\n"
+            header += self.config.md_setext_chars[0] * len(text) + "\n"
+        else:
+            num = int(self.config.md_header_level)
+            header += "#" * num + " " + text + "\n"
         return header
 
     def format_sections(
@@ -88,9 +92,12 @@ class MdTools(FormatTools):
         for section, paragraphs in sections.items():
             if section:
                 lines.append("")
-                lines.append(
-                    "#" * (int(self.config.md_header_level) + 1) + " " + section
-                )
+                if self.config.md_setext_chars:
+                    lines.append(section)
+                    lines.append(self.config.md_setext_chars[1] * len(section))
+                else:
+                    header_level = int(self.config.md_header_level) + 1
+                    lines.append("#" * header_level + " " + section)
             for paragraph in paragraphs:
                 lines.append("")
                 lines.append(paragraph)

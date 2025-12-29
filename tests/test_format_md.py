@@ -199,9 +199,10 @@ def test_parse_text(text, parsed):
 
 
 @pytest.mark.parametrize(
-    "sections, expected",
+    "config_kwargs, sections, expected",
     [
         pytest.param(
+            {"md_header_level": "2"},
             [
                 (
                     "Added",
@@ -235,6 +236,7 @@ def test_parse_text(text, parsed):
             id="one",
         ),
         pytest.param(
+            {"md_header_level": 2},
             [
                 (
                     None,
@@ -255,11 +257,47 @@ def test_parse_text(text, parsed):
             """,
             id="two",
         ),
+        pytest.param(
+            {"md_setext_chars": "=-"},
+            [
+                (
+                    "Added",
+                    [
+                        "- This thing was added.\n  And we liked it.",
+                        "- Also added\n  this thing\n  that is very important.",
+                    ],
+                ),
+                (
+                    "Bugs Fixed",
+                    ["- This thing was fixed.", "- Another thing was fixed."],
+                ),
+            ],
+            """\
+
+            Added
+            -----
+
+            - This thing was added.
+              And we liked it.
+
+            - Also added
+              this thing
+              that is very important.
+
+            Bugs Fixed
+            ----------
+
+            - This thing was fixed.
+
+            - Another thing was fixed.
+            """,
+            id="one",
+        ),
     ],
 )
-def test_format_sections(sections, expected):
+def test_format_sections(config_kwargs, sections, expected):
     sections = collections.OrderedDict(sections)
-    actual = MdTools(Config(md_header_level="2")).format_sections(sections)
+    actual = MdTools(Config(**config_kwargs)).format_sections(sections)
     assert actual == textwrap.dedent(expected)
 
 
@@ -268,6 +306,12 @@ def test_format_sections(sections, expected):
     [
         ({}, "2020-07-26", {}, "\n# 2020-07-26\n"),
         ({"md_header_level": "3"}, "2020-07-26", {}, "\n### 2020-07-26\n"),
+        (
+            {"md_setext_chars": "*#"},
+            "2020-07-26",
+            {},
+            "\n2020-07-26\n**********\n",
+        ),
         (
             {},
             "2022-04-03",

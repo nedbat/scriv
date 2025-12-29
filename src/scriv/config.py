@@ -144,6 +144,21 @@ class _Options:
         },
     )
 
+    md_setext_chars = attr.ib(
+        type=str,
+        default="",
+        validator=attr.validators.matches_re(r"^$|\S\S"),
+        metadata={
+            "doc": """\
+                Two characters: for Markdown changelog files, these enable
+                setext-style underlined headings if set. The first is for the
+                heading for each changelog entry, the second is for the category
+                sections within the entry. Use "=-" for standard formatting.
+                """,
+            "doc_default": "(empty)",
+        },
+    )
+
     # The name of the template for new fragments.
     new_fragment_template = attr.ib(
         type=str,

@@ -329,6 +329,19 @@ level to use for the entry heading.
 Default: ``1``
 
 
+.. _config_md_setext_chars:
+
+md_setext_chars
+---------------
+
+Two characters: for Markdown changelog files, these enable
+setext-style underlined headings if set. The first is for the
+heading for each changelog entry, the second is for the category
+sections within the entry. Use "=-" for standard formatting.
+
+Default: (empty)
+
+
 .. _config_new_fragment_template:
 
 new_fragment_template
@@ -387,7 +400,7 @@ source file.
 
 Default: (empty)
 
-.. [[[end]]] (sum: awP6VYMTla)
+.. [[[end]]] (sum: rrHkfq+w8K)
 
 
 .. _deprecated_config:
