@@ -2,6 +2,7 @@
 
 import os
 import sys
+from textwrap import dedent
 
 import pytest
 
@@ -23,36 +24,36 @@ def test_no_extras_craziness():
         assert yaml is not None
 
 
-PYTHON_CODE = """\
-# A string we should get.
-version = "1.2.3"
+PYTHON_CODE = dedent("""\
+    # A string we should get.
+    version = "1.2.3"
 
-typed_version: Final[str] = "2.3.4"
+    typed_version: Final[str] = "2.3.4"
 
-thing1.attr = "3.4.5"
-thing2.attr: str = "4.5.6"
+    thing1.attr = "3.4.5"
+    thing2.attr: str = "4.5.6"
 
-# Numbers don't count.
-how_many = 123
+    # Numbers don't count.
+    how_many = 123
 
-# Complex names don't count.
-a_thing[0] = 123
+    # Complex names don't count.
+    a_thing[0] = 123
 
-# Non-constant values don't count.
-a_thing_2 = func(1)
+    # Non-constant values don't count.
+    a_thing_2 = func(1)
 
-# Non-strings don't count.
-version = compute_version(1)
+    # Non-strings don't count.
+    version = compute_version(1)
 
-if 1:
-    # It's OK if they are inside other structures.
-    also = "xyzzy"
-    but = '''hello there'''
+    if 1:
+        # It's OK if they are inside other structures.
+        also = "xyzzy"
+        but = '''hello there'''
 
-def foo():
-    # Even in a function is OK, but why would you do that?
-    somewhere_else = "this would be an odd place to get the string"
-"""
+    def foo():
+        # Even in a function is OK, but why would you do that?
+        somewhere_else = "this would be an odd place to get the string"
+    """)
 
 
 @pytest.mark.parametrize(
@@ -81,27 +82,27 @@ def test_unknown_file_type(temp_dir):
         find_literal("what.xyz", "hi")
 
 
-TOML_LITERAL = """
-version = "1"
+TOML_LITERAL = dedent("""\
+    version = "1"
 
-[tool.poetry]
-version = "2"
+    [tool.poetry]
+    version = "2"
 
-[metadata]
-version = "3"
-objects = { version = "4", other = "ignore" }
+    [metadata]
+    version = "3"
+    objects = { version = "4", other = "ignore" }
 
-[bogus]
-# Non-strings don't count.
-number = 123
-boolean = true
-lists = [1, 2, 3]
-bad_type = nan
+    [bogus]
+    # Non-strings don't count.
+    number = 123
+    boolean = true
+    lists = [1, 2, 3]
+    bad_type = nan
 
-# Sections don't count.
-[bogus.section]
+    # Sections don't count.
+    [bogus.section]
 
-"""
+    """)
 
 
 @pytest.mark.skipif(tomllib is None, reason="No TOML support installed")
@@ -136,20 +137,20 @@ def test_find_toml_literal_fail_if_unavailable(monkeypatch):
         find_literal("foo.toml", "fail")
 
 
-YAML_LITERAL = """\
----
-version: 1.2.3
+YAML_LITERAL = dedent("""\
+    ---
+    version: 1.2.3
 
-myVersion:
-  MAJOR: 2
-  MINOR: 3
-  PATCH: 5
+    myVersion:
+      MAJOR: 2
+      MINOR: 3
+      PATCH: 5
 
-myproduct:
-  version: [major=5, minor=6, patch=7]
-  versionString: "8.9.22"
-...
-"""
+    myproduct:
+      version: [major=5, minor=6, patch=7]
+      versionString: "8.9.22"
+    ...
+    """)
 
 
 @pytest.mark.skipif(yaml is None, reason="No YAML support installed")
@@ -176,32 +177,32 @@ def test_find_yaml_literal_fail_if_unavailable(monkeypatch):
         find_literal("foo.yml", "fail")
 
 
-CFG_LITERAL = """\
+CFG_LITERAL = dedent("""\
 
-[metadata]
-name = myproduct
-version = 1.2.3
-url = https://github.com/nedbat/scriv
-description = A nice description
-long_description = file: README.md
-long_description_content_type = text/markdown
-license = MIT
+    [metadata]
+    name = myproduct
+    version = 1.2.3
+    url = https://github.com/nedbat/scriv
+    description = A nice description
+    long_description = file: README.md
+    long_description_content_type = text/markdown
+    license = MIT
 
-[options]
-zip_safe = false
-include_package_data = true
+    [options]
+    zip_safe = false
+    include_package_data = true
 
-[bdist_wheel]
-universal = true
+    [bdist_wheel]
+    universal = true
 
-[coverage:report]
-show_missing = true
+    [coverage:report]
+    show_missing = true
 
-[flake8]
-max-line-length = 99
-doctests = True
-exclude = .git, .eggs, __pycache__, tests/, docs/, build/, dist/
-"""
+    [flake8]
+    max-line-length = 99
+    doctests = True
+    exclude = .git, .eggs, __pycache__, tests/, docs/, build/, dist/
+    """)
 
 
 @pytest.mark.parametrize(
@@ -220,11 +221,11 @@ def test_find_cfg_literal(name, value, temp_dir):
     assert find_literal("foo.cfg", name) == value
 
 
-CABAL_LITERAL = """\
-cabal-version:      3.0
-name:               pkg
-version:            1.2.3
-"""
+CABAL_LITERAL = dedent("""\
+    cabal-version:      3.0
+    name:               pkg
+    version:            1.2.3
+    """)
 
 
 @pytest.mark.parametrize(

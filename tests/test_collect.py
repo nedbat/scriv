@@ -1,123 +1,123 @@
 """Test collection logic."""
 
-import textwrap
+from textwrap import dedent
 from unittest.mock import call
 
 import freezegun
 import pytest
 
-COMMENT = """\
-.. this line should be dropped
+COMMENT = dedent("""\
+    .. this line should be dropped
 
-"""
+    """)
 
-COMMENT_MD = """\
-<!-- this line should be dropped -->
-"""
+COMMENT_MD = dedent("""\
+    <!-- this line should be dropped -->
+    """)
 
-FRAG1 = """\
-Fixed
------
+FRAG1 = dedent("""\
+    Fixed
+    -----
 
-- Launching missiles no longer targets ourselves.
-"""
+    - Launching missiles no longer targets ourselves.
+    """)
 
-FRAG2 = """\
-Added
------
+FRAG2 = dedent("""\
+    Added
+    -----
 
-- Now you can send email with this tool.
+    - Now you can send email with this tool.
 
-Fixed
------
+    Fixed
+    -----
 
-- Typos corrected.
-"""
+    - Typos corrected.
+    """)
 
-FRAG2_MD = """\
-# Added
+FRAG2_MD = dedent("""\
+    # Added
 
-- Now you can send email with this tool.
+    - Now you can send email with this tool.
 
-# Fixed
+    # Fixed
 
-- Typos corrected.
-"""
+    - Typos corrected.
+    """)
 
-FRAG3 = """\
-Obsolete
---------
+FRAG3 = dedent("""\
+    Obsolete
+    --------
 
-- This section has the wrong name.
-"""
+    - This section has the wrong name.
+    """)
 
-CHANGELOG_1_2 = """\
+CHANGELOG_1_2 = dedent("""\
 
-2020-02-25
-==========
+    2020-02-25
+    ==========
 
-Added
------
+    Added
+    -----
 
-- Now you can send email with this tool.
+    - Now you can send email with this tool.
 
-Fixed
------
+    Fixed
+    -----
 
-- Launching missiles no longer targets ourselves.
+    - Launching missiles no longer targets ourselves.
 
-- Typos corrected.
-"""
+    - Typos corrected.
+    """)
 
-CHANGELOG_2_1_3 = """\
+CHANGELOG_2_1_3 = dedent("""\
 
-2020-02-25
-==========
+    2020-02-25
+    ==========
 
-Added
------
+    Added
+    -----
 
-- Now you can send email with this tool.
+    - Now you can send email with this tool.
 
-Fixed
------
+    Fixed
+    -----
 
-- Typos corrected.
+    - Typos corrected.
 
-- Launching missiles no longer targets ourselves.
+    - Launching missiles no longer targets ourselves.
 
-Obsolete
---------
+    Obsolete
+    --------
 
-- This section has the wrong name.
-"""
+    - This section has the wrong name.
+    """)
 
-MARKED_CHANGELOG_A = """\
-================
-My Great Project
-================
+MARKED_CHANGELOG_A = dedent("""\
+    ================
+    My Great Project
+    ================
 
-Blah blah.
+    Blah blah.
 
-Changes
-=======
+    Changes
+    =======
 
-.. scriv-insert-here
-"""
+    .. scriv-insert-here
+    """)
 
-UNMARKED_CHANGELOG_B = """\
+UNMARKED_CHANGELOG_B = dedent("""\
 
-Other stuff
-===========
+    Other stuff
+    ===========
 
-Blah blah.
-"""
+    Blah blah.
+    """)
 
-CHANGELOG_HEADER = """\
+CHANGELOG_HEADER = dedent("""\
 
-2020-02-25
-==========
-"""
+    2020-02-25
+    ==========
+    """)
 
 
 def test_collect_simple(cli_invoke, changelog_d, temp_dir):
@@ -487,7 +487,7 @@ def test_duplicate_version(cli_invoke, changelog_d, temp_dir):
 def test_duplicate_version_2(cli_invoke, changelog_d, temp_dir):
     (changelog_d / "scriv.ini").write_text("[scriv]\nversion = 12.34.56\n")
     (temp_dir / "CHANGELOG.rst").write_text(
-        textwrap.dedent(
+        dedent(
             """\
             Preamble that doesn't count
 
@@ -519,7 +519,7 @@ def test_duplicate_version_2(cli_invoke, changelog_d, temp_dir):
 def test_duplicate_version_with_v(cli_invoke, changelog_d, temp_dir):
     (changelog_d / "scriv.ini").write_text("[scriv]\nversion = 12.34.56\n")
     (temp_dir / "CHANGELOG.rst").write_text(
-        textwrap.dedent(
+        dedent(
             """\
             Preamble that doesn't count
 
@@ -551,7 +551,7 @@ def test_duplicate_version_with_v(cli_invoke, changelog_d, temp_dir):
 def test_unparsable_version(cli_invoke, changelog_d, temp_dir):
     (changelog_d / "scriv.ini").write_text("[scriv]\nversion = 12.34.56\n")
     (temp_dir / "CHANGELOG.rst").write_text(
-        textwrap.dedent(
+        dedent(
             """\
             Preamble that doesn't count
 

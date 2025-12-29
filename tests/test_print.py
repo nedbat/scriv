@@ -1,21 +1,23 @@
 """Test print logic."""
 
+from textwrap import dedent
+
 import freezegun
 import pytest
 
-CHANGELOG_HEADER = """\
+CHANGELOG_HEADER = dedent("""\
 
-1.2 - 2020-02-25
-================
-"""
+    1.2 - 2020-02-25
+    ================
+    """)
 
 
-FRAG = """\
-Fixed
------
+FRAG = dedent("""\
+    Fixed
+    -----
 
-- Launching missiles no longer targets ourselves.
-"""
+    - Launching missiles no longer targets ourselves.
+    """)
 
 
 @pytest.mark.parametrize("newline", ("\r\n", "\n"))

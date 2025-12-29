@@ -2,6 +2,7 @@
 
 import json
 import logging
+from textwrap import dedent
 from typing import Any
 from unittest.mock import call
 
@@ -9,40 +10,40 @@ import pytest
 
 from .helpers import check_logs
 
-CHANGELOG1 = """\
-Some text before
+CHANGELOG1 = dedent("""\
+    Some text before
 
-v1.2.3 -- 2022-04-21
---------------------
+    v1.2.3 -- 2022-04-21
+    --------------------
 
-A good release
+    A good release
 
-Some fixes
-----------
+    Some fixes
+    ----------
 
-No version number in this section.
+    No version number in this section.
 
-v1.0 -- 2020-02-20
-------------------
+    v1.0 -- 2020-02-20
+    ------------------
 
-Nothing to say.
+    Nothing to say.
 
-v0.9a7 -- 2017-06-16
---------------------
+    v0.9a7 -- 2017-06-16
+    --------------------
 
-A beginning
+    A beginning
 
-v0.1 -- 2010-01-01
-------------------
+    v0.1 -- 2010-01-01
+    ------------------
 
-Didn't bother to tag this one.
+    Didn't bother to tag this one.
 
-v0.0.1 -- 2001-01-01
---------------------
+    v0.0.1 -- 2001-01-01
+    --------------------
 
-Very first.
+    Very first.
 
-"""
+    """)
 
 RELEASES1 = {
     "v1.0": {

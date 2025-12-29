@@ -1,45 +1,47 @@
 """Tests of scriv/changelog.py"""
 
+from textwrap import dedent
+
 import pytest
 
 from scriv.changelog import Changelog
 from scriv.config import Config
 
-A = """\
-Hello
-Goodbye
-"""
+A = dedent("""\
+    Hello
+    Goodbye
+    """)
 
-B = """\
-Now
-more than
-ever.
-"""
+B = dedent("""\
+    Now
+    more than
+    ever.
+    """)
 
-BODY = """\
-2022-09-13
-==========
+BODY = dedent("""\
+    2022-09-13
+    ==========
 
-Added
------
+    Added
+    -----
 
-- Wrote tests for Changelog.
+    - Wrote tests for Changelog.
 
-2022-02-25
-==========
+    2022-02-25
+    ==========
 
-Added
------
+    Added
+    -----
 
-- Now you can send email with this tool.
+    - Now you can send email with this tool.
 
-Fixed
------
+    Fixed
+    -----
 
-- Launching missiles no longer targets ourselves.
+    - Launching missiles no longer targets ourselves.
 
-- Typos corrected.
-"""
+    - Typos corrected.
+    """)
 
 BODY_SECTIONS = {
     "2022-09-13": [

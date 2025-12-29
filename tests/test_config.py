@@ -1,7 +1,7 @@
 """Tests of scriv/config.py"""
 
 import re
-import textwrap
+from textwrap import dedent
 
 import pytest
 
@@ -12,58 +12,58 @@ from scriv.optional import tomllib
 
 from .helpers import without_module
 
-CONFIG1 = """\
-[scriv]
-changelog = README.md
-categories = New, Different, Gone, Bad
-start_marker = FIRST!
-compact_fragments = yes
-md_html_anchors = False
-"""
+CONFIG1 = dedent("""\
+    [scriv]
+    changelog = README.md
+    categories = New, Different, Gone, Bad
+    start_marker = FIRST!
+    compact_fragments = yes
+    md_html_anchors = False
+    """)
 
 OLD_CONFIG1 = CONFIG1.replace("changelog = ", "output_file = ").replace(
     "start_marker = ", "insert_marker = "
 )
 
-CONFIG2 = """\
-[someotherthing]
-no_idea = what this is
+CONFIG2 = dedent("""\
+    [someotherthing]
+    no_idea = what this is
 
-[tool.scriv]
-changelog = README.md
-categories =
-    New
-    Different
-    Gone
-    Bad
-compact_fragments = true
-fragment_name_fields = author, created
+    [tool.scriv]
+    changelog = README.md
+    categories =
+        New
+        Different
+        Gone
+        Bad
+    compact_fragments = true
+    fragment_name_fields = author, created
 
-[more stuff]
-value = 17
-"""
+    [more stuff]
+    value = 17
+    """)
 
-GENERIC_TOML_CONFIG = """\
-[project]
-name = "spam"
-version = "2020.0.0"
-description = "Lovely Spam! Wonderful Spam!"
-readme = "README.rst"
-requires-python = ">=3.10"
-license = {file = "LICENSE.txt"}
-keywords = ["egg", "bacon", "sausage", "tomatoes", "Lobster Thermidor"]
-authors = [
-  {email = "hi@pradyunsg.me"},
-  {name = "Tzu-Ping Chung"}
-]
-maintainers = [
-  {name = "Brett Cannon", email = "brett@python.org"}
-]
-classifiers = [
-  "Development Status :: 4 - Beta",
-  "Programming Language :: Python"
-]
-"""
+GENERIC_TOML_CONFIG = dedent("""\
+    [project]
+    name = "spam"
+    version = "2020.0.0"
+    description = "Lovely Spam! Wonderful Spam!"
+    readme = "README.rst"
+    requires-python = ">=3.10"
+    license = {file = "LICENSE.txt"}
+    keywords = ["egg", "bacon", "sausage", "tomatoes", "Lobster Thermidor"]
+    authors = [
+    {email = "hi@pradyunsg.me"},
+    {name = "Tzu-Ping Chung"}
+    ]
+    maintainers = [
+    {name = "Brett Cannon", email = "brett@python.org"}
+    ]
+    classifiers = [
+    "Development Status :: 4 - Beta",
+    "Programming Language :: Python"
+    ]
+    """)
 
 TOML_CONFIG = (
     GENERIC_TOML_CONFIG
@@ -451,7 +451,7 @@ def test_bad_command(fake_run_command, bad_cmd, msg_rx):
 
 def test_old_and_new(temp_dir):
     (temp_dir / "tox.ini").write_text(
-        textwrap.dedent(
+        dedent(
             """\
             [scriv]
             changelog = README.md
@@ -466,7 +466,7 @@ def test_old_and_new(temp_dir):
 @pytest.mark.skipif(tomllib is None, reason="No TOML support installed")
 def test_old_and_new_toml(temp_dir):
     (temp_dir / "pyproject.toml").write_text(
-        textwrap.dedent(
+        dedent(
             """\
             [tool.scriv]
             changelog = "README.md"
