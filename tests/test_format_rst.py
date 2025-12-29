@@ -459,4 +459,4 @@ def test_bad_convert_to_markdown(rst_text, msg):
             textwrap.dedent(rst_text), fail_if_warn=True
         )
         # if we don't get the exception, we can debug the test:
-        print(converted)
+        print(converted)  # pragma: only failure
