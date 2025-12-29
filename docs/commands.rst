@@ -61,6 +61,10 @@ working on.  "Main" branch names aren't included, to cut down on uninteresting
 noise.  The branch names considered uninteresting are settable with the
 :ref:`config_main_branches` setting.
 
+If you want the files to be named differently, you can use the
+:ref:`config_fragment_name_fields` setting to chose what components to include
+in what order.
+
 The initial contents of the fragment file are populated from the
 :ref:`config_new_fragment_template` template.  The format is either
 reStructuredText or Markdown, selectable with the :ref:`config_format`
@@ -145,6 +149,10 @@ changed with the :ref:`config_start_marker` setting.  Using a marker like
 this, you can have your changelog be just part of a larger README file.  If
 there is no marker in the file, the new entry is inserted at the top of the
 file.
+
+Some specifics of the output are affected by settings:
+:ref:`config_md_html_anchors`, :ref:`config_md_setext_chars`, and
+:ref:`config_compact_fragments`.
 
 
 Fragment Deletion
