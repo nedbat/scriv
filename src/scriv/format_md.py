@@ -74,7 +74,7 @@ class MdTools(FormatTools):
         anchor: Optional[str] = None,
     ) -> str:  # noqa: D102 (inherited docstring)
         header = "\n"
-        if anchor:
+        if anchor and self.config.md_html_anchors:
             header += f"<a id='{anchor}'></a>\n"
         if self.config.md_setext_chars:
             header += text + "\n"

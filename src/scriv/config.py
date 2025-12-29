@@ -159,6 +159,18 @@ class _Options:
         },
     )
 
+    md_html_anchors = attr.ib(
+        type=bool,
+        default=True,
+        converter=attr.converters.to_bool,
+        metadata={
+            "doc": """\
+                If true, Markdown sections will have HTML anchors added
+                for precise linking.
+                """,
+        },
+    )
+
     compact_fragments = attr.ib(
         type=bool,
         default=False,

@@ -340,6 +340,17 @@ level to use for the entry heading.
 Default: ``1``
 
 
+.. _config_md_html_anchors:
+
+md_html_anchors
+---------------
+
+If true, Markdown sections will have HTML anchors added
+for precise linking.
+
+Default: ``True``
+
+
 .. _config_md_setext_chars:
 
 md_setext_chars
@@ -411,7 +422,7 @@ source file.
 
 Default: (empty)
 
-.. [[[end]]] (sum: KjH/6j6qqn)
+.. [[[end]]] (sum: Sa9e9PkjA7)
 
 
 .. _deprecated_config:

@@ -350,6 +350,12 @@ def test_format_sections(config_kwargs, sections, expected):
             {"anchor": "here"},
             "\n<a id='here'></a>\n# 2022-04-03\n",
         ),
+        (
+            {"md_html_anchors": False},
+            "2022-04-03",
+            {"anchor": "here"},
+            "\n# 2022-04-03\n",
+        ),
     ],
 )
 def test_format_header(config_kwargs, text, fh_kwargs, result):

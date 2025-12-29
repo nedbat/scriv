@@ -18,6 +18,7 @@ changelog = README.md
 categories = New, Different, Gone, Bad
 start_marker = FIRST!
 compact_fragments = yes
+md_html_anchors = False
 """
 
 OLD_CONFIG1 = CONFIG1.replace("changelog = ", "output_file = ").replace(
@@ -109,6 +110,7 @@ def test_defaults(temp_dir):
     assert config.rst_header_chars == "=-"
     assert config.md_header_level == "1"
     assert config.md_setext_chars == ""
+    assert config.md_html_anchors is True
     assert config.compact_fragments is False
     assert "{{ date.strftime('%Y-%m-%d') }}" in config.entry_title_template
     assert config.main_branches == ["master", "main", "develop"]
@@ -124,6 +126,7 @@ def test_reading_config(config_text, temp_dir):
     assert config.changelog == "README.md"
     assert config.format == "md"
     assert config.compact_fragments is True
+    assert config.md_html_anchors is False
     assert config.categories == ["New", "Different", "Gone", "Bad"]
     assert config.start_marker == "FIRST!"
 
