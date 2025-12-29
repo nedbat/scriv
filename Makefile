@@ -72,7 +72,7 @@ diff_upgrade: ## summarize the last `make upgrade`
 .PHONY: botedits quality requirements test test-all validate
 
 botedits: ## make source edits by tools
-	python -m black --line-length=80 src/scriv tests docs
+	python -m ruff format --line-length=80 src/scriv tests docs
 	python -m cogapp -crP docs/*.rst
 
 quality: ## check coding style with pycodestyle and pylint

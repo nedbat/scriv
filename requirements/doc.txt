@@ -33,7 +33,7 @@ colorama==0.4.6 ; sys_platform == 'win32'
     #   pylint
     #   pytest
     #   sphinx
-coverage==7.13.0
+coverage==7.13.1
     # via -r requirements/test.txt
 dill==0.4.0
     # via
@@ -145,9 +145,9 @@ responses==0.25.8
     # via -r requirements/test.txt
 restructuredtext-lint==2.0.2
     # via doc8
-roman-numerals==4.0.0 ; python_full_version >= '3.11'
+roman-numerals==4.1.0 ; python_full_version >= '3.11'
     # via roman-numerals-py
-roman-numerals-py==4.0.0 ; python_full_version >= '3.11'
+roman-numerals-py==4.1.0 ; python_full_version >= '3.11'
     # via sphinx
 six==1.17.0
     # via
@@ -207,7 +207,7 @@ urllib3==2.6.2
     #   -r requirements/test.txt
     #   requests
     #   responses
-urwid==3.0.4
+urwid==3.0.3
     # via
     #   -r requirements/test.txt
     #   pudb

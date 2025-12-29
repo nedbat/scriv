@@ -24,7 +24,7 @@ colorama==0.4.6 ; sys_platform == 'win32'
     #   click
     #   pylint
     #   pytest
-coverage==7.13.0
+coverage==7.13.1
     # via -r requirements/test.in
 dill==0.4.0
     # via pylint
@@ -111,7 +111,7 @@ urllib3==2.6.2
     #   -r requirements/base.txt
     #   requests
     #   responses
-urwid==3.0.4
+urwid==3.0.3
     # via
     #   pudb
     #   urwid-readline

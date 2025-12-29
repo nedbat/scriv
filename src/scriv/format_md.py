@@ -10,7 +10,8 @@ class MdTools(FormatTools):
     """Specifics about how to work with Markdown."""
 
     def parse_text(
-        self, text
+        self,
+        text,
     ) -> SectionDict:  # noqa: D102 (inherited docstring)
         lines = text.splitlines()
 
@@ -68,7 +69,9 @@ class MdTools(FormatTools):
         return sections
 
     def format_header(
-        self, text: str, anchor: Optional[str] = None
+        self,
+        text: str,
+        anchor: Optional[str] = None,
     ) -> str:  # noqa: D102 (inherited docstring)
         num = int(self.config.md_header_level)
         header = "\n"
@@ -78,7 +81,8 @@ class MdTools(FormatTools):
         return header
 
     def format_sections(
-        self, sections: SectionDict
+        self,
+        sections: SectionDict,
     ) -> str:  # noqa: D102 (inherited docstring)
         lines = []
         for section, paragraphs in sections.items():

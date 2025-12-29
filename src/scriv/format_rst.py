@@ -52,7 +52,8 @@ class RstTools(FormatTools):
         return bool(re.search(r"^.. _[-.\w]+:$", line))
 
     def parse_text(
-        self, text: str
+        self,
+        text: str,
     ) -> SectionDict:  # noqa: D102 (inherited docstring)
         # Parse a very restricted subset of rst.
         lines = text.splitlines()
@@ -117,7 +118,9 @@ class RstTools(FormatTools):
         return sections
 
     def format_header(
-        self, text: str, anchor: Optional[str] = None
+        self,
+        text: str,
+        anchor: Optional[str] = None,
     ) -> str:  # noqa: D102 (inherited docstring)
         header = "\n"
         if anchor:
@@ -128,7 +131,8 @@ class RstTools(FormatTools):
         return header  # type: ignore[no-any-return]
 
     def format_sections(
-        self, sections: SectionDict
+        self,
+        sections: SectionDict,
     ) -> str:  # noqa: D102 (inherited docstring)
         lines = []
         for section, paragraphs in sections.items():
