@@ -2,7 +2,6 @@
 
 import logging
 import sys
-from typing import Optional
 
 import click
 
@@ -36,12 +35,12 @@ logger = logging.getLogger(__name__)
 @scriv_command
 def collect(
     *,
-    add: Optional[bool],
-    edit: Optional[bool],
+    add: bool | None,
+    edit: bool | None,
     title: str,
     keep: bool,
     version: str,
-    config_file: Optional[str],
+    config_file: str | None,
 ) -> None:
     """
     Collect and combine fragments into the changelog.

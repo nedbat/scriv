@@ -91,11 +91,12 @@ Thanks to all the contributors so far:
 | Kurt McKee
 | Mark Dickinson
 | Matias Guijarro
+| Max Christoph
 | Michael Makukha
 | Rodrigo Girão Serrão
 | Ronny Pfannschmidt
 
-.. [[[end]]] (sum: bWGnlDAyI7)
+.. [[[end]]] (sum: y19u+Uuyzy)
 
 .. _repo: https://github.com/nedbat/scriv
 

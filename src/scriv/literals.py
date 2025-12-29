@@ -6,13 +6,13 @@ import ast
 import configparser
 import os.path
 from collections.abc import MutableMapping
-from typing import Any, Optional
+from typing import Any
 
 from .exceptions import ScrivException
 from .optional import tomllib, yaml
 
 
-def find_literal(file_name: str, literal_name: str) -> Optional[str]:
+def find_literal(file_name: str, literal_name: str) -> str | None:
     """
     Look inside a file for a literal value, and return it.
 
@@ -70,7 +70,7 @@ class PythonLiteralFinder(ast.NodeVisitor):
         self.name = None
         self.value = None
 
-    def find(self, node: ast.AST, name: str) -> Optional[str]:
+    def find(self, node: ast.AST, name: str) -> str | None:
         """
         Search the AST in `node`, looking for an assignment to `name`.
 
@@ -105,9 +105,7 @@ class PythonLiteralFinder(ast.NodeVisitor):
                 self.value = value.value
 
 
-def find_nested_value(
-    data: MutableMapping[str, Any], name: str
-) -> Optional[str]:
+def find_nested_value(data: MutableMapping[str, Any], name: str) -> str | None:
     """
     Use a period-separated name to traverse a dictionary.
 

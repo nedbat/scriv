@@ -1,7 +1,6 @@
 """Markdown text knowledge for scriv."""
 
 import re
-from typing import Optional
 
 from .format import FormatTools, SectionDict
 
@@ -71,7 +70,7 @@ class MdTools(FormatTools):
     def format_header(
         self,
         text: str,
-        anchor: Optional[str] = None,
+        anchor: str | None = None,
     ) -> str:  # noqa: D102 (inherited docstring)
         header = "\n"
         if anchor and self.config.md_html_anchors:

@@ -3,7 +3,6 @@
 import logging
 import shlex
 import subprocess
-from typing import Union
 
 # The return value of run_command.
 CmdResult = tuple[bool, str]
@@ -11,7 +10,7 @@ CmdResult = tuple[bool, str]
 logger = logging.getLogger(__name__)
 
 
-def run_command(cmd: Union[str, list[str]]) -> CmdResult:
+def run_command(cmd: str | list[str]) -> CmdResult:
     """
     Run a command line (with no shell).
 
@@ -38,7 +37,7 @@ def run_command(cmd: Union[str, list[str]]) -> CmdResult:
     return proc.returncode == 0, output
 
 
-def run_simple_command(cmd: Union[str, list[str]]) -> str:
+def run_simple_command(cmd: str | list[str]) -> str:
     """
     Run a command and return its output, or "" if it fails.
     """

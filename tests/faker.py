@@ -2,8 +2,7 @@
 
 import re
 import shlex
-from collections.abc import Iterable
-from typing import Callable, Optional
+from collections.abc import Callable, Iterable
 
 from scriv.shell import CmdResult
 
@@ -111,7 +110,7 @@ class FakeGit:
         self.tags.update(tags)
 
     def add_remote(
-        self, name: str, url: str, push_url: Optional[str] = None
+        self, name: str, url: str, push_url: str | None = None
     ) -> None:
         """Add a remote with a name and a url."""
         self.remotes[name] = (url, push_url or url)

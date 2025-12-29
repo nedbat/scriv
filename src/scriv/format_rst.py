@@ -3,7 +3,6 @@
 import os
 import re
 import tempfile
-from typing import Optional
 
 from .exceptions import ScrivException
 from .format import FormatTools, SectionDict
@@ -120,7 +119,7 @@ class RstTools(FormatTools):
     def format_header(
         self,
         text: str,
-        anchor: Optional[str] = None,
+        anchor: str | None = None,
     ) -> str:  # noqa: D102 (inherited docstring)
         header = "\n"
         if anchor:

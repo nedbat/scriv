@@ -2,7 +2,6 @@
 
 import logging
 import sys
-from typing import Optional
 
 import click
 
@@ -25,9 +24,9 @@ logger = logging.getLogger(__name__)
 @scriv_command
 def create(
     *,
-    add: Optional[bool],
-    edit: Optional[bool],
-    config_file: Optional[str],
+    add: bool | None,
+    edit: bool | None,
+    config_file: str | None,
 ) -> None:
     """
     Create a new changelog fragment.

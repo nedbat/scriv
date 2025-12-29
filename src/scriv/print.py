@@ -6,7 +6,6 @@ import logging
 import os
 import pathlib
 import sys
-from typing import Optional
 
 import click
 
@@ -33,7 +32,7 @@ def print_(
     *,
     version: str | None,
     output: pathlib.Path | None,
-    config_file: Optional[str] = None,
+    config_file: str | None = None,
 ) -> None:
     """
     Print collected fragments, or print an entry from the changelog.

@@ -7,7 +7,6 @@ import re
 import textwrap
 from collections.abc import Iterable
 from pathlib import Path
-from typing import Optional
 
 import jinja2
 
@@ -24,8 +23,8 @@ class Scriv:
     def __init__(
         self,
         *,
-        config: Optional[Config] = None,
-        config_file: Optional[str] = None,
+        config: Config | None = None,
+        config_file: str | None = None,
     ):
         """Create a new Scriv."""
         if config is None:

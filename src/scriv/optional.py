@@ -5,9 +5,8 @@ Third-party modules that might or might not be available.
 # pylint: disable=unused-import
 
 from types import ModuleType
-from typing import Optional
 
-tomllib: Optional[ModuleType]
+tomllib: ModuleType | None
 
 try:
     try:
@@ -18,7 +17,7 @@ except ImportError:
     tomllib = None
 
 
-yaml: Optional[ModuleType]
+yaml: ModuleType | None
 
 try:
     import yaml  # type: ignore[no-redef]

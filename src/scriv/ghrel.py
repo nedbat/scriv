@@ -2,7 +2,6 @@
 
 import logging
 import re
-from typing import Optional
 
 import click
 import jinja2
@@ -57,8 +56,8 @@ def github_release(
     draft: bool,
     dry_run: bool,
     fail_if_warn: bool,
-    repo: Optional[str] = None,
-    config_file: Optional[str] = None,
+    repo: str | None = None,
+    config_file: str | None = None,
 ) -> None:
     """
     Create GitHub releases from the changelog.
@@ -139,7 +138,7 @@ def github_release(
             break
 
 
-def resolve_repo(repo: Optional[str]) -> str:
+def resolve_repo(repo: str | None) -> str:
     """
     Resolve a repo argument to an owner/repo GitHub repo name.
     """

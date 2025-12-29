@@ -14,7 +14,7 @@ SectionDict = dict[Optional[str], list[str]]
 class FormatTools(abc.ABC):
     """Methods and data about specific formats."""
 
-    def __init__(self, config: Optional[Config] = None):
+    def __init__(self, config: Config | None = None):
         """Create a FormatTools with the specified configuration."""
         self.config = config or Config()
 
@@ -32,7 +32,7 @@ class FormatTools(abc.ABC):
         """
 
     @abc.abstractmethod
-    def format_header(self, text: str, anchor: Optional[str] = None) -> str:
+    def format_header(self, text: str, anchor: str | None = None) -> str:
         """
         Format the header for a new changelog entry.
         """
