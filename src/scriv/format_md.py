@@ -88,21 +88,24 @@ class MdTools(FormatTools):
         self,
         sections: SectionDict,
     ) -> str:  # noqa: D102 (inherited docstring)
-        lines = []
+        lines = [""]
         for section, paragraphs in sections.items():
             if section:
-                lines.append("")
                 if self.config.md_setext_chars:
                     lines.append(section)
                     lines.append(self.config.md_setext_chars[1] * len(section))
                 else:
                     header_level = int(self.config.md_header_level) + 1
                     lines.append("#" * header_level + " " + section)
-            for paragraph in paragraphs:
                 lines.append("")
+            for paragraph in paragraphs:
                 lines.append(paragraph)
+                if not self.config.compact_fragments:
+                    lines.append("")
+            if self.config.compact_fragments and lines[-1] != "":
+                lines.append("")
 
-        return "\n".join(lines) + "\n"
+        return "\n".join(lines)
 
     def convert_to_markdown(
         self, text: str, name: str = "", fail_if_warn: bool = False

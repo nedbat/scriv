@@ -256,9 +256,10 @@ def test_parse_text(text, parsed):
 
 
 @pytest.mark.parametrize(
-    "sections, expected",
+    "config_kwargs, sections, expected",
     [
         pytest.param(
+            {"rst_header_chars": "#~"},
             [
                 (
                     "Added",
@@ -294,6 +295,7 @@ def test_parse_text(text, parsed):
             id="one",
         ),
         pytest.param(
+            {"rst_header_chars": "#~"},
             [
                 (
                     None,
@@ -314,11 +316,45 @@ def test_parse_text(text, parsed):
             """,
             id="two",
         ),
+        pytest.param(
+            {"rst_header_chars": "*.", "compact_fragments": True},
+            [
+                (
+                    "Added",
+                    [
+                        "- This thing was added.\n  And we liked it.",
+                        "- Also added\n  this thing\n  that is very important.",
+                    ],
+                ),
+                (
+                    "Bugs Fixed",
+                    ["- This thing was fixed.", "- Another thing was fixed."],
+                ),
+            ],
+            """\
+
+            Added
+            .....
+
+            - This thing was added.
+              And we liked it.
+            - Also added
+              this thing
+              that is very important.
+
+            Bugs Fixed
+            ..........
+
+            - This thing was fixed.
+            - Another thing was fixed.
+            """,
+            id="compact",
+        ),
     ],
 )
-def test_format_sections(sections, expected):
+def test_format_sections(config_kwargs, sections, expected):
     sections = collections.OrderedDict(sections)
-    actual = RstTools(Config(rst_header_chars="#~")).format_sections(sections)
+    actual = RstTools(Config(**config_kwargs)).format_sections(sections)
     assert actual == textwrap.dedent(expected)
 
 

@@ -1,0 +1,8 @@
+Added
+.....
+
+- A new configuration setting ``compact_fragments`` is a boolean, defaulting to
+  False.  If set to true, fragments will be concatenated without blank lines
+  between them, allowing for compact bullet lists. Closes `issue #148`_.
+
+.. _issue 148: https://github.com/nedbat/scriv/issues/148

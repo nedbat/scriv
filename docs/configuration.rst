@@ -239,6 +239,17 @@ for this setting is :ref:`output_file <deprecated_config>`.
 Default: ``CHANGELOG.${config:format}``
 
 
+.. _config_compact_fragments:
+
+compact_fragments
+-----------------
+
+If true, fragments will be concatenated without blank lines
+between them, allowing for compact bullet lists.
+
+Default: ``False``
+
+
 .. _config_end_marker:
 
 end_marker
@@ -400,7 +411,7 @@ source file.
 
 Default: (empty)
 
-.. [[[end]]] (sum: rrHkfq+w8K)
+.. [[[end]]] (sum: KjH/6j6qqn)
 
 
 .. _deprecated_config:

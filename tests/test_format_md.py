@@ -293,6 +293,38 @@ def test_parse_text(text, parsed):
             """,
             id="one",
         ),
+        pytest.param(
+            {"md_header_level": "2", "compact_fragments": True},
+            [
+                (
+                    "Added",
+                    [
+                        "- This thing was added.\n  And we liked it.",
+                        "- Also added\n  this thing\n  that is very important.",
+                    ],
+                ),
+                (
+                    "Fixed",
+                    ["- This thing was fixed.", "- Another thing was fixed."],
+                ),
+            ],
+            """\
+
+            ### Added
+
+            - This thing was added.
+              And we liked it.
+            - Also added
+              this thing
+              that is very important.
+
+            ### Fixed
+
+            - This thing was fixed.
+            - Another thing was fixed.
+            """,
+            id="compact",
+        ),
     ],
 )
 def test_format_sections(config_kwargs, sections, expected):

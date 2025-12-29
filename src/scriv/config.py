@@ -159,6 +159,18 @@ class _Options:
         },
     )
 
+    compact_fragments = attr.ib(
+        type=bool,
+        default=False,
+        converter=attr.converters.to_bool,
+        metadata={
+            "doc": """\
+                If true, fragments will be concatenated without blank lines
+                between them, allowing for compact bullet lists.
+                """,
+        },
+    )
+
     # The name of the template for new fragments.
     new_fragment_template = attr.ib(
         type=str,
@@ -308,7 +320,7 @@ class Config:
         if attrdef.type is list:
             if isinstance(value, str):
                 value = convert_list(value)
-        else:
+        elif isinstance(value, str):
             try:
                 value = self.resolve_value(value)
             except ScrivException as se:

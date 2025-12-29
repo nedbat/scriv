@@ -17,6 +17,7 @@ CONFIG1 = """\
 changelog = README.md
 categories = New, Different, Gone, Bad
 start_marker = FIRST!
+compact_fragments = yes
 """
 
 OLD_CONFIG1 = CONFIG1.replace("changelog = ", "output_file = ").replace(
@@ -34,6 +35,7 @@ categories =
     Different
     Gone
     Bad
+compact_fragments = true
 
 [more stuff]
 value = 17
@@ -73,6 +75,7 @@ categories = [
     "Bad",
 ]
 start_marker = "FIRST!"
+compact_fragments = true
 # other scriv options
 
 ["more stuff"]
@@ -106,6 +109,7 @@ def test_defaults(temp_dir):
     assert config.rst_header_chars == "=-"
     assert config.md_header_level == "1"
     assert config.md_setext_chars == ""
+    assert config.compact_fragments is False
     assert "{{ date.strftime('%Y-%m-%d') }}" in config.entry_title_template
     assert config.main_branches == ["master", "main", "develop"]
     assert config.skip_fragments == "README.*"
@@ -119,14 +123,16 @@ def test_reading_config(config_text, temp_dir):
     assert config.fragment_directory == "changelog.d"
     assert config.changelog == "README.md"
     assert config.format == "md"
+    assert config.compact_fragments is True
     assert config.categories == ["New", "Different", "Gone", "Bad"]
     assert config.start_marker == "FIRST!"
 
 
-def test_reading_config_list(temp_dir):
+def test_reading_config_non_strings(temp_dir):
     (temp_dir / "tox.ini").write_text(CONFIG2)
     config = Config.read()
     assert config.categories == ["New", "Different", "Gone", "Bad"]
+    assert config.compact_fragments is True
 
 
 def test_reading_config_from_directory(changelog_d):
@@ -343,6 +349,7 @@ class TestTomlConfig:
         assert config.format == "md"
         assert config.categories == ["New", "Different", "Gone", "Bad"]
         assert config.start_marker == "FIRST!"
+        assert config.compact_fragments is True
 
     def test_toml_without_us(self, temp_dir):
         (temp_dir / "pyproject.toml").write_text(GENERIC_TOML_CONFIG)
