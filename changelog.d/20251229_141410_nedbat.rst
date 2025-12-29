@@ -1,0 +1,8 @@
+Added
+.....
+
+- The names of fragment files can be customized with the new
+  ``fragment_name_fields`` configuration option, which is a list chosen from
+  ``"created"``, ``branch``, and ``author``. Closes `issue 103`_.
+
+.. _issue 103: https://github.com/nedbat/scriv/issues/103

@@ -37,6 +37,7 @@ categories =
     Gone
     Bad
 compact_fragments = true
+fragment_name_fields = author, created
 
 [more stuff]
 value = 17
@@ -114,6 +115,7 @@ def test_defaults(temp_dir):
     assert config.compact_fragments is False
     assert "{{ date.strftime('%Y-%m-%d') }}" in config.entry_title_template
     assert config.main_branches == ["master", "main", "develop"]
+    assert config.fragment_name_fields == ["created", "author", "branch"]
     assert config.skip_fragments == "README.*"
     assert config.version == ""
 
@@ -136,6 +138,7 @@ def test_reading_config_non_strings(temp_dir):
     config = Config.read()
     assert config.categories == ["New", "Different", "Gone", "Bad"]
     assert config.compact_fragments is True
+    assert config.fragment_name_fields == ["author", "created"]
 
 
 def test_reading_config_from_directory(changelog_d):
@@ -328,6 +331,16 @@ def test_md_setext_chars_is_two_chars(chars):
     msg = rf"Invalid configuration: 'md_setext_chars' must match.*'{chars}'"
     with pytest.raises(ScrivException, match=msg):
         Config(md_setext_chars=chars)
+
+
+def test_fragment_name_fields_invalid():
+    msg = (
+        "Invalid configuration: 'fragment_name_fields' "
+        + "must be chosen from: created, author, branch. "
+        + "'xyzzy' are not allowed."
+    )
+    with pytest.raises(ScrivException, match=msg):
+        Config(fragment_name_fields=["created", "xyzzy"])
 
 
 def test_md_format(changelog_d):

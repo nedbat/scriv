@@ -296,6 +296,19 @@ will not be created.
 Default: ``changelog.d``
 
 
+.. _config_fragment_name_fields:
+
+fragment_name_fields
+--------------------
+
+The components to use when making new fragment file names.
+"created" is a timestamp, "author" is the user nick, and
+"branch" is the current Git branch name if it isn't one of the
+main branch names.
+
+Default: ``created, author, branch``
+
+
 .. _config_ghrel_template:
 
 ghrel_template
@@ -422,7 +435,7 @@ source file.
 
 Default: (empty)
 
-.. [[[end]]] (sum: Sa9e9PkjA7)
+.. [[[end]]] (sum: QcGRNKbOyn)
 
 
 .. _deprecated_config:

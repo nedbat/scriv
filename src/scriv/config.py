@@ -20,6 +20,24 @@ from .shell import run_shell_command
 logger = logging.getLogger(__name__)
 
 
+def subset_validator(allowed):
+    """Create a validator that ensures a list is a subset of allowed values."""
+
+    def validate_subset(_instance, attribute, value):
+        """
+        Validate that value is a subset of allowed values.
+        """
+        value = convert_list(value)
+        bad_values = set(value) - set(allowed)
+        if bad_values:
+            raise ValueError(
+                f"{attribute.name!r} must be chosen from: {', '.join(allowed)}."
+                + f" {', '.join(map(repr, bad_values))} are not allowed."
+            )
+
+    return validate_subset
+
+
 DEFAULT_FORMAT = "rst"
 DEFAULT_CHANGELOG = "CHANGELOG.${config:format}"
 
@@ -56,6 +74,22 @@ class _Options:
             "doc_default": f"""\
                 Derived from the changelog file name if provided,
                 otherwise "{DEFAULT_FORMAT}".
+                """,
+        },
+    )
+
+    fragment_name_fields = attr.ib(
+        type=list,
+        default=["created", "author", "branch"],
+        validator=attr.validators.optional(  # type: ignore[arg-type]
+            subset_validator(["created", "author", "branch"])
+        ),
+        metadata={
+            "doc": """\
+                The components to use when making new fragment file names.
+                "created" is a timestamp, "author" is the user nick, and
+                "branch" is the current Git branch name if it isn't one of the
+                main branch names.
                 """,
         },
     )
@@ -330,8 +364,7 @@ class Config:
         attrdef = fields[name]
         value = getattr(self._options, name)
         if attrdef.type is list:
-            if isinstance(value, str):
-                value = convert_list(value)
+            value = convert_list(value)
         elif isinstance(value, str):
             try:
                 value = self.resolve_value(value)
@@ -524,13 +557,16 @@ class Config:
         return value
 
 
-def convert_list(val: str) -> list[str]:
+def convert_list(val: str | list[str]) -> list[str]:
     """
     Convert a string value from a config into a list of strings.
 
     Elements can be separated by commas or newlines.
     """
-    vals = re.split(r"[\n,]", val)
-    vals = [v.strip() for v in vals]
-    vals = [v for v in vals if v]
-    return vals
+    if isinstance(val, str):
+        vals = re.split(r"[\n,]", val)
+        vals = [v.strip() for v in vals]
+        vals = [v for v in vals if v]
+        return vals
+    else:
+        return val

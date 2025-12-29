@@ -77,13 +77,19 @@ def _new_fragment_path(config: Config) -> Path:
     Return the file path for a new fragment.
     """
     now = datetime.datetime.now()
-    file_name = f"{now:%Y%m%d_%H%M%S}_{user_nick()}"
     branch_name = current_branch_name()
     if branch_name and branch_name not in config.main_branches:
         branch_name = branch_name.rpartition("/")[-1]
         branch_name = re.sub(r"[^a-zA-Z0-9_]", "_", branch_name)
-        file_name += f"_{branch_name}"
-    file_name += f".{config.format}"
+    else:
+        branch_name = ""
+    parts = {
+        "created": f"{now:%Y%m%d_%H%M%S}",
+        "author": user_nick(),
+        "branch": branch_name,
+    }
+    file_name_values = [parts[p] for p in config.fragment_name_fields]
+    file_name = "_".join(v for v in file_name_values if v) + f".{config.format}"
     file_path = Path(config.fragment_directory) / file_name
     return file_path
 

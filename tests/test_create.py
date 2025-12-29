@@ -29,11 +29,12 @@ class TestNewFragmentPath:
         fake_git.set_branch("mainline")
         scriv = Scriv(
             config=Config(
-                fragment_directory="notes", main_branches=["main", "mainline"]
+                fragment_directory="notes_dir",
+                main_branches=["main", "mainline"],
             )
         )
         assert scriv.new_fragment().path == Path(
-            "notes/20121001_070809_joedev.rst"
+            "notes_dir/20121001_070809_joedev.rst"
         )
 
     @freezegun.freeze_time("2013-02-25T15:16:17")
@@ -43,6 +44,14 @@ class TestNewFragmentPath:
         scriv = Scriv(config=Config(fragment_directory="notes"))
         assert scriv.new_fragment().path == Path(
             "notes/20130225_151617_joedev_feature_123_4.rst"
+        )
+
+    @freezegun.freeze_time("2025-12-29T11:12:13")
+    def test_customized_new_fragment_path(self, fake_git):
+        fake_git.set_branch("joedeveloper/feature-123.4")
+        scriv = Scriv(config=Config(fragment_name_fields=["branch", "created"]))
+        assert scriv.new_fragment().path == Path(
+            "changelog.d/feature_123_4_20251229_111213.rst"
         )
 
 
