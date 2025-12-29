@@ -8,7 +8,7 @@ import click
 
 from .gitinfo import git_add, git_config_bool, git_edit
 from .scriv import Scriv
-from .util import scriv_command, config_option
+from .util import scriv_command
 
 logger = logging.getLogger(__name__)
 
@@ -22,9 +22,13 @@ logger = logging.getLogger(__name__)
     default=None,
     help="Open the created file in your text editor.",
 )
-@config_option
 @scriv_command
-def create(add: Optional[bool], edit: Optional[bool], config_file: Optional[str]) -> None:
+def create(
+    *,
+    add: Optional[bool],
+    edit: Optional[bool],
+    config_file: Optional[str],
+) -> None:
     """
     Create a new changelog fragment.
     """
@@ -32,12 +36,7 @@ def create(add: Optional[bool], edit: Optional[bool], config_file: Optional[str]
         add = git_config_bool("scriv.create.add")
     if edit is None:
         edit = git_config_bool("scriv.create.edit")
-    if config_file is None:
-        scriv = Scriv()
-    else:
-        from .config import Config
-        config = Config.read_config_file(config_file)
-        scriv = Scriv(config=config)
+    scriv = Scriv(config_file=config_file)
     frag = scriv.new_fragment()
     file_path = frag.path
     if not file_path.parent.exists():

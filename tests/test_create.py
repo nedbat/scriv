@@ -309,3 +309,23 @@ class TestCreateAdd:
         assert result.exit_code == 99
         assert "Added" not in caplog.text
         assert "Couldn't add " + file_path in caplog.text
+
+
+def test_explicit_config_file(cli_invoke, fake_git, changelog_d, temp_dir):
+    ini_path = temp_dir / "my_scriv.ini"
+    ini_path.write_text("[scriv]\nfragment_name_fields = branch, author\n")
+    fake_git.set_branch("awesome-feature")
+    cli_invoke(["create", "--config", str(ini_path)])
+    created_file = next(changelog_d.iterdir())
+    assert (
+        created_file
+        == temp_dir / "changelog.d" / "awesome_feature_somebody.rst"
+    )
+
+
+def test_missing_explicit_config_file(
+    cli_invoke, fake_git, changelog_d, temp_dir
+):
+    ini_path = temp_dir / "no_such_scriv.ini"
+    result = cli_invoke(["create", "--config", str(ini_path)], expect_ok=False)
+    assert isinstance(result.exception, SystemExit)

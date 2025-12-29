@@ -10,9 +10,8 @@ from typing import Optional
 
 import click
 
-from .config import Config
 from .scriv import Scriv
-from .util import Version, scriv_command, config_option
+from .util import Version, scriv_command
 
 logger = logging.getLogger(__name__)
 
@@ -29,9 +28,9 @@ logger = logging.getLogger(__name__)
     default=None,
     help="The path to a file to write the output to.",
 )
-@config_option
 @scriv_command
 def print_(
+    *,
     version: str | None,
     output: pathlib.Path | None,
     config_file: Optional[str] = None,
@@ -39,11 +38,7 @@ def print_(
     """
     Print collected fragments, or print an entry from the changelog.
     """
-    if config_file:
-        config = Config.read_config_file(config_file)
-        scriv = Scriv(config=config)
-    else:
-        scriv = Scriv()
+    scriv = Scriv(config_file=config_file)
     changelog = scriv.changelog()
     newline: str = os.linesep
 

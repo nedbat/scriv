@@ -21,10 +21,15 @@ from .util import order_dict
 class Scriv:
     """Public API to the scriv application."""
 
-    def __init__(self, *, config: Optional[Config] = None):
+    def __init__(
+        self,
+        *,
+        config: Optional[Config] = None,
+        config_file: Optional[str] = None,
+    ):
         """Create a new Scriv."""
         if config is None:
-            self.config = Config.read()
+            self.config = Config.read(config_file)
         else:
             self.config = config
 

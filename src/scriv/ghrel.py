@@ -7,14 +7,13 @@ from typing import Optional
 import click
 import jinja2
 
-from .config import Config
 from .exceptions import ScrivException
 from .github import create_release, get_releases, update_release
 from .gitinfo import get_github_repos
 from .linkcheck import check_markdown_links
 from .scriv import Scriv
 from .shell import run_simple_command
-from .util import Version, scriv_command, config_option
+from .util import Version, scriv_command
 
 logger = logging.getLogger(__name__)
 
@@ -50,10 +49,9 @@ logger = logging.getLogger(__name__)
     "--repo",
     help="The GitHub repo (owner/reponame) to create the release in.",
 )
-@config_option
 @scriv_command
-def github_release(  # pylint: disable=R0917
-    # Keep pylint from complaining about the number of CLI options
+def github_release(
+    *,
     all_entries: bool,
     check_links: bool,
     draft: bool,
@@ -73,11 +71,7 @@ def github_release(  # pylint: disable=R0917
     tags = set(map(Version, run_simple_command("git tag").split()))
     releases = {Version(k): v for k, v in get_releases(repo).items()}
 
-    if config_file:
-        config = Config.read_config_file(config_file)
-        scriv = Scriv(config=config)
-    else:
-        scriv = Scriv()
+    scriv = Scriv(config_file=config_file)
     changelog = scriv.changelog()
     changelog.read()
 

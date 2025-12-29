@@ -126,10 +126,19 @@ def scriv_command(func):
 
     - Set the log level from the command line for all of scriv.
 
+    - All commands take a --config option.
+
     """
 
     @functools.wraps(func)
     @click_log.simple_verbosity_option(logging.getLogger("scriv"))
+    @click.option(
+        "--config",
+        "config_file",
+        default=None,
+        type=click.Path(exists=True, readable=True, dir_okay=False),
+        help="Use a custom config file.",
+    )
     def _wrapped(*args, **kwargs):
         try:
             func(*args, **kwargs)
@@ -137,11 +146,3 @@ def scriv_command(func):
             sys.exit(str(exc))
 
     return _wrapped
-
-config_option = click.option(
-    "--config",
-    "config_file",
-    default=None,
-    type=click.Path(),
-    help="Use a custom config file.",
-)

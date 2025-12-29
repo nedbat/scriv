@@ -376,21 +376,7 @@ class Config:
         return value
 
     @classmethod
-    def read_config_file(cls, config_file: str) -> Config:
-        """
-        Read a configuration file.
-
-        Configuration will be read from the given configuration file.
-        """
-        config = cls(post_create_=False)
-        config.read_one_config(config_file)
-        with validator_exceptions():
-            attr.validate(config._options)
-        config._options.post_create()
-        return config
-
-    @classmethod
-    def read(cls) -> Config:
+    def read(cls, file_name: str | None = None) -> Config:
         """
         Read the configuration to use.
 
@@ -402,12 +388,15 @@ class Config:
 
         """
         config = cls(post_create_=False)
-        config.read_one_config("setup.cfg")
-        config.read_one_config("tox.ini")
-        config.read_one_toml("pyproject.toml")
-        config.read_one_config(
-            str(Path(config.fragment_directory) / "scriv.ini")
-        )
+        if file_name is not None:
+            config.read_one_config(file_name)
+        else:
+            config.read_one_config("setup.cfg")
+            config.read_one_config("tox.ini")
+            config.read_one_toml("pyproject.toml")
+            config.read_one_config(
+                str(Path(config.fragment_directory) / "scriv.ini")
+            )
         with validator_exceptions():
             attr.validate(config._options)
         config._options.post_create()

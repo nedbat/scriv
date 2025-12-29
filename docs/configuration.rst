@@ -10,7 +10,7 @@ behavior can be customized with a settings file.
 Files Read
 ==========
 
-Scriv will read settings from any of these files:
+Scriv will read settings from a number of files:
 
 - setup.cfg
 
@@ -19,6 +19,9 @@ Scriv will read settings from any of these files:
 - pyproject.toml
 
 - scriv.ini in the fragment directory ("changelog.d/" by default)
+
+- You can specify a specific config file with any command's ``--config``
+  option. In this case, only that file will be read.
 
 In .ini or .cfg files, scriv will read settings from a section named either
 ``[scriv]`` or ``[tool.scriv]``.

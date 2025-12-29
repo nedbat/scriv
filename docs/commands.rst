@@ -42,8 +42,9 @@ scriv create
       --add / --no-add     'git add' the created file.
       --edit / --no-edit   Open the created file in your text editor.
       -v, --verbosity LVL  Either CRITICAL, ERROR, WARNING, INFO or DEBUG
+      --config FILE        Use a custom config file.
       --help               Show this message and exit.
-.. [[[end]]] (sum: Re3sH9Hrw0)
+.. [[[end]]] (sum: 5l0TjRJK5B)
 
 The create command creates new :ref:`fragments <fragments>`.
 
@@ -118,8 +119,9 @@ scriv collect
       --keep               Keep the fragment files that are collected.
       --version TEXT       The version name to use for this entry.
       -v, --verbosity LVL  Either CRITICAL, ERROR, WARNING, INFO or DEBUG
+      --config FILE        Use a custom config file.
       --help               Show this message and exit.
-.. [[[end]]] (sum: 6TyneDljEM)
+.. [[[end]]] (sum: IElokw1iov)
 
 The collect command aggregates all the current fragments into the changelog
 file.
@@ -195,8 +197,9 @@ scriv github-release
       --repo TEXT          The GitHub repo (owner/reponame) to create the
                            release in.
       -v, --verbosity LVL  Either CRITICAL, ERROR, WARNING, INFO or DEBUG
+      --config FILE        Use a custom config file.
       --help               Show this message and exit.
-.. [[[end]]] (sum: up0wQsS8Lh)
+.. [[[end]]] (sum: qcsuFm7AwS)
 
 The ``github-release`` command reads the changelog file, parses it into
 entries, and then creates or updates GitHub releases to match.  Only the most
@@ -254,8 +257,9 @@ scriv print
       --version TEXT       The version of the changelog entry to extract.
       --output PATH        The path to a file to write the output to.
       -v, --verbosity LVL  Either CRITICAL, ERROR, WARNING, INFO or DEBUG
+      --config FILE        Use a custom config file.
       --help               Show this message and exit.
-.. [[[end]]] (sum: 9lKjRw2l9y)
+.. [[[end]]] (sum: UQxzaeWP2O)
 
 The ``print`` command writes a changelog entry to standard out.
 
