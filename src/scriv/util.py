@@ -10,6 +10,7 @@ import sys
 from collections.abc import Sequence
 from typing import TypeVar
 
+import click
 import click_log
 
 from .exceptions import ScrivException
@@ -136,3 +137,11 @@ def scriv_command(func):
             sys.exit(str(exc))
 
     return _wrapped
+
+config_option = click.option(
+    "--config",
+    "config_file",
+    default=None,
+    type=click.Path(),
+    help="Use a custom config file.",
+)

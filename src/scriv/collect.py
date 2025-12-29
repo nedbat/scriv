@@ -6,9 +6,10 @@ from typing import Optional
 
 import click
 
+from .config import Config
 from .gitinfo import git_add, git_config_bool, git_edit, git_rm
 from .scriv import Scriv
-from .util import Version, scriv_command
+from .util import Version, scriv_command, config_option
 
 logger = logging.getLogger(__name__)
 
@@ -33,6 +34,7 @@ logger = logging.getLogger(__name__)
 @click.option(
     "--version", default=None, help="The version name to use for this entry."
 )
+@config_option
 @scriv_command
 def collect(
     add: Optional[bool],
@@ -40,6 +42,7 @@ def collect(
     title: str,
     keep: bool,
     version: str,
+    config_file: Optional[str]
 ) -> None:
     """
     Collect and combine fragments into the changelog.
@@ -52,7 +55,11 @@ def collect(
     if edit is None:
         edit = git_config_bool("scriv.collect.edit")
 
-    scriv = Scriv()
+    if config_file is None:
+        scriv = Scriv()
+    else:
+        config = Config.read_config_file(config_file)
+        scriv = Scriv(config=config)
     logger.info(f"Collecting from {scriv.config.fragment_directory}")
     frags = scriv.fragments_to_combine()
     if not frags:
