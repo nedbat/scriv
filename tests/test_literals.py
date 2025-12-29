@@ -146,7 +146,7 @@ myVersion:
   PATCH: 5
 
 myproduct:
-  version: [mayor=5, minor=6, patch=7]
+  version: [major=5, minor=6, patch=7]
   versionString: "8.9.22"
 ...
 """
@@ -200,7 +200,7 @@ show_missing = true
 [flake8]
 max-line-length = 99
 doctests = True
-exclude =  .git, .eggs, __pycache__, tests/, docs/, build/, dist/
+exclude = .git, .eggs, __pycache__, tests/, docs/, build/, dist/
 """
 
 
