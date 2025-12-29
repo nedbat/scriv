@@ -313,6 +313,14 @@ def test_rst_chars_is_two_chars(chars):
         Config(rst_header_chars=chars)
 
 
+@pytest.mark.parametrize("chars", ["#", "#=-", "# ", "  "])
+def test_md_setext_chars_is_two_chars(chars):
+    # md_setext_chars must be exactly two non-space characters.
+    msg = rf"Invalid configuration: 'md_setext_chars' must match.*'{chars}'"
+    with pytest.raises(ScrivException, match=msg):
+        Config(md_setext_chars=chars)
+
+
 def test_md_format(changelog_d):
     (changelog_d / "scriv.ini").write_text("[scriv]\nformat = md\n")
     config = Config.read()
