@@ -31,6 +31,11 @@ logger = logging.getLogger(__name__)
     help="Check that links are valid (EXPERIMENTAL).",
 )
 @click.option(
+    "--draft",
+    is_flag=True,
+    help="Publish a draft release.",
+)
+@click.option(
     "--dry-run",
     is_flag=True,
     help="Don't post to GitHub, just show what would be done.",
@@ -45,9 +50,11 @@ logger = logging.getLogger(__name__)
     help="The GitHub repo (owner/reponame) to create the release in.",
 )
 @scriv_command
-def github_release(
+def github_release(  # pylint: disable=R0917
+    # Keep pylint from complaining about the number of CLI options
     all_entries: bool,
     check_links: bool,
+    draft: bool,
     dry_run: bool,
     fail_if_warn: bool,
     repo: Optional[str] = None,
@@ -90,7 +97,7 @@ def github_release(
             "body": md,
             "name": str(version),
             "tag_name": str(version),
-            "draft": False,
+            "draft": draft,
             "prerelease": version.is_prerelease(),
         }
 

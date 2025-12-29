@@ -140,6 +140,25 @@ def test_default(
     ]
 
 
+def test_default_draft(
+    cli_invoke, scenario1, mock_create_release, mock_update_release, caplog
+):
+    cli_invoke(["github-release", "--draft"])
+
+    draft_rel = V123_REL.copy()
+    draft_rel["draft"] = True
+
+    assert mock_create_release.mock_calls == [call("joe/project", draft_rel)]
+    assert mock_update_release.mock_calls == []
+    assert caplog.record_tuples == [
+        (
+            "scriv.changelog",
+            logging.INFO,
+            "Reading changelog CHANGELOG.rst",
+        ),
+    ]
+
+
 def test_dash_all(
     cli_invoke, scenario1, mock_create_release, mock_update_release, caplog
 ):

@@ -15,7 +15,7 @@ Scriv
                     break
                 print(line.rstrip())
 .. ]]]
-.. [[[end]]] (checksum: d41d8cd98f00b204e9800998ecf8427e)
+.. [[[end]]] (sum: 1B2M2Y8Asg)
 
 Scriv changelog management tool
 
@@ -25,7 +25,7 @@ Scriv changelog management tool
 | |pyversions-badge| |license-badge|
 | |sponsor-badge| |bluesky-nedbat| |mastodon-nedbat|
 
-.. [[[end]]] (checksum: 7fdcea0e3dde536381ddf121907d2b69)
+.. [[[end]]] (sum: f9zqDj3eU2)
 
 Overview
 ========
@@ -84,7 +84,7 @@ Thanks to all the contributors so far:
 | Ned Batchelder
 | Abhilash Raj
 | Agustín Piqueres
-| Alyssa Coughlan
+| Alyssa Coghlan
 | Flo Kuepper
 | James Gerity
 | Javier Sagredo
@@ -95,7 +95,7 @@ Thanks to all the contributors so far:
 | Rodrigo Girão Serrão
 | Ronny Pfannschmidt
 
-.. [[[end]]] (checksum: 38a9f227f719032ff5b67bcc50bb7276)
+.. [[[end]]] (sum: bWGnlDAyI7)
 
 .. _repo: https://github.com/nedbat/scriv
 
@@ -137,4 +137,4 @@ Thanks to all the contributors so far:
     :target: https://github.com/sponsors/nedbat
     :alt: Sponsor me on GitHub
 
-.. [[[end]]] (checksum: 8b12edabfa17d670355a58c750b0a648)
+.. [[[end]]] (sum: ixLtq/oX1n)
