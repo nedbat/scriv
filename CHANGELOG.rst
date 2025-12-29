@@ -21,6 +21,48 @@ See the fragment files in the `changelog.d directory`_.
 
 .. scriv-insert-here
 
+.. _changelog-1.8.0:
+
+1.8.0 — 2025-12-29
+------------------
+
+Added
+.....
+
+- Add a ``--draft`` option to the `github-release` command,
+  closing `issue 164`_. Thanks, `Alyssa Coghlan <pull 165_>`_.
+
+- The ``--config`` option to all commands lets you specify a configuration file
+  to use. Thanks, `Max Christoph <pull 151_>`_
+
+- A new configuration setting ``compact_fragments`` is a boolean, defaulting to
+  False.  If set to true, fragments will be concatenated without blank lines
+  between them, allowing for compact bullet lists. Closes `issue 148`_.
+
+- The names of fragment files can be customized with the new
+  ``fragment_name_fields`` configuration option, which is a list chosen from
+  ``"created"``, ``branch``, and ``author``. Closes `issue 103`_.
+
+- A new configuration setting ``md_setext_chars`` enables setext-style
+  underlined headings in Markdown output.  Set to ``"=-"`` to use standard
+  header underlines.  Finishes `issue 167`_.
+
+- A new option ``md_html_anchors`` can be set to False to suppress the creation
+  of HTML anchors for Markdown headings, closing ``issue 168``. Some purists
+  don't like HTML tags in Markdown, though they are fine with HTML comments. :)
+
+Changed
+.......
+
+- Dropped support for Python 3.9 and declared support for Python 3.14.
+
+.. _issue 148: https://github.com/nedbat/scriv/issues/148
+.. _pull 151: https://github.com/nedbat/scriv/pull/151
+.. _issue 164: https://github.com/nedbat/scriv/issues/164
+.. _pull 165: https://github.com/nedbat/scriv/pull/165
+.. _issue 167: https://github.com/nedbat/scriv/issues/167
+.. _issue 168: https://github.com/nedbat/scriv/issues/168
+
 .. _changelog-1.7.0:
 
 1.7.0 — 2025-04-20

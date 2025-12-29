@@ -1,8 +1,0 @@
-Added
-.....
-
-- A new option ``md_html_anchors`` can be set to False to suppress the creation
-  of HTML anchors for Markdown headings, closing ``issue 168``. Some purists
-  don't like HTML tags in Markdown, though they are fine with HTML comments. :)
-
-.. _issue 168: https://github.com/nedbat/scriv/issues/168

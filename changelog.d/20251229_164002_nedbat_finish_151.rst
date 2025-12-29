@@ -1,7 +1,0 @@
-Added
-.....
-
-- The ``--config`` option to all commands lets you specify a configuration file
-  to use. Thanks, `Max Christoph <pull 151_>`_
-
-.. _pull 151: https://github.com/nedbat/scriv/pull/151

@@ -4,6 +4,7 @@
 #   - increment the version in src/scriv/__init__.py
 #   - scriv collect
 #   - commit changes
+#   - make quality
 #   - make check_release
 #   - make release
 
