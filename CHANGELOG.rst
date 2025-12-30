@@ -41,7 +41,7 @@ Added
 
 - The names of fragment files can be customized with the new
   ``fragment_name_fields`` configuration option, which is a list chosen from
-  ``"created"``, ``branch``, and ``author``. Closes `issue 103`_.
+  ``"created"``, ``branch``, and ``author``. Closes `issue #103`_.
 
 - A new configuration setting ``md_setext_chars`` enables setext-style
   underlined headings in Markdown output.  Set to ``"=-"`` to use standard
@@ -56,6 +56,7 @@ Changed
 
 - Dropped support for Python 3.9 and declared support for Python 3.14.
 
+.. _issue #103: https://github.com/nedbat/scriv/issues/103
 .. _issue 148: https://github.com/nedbat/scriv/issues/148
 .. _pull 151: https://github.com/nedbat/scriv/pull/151
 .. _issue 164: https://github.com/nedbat/scriv/issues/164
