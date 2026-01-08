@@ -4,7 +4,7 @@ alabaster==1.0.0
     # via
     #   -r requirements/quality.txt
     #   sphinx
-astroid==4.0.2
+astroid==4.0.3
     # via
     #   -r requirements/quality.txt
     #   pylint
@@ -27,7 +27,7 @@ cachetools==6.2.4
     # via
     #   -r requirements/tox.txt
     #   tox
-certifi==2025.11.12
+certifi==2026.1.4
     # via
     #   -r requirements/quality.txt
     #   requests
@@ -91,7 +91,7 @@ exceptiongroup==1.3.1 ; python_full_version < '3.11'
     # via
     #   -r requirements/quality.txt
     #   pytest
-filelock==3.20.1
+filelock==3.20.2
     # via
     #   -r requirements/tox.txt
     #   tox
@@ -152,7 +152,7 @@ keyring==25.7.0 ; platform_machine != 'ppc64le' and platform_machine != 's390x'
     # via
     #   -r requirements/quality.txt
     #   twine
-librt==0.7.5 ; platform_python_implementation != 'PyPy'
+librt==0.7.7 ; platform_python_implementation != 'PyPy'
     # via
     #   -r requirements/quality.txt
     #   mypy
@@ -202,7 +202,7 @@ parso==0.8.5
     # via
     #   -r requirements/quality.txt
     #   jedi
-pathspec==0.12.1
+pathspec==1.0.2
     # via
     #   -r requirements/quality.txt
     #   mypy
@@ -390,7 +390,7 @@ tomlkit==0.13.3
     # via
     #   -r requirements/quality.txt
     #   pylint
-tox==4.32.0
+tox==4.33.0
     # via -r requirements/tox.txt
 twine==6.2.0
     # via -r requirements/quality.txt
@@ -398,7 +398,7 @@ types-freezegun==1.1.10
     # via -r requirements/quality.txt
 types-pyyaml==6.0.12.20250915
     # via -r requirements/quality.txt
-types-requests==2.32.4.20250913
+types-requests==2.32.4.20260107
     # via -r requirements/quality.txt
 types-toml==0.10.8.20240310
     # via -r requirements/quality.txt
@@ -413,7 +413,7 @@ typing-extensions==4.15.0
     #   pudb
     #   tox
     #   virtualenv
-urllib3==2.6.2
+urllib3==2.6.3
     # via
     #   -r requirements/quality.txt
     #   requests
@@ -429,7 +429,7 @@ urwid-readline==0.15.1
     # via
     #   -r requirements/quality.txt
     #   pudb
-virtualenv==20.35.4
+virtualenv==20.36.0
     # via
     #   -r requirements/tox.txt
     #   tox
