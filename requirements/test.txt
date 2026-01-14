@@ -95,11 +95,11 @@ responses==0.25.8
     # via -r requirements/test.in
 six==1.17.0
     # via python-dateutil
-tomli==2.3.0 ; python_full_version < '3.11'
+tomli==2.4.0 ; python_full_version < '3.11'
     # via
     #   pylint
     #   pytest
-tomlkit==0.13.3
+tomlkit==0.14.0
     # via pylint
 typing-extensions==4.15.0
     # via
