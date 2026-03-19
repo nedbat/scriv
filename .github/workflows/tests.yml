@@ -111,6 +111,7 @@ jobs:
     runs-on: ubuntu-latest
     environment:
       name: coverage
+      deployment: false
 
     steps:
       - name: "Check out the repo"
