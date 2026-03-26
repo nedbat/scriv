@@ -224,7 +224,7 @@ pyyaml==6.0.3
     #   responses
 readme-renderer==44.0
     # via twine
-requests==2.32.5
+requests==2.33.0
     # via
     #   -r doc.txt
     #   -r test.txt
@@ -247,7 +247,7 @@ rfc3986==2.0.0
     # via twine
 rich==14.2.0
     # via twine
-roman-numerals==4.1.0 ; python_full_version >= "3.11"
+roman-numerals==4.1.0
     # via
     #   -r doc.txt
     #   sphinx
@@ -265,7 +265,7 @@ snowballstemmer==3.0.1
     #   -r doc.txt
     #   pydocstyle
     #   sphinx
-sphinx==9.1.0 ; python_full_version >= "3.12"
+sphinx==9.1.0
     # via
     #   -r doc.txt
     #   sphinx-rtd-theme

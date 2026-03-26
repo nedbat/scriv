@@ -251,7 +251,7 @@ readme-renderer==44.0
     # via
     #   -r quality.txt
     #   twine
-requests==2.32.5
+requests==2.33.0
     # via
     #   -r quality.txt
     #   id
@@ -277,7 +277,7 @@ rich==14.2.0
     # via
     #   -r quality.txt
     #   twine
-roman-numerals==4.1.0 ; python_full_version >= "3.11"
+roman-numerals==4.1.0
     # via
     #   -r quality.txt
     #   sphinx
@@ -296,7 +296,7 @@ snowballstemmer==3.0.1
     #   -r quality.txt
     #   pydocstyle
     #   sphinx
-sphinx==9.1.0 ; python_full_version >= "3.12"
+sphinx==9.1.0
     # via
     #   -r quality.txt
     #   sphinx-rtd-theme
