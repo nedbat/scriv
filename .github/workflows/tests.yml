@@ -54,14 +54,14 @@ jobs:
             3.13
             3.14
 
-      - name: "Restore cache"
-        id: "restore-cache"
-        uses: actions/cache@cdf6c1fa76f9f475f3d7449005a359c84ca0f306 # v5.0.3
-        with:
-          path: |
-            .tox/
-            .venv/
-          key: "cache-python-${{ steps.setup-python.outputs.python-version }}-os-${{ runner.os }}-hash-${{ hashFiles('tox.ini', 'requirements/*.txt') }}"
+      #- name: "Restore cache"
+      #  id: "restore-cache"
+      #  uses: actions/cache@cdf6c1fa76f9f475f3d7449005a359c84ca0f306 # v5.0.3
+      #  with:
+      #    path: |
+      #      .tox/
+      #      .venv/
+      #    key: "cache-python-${{ steps.setup-python.outputs.python-version }}-os-${{ runner.os }}-hash-${{ hashFiles('tox.ini', 'requirements/*.txt') }}"
 
       - name: "Identify venv path"
         shell: "bash"
