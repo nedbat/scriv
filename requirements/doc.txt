@@ -2,19 +2,19 @@
 #    make upgrade
 alabaster==1.0.0
     # via sphinx
-astroid==4.0.3
+astroid==4.0.4
     # via
     #   -r requirements/test.txt
     #   pylint
-attrs==25.4.0
+attrs==26.1.0
     # via -r requirements/test.txt
-babel==2.17.0
+babel==2.18.0
     # via sphinx
-certifi==2026.1.4
+certifi==2026.2.25
     # via
     #   -r requirements/test.txt
     #   requests
-charset-normalizer==3.4.4
+charset-normalizer==3.4.6
     # via
     #   -r requirements/test.txt
     #   requests
@@ -33,9 +33,9 @@ colorama==0.4.6 ; sys_platform == 'win32'
     #   pylint
     #   pytest
     #   sphinx
-coverage==7.13.1
+coverage==7.13.5
     # via -r requirements/test.txt
-dill==0.4.0
+dill==0.4.1
     # via
     #   -r requirements/test.txt
     #   pylint
@@ -57,13 +57,13 @@ idna==3.11
     # via
     #   -r requirements/test.txt
     #   requests
-imagesize==1.4.1
+imagesize==2.0.0
     # via sphinx
 iniconfig==2.3.0
     # via
     #   -r requirements/test.txt
     #   pytest
-isort==7.0.0
+isort==8.0.1
     # via
     #   -r requirements/test.txt
     #   pylint
@@ -89,17 +89,17 @@ mdurl==0.1.2
     # via
     #   -r requirements/test.txt
     #   markdown-it-py
-packaging==25.0
+packaging==26.0
     # via
     #   -r requirements/test.txt
     #   pudb
     #   pytest
     #   sphinx
-parso==0.8.5
+parso==0.8.6
     # via
     #   -r requirements/test.txt
     #   jedi
-platformdirs==4.5.1
+platformdirs==4.9.4
     # via
     #   -r requirements/test.txt
     #   pylint
@@ -115,7 +115,7 @@ pygments==2.19.2
     #   doc8
     #   pudb
     #   sphinx
-pylint==4.0.4
+pylint==4.0.5
     # via
     #   -r requirements/test.txt
     #   pylint-pytest
@@ -136,12 +136,12 @@ pyyaml==6.0.3
     # via
     #   -r requirements/test.txt
     #   responses
-requests==2.32.5
+requests==2.33.0
     # via
     #   -r requirements/test.txt
     #   responses
     #   sphinx
-responses==0.25.8
+responses==0.26.0
     # via -r requirements/test.txt
 restructuredtext-lint==2.0.2
     # via doc8
@@ -186,9 +186,9 @@ sphinxcontrib-qthelp==2.0.0
     # via sphinx
 sphinxcontrib-serializinghtml==2.0.0
     # via sphinx
-stevedore==5.6.0
+stevedore==5.7.0
     # via doc8
-tomli==2.4.0 ; python_full_version < '3.11'
+tomli==2.4.1 ; python_full_version < '3.11'
     # via
     #   -r requirements/test.txt
     #   doc8
@@ -210,7 +210,7 @@ urllib3==2.6.3
     #   -r requirements/test.txt
     #   requests
     #   responses
-urwid==3.0.3
+urwid==3.0.5
     # via
     #   -r requirements/test.txt
     #   pudb
@@ -219,7 +219,7 @@ urwid-readline==0.15.1
     # via
     #   -r requirements/test.txt
     #   pudb
-wcwidth==0.2.14
+wcwidth==0.6.0
     # via
     #   -r requirements/test.txt
     #   urwid
