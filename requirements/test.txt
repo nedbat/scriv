@@ -4,15 +4,15 @@ astroid==4.0.4
     # via pylint
 attrs==26.1.0
     # via -r requirements/base.txt
-certifi==2026.2.25
+certifi==2026.4.22
     # via
     #   -r requirements/base.txt
     #   requests
-charset-normalizer==3.4.6
+charset-normalizer==3.4.7
     # via
     #   -r requirements/base.txt
     #   requests
-click==8.3.1
+click==8.3.3
     # via
     #   -r requirements/base.txt
     #   click-log
@@ -32,7 +32,7 @@ exceptiongroup==1.3.1 ; python_full_version < '3.11'
     # via pytest
 freezegun==1.5.5
     # via -r requirements/test.in
-idna==3.11
+idna==3.13
     # via
     #   -r requirements/base.txt
     #   requests
@@ -56,19 +56,19 @@ mdurl==0.1.2
     # via
     #   -r requirements/base.txt
     #   markdown-it-py
-packaging==26.0
+packaging==26.2
     # via
     #   pudb
     #   pytest
 parso==0.8.6
     # via jedi
-platformdirs==4.9.4
+platformdirs==4.9.6
     # via pylint
 pluggy==1.6.0
     # via pytest
 pudb==2025.1.5
     # via -r requirements/test.in
-pygments==2.19.2
+pygments==2.20.0
     # via pudb
 pylint==4.0.5
     # via pylint-pytest
@@ -87,7 +87,7 @@ pyyaml==6.0.3
     # via
     #   -r requirements/test.in
     #   responses
-requests==2.33.0
+requests==2.33.1
     # via
     #   -r requirements/base.txt
     #   responses
@@ -111,7 +111,7 @@ urllib3==2.6.3
     #   -r requirements/base.txt
     #   requests
     #   responses
-urwid==3.0.5
+urwid==4.0.0
     # via
     #   pudb
     #   urwid-readline

@@ -2,11 +2,11 @@
 #    make upgrade
 attrs==26.1.0
     # via -r requirements/base.in
-certifi==2026.2.25
+certifi==2026.4.22
     # via requests
-charset-normalizer==3.4.6
+charset-normalizer==3.4.7
     # via requests
-click==8.3.1
+click==8.3.3
     # via
     #   -r requirements/base.in
     #   click-log
@@ -14,7 +14,7 @@ click-log==0.4.0
     # via -r requirements/base.in
 colorama==0.4.6 ; sys_platform == 'win32'
     # via click
-idna==3.11
+idna==3.13
     # via requests
 jinja2==3.1.6
     # via -r requirements/base.in
@@ -24,7 +24,7 @@ markupsafe==3.0.3
     # via jinja2
 mdurl==0.1.2
     # via markdown-it-py
-requests==2.33.0
+requests==2.33.1
     # via -r requirements/base.in
 urllib3==2.6.3
     # via requests
