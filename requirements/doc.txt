@@ -10,7 +10,7 @@ attrs==26.1.0
     # via -r requirements/test.txt
 babel==2.18.0
     # via sphinx
-certifi==2026.4.22
+certifi==2026.5.20
     # via
     #   -r requirements/test.txt
     #   requests
@@ -18,7 +18,7 @@ charset-normalizer==3.4.7
     # via
     #   -r requirements/test.txt
     #   requests
-click==8.3.3
+click==8.4.0
     # via
     #   -r requirements/test.txt
     #   click-log
@@ -33,7 +33,7 @@ colorama==0.4.6 ; sys_platform == 'win32'
     #   pylint
     #   pytest
     #   sphinx
-coverage==7.13.5
+coverage==7.14.0
     # via -r requirements/test.txt
 dill==0.4.1
     # via
@@ -53,7 +53,7 @@ exceptiongroup==1.3.1 ; python_full_version < '3.11'
     #   pytest
 freezegun==1.5.5
     # via -r requirements/test.txt
-idna==3.13
+idna==3.15
     # via
     #   -r requirements/test.txt
     #   requests
@@ -67,7 +67,7 @@ isort==8.0.1
     # via
     #   -r requirements/test.txt
     #   pylint
-jedi==0.19.2
+jedi==0.20.0
     # via
     #   -r requirements/test.txt
     #   pudb
@@ -75,7 +75,7 @@ jinja2==3.1.6
     # via
     #   -r requirements/test.txt
     #   sphinx
-markdown-it-py==4.0.0
+markdown-it-py==4.2.0
     # via -r requirements/test.txt
 markupsafe==3.0.3
     # via
@@ -95,7 +95,7 @@ packaging==26.2
     #   pudb
     #   pytest
     #   sphinx
-parso==0.8.6
+parso==0.8.7
     # via
     #   -r requirements/test.txt
     #   jedi
@@ -136,7 +136,7 @@ pyyaml==6.0.3
     # via
     #   -r requirements/test.txt
     #   responses
-requests==2.33.1
+requests==2.34.2
     # via
     #   -r requirements/test.txt
     #   responses
@@ -186,7 +186,7 @@ sphinxcontrib-qthelp==2.0.0
     # via sphinx
 sphinxcontrib-serializinghtml==2.0.0
     # via sphinx
-stevedore==5.7.0
+stevedore==5.8.0
     # via doc8
 tomli==2.4.1 ; python_full_version < '3.11'
     # via
@@ -195,7 +195,7 @@ tomli==2.4.1 ; python_full_version < '3.11'
     #   pylint
     #   pytest
     #   sphinx
-tomlkit==0.14.0
+tomlkit==0.15.0
     # via
     #   -r requirements/test.txt
     #   pylint
@@ -205,7 +205,7 @@ typing-extensions==4.15.0
     #   astroid
     #   exceptiongroup
     #   pudb
-urllib3==2.6.3
+urllib3==2.7.0
     # via
     #   -r requirements/test.txt
     #   requests
@@ -219,7 +219,7 @@ urwid-readline==0.15.1
     # via
     #   -r requirements/test.txt
     #   pudb
-wcwidth==0.6.0
+wcwidth==0.7.0
     # via
     #   -r requirements/test.txt
     #   urwid

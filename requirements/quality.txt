@@ -4,6 +4,8 @@ alabaster==1.0.0
     # via
     #   -r requirements/doc.txt
     #   sphinx
+ast-serialize==0.5.0
+    # via mypy
 astroid==4.0.4
     # via
     #   -r requirements/doc.txt
@@ -19,9 +21,9 @@ babel==2.18.0
     #   sphinx
 backports-tarfile==1.2.0 ; python_full_version < '3.12' and platform_machine != 'ppc64le' and platform_machine != 's390x'
     # via jaraco-context
-build==1.4.4
+build==1.5.0
     # via check-manifest
-certifi==2026.4.22
+certifi==2026.5.20
     # via
     #   -r requirements/doc.txt
     #   -r requirements/test.txt
@@ -35,7 +37,7 @@ charset-normalizer==3.4.7
     #   requests
 check-manifest==0.51
     # via -r requirements/quality.in
-click==8.3.3
+click==8.4.0
     # via
     #   -r requirements/doc.txt
     #   -r requirements/test.txt
@@ -55,11 +57,11 @@ colorama==0.4.6 ; os_name == 'nt' or sys_platform == 'win32'
     #   pylint
     #   pytest
     #   sphinx
-coverage==7.13.5
+coverage==7.14.0
     # via
     #   -r requirements/doc.txt
     #   -r requirements/test.txt
-cryptography==47.0.0 ; platform_machine != 'ppc64le' and platform_machine != 's390x' and sys_platform == 'linux'
+cryptography==48.0.0 ; platform_machine != 'ppc64le' and platform_machine != 's390x' and sys_platform == 'linux'
     # via secretstorage
 dill==0.4.1
     # via
@@ -87,7 +89,7 @@ freezegun==1.5.5
     #   -r requirements/test.txt
 id==1.6.1
     # via twine
-idna==3.13
+idna==3.15
     # via
     #   -r requirements/doc.txt
     #   -r requirements/test.txt
@@ -115,9 +117,9 @@ jaraco-classes==3.4.0 ; platform_machine != 'ppc64le' and platform_machine != 's
     # via keyring
 jaraco-context==6.1.2 ; platform_machine != 'ppc64le' and platform_machine != 's390x'
     # via keyring
-jaraco-functools==4.4.0 ; platform_machine != 'ppc64le' and platform_machine != 's390x'
+jaraco-functools==4.5.0 ; platform_machine != 'ppc64le' and platform_machine != 's390x'
     # via keyring
-jedi==0.19.2
+jedi==0.20.0
     # via
     #   -r requirements/doc.txt
     #   -r requirements/test.txt
@@ -133,9 +135,9 @@ jinja2==3.1.6
     #   sphinx
 keyring==25.7.0 ; platform_machine != 'ppc64le' and platform_machine != 's390x'
     # via twine
-librt==0.9.0 ; platform_python_implementation != 'PyPy'
+librt==0.11.0 ; platform_python_implementation != 'PyPy'
     # via mypy
-markdown-it-py==4.0.0
+markdown-it-py==4.2.0
     # via
     #   -r requirements/doc.txt
     #   -r requirements/test.txt
@@ -159,7 +161,7 @@ more-itertools==11.0.2 ; platform_machine != 'ppc64le' and platform_machine != '
     # via
     #   jaraco-classes
     #   jaraco-functools
-mypy==1.20.2
+mypy==2.1.0
     # via -r requirements/quality.in
 mypy-extensions==1.1.0
     # via mypy
@@ -174,7 +176,7 @@ packaging==26.2
     #   pytest
     #   sphinx
     #   twine
-parso==0.8.6
+parso==0.8.7
     # via
     #   -r requirements/doc.txt
     #   -r requirements/test.txt
@@ -246,7 +248,7 @@ pyyaml==6.0.3
     #   responses
 readme-renderer==44.0
     # via twine
-requests==2.33.1
+requests==2.34.2
     # via
     #   -r requirements/doc.txt
     #   -r requirements/test.txt
@@ -272,7 +274,7 @@ roman-numerals==4.1.0 ; python_full_version >= '3.11'
     # via
     #   -r requirements/doc.txt
     #   sphinx
-ruff==0.15.12
+ruff==0.15.13
     # via -r requirements/quality.in
 secretstorage==3.5.0 ; platform_machine != 'ppc64le' and platform_machine != 's390x' and sys_platform == 'linux'
     # via keyring
@@ -335,7 +337,7 @@ sphinxcontrib-serializinghtml==2.0.0
     # via
     #   -r requirements/doc.txt
     #   sphinx
-stevedore==5.7.0
+stevedore==5.8.0
     # via
     #   -r requirements/doc.txt
     #   doc8
@@ -350,7 +352,7 @@ tomli==2.4.1 ; python_full_version < '3.11'
     #   pylint
     #   pytest
     #   sphinx
-tomlkit==0.14.0
+tomlkit==0.15.0
     # via
     #   -r requirements/doc.txt
     #   -r requirements/test.txt
@@ -359,11 +361,11 @@ twine==6.2.0
     # via -r requirements/quality.in
 types-freezegun==1.1.10
     # via -r requirements/quality.in
-types-pyyaml==6.0.12.20260408
+types-pyyaml==6.0.12.20260518
     # via -r requirements/quality.in
-types-requests==2.33.0.20260408
+types-requests==2.33.0.20260518
     # via -r requirements/quality.in
-types-toml==0.10.8.20260408
+types-toml==0.10.8.20260518
     # via -r requirements/quality.in
 typing-extensions==4.15.0
     # via
@@ -374,7 +376,7 @@ typing-extensions==4.15.0
     #   exceptiongroup
     #   mypy
     #   pudb
-urllib3==2.6.3
+urllib3==2.7.0
     # via
     #   -r requirements/doc.txt
     #   -r requirements/test.txt
@@ -394,10 +396,10 @@ urwid-readline==0.15.1
     #   -r requirements/doc.txt
     #   -r requirements/test.txt
     #   pudb
-wcwidth==0.6.0
+wcwidth==0.7.0
     # via
     #   -r requirements/doc.txt
     #   -r requirements/test.txt
     #   urwid
-zipp==3.23.1 ; (python_full_version < '3.10.2' and platform_machine == 'ppc64le') or (python_full_version < '3.10.2' and platform_machine == 's390x') or (python_full_version < '3.12' and platform_machine != 'ppc64le' and platform_machine != 's390x')
+zipp==4.1.0 ; (python_full_version < '3.10.2' and platform_machine == 'ppc64le') or (python_full_version < '3.10.2' and platform_machine == 's390x') or (python_full_version < '3.12' and platform_machine != 'ppc64le' and platform_machine != 's390x')
     # via importlib-metadata

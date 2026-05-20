@@ -4,6 +4,10 @@ alabaster==1.0.0
     # via
     #   -r requirements/quality.txt
     #   sphinx
+ast-serialize==0.5.0
+    # via
+    #   -r requirements/quality.txt
+    #   mypy
 astroid==4.0.4
     # via
     #   -r requirements/quality.txt
@@ -18,16 +22,16 @@ backports-tarfile==1.2.0 ; python_full_version < '3.12' and platform_machine != 
     # via
     #   -r requirements/quality.txt
     #   jaraco-context
-build==1.4.4
+build==1.5.0
     # via
     #   -r requirements/dev.in
     #   -r requirements/quality.txt
     #   check-manifest
-cachetools==7.0.6
+cachetools==7.1.3
     # via
     #   -r requirements/tox.txt
     #   tox
-certifi==2026.4.22
+certifi==2026.5.20
     # via
     #   -r requirements/quality.txt
     #   requests
@@ -41,7 +45,7 @@ charset-normalizer==3.4.7
     #   requests
 check-manifest==0.51
     # via -r requirements/quality.txt
-click==8.3.3
+click==8.4.0
     # via
     #   -r requirements/quality.txt
     #   click-log
@@ -59,9 +63,9 @@ colorama==0.4.6
     #   pytest
     #   sphinx
     #   tox
-coverage==7.13.5
+coverage==7.14.0
     # via -r requirements/quality.txt
-cryptography==47.0.0 ; os_name != 'nt' and platform_machine != 'ppc64le' and platform_machine != 's390x' and sys_platform == 'linux'
+cryptography==48.0.0 ; os_name != 'nt' and platform_machine != 'ppc64le' and platform_machine != 's390x' and sys_platform == 'linux'
     # via
     #   -r requirements/quality.txt
     #   secretstorage
@@ -99,7 +103,7 @@ id==1.6.1
     # via
     #   -r requirements/quality.txt
     #   twine
-idna==3.13
+idna==3.15
     # via
     #   -r requirements/quality.txt
     #   requests
@@ -128,11 +132,11 @@ jaraco-context==6.1.2 ; platform_machine != 'ppc64le' and platform_machine != 's
     # via
     #   -r requirements/quality.txt
     #   keyring
-jaraco-functools==4.4.0 ; platform_machine != 'ppc64le' and platform_machine != 's390x'
+jaraco-functools==4.5.0 ; platform_machine != 'ppc64le' and platform_machine != 's390x'
     # via
     #   -r requirements/quality.txt
     #   keyring
-jedi==0.19.2
+jedi==0.20.0
     # via
     #   -r requirements/quality.txt
     #   pudb
@@ -149,11 +153,11 @@ keyring==25.7.0 ; platform_machine != 'ppc64le' and platform_machine != 's390x'
     # via
     #   -r requirements/quality.txt
     #   twine
-librt==0.9.0 ; platform_python_implementation != 'PyPy'
+librt==0.11.0 ; platform_python_implementation != 'PyPy'
     # via
     #   -r requirements/quality.txt
     #   mypy
-markdown-it-py==4.0.0
+markdown-it-py==4.2.0
     # via
     #   -r requirements/quality.txt
     #   rich
@@ -174,7 +178,7 @@ more-itertools==11.0.2 ; platform_machine != 'ppc64le' and platform_machine != '
     #   -r requirements/quality.txt
     #   jaraco-classes
     #   jaraco-functools
-mypy==1.20.2
+mypy==2.1.0
     # via -r requirements/quality.txt
 mypy-extensions==1.1.0
     # via
@@ -195,7 +199,7 @@ packaging==26.2
     #   sphinx
     #   tox
     #   twine
-parso==0.8.6
+parso==0.8.7
     # via
     #   -r requirements/quality.txt
     #   jedi
@@ -260,7 +264,7 @@ python-dateutil==2.9.0.post0
     # via
     #   -r requirements/quality.txt
     #   freezegun
-python-discovery==1.2.2
+python-discovery==1.3.1
     # via
     #   -r requirements/tox.txt
     #   tox
@@ -277,7 +281,7 @@ readme-renderer==44.0
     # via
     #   -r requirements/quality.txt
     #   twine
-requests==2.33.1
+requests==2.34.2
     # via
     #   -r requirements/quality.txt
     #   requests-toolbelt
@@ -306,7 +310,7 @@ roman-numerals==4.1.0 ; python_full_version >= '3.11'
     # via
     #   -r requirements/quality.txt
     #   sphinx
-ruff==0.15.12
+ruff==0.15.13
     # via -r requirements/quality.txt
 secretstorage==3.5.0 ; os_name != 'nt' and platform_machine != 'ppc64le' and platform_machine != 's390x' and sys_platform == 'linux'
     # via
@@ -372,7 +376,7 @@ sphinxcontrib-serializinghtml==2.0.0
     # via
     #   -r requirements/quality.txt
     #   sphinx
-stevedore==5.7.0
+stevedore==5.8.0
     # via
     #   -r requirements/quality.txt
     #   doc8
@@ -393,21 +397,21 @@ tomli-w==1.2.0
     # via
     #   -r requirements/tox.txt
     #   tox
-tomlkit==0.14.0
+tomlkit==0.15.0
     # via
     #   -r requirements/quality.txt
     #   pylint
-tox==4.53.0
+tox==4.54.0
     # via -r requirements/tox.txt
 twine==6.2.0
     # via -r requirements/quality.txt
 types-freezegun==1.1.10
     # via -r requirements/quality.txt
-types-pyyaml==6.0.12.20260408
+types-pyyaml==6.0.12.20260518
     # via -r requirements/quality.txt
-types-requests==2.33.0.20260408
+types-requests==2.33.0.20260518
     # via -r requirements/quality.txt
-types-toml==0.10.8.20260408
+types-toml==0.10.8.20260518
     # via -r requirements/quality.txt
 typing-extensions==4.15.0
     # via
@@ -420,7 +424,7 @@ typing-extensions==4.15.0
     #   pudb
     #   tox
     #   virtualenv
-urllib3==2.6.3
+urllib3==2.7.0
     # via
     #   -r requirements/quality.txt
     #   id
@@ -437,15 +441,15 @@ urwid-readline==0.15.1
     # via
     #   -r requirements/quality.txt
     #   pudb
-virtualenv==21.3.0
+virtualenv==21.3.3
     # via
     #   -r requirements/tox.txt
     #   tox
-wcwidth==0.6.0
+wcwidth==0.7.0
     # via
     #   -r requirements/quality.txt
     #   urwid
-zipp==3.23.1 ; (python_full_version < '3.10.2' and platform_machine == 'ppc64le') or (python_full_version < '3.10.2' and platform_machine == 's390x') or (python_full_version < '3.12' and platform_machine != 'ppc64le' and platform_machine != 's390x')
+zipp==4.1.0 ; (python_full_version < '3.10.2' and platform_machine == 'ppc64le') or (python_full_version < '3.10.2' and platform_machine == 's390x') or (python_full_version < '3.12' and platform_machine != 'ppc64le' and platform_machine != 's390x')
     # via
     #   -r requirements/quality.txt
     #   importlib-metadata
