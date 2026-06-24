@@ -13,6 +13,34 @@ Fragments are files describing your latest work, created by the
 committed with the code change itself, then later aggregated into the changelog
 file with ":ref:`cmd_collect`".
 
+Checking Fragments Render in Sphinx
+-----------------------------------
+
+If you use Sphinx to build your documentation, you may want to ensure that your changelog fragments contain valid reStructuredText before they are collected into the main changelog.
+
+1. Move your ``changelog.d`` folder under your Sphinx docs folder (so ``toctree`` directives can access it). For example, configure `scriv` to use ``docs/changelog.d``:
+
+   .. code-block:: toml
+
+       [tool.scriv]
+       fragment_directory = "docs/changelog.d"
+
+2. Include a hidden ``toctree`` directive in the Sphinx page that includes the main ``CHANGELOG.rst`` file. This will syntax check the unreleased fragments without linking them visibly:
+
+   .. code-block:: rest
+
+       .. Syntax check the changelog fragments
+
+       .. toctree::
+          :hidden:
+          :glob:
+
+          changelog.d/*
+
+       .. Include the scriv-generated changelog details
+
+       .. include:: ../CHANGELOG.rst
+
 
 .. _categories:
 
