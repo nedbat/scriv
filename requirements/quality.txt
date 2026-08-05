@@ -50,7 +50,7 @@ coverage==7.14.0
     # via
     #   -r doc.txt
     #   -r test.txt
-cryptography==48.0.1
+cryptography==50.0.0
     # via secretstorage
 dill==0.4.1
     # via

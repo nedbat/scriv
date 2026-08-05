@@ -55,7 +55,7 @@ colorama==0.4.6
     #   tox
 coverage==7.14.0
     # via -r quality.txt
-cryptography==48.0.1
+cryptography==50.0.0
     # via
     #   -r quality.txt
     #   secretstorage
