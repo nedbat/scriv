@@ -83,13 +83,15 @@ quality: ## check coding style with pycodestyle and pylint
 HAS_UV := $(shell command -v uv 2>/dev/null)
 ifdef HAS_UV
 	INSTALL := uv pip sync
+	PIP := uv pip
 else
 	INSTALL := python -m pip install -r
+	PIP := python -m pip
 endif
 
 install:				## install the developer tools.
 	$(INSTALL) requirements/dev.txt
-	python -m pip install -e .
+	$(PIP) install -e .
 
 test: ## run tests in the current virtualenv
 	tox -e py310
