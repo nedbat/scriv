@@ -283,7 +283,7 @@ rich==15.0.0
     # via
     #   -r quality.txt
     #   twine
-roman-numerals==4.1.0 ; python_full_version >= "3.11"
+roman-numerals==4.1.0
     # via
     #   -r quality.txt
     #   sphinx
@@ -302,7 +302,7 @@ snowballstemmer==3.0.1
     #   -r quality.txt
     #   pydocstyle
     #   sphinx
-sphinx==9.1.0 ; python_full_version >= "3.12"
+sphinx==9.1.0
     # via
     #   -r quality.txt
     #   sphinx-rtd-theme
@@ -366,7 +366,7 @@ typing-extensions==4.15.0
     #   -r quality.txt
     #   mypy
     #   pudb
-urllib3==2.7.0
+urllib3==2.8.0
     # via
     #   -r quality.txt
     #   id
