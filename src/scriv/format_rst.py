@@ -81,6 +81,7 @@ class RstTools(FormatTools):
 
             if self._is_underline(line):
                 if section_char is None or line[0] == section_char:
+                    # pylint: disable=unsubscriptable-object
                     # Section underline. Previous line was the heading.
                     # General RST can have overlines as well as underlines,
                     # which we detect because there are no previous paragraphs.

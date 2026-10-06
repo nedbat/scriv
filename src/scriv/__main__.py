@@ -2,4 +2,5 @@
 
 from .cli import cli
 
-cli(prog_name="scriv")
+if __name__ == "__main__":
+    cli(prog_name="scriv")

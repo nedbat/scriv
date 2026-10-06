@@ -18,8 +18,6 @@ from click.testing import CliRunner
 if os.getenv("SCRIV_TEST_NO_EXTRAS", ""):
     sys.modules["yaml"] = None  # type: ignore[assignment]
 
-# pylint: disable=wrong-import-position
-
 from scriv.cli import cli as scriv_cli
 
 from .faker import FakeGit, FakeRunCommand
