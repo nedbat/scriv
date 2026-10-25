@@ -77,7 +77,7 @@ docutils==0.21.2
     #   restructuredtext-lint
     #   sphinx
     #   sphinx-rtd-theme
-filelock==4.0.12
+filelock==4.2.1
     # via
     #   -r tox.txt
     #   python-discovery
