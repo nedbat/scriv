@@ -2,178 +2,207 @@
 #    make upgrade
 alabaster==1.0.0
     # via
-    #   -r quality.txt
+    #   -r requirements/quality.txt
     #   sphinx
-ast-serialize==0.12.1
+ast-serialize==0.13.0
     # via
-    #   -r quality.txt
+    #   -r requirements/quality.txt
     #   mypy
-astroid==4.3.3
+astroid==4.3.4
     # via
-    #   -r quality.txt
+    #   -r requirements/quality.txt
     #   pylint
 attrs==26.1.0
-    # via -r quality.txt
+    # via -r requirements/quality.txt
 babel==2.18.0
     # via
-    #   -r quality.txt
+    #   -r requirements/quality.txt
     #   sphinx
+backports-tarfile==1.2.0 ; python_full_version < '3.12' and platform_machine != 'ppc64le' and platform_machine != 's390x'
+    # via
+    #   -r requirements/quality.txt
+    #   jaraco-context
 build==1.6.1
     # via
-    #   -r dev.in
-    #   -r quality.txt
+    #   -r requirements/dev.in
+    #   -r requirements/quality.txt
     #   check-manifest
 cachetools==7.2.1
     # via
-    #   -r tox.txt
+    #   -r requirements/tox.txt
     #   tox
 certifi==2026.7.22
     # via
-    #   -r quality.txt
+    #   -r requirements/quality.txt
     #   requests
-cffi==2.1.1 ; platform_machine != "ppc64le" and platform_machine != "s390x" and platform_python_implementation != "PyPy" and sys_platform == "linux"
+cffi==2.1.1 ; os_name != 'nt' and platform_machine != 'ppc64le' and platform_machine != 's390x' and platform_python_implementation != 'PyPy' and sys_platform == 'linux'
     # via
-    #   -r quality.txt
+    #   -r requirements/quality.txt
     #   cryptography
 charset-normalizer==3.5.2
     # via
-    #   -r quality.txt
+    #   -r requirements/quality.txt
     #   requests
 check-manifest==0.51
-    # via -r quality.txt
+    # via -r requirements/quality.txt
 click==8.5.0
     # via
-    #   -r quality.txt
+    #   -r requirements/quality.txt
     #   click-log
 click-log==0.4.0
-    # via -r quality.txt
+    # via -r requirements/quality.txt
 cogapp==3.6.0
-    # via -r quality.txt
+    # via -r requirements/quality.txt
 colorama==0.4.6
     # via
-    #   -r tox.txt
+    #   -r requirements/quality.txt
+    #   -r requirements/tox.txt
+    #   build
+    #   pylint
+    #   pytest
+    #   sphinx
     #   tox
 coverage==7.16.2
-    # via -r quality.txt
-cryptography==50.0.2 ; platform_machine != "ppc64le" and platform_machine != "s390x" and sys_platform == "linux"
+    # via -r requirements/quality.txt
+cryptography==50.0.2 ; os_name != 'nt' and platform_machine != 'ppc64le' and platform_machine != 's390x' and sys_platform == 'linux'
     # via
-    #   -r quality.txt
+    #   -r requirements/quality.txt
     #   secretstorage
 dill==0.4.1
     # via
-    #   -r quality.txt
+    #   -r requirements/quality.txt
     #   pylint
 distlib==0.4.3
     # via
-    #   -r tox.txt
+    #   -r requirements/tox.txt
     #   virtualenv
 doc8==2.0.0
-    # via -r quality.txt
+    # via -r requirements/quality.txt
 docutils==0.21.2
     # via
-    #   -r quality.txt
+    #   -r requirements/quality.txt
     #   doc8
     #   readme-renderer
     #   restructuredtext-lint
     #   sphinx
     #   sphinx-rtd-theme
-filelock==4.0.12
+exceptiongroup==1.3.1 ; python_full_version < '3.11'
     # via
-    #   -r tox.txt
+    #   -r requirements/quality.txt
+    #   pytest
+filelock==4.1.0 ; python_full_version < '3.11'
+    # via
+    #   -r requirements/tox.txt
+    #   python-discovery
+    #   tox
+    #   virtualenv
+filelock==4.2.0 ; python_full_version >= '3.11'
+    # via
+    #   -r requirements/tox.txt
     #   python-discovery
     #   tox
     #   virtualenv
 freezegun==1.5.5
-    # via -r quality.txt
+    # via -r requirements/quality.txt
 id==1.6.1
     # via
-    #   -r quality.txt
+    #   -r requirements/quality.txt
     #   twine
 idna==3.20
     # via
-    #   -r quality.txt
+    #   -r requirements/quality.txt
     #   requests
 imagesize==2.0.1
     # via
-    #   -r quality.txt
+    #   -r requirements/quality.txt
     #   sphinx
-iniconfig==2.3.0
+importlib-metadata==9.0.1 ; python_full_version < '3.10.2' or (python_full_version >= '3.10.2' and python_full_version < '3.12' and platform_machine != 'ppc64le' and platform_machine != 's390x')
     # via
-    #   -r quality.txt
+    #   -r requirements/quality.txt
+    #   build
+    #   keyring
+iniconfig==2.3.1
+    # via
+    #   -r requirements/quality.txt
     #   pytest
 isort==9.0.2
     # via
-    #   -r quality.txt
+    #   -r requirements/quality.txt
     #   pylint
-jaraco-classes==3.4.0 ; platform_machine != "ppc64le" and platform_machine != "s390x"
+jaraco-classes==3.4.0 ; platform_machine != 'ppc64le' and platform_machine != 's390x'
     # via
-    #   -r quality.txt
+    #   -r requirements/quality.txt
     #   keyring
-jaraco-context==6.1.2 ; platform_machine != "ppc64le" and platform_machine != "s390x"
+jaraco-context==6.1.2 ; platform_machine != 'ppc64le' and platform_machine != 's390x'
     # via
-    #   -r quality.txt
+    #   -r requirements/quality.txt
     #   keyring
-jaraco-functools==4.6.0 ; platform_machine != "ppc64le" and platform_machine != "s390x"
+jaraco-functools==4.6.0 ; platform_machine != 'ppc64le' and platform_machine != 's390x'
     # via
-    #   -r quality.txt
+    #   -r requirements/quality.txt
     #   keyring
-jedi==0.20.0
+jedi==0.20.1
     # via
-    #   -r quality.txt
+    #   -r requirements/quality.txt
     #   pudb
-jeepney==0.9.0 ; platform_machine != "ppc64le" and platform_machine != "s390x" and sys_platform == "linux"
+jeepney==0.9.0 ; os_name != 'nt' and platform_machine != 'ppc64le' and platform_machine != 's390x' and sys_platform == 'linux'
     # via
-    #   -r quality.txt
+    #   -r requirements/quality.txt
     #   keyring
     #   secretstorage
 jinja2==3.1.6
     # via
-    #   -r quality.txt
+    #   -r requirements/quality.txt
     #   sphinx
-keyring==25.7.0 ; platform_machine != "ppc64le" and platform_machine != "s390x"
+keyring==25.7.0 ; platform_machine != 'ppc64le' and platform_machine != 's390x'
     # via
-    #   -r quality.txt
+    #   -r requirements/quality.txt
     #   twine
-librt==0.16.0 ; platform_python_implementation != "PyPy"
+librt==0.16.0 ; platform_python_implementation != 'PyPy'
     # via
-    #   -r quality.txt
+    #   -r requirements/quality.txt
     #   mypy
 markdown-it-py==4.2.0
     # via
-    #   -r quality.txt
+    #   -r requirements/quality.txt
     #   rich
 markupsafe==3.0.4
     # via
-    #   -r quality.txt
+    #   -r requirements/quality.txt
     #   jinja2
 mccabe==0.7.0
     # via
-    #   -r quality.txt
+    #   -r requirements/quality.txt
     #   pylint
 mdurl==0.1.2
     # via
-    #   -r quality.txt
+    #   -r requirements/quality.txt
     #   markdown-it-py
-more-itertools==11.1.0 ; platform_machine != "ppc64le" and platform_machine != "s390x"
+more-itertools==11.1.0 ; python_full_version < '3.11' and platform_machine != 'ppc64le' and platform_machine != 's390x'
     # via
-    #   -r quality.txt
+    #   -r requirements/quality.txt
+    #   jaraco-classes
+    #   jaraco-functools
+more-itertools==11.2.1 ; python_full_version >= '3.11' and platform_machine != 'ppc64le' and platform_machine != 's390x'
+    # via
+    #   -r requirements/quality.txt
     #   jaraco-classes
     #   jaraco-functools
 mypy==2.4.0
-    # via -r quality.txt
+    # via -r requirements/quality.txt
 mypy-extensions==1.1.0
     # via
-    #   -r quality.txt
+    #   -r requirements/quality.txt
     #   isort
     #   mypy
 nh3==0.3.7
     # via
-    #   -r quality.txt
+    #   -r requirements/quality.txt
     #   readme-renderer
 packaging==26.3
     # via
-    #   -r quality.txt
-    #   -r tox.txt
+    #   -r requirements/quality.txt
+    #   -r requirements/tox.txt
     #   build
     #   pudb
     #   pyproject-api
@@ -184,194 +213,250 @@ packaging==26.3
     #   virtualenv
 parso==0.8.7
     # via
-    #   -r quality.txt
+    #   -r requirements/quality.txt
     #   jedi
 pathspec==1.1.1
     # via
-    #   -r quality.txt
+    #   -r requirements/quality.txt
     #   mypy
-platformdirs==4.12.3
+platformdirs==4.12.4 ; python_full_version < '3.11'
     # via
-    #   -r quality.txt
-    #   -r tox.txt
+    #   -r requirements/quality.txt
+    #   -r requirements/tox.txt
     #   pylint
     #   tox
     #   virtualenv
-pluggy==1.6.0
+platformdirs==4.13.0 ; python_full_version >= '3.11'
     # via
-    #   -r quality.txt
-    #   -r tox.txt
+    #   -r requirements/quality.txt
+    #   -r requirements/tox.txt
+    #   pylint
+    #   tox
+    #   virtualenv
+pluggy==1.7.0
+    # via
+    #   -r requirements/quality.txt
+    #   -r requirements/tox.txt
     #   pytest
     #   tox
-pudb==2025.1.5
-    # via -r quality.txt
+pudb==2026.1
+    # via -r requirements/quality.txt
 pycodestyle==2.15.0
-    # via -r quality.txt
-pycparser==3.0 ; implementation_name != "PyPy" and platform_machine != "ppc64le" and platform_machine != "s390x" and platform_python_implementation != "PyPy" and sys_platform == "linux"
+    # via -r requirements/quality.txt
+pycparser==3.11 ; implementation_name != 'PyPy' and os_name != 'nt' and platform_machine != 'ppc64le' and platform_machine != 's390x' and platform_python_implementation != 'PyPy' and sys_platform == 'linux'
     # via
-    #   -r quality.txt
+    #   -r requirements/quality.txt
     #   cffi
 pydocstyle==6.3.0
-    # via -r quality.txt
+    # via -r requirements/quality.txt
 pygments==2.21.0
     # via
-    #   -r quality.txt
+    #   -r requirements/quality.txt
     #   doc8
     #   pudb
     #   pytest
     #   readme-renderer
     #   rich
     #   sphinx
-pylint==4.1.2
+pylint==4.1.3
     # via
-    #   -r quality.txt
+    #   -r requirements/quality.txt
     #   pylint-pytest
 pylint-pytest==1.1.9.post1
-    # via -r quality.txt
-pyproject-api==1.11.3
+    # via -r requirements/quality.txt
+pyproject-api==1.11.4 ; python_full_version < '3.11'
     # via
-    #   -r tox.txt
+    #   -r requirements/tox.txt
+    #   tox
+pyproject-api==1.11.6 ; python_full_version >= '3.11'
+    # via
+    #   -r requirements/tox.txt
     #   tox
 pyproject-hooks==1.3.3
     # via
-    #   -r quality.txt
+    #   -r requirements/quality.txt
     #   build
 pytest==9.1.1
     # via
-    #   -r quality.txt
+    #   -r requirements/quality.txt
     #   pylint-pytest
     #   pytest-mock
 pytest-mock==3.16.0
-    # via -r quality.txt
+    # via -r requirements/quality.txt
 python-dateutil==2.9.0.post0
     # via
-    #   -r quality.txt
+    #   -r requirements/quality.txt
     #   freezegun
-python-discovery==1.6.1
+python-discovery==1.6.2
     # via
-    #   -r tox.txt
+    #   -r requirements/tox.txt
     #   tox
     #   virtualenv
+pywin32-ctypes==0.2.3 ; platform_machine != 'ppc64le' and platform_machine != 's390x' and sys_platform == 'win32'
+    # via
+    #   -r requirements/quality.txt
+    #   keyring
 pyyaml==6.0.3
     # via
-    #   -r quality.txt
+    #   -r requirements/quality.txt
     #   responses
 readme-renderer==46.0
     # via
-    #   -r quality.txt
+    #   -r requirements/quality.txt
     #   twine
 requests==2.34.2
     # via
-    #   -r quality.txt
+    #   -r requirements/quality.txt
     #   requests-toolbelt
     #   responses
     #   sphinx
     #   twine
 requests-toolbelt==1.0.0
     # via
-    #   -r quality.txt
+    #   -r requirements/quality.txt
     #   twine
 responses==0.26.3
-    # via -r quality.txt
+    # via -r requirements/quality.txt
 restructuredtext-lint==2.0.2
     # via
-    #   -r quality.txt
+    #   -r requirements/quality.txt
     #   doc8
 rfc3986==2.0.0
     # via
-    #   -r quality.txt
+    #   -r requirements/quality.txt
     #   twine
 rich==15.0.0
     # via
-    #   -r quality.txt
+    #   -r requirements/quality.txt
     #   twine
-roman-numerals==4.1.0 ; python_full_version >= "3.11"
+roman-numerals==4.1.0 ; python_full_version >= '3.11'
     # via
-    #   -r quality.txt
+    #   -r requirements/quality.txt
     #   sphinx
-ruff==0.16.10
-    # via -r quality.txt
-secretstorage==3.5.0 ; platform_machine != "ppc64le" and platform_machine != "s390x" and sys_platform == "linux"
+ruff==0.17.0
+    # via -r requirements/quality.txt
+secretstorage==3.5.0 ; os_name != 'nt' and platform_machine != 'ppc64le' and platform_machine != 's390x' and sys_platform == 'linux'
     # via
-    #   -r quality.txt
+    #   -r requirements/quality.txt
     #   keyring
+setuptools==84.0.0
+    # via
+    #   -r requirements/quality.txt
+    #   check-manifest
 six==1.17.0
     # via
-    #   -r quality.txt
+    #   -r requirements/quality.txt
     #   python-dateutil
 snowballstemmer==3.1.1
     # via
-    #   -r quality.txt
+    #   -r requirements/quality.txt
     #   pydocstyle
     #   sphinx
-sphinx==9.1.0 ; python_full_version >= "3.12"
+sphinx==8.1.3 ; python_full_version < '3.11'
     # via
-    #   -r quality.txt
+    #   -r requirements/quality.txt
+    #   sphinx-rtd-theme
+    #   sphinxcontrib-jquery
+sphinx==9.0.4 ; python_full_version == '3.11.*'
+    # via
+    #   -r requirements/quality.txt
+    #   sphinx-rtd-theme
+    #   sphinxcontrib-jquery
+sphinx==9.1.0 ; python_full_version >= '3.12'
+    # via
+    #   -r requirements/quality.txt
     #   sphinx-rtd-theme
     #   sphinxcontrib-jquery
 sphinx-rtd-theme==3.1.0
-    # via -r quality.txt
+    # via
+    #   -c requirements/constraints.in
+    #   -r requirements/quality.txt
 sphinxcontrib-applehelp==2.0.0
     # via
-    #   -r quality.txt
+    #   -r requirements/quality.txt
     #   sphinx
 sphinxcontrib-devhelp==2.0.0
     # via
-    #   -r quality.txt
+    #   -r requirements/quality.txt
     #   sphinx
 sphinxcontrib-htmlhelp==2.1.0
     # via
-    #   -r quality.txt
+    #   -r requirements/quality.txt
     #   sphinx
 sphinxcontrib-jquery==4.1
     # via
-    #   -r quality.txt
+    #   -r requirements/quality.txt
     #   sphinx-rtd-theme
 sphinxcontrib-jsmath==1.0.1
     # via
-    #   -r quality.txt
+    #   -r requirements/quality.txt
     #   sphinx
 sphinxcontrib-qthelp==2.0.0
     # via
-    #   -r quality.txt
+    #   -r requirements/quality.txt
     #   sphinx
 sphinxcontrib-serializinghtml==2.0.0
     # via
-    #   -r quality.txt
+    #   -r requirements/quality.txt
     #   sphinx
-stevedore==5.9.1 ; python_full_version >= "3.11"
+stevedore==5.8.0 ; python_full_version < '3.11'
     # via
-    #   -r quality.txt
+    #   -r requirements/quality.txt
     #   doc8
+stevedore==5.9.1 ; python_full_version >= '3.11'
+    # via
+    #   -r requirements/quality.txt
+    #   doc8
+tomli==2.5.0 ; python_full_version < '3.11'
+    # via
+    #   -r requirements/quality.txt
+    #   -r requirements/tox.txt
+    #   build
+    #   check-manifest
+    #   doc8
+    #   mypy
+    #   pylint
+    #   pyproject-api
+    #   pytest
+    #   sphinx
+    #   tox
 tomli-w==1.2.0
     # via
-    #   -r tox.txt
+    #   -r requirements/tox.txt
     #   tox
 tomlkit==0.15.1
     # via
-    #   -r quality.txt
+    #   -r requirements/quality.txt
     #   pylint
-tox==4.64.9
-    # via -r tox.txt
+tox==4.65.0 ; python_full_version < '3.11'
+    # via -r requirements/tox.txt
+tox==4.65.5 ; python_full_version >= '3.11'
+    # via -r requirements/tox.txt
 twine==7.0.0
-    # via -r quality.txt
+    # via -r requirements/quality.txt
 types-freezegun==1.1.10
-    # via -r quality.txt
+    # via -r requirements/quality.txt
 types-pyyaml==6.0.12.20260906
-    # via -r quality.txt
+    # via -r requirements/quality.txt
 types-requests==2.33.0.20261006
-    # via -r quality.txt
+    # via -r requirements/quality.txt
 types-toml==0.10.8.20260518
-    # via -r quality.txt
+    # via -r requirements/quality.txt
 typing-extensions==4.16.0
     # via
-    #   -r quality.txt
+    #   -r requirements/quality.txt
+    #   -r requirements/tox.txt
+    #   astroid
+    #   cryptography
+    #   exceptiongroup
     #   mypy
     #   pudb
+    #   tox
     #   urwid
+    #   virtualenv
 urllib3==2.8.0
     # via
-    #   -r quality.txt
+    #   -r requirements/quality.txt
     #   id
     #   requests
     #   responses
@@ -379,18 +464,22 @@ urllib3==2.8.0
     #   types-requests
 urwid==4.2.5
     # via
-    #   -r quality.txt
+    #   -r requirements/quality.txt
     #   pudb
     #   urwid-readline
 urwid-readline==0.15.1
     # via
-    #   -r quality.txt
+    #   -r requirements/quality.txt
     #   pudb
-virtualenv==21.14.13
+virtualenv==21.14.7
     # via
-    #   -r tox.txt
+    #   -r requirements/tox.txt
     #   tox
 wcwidth==0.9.2
     # via
-    #   -r quality.txt
+    #   -r requirements/quality.txt
     #   urwid
+zipp==4.1.1 ; python_full_version < '3.10.2' or (python_full_version >= '3.10.2' and python_full_version < '3.12' and platform_machine != 'ppc64le' and platform_machine != 's390x')
+    # via
+    #   -r requirements/quality.txt
+    #   importlib-metadata

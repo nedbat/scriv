@@ -1,5 +1,7 @@
 # Requirements for test runs.
 
+-c constraints.in
+
 -r base.txt               # Core dependencies for this package
 
 coverage                  # for measuring coverage

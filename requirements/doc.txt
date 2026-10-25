@@ -2,7 +2,7 @@
 #    make upgrade
 alabaster==1.0.0
     # via sphinx
-astroid==4.3.3
+astroid==4.3.4
     # via
     #   -r requirements/test.txt
     #   pylint
@@ -58,7 +58,7 @@ idna==3.20
     #   requests
 imagesize==2.0.1
     # via sphinx
-iniconfig==2.3.0
+iniconfig==2.3.1
     # via
     #   -r requirements/test.txt
     #   pytest
@@ -66,7 +66,7 @@ isort==9.0.2
     # via
     #   -r requirements/test.txt
     #   pylint
-jedi==0.20.0
+jedi==0.20.1
     # via
     #   -r requirements/test.txt
     #   pudb
@@ -102,15 +102,19 @@ parso==0.8.7
     # via
     #   -r requirements/test.txt
     #   jedi
-platformdirs==4.12.3
+platformdirs==4.12.4 ; python_full_version < '3.11'
     # via
     #   -r requirements/test.txt
     #   pylint
-pluggy==1.6.0
+platformdirs==4.13.0 ; python_full_version >= '3.11'
+    # via
+    #   -r requirements/test.txt
+    #   pylint
+pluggy==1.7.0
     # via
     #   -r requirements/test.txt
     #   pytest
-pudb==2025.1.5
+pudb==2026.1
     # via -r requirements/test.txt
 pygments==2.21.0
     # via
@@ -119,7 +123,7 @@ pygments==2.21.0
     #   pudb
     #   pytest
     #   sphinx
-pylint==4.1.2
+pylint==4.1.3
     # via
     #   -r requirements/test.txt
     #   pylint-pytest
@@ -194,7 +198,7 @@ stevedore==5.8.0 ; python_full_version < '3.11'
     # via doc8
 stevedore==5.9.1 ; python_full_version >= '3.11'
     # via doc8
-tomli==2.4.1 ; python_full_version < '3.11'
+tomli==2.5.0 ; python_full_version < '3.11'
     # via
     #   -r requirements/test.txt
     #   doc8

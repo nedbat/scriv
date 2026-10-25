@@ -1,5 +1,7 @@
 # Core requirements for using this application
 
+-c constraints.in
+
 attrs
 click
 click-log

@@ -1,5 +1,7 @@
 # Additional requirements for development of this application
 
+-c constraints.in
+
 -r quality.txt            # Core and quality check dependencies
 -r tox.txt                # tox and related dependencies
 

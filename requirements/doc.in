@@ -1,5 +1,7 @@
 # Requirements for documentation validation
 
+-c constraints.in
+
 -r test.txt               # Core and testing dependencies for this package
 
 cogapp

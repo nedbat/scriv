@@ -1,3 +1,5 @@
 # Tox and related requirements.
 
+-c constraints.in
+
 tox                       # Virtualenv management for tests

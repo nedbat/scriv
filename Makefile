@@ -50,9 +50,21 @@ docs: botedits ## generate Sphinx HTML documentation, including API docs
 	tox -e docs
 	$(BROWSER)docs/_build/html/index.html
 
-PIP_COMPILE = uv pip compile -q --universal -c requirements/constraints.in --upgrade
-upgrade: export UV_CUSTOM_COMPILE_COMMAND=make upgrade
+PIP_COMPILE = uv pip compile -q --universal ${COMPILE_OPTS}
+
+# Limit to packages that were released more than 10 days ago.
+# https://blog.yossarian.net/2025/11/21/We-should-all-be-using-dependency-cooldowns
+upgrade: export UV_EXCLUDE_NEWER=P10D
 upgrade: ## update the requirements/*.txt files with the latest packages satisfying requirements/*.in
+	$(MAKE) _upgrade COMPILE_OPTS="--upgrade"
+
+# Upgrade just one package, with no cooldown.
+upgrade_one: ## update the *.txt files for one package. `make upgrade_one package=...`
+	@test -n "$(package)" || { echo "\nUsage: make upgrade_one package=...\n"; exit 1; }
+	$(MAKE) _upgrade COMPILE_OPTS="--upgrade-package $(package)"
+
+_upgrade: export UV_CUSTOM_COMPILE_COMMAND=make upgrade
+_upgrade:
 	# Make sure to compile files after any other files they include!
 	$(PIP_COMPILE) -o requirements/base.txt requirements/base.in
 	$(PIP_COMPILE) -o requirements/test.txt requirements/test.in

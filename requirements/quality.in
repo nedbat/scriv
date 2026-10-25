@@ -1,5 +1,7 @@
 # Requirements for code quality checks
 
+-c constraints.in
+
 -r test.txt               # Core and testing dependencies for this package
 -r doc.txt                # Need doc packages for full linting
 
