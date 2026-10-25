@@ -27,11 +27,11 @@ cachetools==7.2.1
     # via
     #   -r tox.txt
     #   tox
-certifi==2026.7.22
+certifi==2026.10.19
     # via
     #   -r quality.txt
     #   requests
-cffi==2.1.1 ; platform_machine != "ppc64le" and platform_machine != "s390x" and platform_python_implementation != "PyPy" and sys_platform == "linux"
+cffi==2.1.1
     # via
     #   -r quality.txt
     #   cryptography
@@ -55,7 +55,7 @@ colorama==0.4.6
     #   tox
 coverage==7.16.2
     # via -r quality.txt
-cryptography==50.0.2 ; platform_machine != "ppc64le" and platform_machine != "s390x" and sys_platform == "linux"
+cryptography==50.0.2
     # via
     #   -r quality.txt
     #   secretstorage
@@ -105,15 +105,15 @@ isort==9.0.2
     # via
     #   -r quality.txt
     #   pylint
-jaraco-classes==3.4.0 ; platform_machine != "ppc64le" and platform_machine != "s390x"
+jaraco-classes==3.4.0
     # via
     #   -r quality.txt
     #   keyring
-jaraco-context==6.1.2 ; platform_machine != "ppc64le" and platform_machine != "s390x"
+jaraco-context==6.1.2
     # via
     #   -r quality.txt
     #   keyring
-jaraco-functools==4.6.0 ; platform_machine != "ppc64le" and platform_machine != "s390x"
+jaraco-functools==4.6.0
     # via
     #   -r quality.txt
     #   keyring
@@ -121,7 +121,7 @@ jedi==0.20.0
     # via
     #   -r quality.txt
     #   pudb
-jeepney==0.9.0 ; platform_machine != "ppc64le" and platform_machine != "s390x" and sys_platform == "linux"
+jeepney==0.9.0
     # via
     #   -r quality.txt
     #   keyring
@@ -130,11 +130,11 @@ jinja2==3.1.6
     # via
     #   -r quality.txt
     #   sphinx
-keyring==25.7.0 ; platform_machine != "ppc64le" and platform_machine != "s390x"
+keyring==25.7.0
     # via
     #   -r quality.txt
     #   twine
-librt==0.16.0 ; platform_python_implementation != "PyPy"
+librt==0.16.0
     # via
     #   -r quality.txt
     #   mypy
@@ -154,7 +154,7 @@ mdurl==0.1.2
     # via
     #   -r quality.txt
     #   markdown-it-py
-more-itertools==11.1.0 ; platform_machine != "ppc64le" and platform_machine != "s390x"
+more-itertools==11.1.0
     # via
     #   -r quality.txt
     #   jaraco-classes
@@ -207,7 +207,7 @@ pudb==2025.1.5
     # via -r quality.txt
 pycodestyle==2.15.0
     # via -r quality.txt
-pycparser==3.0 ; implementation_name != "PyPy" and platform_machine != "ppc64le" and platform_machine != "s390x" and platform_python_implementation != "PyPy" and sys_platform == "linux"
+pycparser==3.0
     # via
     #   -r quality.txt
     #   cffi
@@ -285,13 +285,13 @@ rich==15.0.0
     # via
     #   -r quality.txt
     #   twine
-roman-numerals==4.1.0 ; python_full_version >= "3.11"
+roman-numerals==4.1.0
     # via
     #   -r quality.txt
     #   sphinx
 ruff==0.16.10
     # via -r quality.txt
-secretstorage==3.5.0 ; platform_machine != "ppc64le" and platform_machine != "s390x" and sys_platform == "linux"
+secretstorage==3.5.0
     # via
     #   -r quality.txt
     #   keyring
@@ -304,7 +304,7 @@ snowballstemmer==3.1.1
     #   -r quality.txt
     #   pydocstyle
     #   sphinx
-sphinx==9.1.0 ; python_full_version >= "3.12"
+sphinx==9.1.0
     # via
     #   -r quality.txt
     #   sphinx-rtd-theme
@@ -339,7 +339,7 @@ sphinxcontrib-serializinghtml==2.0.0
     # via
     #   -r quality.txt
     #   sphinx
-stevedore==5.9.1 ; python_full_version >= "3.11"
+stevedore==5.9.1
     # via
     #   -r quality.txt
     #   doc8
