@@ -28,17 +28,9 @@ python-discovery==1.6.1
     # via
     #   tox
     #   virtualenv
-tomli==2.4.1 ; python_full_version < '3.11'
-    # via
-    #   pyproject-api
-    #   tox
 tomli-w==1.2.0
     # via tox
 tox==4.64.9
-    # via -r requirements/tox.in
-typing-extensions==4.16.0 ; python_full_version < '3.13'
-    # via
-    #   tox
-    #   virtualenv
-virtualenv==21.14.5
+    # via -r tox.in
+virtualenv==21.14.13
     # via tox
