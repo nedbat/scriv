@@ -471,7 +471,7 @@ urwid-readline==0.15.1
     # via
     #   -r requirements/quality.txt
     #   pudb
-virtualenv==21.14.7
+virtualenv==21.14.13
     # via
     #   -r requirements/tox.txt
     #   tox
