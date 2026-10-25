@@ -11,7 +11,7 @@ filelock==4.1.0 ; python_full_version < '3.11'
     #   python-discovery
     #   tox
     #   virtualenv
-filelock==4.2.0 ; python_full_version >= '3.11'
+filelock==4.2.4 ; python_full_version >= '3.11'
     # via
     #   python-discovery
     #   tox

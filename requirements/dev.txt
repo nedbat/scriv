@@ -31,7 +31,7 @@ cachetools==7.2.1
     # via
     #   -r requirements/tox.txt
     #   tox
-certifi==2026.7.22
+certifi==2026.10.23
     # via
     #   -r requirements/quality.txt
     #   requests
@@ -96,7 +96,7 @@ filelock==4.1.0 ; python_full_version < '3.11'
     #   python-discovery
     #   tox
     #   virtualenv
-filelock==4.2.0 ; python_full_version >= '3.11'
+filelock==4.2.4 ; python_full_version >= '3.11'
     # via
     #   -r requirements/tox.txt
     #   python-discovery
@@ -339,7 +339,7 @@ secretstorage==3.5.0 ; os_name != 'nt' and platform_machine != 'ppc64le' and pla
     # via
     #   -r requirements/quality.txt
     #   keyring
-setuptools==84.0.0
+setuptools==84.2.1
     # via
     #   -r requirements/quality.txt
     #   check-manifest
