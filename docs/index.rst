@@ -23,40 +23,60 @@ Scriv changelog management tool
 
 | |pypi-badge| |ci-badge| |coverage-badge| |doc-badge|
 | |pyversions-badge| |license-badge|
-| |sponsor-badge| |bluesky-nedbat| |mastodon-nedbat|
+| |sponsor-badge| |mastodon-nedbat|
 
-.. [[[end]]] (sum: f9zqDj3eU2)
+.. [[[end]]] (sum: haxcrjYNQd)
 
 Overview
 ========
 
-Scriv is a command-line tool for helping developers maintain useful changelogs.
-It manages a directory of changelog fragments. It aggregates them into entries
-in a CHANGELOG file.
-
-Currently scriv implements a simple workflow. The goal is to adapt to more
-styles of changelog management in the future.
+Scriv is a command-line tool for maintaining changelogs.  It manages a
+directory of changelog fragments committed with the code changes, then
+aggregates them into a CHANGELOG file when the code is being released.
 
 
 Getting Started
 ===============
 
-Scriv writes changelog fragments into a directory called "changelog.d".  Start
-by creating this directory.  (By the way, like many aspects of scriv's
-operation, you can choose a different name for this directory.)
+In your project, create a directory called ``changelog.d``. This is where scriv
+will create changelog fragments.
 
-To make a new changelog fragment, use the ":ref:`cmd_create`" command.  It will
-make a new file with a filename using the current date and time, your GitHub or
-Git user name, and your branch name.  Changelog fragments should be committed
-along with all the other changes on your branch.
+Many aspects of scriv's operation are configurable: you can choose a different
+directory name if you like: put a setting in pyproject.toml:
 
-When it is time to release your project, the ":ref:`cmd_collect`" command
-aggregates all the fragments into a new entry in your changelog file.
+.. code-block:: toml
+
+    [tool.scriv]
+    fragment_directory = "changes"
+
+Create a fragment using the ":ref:`cmd_create`" command. It will create a new
+file in the fragment directory and open your editor to edit the contents.  The
+file name will include the date and time, your user name, and your branch name
+to keep it separate from other changelog fragments.
+
+The template for new fragments includes categories of changes. Put your
+description in the proper category.  By default, ":ref:`cmd_create`" will add
+the new fragment to git so that you can commit it along with the other changes
+on your branch.
+
+When it is time to release your project, use the ":ref:`cmd_collect`" command
+to aggregate all the fragments into a new entry in your changelog file. By
+default the file is called ``CHANGELOG.rst`` but you can specify a different
+name with the ``changelog`` setting:
+
+.. code-block:: toml
+
+    [tool.scriv]
+    fragment_directory = "changes"
+    changelog = "CHANGELOG.md"
 
 You can also choose to publish your changelog entries as GitHub releases with
 the ":ref:`cmd_github_release`" command.  It parses the changelog file and
 creates or updates GitHub releases to match.  It can be used even with
 changelog files that were not created by scriv.
+
+Details
+=======
 
 .. toctree::
     :maxdepth: 1
@@ -72,33 +92,6 @@ changelog files that were not created by scriv.
 ..        app, no version numbers
 ..        lib, occasional publish
 
-
-How To Contribute
-=================
-
-`Contributions on GitHub <repo_>`_ are very welcome.
-Thanks to all the contributors so far:
-
-.. [[[cog include_readme_section("contributors") ]]]
-
-| Ned Batchelder
-| Abhilash Raj
-| Agustín Piqueres
-| Alyssa Coghlan
-| Flo Kuepper
-| James Gerity
-| Javier Sagredo
-| Kurt McKee
-| Mark Dickinson
-| Matias Guijarro
-| Max Christoph
-| Michael Makukha
-| Rodrigo Girão Serrão
-| Ronny Pfannschmidt
-
-.. [[[end]]] (sum: y19u+Uuyzy)
-
-.. _repo: https://github.com/nedbat/scriv
 
 .. [[[cog include_readme_section("badge-links") ]]]
 
