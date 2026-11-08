@@ -53,37 +53,34 @@ GENERIC_TOML_CONFIG = dedent("""\
     license = {file = "LICENSE.txt"}
     keywords = ["egg", "bacon", "sausage", "tomatoes", "Lobster Thermidor"]
     authors = [
-    {email = "hi@pradyunsg.me"},
-    {name = "Tzu-Ping Chung"}
+        {email = "hi@pradyunsg.me"},
+        {name = "Tzu-Ping Chung"}
     ]
     maintainers = [
-    {name = "Brett Cannon", email = "brett@python.org"}
+        {name = "Brett Cannon", email = "brett@python.org"}
     ]
     classifiers = [
-    "Development Status :: 4 - Beta",
-    "Programming Language :: Python"
+        "Development Status :: 4 - Beta",
+        "Programming Language :: Python"
     ]
     """)
 
-TOML_CONFIG = (
-    GENERIC_TOML_CONFIG
-    + """
-[tool.scriv]
-changelog = "README.md"
-categories = [
-    "New",
-    "Different",
-    "Gone",
-    "Bad",
-]
-start_marker = "FIRST!"
-compact_fragments = true
-# other scriv options
+TOML_CONFIG = GENERIC_TOML_CONFIG + dedent("""\
+    [tool.scriv]
+    changelog = "README.md"
+    categories = [
+        "New",
+        "Different",
+        "Gone",
+        "Bad",
+    ]
+    start_marker = "FIRST!"
+    compact_fragments = true
+    # other scriv options
 
-["more stuff"]
-value = 17
-"""
-)
+    ["more stuff"]
+    value = 17
+    """)
 
 OLD_TOML_CONFIG = TOML_CONFIG.replace("changelog = ", "output_file = ").replace(
     "start_marker = ", "insert_marker = "
