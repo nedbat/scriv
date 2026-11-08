@@ -4,8 +4,10 @@ import os.path
 from pathlib import Path
 
 import freezegun
+import pytest
 
 from scriv.config import Config
+from scriv.optional import tomllib
 from scriv.scriv import Scriv
 
 
@@ -316,6 +318,21 @@ def test_explicit_config_file(cli_invoke, fake_git, changelog_d, temp_dir):
     ini_path.write_text("[scriv]\nfragment_name_fields = branch, author\n")
     fake_git.set_branch("awesome-feature")
     cli_invoke(["create", "--config", str(ini_path)])
+    created_file = next(changelog_d.iterdir())
+    assert (
+        created_file
+        == temp_dir / "changelog.d" / "awesome_feature_somebody.rst"
+    )
+
+
+@pytest.mark.skipif(tomllib is None, reason="No TOML support installed")
+def test_explicit_toml_config_file(cli_invoke, fake_git, changelog_d, temp_dir):
+    toml_path = temp_dir / "my_scriv.toml"
+    toml_path.write_text(
+        '[tool.scriv]\nfragment_name_fields = ["branch", "author"]\n'
+    )
+    fake_git.set_branch("awesome-feature")
+    cli_invoke(["create", "--config", str(toml_path)])
     created_file = next(changelog_d.iterdir())
     assert (
         created_file

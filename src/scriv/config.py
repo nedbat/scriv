@@ -389,7 +389,10 @@ class Config:
         """
         config = cls(post_create_=False)
         if file_name is not None:
-            config.read_one_config(file_name)
+            if file_name.endswith(".toml"):
+                config.read_one_toml(file_name)
+            else:
+                config.read_one_config(file_name)
         else:
             config.read_one_config("setup.cfg")
             config.read_one_config("tox.ini")
