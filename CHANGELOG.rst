@@ -34,9 +34,9 @@ Changed
 Fixed
 .....
 
-- An explicit `--config` file was always parsed as .ini, even if its file
-  extension was `.toml`. Now the extension determines how it is parsed so .toml
-  files can be used successfully.
+- An explicit ``--config`` file was always parsed as .ini, even if its file
+  extension was ``.toml``. Now the extension determines how it is parsed so
+  .toml files can be used successfully.
 
 .. _changelog-1.8.0:
 
