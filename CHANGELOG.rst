@@ -21,6 +21,23 @@ See the fragment files in the `changelog.d directory`_.
 
 .. scriv-insert-here
 
+.. _changelog-1.8.1:
+
+1.8.1 — 2026-11-08
+------------------
+
+Changed
+.......
+
+- Declared support for Python 3.15
+
+Fixed
+.....
+
+- An explicit `--config` file was always parsed as .ini, even if its file
+  extension was `.toml`. Now the extension determines how it is parsed so .toml
+  files can be used successfully.
+
 .. _changelog-1.8.0:
 
 1.8.0 — 2025-12-29
