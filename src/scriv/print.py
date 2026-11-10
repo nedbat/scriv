@@ -9,6 +9,7 @@ import sys
 
 import click
 
+from .exceptions import ScrivException
 from .scriv import Scriv
 from .util import Version, scriv_command
 
@@ -68,8 +69,13 @@ def print_(
         # Standardize newlines to match either the platform default
         # or to match the existing newlines found in the CHANGELOG.
         contents_raw = newline.join(contents.splitlines()).encode("utf-8")
-        with open(output, "wb") as file:
-            file.write(contents_raw)
+        try:
+            with open(output, "wb") as file:
+                file.write(contents_raw)
+        except OSError as exc:
+            raise ScrivException(
+                f"Couldn't write to output file {output}: {exc}"
+            ) from exc
     else:
         # Standardize newlines to just '\n' when writing to STDOUT.
         contents = "\n".join(contents.splitlines())

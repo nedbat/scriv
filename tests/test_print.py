@@ -92,3 +92,24 @@ def test_print_version_not_in_changelog(cli_invoke, changelog_d, temp_dir):
 
     assert result.exit_code == 2
     assert "Unable to find version 123.456 in the changelog" in result.stderr
+
+
+def test_print_output_missing_directory(cli_invoke, changelog_d, temp_dir):
+    changelog = (CHANGELOG_HEADER + FRAG).encode("utf-8")
+    (temp_dir / "CHANGELOG.rst").write_bytes(changelog)
+
+    result = cli_invoke(
+        [
+            "print",
+            "--version",
+            "1.2",
+            "--output",
+            str(temp_dir / "no-such-dir" / "output.txt"),
+        ],
+        expect_ok=False,
+    )
+
+    assert result.exit_code == 1
+    # `sys.exit(str)` prints to stderr on a real terminal; under
+    # click's CliRunner the message is captured on stdout.
+    assert "Couldn't write to output file" in result.output
