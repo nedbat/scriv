@@ -12,9 +12,7 @@ astroid==4.3.4
     #   -r requirements/test.txt
     #   pylint
 attrs==26.1.0
-    # via
-    #   -r requirements/doc.txt
-    #   -r requirements/test.txt
+    # via -r requirements/doc.txt
 babel==2.18.0
     # via
     #   -r requirements/doc.txt
@@ -40,12 +38,9 @@ check-manifest==0.51
 click==8.5.0
     # via
     #   -r requirements/doc.txt
-    #   -r requirements/test.txt
     #   click-log
 click-log==0.4.0
-    # via
-    #   -r requirements/doc.txt
-    #   -r requirements/test.txt
+    # via -r requirements/doc.txt
 cogapp==3.6.0
     # via -r requirements/doc.txt
 colorama==0.4.6 ; os_name == 'nt' or sys_platform == 'win32'
@@ -130,7 +125,6 @@ jeepney==0.9.0 ; platform_machine != 'ppc64le' and platform_machine != 's390x' a
 jinja2==3.1.6
     # via
     #   -r requirements/doc.txt
-    #   -r requirements/test.txt
     #   sphinx
 keyring==25.7.0 ; platform_machine != 'ppc64le' and platform_machine != 's390x'
     # via twine
@@ -139,12 +133,10 @@ librt==0.16.0 ; platform_python_implementation != 'PyPy'
 markdown-it-py==4.2.0
     # via
     #   -r requirements/doc.txt
-    #   -r requirements/test.txt
     #   rich
 markupsafe==3.0.4
     # via
     #   -r requirements/doc.txt
-    #   -r requirements/test.txt
     #   jinja2
 mccabe==0.7.0
     # via
@@ -154,7 +146,6 @@ mccabe==0.7.0
 mdurl==0.1.2
     # via
     #   -r requirements/doc.txt
-    #   -r requirements/test.txt
     #   markdown-it-py
 more-itertools==11.1.0 ; python_full_version < '3.11' and platform_machine != 'ppc64le' and platform_machine != 's390x'
     # via

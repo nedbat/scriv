@@ -3,3 +3,4 @@
 -c constraints.in
 
 tox                       # Virtualenv management for tests
+tox-uv                    # Use uv to create tox environments

@@ -2,7 +2,8 @@
 
 -c constraints.in
 
--r test.txt               # Core and testing dependencies for this package
+-r base.txt               # Core dependencies for this package
+-r test.txt               # Testing dependencies for this package
 
 cogapp
 doc8                      # reStructuredText style checker

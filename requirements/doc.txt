@@ -7,23 +7,25 @@ astroid==4.3.4
     #   -r requirements/test.txt
     #   pylint
 attrs==26.1.0
-    # via -r requirements/test.txt
+    # via -r requirements/base.txt
 babel==2.18.0
     # via sphinx
 certifi==2026.10.23
     # via
+    #   -r requirements/base.txt
     #   -r requirements/test.txt
     #   requests
 charset-normalizer==3.5.2
     # via
+    #   -r requirements/base.txt
     #   -r requirements/test.txt
     #   requests
 click==8.5.0
     # via
-    #   -r requirements/test.txt
+    #   -r requirements/base.txt
     #   click-log
 click-log==0.4.0
-    # via -r requirements/test.txt
+    # via -r requirements/base.txt
 cogapp==3.6.0
     # via -r requirements/doc.in
 colorama==0.4.6 ; sys_platform == 'win32'
@@ -54,6 +56,7 @@ freezegun==1.5.5
     # via -r requirements/test.txt
 idna==3.20
     # via
+    #   -r requirements/base.txt
     #   -r requirements/test.txt
     #   requests
 imagesize==2.0.1
@@ -72,13 +75,13 @@ jedi==0.20.1
     #   pudb
 jinja2==3.1.6
     # via
-    #   -r requirements/test.txt
+    #   -r requirements/base.txt
     #   sphinx
 markdown-it-py==4.2.0
-    # via -r requirements/test.txt
+    # via -r requirements/base.txt
 markupsafe==3.0.4
     # via
-    #   -r requirements/test.txt
+    #   -r requirements/base.txt
     #   jinja2
 mccabe==0.7.0
     # via
@@ -86,7 +89,7 @@ mccabe==0.7.0
     #   pylint
 mdurl==0.1.2
     # via
-    #   -r requirements/test.txt
+    #   -r requirements/base.txt
     #   markdown-it-py
 mypy-extensions==1.1.0
     # via
@@ -146,6 +149,7 @@ pyyaml==6.0.3
     #   responses
 requests==2.34.2
     # via
+    #   -r requirements/base.txt
     #   -r requirements/test.txt
     #   responses
     #   sphinx
@@ -218,6 +222,7 @@ typing-extensions==4.16.0
     #   urwid
 urllib3==2.8.0
     # via
+    #   -r requirements/base.txt
     #   -r requirements/test.txt
     #   requests
     #   responses

@@ -209,6 +209,7 @@ packaging==26.3
     #   pytest
     #   sphinx
     #   tox
+    #   tox-uv-bare
     #   twine
     #   virtualenv
 parso==0.8.7
@@ -420,6 +421,7 @@ tomli==2.5.0 ; python_full_version < '3.11'
     #   pytest
     #   sphinx
     #   tox
+    #   tox-uv-bare
 tomli-w==1.2.0
     # via
     #   -r requirements/tox.txt
@@ -429,9 +431,25 @@ tomlkit==0.15.1
     #   -r requirements/quality.txt
     #   pylint
 tox==4.65.0 ; python_full_version < '3.11'
-    # via -r requirements/tox.txt
+    # via
+    #   -r requirements/tox.txt
+    #   tox-uv-bare
 tox==4.65.5 ; python_full_version >= '3.11'
+    # via
+    #   -r requirements/tox.txt
+    #   tox-uv-bare
+tox-uv==1.36.1 ; python_full_version < '3.11'
     # via -r requirements/tox.txt
+tox-uv==1.37.7 ; python_full_version >= '3.11'
+    # via -r requirements/tox.txt
+tox-uv-bare==1.36.1 ; python_full_version < '3.11'
+    # via
+    #   -r requirements/tox.txt
+    #   tox-uv
+tox-uv-bare==1.37.7 ; python_full_version >= '3.11'
+    # via
+    #   -r requirements/tox.txt
+    #   tox-uv
 twine==7.0.0
     # via -r requirements/quality.txt
 types-freezegun==1.1.10
@@ -471,6 +489,10 @@ urwid-readline==0.15.1
     # via
     #   -r requirements/quality.txt
     #   pudb
+uv==0.13.8
+    # via
+    #   -r requirements/tox.txt
+    #   tox-uv
 virtualenv==21.14.13
     # via
     #   -r requirements/tox.txt

@@ -1,0 +1,8 @@
+Changed
+.......
+
+- Scriv's runtime dependencies used to be exactly pinned, making it hard to
+  co-exist with other tools. Now dependencies are declared with ``>=``
+  constraints, fixing `issue 209`_.
+
+.. _issue 209: https://github.com/nedbat/scriv/issues/209

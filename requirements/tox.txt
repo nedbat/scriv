@@ -20,6 +20,7 @@ packaging==26.3
     # via
     #   pyproject-api
     #   tox
+    #   tox-uv-bare
     #   virtualenv
 platformdirs==4.12.4 ; python_full_version < '3.11'
     # via
@@ -43,15 +44,30 @@ tomli==2.5.0 ; python_full_version < '3.11'
     # via
     #   pyproject-api
     #   tox
+    #   tox-uv-bare
 tomli-w==1.2.0
     # via tox
 tox==4.65.0 ; python_full_version < '3.11'
-    # via -r requirements/tox.in
+    # via
+    #   -r requirements/tox.in
+    #   tox-uv-bare
 tox==4.65.5 ; python_full_version >= '3.11'
+    # via
+    #   -r requirements/tox.in
+    #   tox-uv-bare
+tox-uv==1.36.1 ; python_full_version < '3.11'
     # via -r requirements/tox.in
+tox-uv==1.37.7 ; python_full_version >= '3.11'
+    # via -r requirements/tox.in
+tox-uv-bare==1.36.1 ; python_full_version < '3.11'
+    # via tox-uv
+tox-uv-bare==1.37.7 ; python_full_version >= '3.11'
+    # via tox-uv
 typing-extensions==4.16.0 ; python_full_version < '3.13'
     # via
     #   tox
     #   virtualenv
+uv==0.13.8
+    # via tox-uv
 virtualenv==21.14.13
     # via tox

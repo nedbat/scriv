@@ -2,22 +2,14 @@
 #    make upgrade
 astroid==4.3.4
     # via pylint
-attrs==26.1.0
-    # via -r requirements/base.txt
 certifi==2026.10.23
     # via
-    #   -r requirements/base.txt
+    #   -c requirements/base.txt
     #   requests
 charset-normalizer==3.5.2
     # via
-    #   -r requirements/base.txt
+    #   -c requirements/base.txt
     #   requests
-click==8.5.0
-    # via
-    #   -r requirements/base.txt
-    #   click-log
-click-log==0.4.0
-    # via -r requirements/base.txt
 colorama==0.4.6 ; sys_platform == 'win32'
     # via
     #   pylint
@@ -32,7 +24,7 @@ freezegun==1.5.5
     # via -r requirements/test.in
 idna==3.20
     # via
-    #   -r requirements/base.txt
+    #   -c requirements/base.txt
     #   requests
 iniconfig==2.3.1
     # via pytest
@@ -40,20 +32,8 @@ isort==9.0.2
     # via pylint
 jedi==0.20.1
     # via pudb
-jinja2==3.1.6
-    # via -r requirements/base.txt
-markdown-it-py==4.2.0
-    # via -r requirements/base.txt
-markupsafe==3.0.4
-    # via
-    #   -r requirements/base.txt
-    #   jinja2
 mccabe==0.7.0
     # via pylint
-mdurl==0.1.2
-    # via
-    #   -r requirements/base.txt
-    #   markdown-it-py
 mypy-extensions==1.1.0
     # via isort
 packaging==26.3
@@ -93,7 +73,7 @@ pyyaml==6.0.3
     #   responses
 requests==2.34.2
     # via
-    #   -r requirements/base.txt
+    #   -c requirements/base.txt
     #   responses
 responses==0.26.3
     # via -r requirements/test.in
@@ -113,7 +93,7 @@ typing-extensions==4.16.0
     #   urwid
 urllib3==2.8.0
     # via
-    #   -r requirements/base.txt
+    #   -c requirements/base.txt
     #   requests
     #   responses
 urwid==4.2.5

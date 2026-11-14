@@ -67,7 +67,9 @@ _upgrade: export UV_CUSTOM_COMPILE_COMMAND=make upgrade
 _upgrade:
 	# Make sure to compile files after any other files they include!
 	$(PIP_COMPILE) -o requirements/base.txt requirements/base.in
-	$(PIP_COMPILE) -o requirements/test.txt requirements/test.in
+	$(PIP_COMPILE) -o requirements/base-lowest.txt --resolution lowest-direct requirements/base.in
+	$(PIP_COMPILE) -o requirements/test.txt -c requirements/base.txt requirements/test.in
+	$(PIP_COMPILE) -o requirements/test-lowest.txt -c requirements/base-lowest.txt requirements/test.in
 	$(PIP_COMPILE) -o requirements/doc.txt requirements/doc.in
 	$(PIP_COMPILE) -o requirements/quality.txt requirements/quality.in
 	$(PIP_COMPILE) -o requirements/tox.txt requirements/tox.in

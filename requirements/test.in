@@ -2,8 +2,6 @@
 
 -c constraints.in
 
--r base.txt               # Core dependencies for this package
-
 coverage                  # for measuring coverage
 freezegun                 # for mocking datetime
 pudb                      # for when we need to debug
