@@ -57,6 +57,7 @@ PIP_COMPILE = uv pip compile -q --universal ${COMPILE_OPTS}
 upgrade: export UV_EXCLUDE_NEWER=P10D
 upgrade: ## update the requirements/*.txt files with the latest packages satisfying requirements/*.in
 	$(MAKE) _upgrade COMPILE_OPTS="--upgrade"
+	prek update --cooldown-days 10
 
 # Upgrade just one package, with no cooldown.
 upgrade_one: ## update the *.txt files for one package. `make upgrade_one package=...`
@@ -93,6 +94,7 @@ botedits: ## make source edits by tools
 
 quality: ## check coding style with pycodestyle and pylint
 	tox -e quality
+	prek run --all-files
 
 # For installing development tooling, use uv if it's available, otherwise pip.
 HAS_UV := $(shell command -v uv 2>/dev/null)
@@ -123,20 +125,15 @@ test-all: ## run tests on every supported Python combination
 validate: clean botedits quality test ## run tests and quality checks
 
 
-.PHONY: dist pypi testpypi tag gh_release comment_text
+.PHONY: dist tag gh_release comment_text
 
 dist: ## build the distributions
 	python -m build --sdist --wheel
 
-pypi: ## upload the built distributions to PyPI.
-	python -m twine upload --verbose dist/*
-
-testpypi: ## upload the distrubutions to PyPI's testing server.
-	python -m twine upload --verbose --repository testpypi dist/*
-
+# Pushing the tag triggers the publish workflow.
 tag: ## make a git tag with the version number
 	git tag -s -m "Version $(VERSION)" $(VERSION)
-	git push --all
+	git push --all --follow-tags
 
 gh_release: ## make a GitHub release
 	python -m scriv github-release --all --fail-if-warn --check-links
@@ -148,16 +145,12 @@ comment_text:
 
 .PHONY: release check_release _check_credentials _check_manifest _check_tree _check_version _check_scriv _check_links
 
-release: _check_credentials clean check_release dist pypi tag gh_release comment_text ## do all the steps for a release
+release: _check_credentials clean check_release dist tag gh_release comment_text ## do all the steps for a release
 
 check_release: _check_manifest _check_tree _check_version _check_scriv _check_links ## check that we are ready for a release
 	@echo "Release checks passed"
 
 _check_credentials:
-	@if [[ -z "$$TWINE_PASSWORD" ]]; then \
-		echo 'Missing TWINE_PASSWORD: opvars'; \
-		exit 1; \
-	fi
 	@if [[ -z "$$GITHUB_TOKEN" ]]; then \
 		echo 'Missing GITHUB_TOKEN: opvars github'; \
 		exit 1; \

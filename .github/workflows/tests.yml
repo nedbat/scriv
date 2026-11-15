@@ -37,13 +37,13 @@ jobs:
 
     steps:
       - name: "Check out the repo"
-        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        uses: actions/checkout@v7.0.1
         with:
           persist-credentials: false
 
       - name: "Set up Python"
         id: "setup-python"
-        uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0 # v7.1.0
+        uses: actions/setup-python@v7.1.0
         with:
           # The last listed Python version is the default.
           python-version: |
@@ -57,7 +57,7 @@ jobs:
 
       - name: "Restore cache"
         id: "restore-cache"
-        uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
+        uses: actions/cache@v6.1.0
         with:
           path: |
             .tox/
@@ -100,7 +100,7 @@ jobs:
           ${venv_path}/python -m tox -m ci-tests
 
       - name: "Upload coverage data"
-        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        uses: actions/upload-artifact@v7.0.2
         with:
           name: covdata-${{ matrix.os }}
           path: .coverage.*
@@ -116,12 +116,12 @@ jobs:
 
     steps:
       - name: "Check out the repo"
-        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        uses: actions/checkout@v7.0.1
         with:
           persist-credentials: false
 
       - name: "Set up Python"
-        uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0 # v7.1.0
+        uses: actions/setup-python@v7.1.0
         with:
           python-version: "3.12"
           cache: pip
@@ -133,7 +133,7 @@ jobs:
           python -m pip install -r requirements/tox.txt
 
       - name: "Download coverage data"
-        uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333 # v8.0.2
+        uses: actions/download-artifact@v8.0.2
         with:
           pattern: covdata-*
           merge-multiple: true
@@ -148,7 +148,7 @@ jobs:
       - name: "Make badge"
         if: (github.repository == 'nedbat/scriv') && (github.ref == 'refs/heads/main')
         # https://gist.github.com/nedbat/5a304c1c779d4bcc57be95f847e9327f
-        uses: schneegans/dynamic-badges-action@28b0fa8bdeb46170ac397105ece0c1fe58f68910 # v1.9.0
+        uses: schneegans/dynamic-badges-action@v1.9.0
         with:
           # GIST_TOKEN is a GitHub personal access token with scope "gist".
           # https://github.com/settings/tokens/969369418
@@ -167,12 +167,12 @@ jobs:
 
     steps:
       - name: "Check out the repo"
-        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        uses: actions/checkout@v7.0.1
         with:
           persist-credentials: false
 
       - name: "Set up Python"
-        uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0 # v7.1.0
+        uses: actions/setup-python@v7.1.0
         with:
           python-version: "3.10"
           cache: pip
@@ -193,12 +193,12 @@ jobs:
 
     steps:
       - name: "Check out the repo"
-        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        uses: actions/checkout@v7.0.1
         with:
           persist-credentials: false
 
       - name: "Set up Python"
-        uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0 # v7.1.0
+        uses: actions/setup-python@v7.1.0
         with:
           python-version: "3.10"
           cache: pip
@@ -212,3 +212,21 @@ jobs:
       - name: "Linters etc"
         run: |
           python -m tox -e quality
+
+      - name: "Run prek checks"
+        uses: j178/prek-action@v3.1.0
+        with:
+          prek-version: latest-known
+
+      - name: "Check workflows with zizmor"
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          prek exec zizmor -- zizmor --pedantic .github/workflows
+
+      - name: "Verify the actions lockfile"
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh extension install github/gh-actions-lock --pin v0.4.1
+          gh actions-lock --verify
