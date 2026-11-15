@@ -21,6 +21,20 @@ See the fragment files in the `changelog.d directory`_.
 
 .. scriv-insert-here
 
+.. _changelog-1.8.2:
+
+1.8.2 — 2026-11-15
+------------------
+
+Changed
+.......
+
+- Scriv's runtime dependencies used to be exactly pinned, making it hard to
+  co-exist with other tools. Now dependencies are declared with ``>=``
+  constraints, fixing `issue 209`_.
+
+.. _issue 209: https://github.com/nedbat/scriv/issues/209
+
 .. _changelog-1.8.1:
 
 1.8.1 — 2026-11-08
