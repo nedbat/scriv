@@ -145,7 +145,7 @@ comment_text:
 
 .PHONY: release check_release _check_credentials _check_manifest _check_tree _check_version _check_scriv _check_links
 
-release: _check_credentials clean check_release dist tag gh_release comment_text ## do all the steps for a release
+release: _check_credentials clean check_release tag gh_release comment_text ## do all the steps for a release
 
 check_release: _check_manifest _check_tree _check_version _check_scriv _check_links ## check that we are ready for a release
 	@echo "Release checks passed"
