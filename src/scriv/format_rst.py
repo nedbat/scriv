@@ -65,6 +65,7 @@ class RstTools(FormatTools):
         lines.append("")
 
         sections: SectionDict = {}
+        in_comment = False
         prev_line = ""
         paragraphs = None
         section_char = None
@@ -72,8 +73,19 @@ class RstTools(FormatTools):
         for line in lines:
             line = line.rstrip()
 
+            if not line:
+                # A blank, start a new paragraph.
+                if paragraphs is not None:
+                    paragraphs.append("")
+                continue
+
+            if in_comment:
+                if line[0].isspace():
+                    continue
+                in_comment = False
+
             if self._is_comment(line):
-                # Comment, do nothing.
+                in_comment = True
                 continue
 
             if self._is_anchor(line):
@@ -94,12 +106,6 @@ class RstTools(FormatTools):
                     paragraphs.append("")
                     section_char = line[0]
                     continue
-
-            if not line:
-                # A blank, start a new paragraph.
-                if paragraphs is not None:
-                    paragraphs.append("")
-                continue
 
             if paragraphs is None:
                 paragraphs = sections.setdefault(None, [])
