@@ -83,6 +83,30 @@ from scriv.format_rst import RstTools
             },
             id="multiline_comments",
         ),
+        pytest.param(
+            """\
+            Added
+            -----
+
+            ../artifacts::
+
+                manifest.json
+                wheel.sha256
+
+            .. deploy checklist
+                Internal-only instructions.
+
+            - Keep the visible item.
+            """,
+            {
+                "Added": [
+                    "../artifacts::",
+                    "    manifest.json\n    wheel.sha256",
+                    "- Keep the visible item.",
+                ],
+            },
+            id="double_dot_prefix_is_not_a_comment",
+        ),
         # Multiple section headers.
         pytest.param(
             """\

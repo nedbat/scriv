@@ -31,18 +31,16 @@ class RstTools(FormatTools):
         RST syntax is subtle, so we have to check for other kinds of dot-dot
         lines that are not comments.
         """
-        if line.startswith(".."):
-            if line.startswith(("...", ".. _", ".. [", ".. |")):
-                # It's an underline, hyperlink, citation, or substitution, so
-                # not a comment.
-                return False
-            elif re.search(r"^.. [\w_+:.-]+::", line):
-                # A directive: not a comment.
-                return False
-            else:
-                return True
-        else:
+        if line == "..":
+            return True
+        if not line.startswith("..") or not line[2:3].isspace():
             return False
+
+        markup = line[2:].lstrip()
+        return not (
+            markup.startswith(("_", "[", "|"))
+            or re.match(r"[\w_+:.-]+::", markup)
+        )
 
     def _is_anchor(self, line: str) -> bool:
         """
