@@ -68,7 +68,7 @@ class RstTools(FormatTools):
         paragraphs = None
         section_char = None
 
-        for line in lines:
+        for lineno, line in enumerate(lines):
             line = line.rstrip()
 
             if not line:
@@ -83,7 +83,8 @@ class RstTools(FormatTools):
                 in_comment = False
 
             if self._is_comment(line):
-                in_comment = True
+                # A bare marker followed by a blank line is an empty comment.
+                in_comment = line != ".." or bool(lines[lineno + 1].strip())
                 continue
 
             if self._is_anchor(line):

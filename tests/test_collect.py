@@ -137,6 +137,25 @@ def test_collect_simple(cli_invoke, changelog_d, temp_dir):
     assert not (changelog_d / "20170617_nedbat.rst").exists()
 
 
+def test_collect_preserves_block_quote_after_empty_comment(
+    cli_invoke, changelog_d, temp_dir
+):
+    fragment = dedent("""\
+        Added
+        -----
+
+        A short note.
+
+        ..
+
+            A block quote.
+        """)
+    (changelog_d / "20170616_nedbat.rst").write_text(fragment)
+    cli_invoke(["collect"])
+    changelog_text = (temp_dir / "CHANGELOG.rst").read_text()
+    assert "\n\n    A block quote.\n" in changelog_text
+
+
 def test_collect_ordering(cli_invoke, changelog_d, temp_dir):
     # Fragments in sections are in time order.
     # Unknown sections come after the known ones.
