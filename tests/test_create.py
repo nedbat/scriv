@@ -239,6 +239,22 @@ class TestCreateEdit:
             cli_invoke(["create"])
         assert not expected.exists()
 
+    def test_create_edit_unchanged(
+        self, mocker, fake_git, cli_invoke, changelog_d
+    ):
+        # An unchanged template can still contain a valid changelog entry.
+        (changelog_d / "new_fragment.rst.j2").write_text(
+            "- A {{ config.format }} change.\n"
+        )
+        fake_git.set_config("github.user", "joedev")
+        expected = Path("changelog.d/20130225_151617_joedev.rst")
+        fake_edit(mocker, expected, contents="- A rst change.\n")
+        add = mocker.patch("scriv.create.git_add")
+        with freezegun.freeze_time("2013-02-25T15:16:17"):
+            cli_invoke(["create", "--edit", "--add"])
+        assert not expected.exists()
+        add.assert_not_called()
+
 
 class TestCreateAdd:
     """
