@@ -15,7 +15,7 @@ workflows:
         - 'actions/download-artifact@v8.0.2'
         - 'actions/setup-python@v7.1.0'
         - 'actions/upload-artifact@v7.0.2'
-        - 'j178/prek-action@v3.1.0'
+        - 'j178/prek-action@v3.1.1'
         - 'schneegans/dynamic-badges-action@v1.9.0'
 dependencies:
     'actions/cache@v6.1.0':
@@ -48,9 +48,9 @@ dependencies:
         commit: 'sha1-cf430e030ddbb5b0abf93d22962f4752f3646cd9'
         owner_id: 44036562
         repo_id: 192625955
-    'j178/prek-action@v3.1.0':
-        ref: 'v3.1.0'
-        commit: 'sha1-44924fe9ef4a6f88253c4b6b1bf11c689d3ce53d'
+    'j178/prek-action@v3.1.1':
+        ref: 'v3.1.1'
+        commit: 'sha1-7b101f8338a08d2bd6fdb3625e4e7692428763a3'
         owner_id: 10510431
         repo_id: 1052387486
     'pypa/gh-action-pypi-publish@v1.14.3':

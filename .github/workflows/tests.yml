@@ -214,7 +214,7 @@ jobs:
           python -m tox -e quality
 
       - name: "Run prek checks"
-        uses: j178/prek-action@v3.1.0
+        uses: j178/prek-action@v3.1.1
         with:
           prek-version: latest-known
 
