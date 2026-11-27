@@ -52,9 +52,11 @@ def create(
 
     if edit:
         git_edit(file_path)
-        sections = scriv.sections_from_fragment(frag)
-        if not sections:
-            logger.info("Empty fragment, aborting...")
+        if (
+            file_path.read_text() == frag.content
+            or not scriv.sections_from_fragment(frag)
+        ):
+            logger.info("Empty or unchanged fragment, aborting...")
             file_path.unlink()
             sys.exit()
 

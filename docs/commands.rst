@@ -89,9 +89,8 @@ for each change.  The file is re-parsed when it is collected, so the specifics
 of things like header underlines don't have to match the changelog file, that
 will be adjusted later.
 
-Once you save and exit the editor, scriv will continue working on the file.  If
-the file is empty because you removed all of the non-comment content, scriv
-will stop.
+If you leave the new fragment unchanged or remove all of its non-comment
+content, scriv deletes the fragment when you exit the editor.
 
 Adding
 ------
