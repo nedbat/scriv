@@ -31,18 +31,16 @@ class RstTools(FormatTools):
         RST syntax is subtle, so we have to check for other kinds of dot-dot
         lines that are not comments.
         """
-        if line.startswith(".."):
-            if line.startswith(("...", ".. _", ".. [", ".. |")):
-                # It's an underline, hyperlink, citation, or substitution, so
-                # not a comment.
-                return False
-            elif re.search(r"^.. [\w_+:.-]+::", line):
-                # A directive: not a comment.
-                return False
-            else:
-                return True
-        else:
+        if line == "..":
+            return True
+        if not line.startswith("..") or not line[2:3].isspace():
             return False
+
+        markup = line[2:].lstrip()
+        return not (
+            markup.startswith(("_", "[", "|"))
+            or re.match(r"[\w_+:.-]+::", markup)
+        )
 
     def _is_anchor(self, line: str) -> bool:
         """
@@ -65,15 +63,28 @@ class RstTools(FormatTools):
         lines.append("")
 
         sections: SectionDict = {}
+        in_comment = False
         prev_line = ""
         paragraphs = None
         section_char = None
 
-        for line in lines:
+        for lineno, line in enumerate(lines):
             line = line.rstrip()
 
+            if not line:
+                # A blank, start a new paragraph.
+                if paragraphs is not None:
+                    paragraphs.append("")
+                continue
+
+            if in_comment:
+                if line[0].isspace():
+                    continue
+                in_comment = False
+
             if self._is_comment(line):
-                # Comment, do nothing.
+                # A bare marker followed by a blank line is an empty comment.
+                in_comment = line != ".." or bool(lines[lineno + 1].strip())
                 continue
 
             if self._is_anchor(line):
@@ -94,12 +105,6 @@ class RstTools(FormatTools):
                     paragraphs.append("")
                     section_char = line[0]
                     continue
-
-            if not line:
-                # A blank, start a new paragraph.
-                if paragraphs is not None:
-                    paragraphs.append("")
-                continue
 
             if paragraphs is None:
                 paragraphs = sections.setdefault(None, [])

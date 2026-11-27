@@ -35,6 +35,78 @@ from scriv.format_rst import RstTools
             {"Added": ["- This thing was added.\n  And we liked it."]},
             id="comments_ignored",
         ),
+        # Multi-line indented comments are ignored.
+        pytest.param(
+            """\
+            ..
+                A paragraph comment starts with double dots,
+                and continues as long
+                as the text is indented.
+
+                Even across blank lines and commented-out sections:
+
+                Removed
+                -------
+
+                - Not actually removed.
+
+            .. A comment can also start on the dot-dot line
+               and continue indented on following lines.
+
+            Added
+            -----
+
+            - First item.
+            ..
+                Indented comment between items.
+
+            - Second item.
+
+            ..
+                Multi-line comment right before a directive and link target.
+            .. note::
+                Directive body is preserved.
+
+            .. _issue 206:
+                https://github.com/nedbat/scriv/issues/206
+            """,
+            {
+                "Added": [
+                    "- First item.",
+                    "- Second item.",
+                    ".. note::\n    Directive body is preserved.",
+                    (
+                        ".. _issue 206:\n"
+                        + "    https://github.com/nedbat/scriv/issues/206"
+                    ),
+                ],
+            },
+            id="multiline_comments",
+        ),
+        pytest.param(
+            """\
+            Added
+            -----
+
+            ../artifacts::
+
+                manifest.json
+                wheel.sha256
+
+            .. deploy checklist
+                Internal-only instructions.
+
+            - Keep the visible item.
+            """,
+            {
+                "Added": [
+                    "../artifacts::",
+                    "    manifest.json\n    wheel.sha256",
+                    "- Keep the visible item.",
+                ],
+            },
+            id="double_dot_prefix_is_not_a_comment",
+        ),
         # Multiple section headers.
         pytest.param(
             """\
@@ -184,6 +256,7 @@ from scriv.format_rst import RstTools
             """\
             .. Nothing to see here.
             ..
+                Not even indented lines.
 
             .. Or here.
 
